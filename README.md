@@ -14,9 +14,10 @@ npm run dev
 
 ## GitHub Pages
 
-GitHub не запускає `npm run dev`. Сайт збирається workflow `.github/workflows/deploy-pages.yml`.
+Це Vite + React, не Jekyll. Якщо в Actions падає `jekyll-build-pages` з помилкою про папку `docs` — GitHub зібрав сайт як Jekyll. Той workflow треба прибрати.
 
-1. Запуште ці файли в репозиторій.
-2. **Settings → Pages → Source:** GitHub Actions.
-3. Після зеленого workflow сайт буде на  
+1. Запуште ці файли в репозиторій (зокрема `.github/workflows/pages.yml`).
+2. **Settings → Pages → Build and deployment → Source:** оберіть **GitHub Actions** (не “Deploy from a branch” і не папку `/docs`).
+3. Якщо є старий workflow з `actions/jekyll-build-pages` — видаліть його в **Actions** або в `.github/workflows/`.
+4. Після зеленого **Deploy GitHub Pages** сайт буде на  
    `https://<нік>.github.io/<назва-репозиторію>/`
