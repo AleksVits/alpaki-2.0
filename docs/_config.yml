@@ -1,0 +1,2 @@
+# Static Vite export. Disables the default jekyll-theme-primer on GitHub Pages.
+theme: null
