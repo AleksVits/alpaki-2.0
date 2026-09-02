@@ -8,6 +8,8 @@ import { useI18n } from '../i18n'
 const roadPath =
   'M 26.2 81.1 L 28.0 78.5 L 29.9 76.8 L 32.0 73.5 L 38.0 68.0 L 43.1 62.7 L 48.0 58.2 L 52.4 54.1 L 51.7 51.9 L 52.0 49.7 L 54.4 47.6 L 62.2 43.2 L 63.4 41.1 L 63.7 38.9 L 63.3 36.8 L 67.5 33.6 L 68.4 32.4 L 68.8 31.9 L 68.7 31.0 L 66.7 28.4 L 67.6 26.7 L 70.4 25.0 L 71.5 23.2 L 71.1 20.7 L 72.5 18.9 L 73.6 16.3'
 
+const stationPos = { x: 26.2, y: 81.1 }
+
 export function Location() {
   const { t } = useI18n()
   const roadRef = useRef<HTMLDivElement>(null)
@@ -35,6 +37,15 @@ export function Location() {
               onPointerLeave={() => setHint(null)}
             />
           </svg>
+          <div
+            className="location__station"
+            style={{ left: `${stationPos.x}%`, top: `${stationPos.y}%` }}
+          >
+            <span className="location__station-label">{t.location.station}</span>
+            <span className="location__station-ico">
+              <img src={asset('icons/location-train.png?v=1')} alt="" />
+            </span>
+          </div>
           {hint && (
             <div
               className={`location__hint${hint.y < 88 ? ' location__hint--below' : ''}`}
@@ -48,12 +59,6 @@ export function Location() {
       }
     >
       <div className="location">
-        <div className="location__station">
-          <span className="location__station-label">{t.location.station}</span>
-          <span className="location__station-ico">
-            <img src={asset('icons/location-train.png?v=1')} alt="" />
-          </span>
-        </div>
         <div className="location__copy">
           <Kicker>{t.location.kicker}</Kicker>
           <Title>{splitTitle(t.location.title)}</Title>

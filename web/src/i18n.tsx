@@ -53,7 +53,7 @@ const ua = {
   },
   location: {
     kicker: 'Локація',
-    title: 'Від станції Кваси —\nдо тиші гір',
+    title: 'Від станції Кваси\u00A0—\nдо тиші гір',
     text: 'Гірська дорога веде від села Кваси\nдо урочища Тростянець і території AL’PAKI LEGEND.',
     pin: 'AL’PAKI LEGEND\nУрочище Тростянець',
     distance: '3 км',
@@ -308,7 +308,7 @@ const en: typeof ua = {
   },
   location: {
     kicker: 'Location',
-    title: 'From Kvasy station —\nto the quiet of the mountains',
+    title: 'From Kvasy station\u00A0—\nto the quiet of the mountains',
     text: 'A mountain road leads from the village of Kvasy\nto the Trostyanets tract and the AL’PAKI LEGEND site.',
     pin: 'AL’PAKI LEGEND\nTrostyanets tract',
     distance: '3 km',
