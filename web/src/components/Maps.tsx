@@ -1,3 +1,4 @@
+import { asset } from '../asset'
 import { useI18n } from '../i18n'
 
 const cities = [
@@ -15,7 +16,7 @@ export function UkraineMap() {
 
   return (
     <div className="ua-map" role="img" aria-label="Ukraine">
-      <img className="ua-map__img" src="/ukraine-map.png" alt="" />
+      <img className="ua-map__img" src={asset('ukraine-map.png')} alt="" />
       {cities.map((city) => (
         <span
           key={city.id}
@@ -29,7 +30,7 @@ export function UkraineMap() {
       ))}
       <span className="ua-map__kvasy" style={{ left: '16.4%', top: '44.2%' }} tabIndex={0}>
         <span className="ua-map__pin">
-          <img src="/logo-mark.png?v=2" alt="" />
+          <img src={asset('logo-mark.png?v=2')} alt="" />
         </span>
         <span className="ua-map__kvasy-name">{t.about.kvasy}</span>
         <span className="ua-map__kvasy-sub">{t.about.tract}</span>

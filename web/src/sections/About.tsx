@@ -1,6 +1,6 @@
+import { asset } from '../asset'
 import {
   IconBuildings,
-  IconFire,
   IconShield,
   IconTree,
   IconUmbrella,
@@ -11,10 +11,11 @@ import { useI18n } from '../i18n'
 
 const statIcons = [IconTree, IconBuildings, IconUmbrella, IconShield]
 const featureIcons = [
-  '/icons/feature-apt.png?v=1',
-  '/icons/feature-spa.png?v=1',
-  '/icons/feature-pool.png?v=1',
-  '/icons/feature-rest.png?v=1',
+  asset('icons/feature-apt.png?v=1'),
+  asset('icons/feature-spa.png?v=1'),
+  asset('icons/feature-pool.png?v=1'),
+  asset('icons/feature-rest.png?v=1'),
+  asset('icons/feature-leisure.png?v=1'),
 ]
 
 export function AboutStats() {
@@ -70,11 +71,7 @@ export function AboutIntro() {
             {t.about.features.map((item, i) => (
               <li key={item.id}>
                 <span className="features__icon">
-                  {featureIcons[i] ? (
-                    <img src={featureIcons[i]} alt="" />
-                  ) : (
-                    <IconFire />
-                  )}
+                  <img src={featureIcons[i]} alt="" />
                 </span>
                 <span>{item.label}</span>
               </li>

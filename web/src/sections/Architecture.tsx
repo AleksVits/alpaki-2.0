@@ -1,14 +1,15 @@
 import { useState } from 'react'
+import { asset } from '../asset'
 import { Kicker, Lead, Pager, Stage, Title, splitTitle } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 const materialIcons = [
-  '/icons/material-stone.png?v=4',
-  '/icons/material-wood.png?v=4',
-  '/icons/material-glass.png?v=4',
-  '/icons/material-terrace.png?v=4',
+  asset('icons/material-stone.png?v=4'),
+  asset('icons/material-wood.png?v=4'),
+  asset('icons/material-glass.png?v=4'),
+  asset('icons/material-terrace.png?v=4'),
 ]
-const photos = Array.from({ length: 8 }, (_, i) => `/architecture/${String(i).padStart(2, '0')}.png`)
+const photos = Array.from({ length: 8 }, (_, i) => asset(`architecture/${String(i).padStart(2, '0')}.png`))
 
 export function Architecture() {
   const { t } = useI18n()

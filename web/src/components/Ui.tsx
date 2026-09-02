@@ -6,12 +6,14 @@ type StageProps = {
   className?: string
   children: ReactNode
   next?: string
+  overlay?: ReactNode
 }
 
-export function Stage({ id, className = '', children, next }: StageProps) {
+export function Stage({ id, className = '', children, next, overlay }: StageProps) {
   return (
     <section id={id} className={`stage ${className}`}>
       <div className="stage__shade" />
+      {overlay}
       <div className="stage__inner">{children}</div>
       {next && (
         <a className="scroll-hint" href={`#${next}`} aria-label="Next">
