@@ -1,11 +1,25 @@
+import { cpSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
+
+const root = dirname(fileURLToPath(import.meta.url))
+
+function copyToDocs(): Plugin {
+  return {
+    name: 'copy-to-docs',
+    closeBundle() {
+      cpSync(resolve(root, 'dist'), resolve(root, '../docs'), { recursive: true })
+    },
+  }
+}
 
 export default defineConfig(({ command }) => ({
-  plugins: [react()],
+  plugins: [react(), copyToDocs()],
   base: command === 'build' ? '/alpaki-2.0/' : '/',
   build: {
-    outDir: '../docs',
+    outDir: 'dist',
     emptyOutDir: true,
   },
 }))
