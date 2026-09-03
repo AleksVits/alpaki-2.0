@@ -388,12 +388,13 @@ p, h1, h2, h3 { margin: 0; }
 }
 .stage--about-intro .stage__shade { background: none; }
 .stage--architecture {
+  --thumbs-h: clamp(7.5rem, 16vh, 13rem);
   background: url('/architecture.png') center / cover no-repeat;
 }
 .stage--architecture .stage__shade { background: none; }
 .stage--architecture .stage__inner {
   justify-content: center;
-  padding-bottom: 11rem;
+  padding-bottom: calc(var(--thumbs-h) + 4.6rem);
 }
 .stage--location {
   background: url('/location.jpg') 58% 38% / cover no-repeat;
@@ -1007,12 +1008,12 @@ p, h1, h2, h3 { margin: 0; }
   bottom: 3.2rem;
   z-index: 3;
   display: grid;
-  grid-template-columns: 32px repeat(4, 1fr) auto;
+  grid-template-columns: 2rem repeat(4, 1fr) auto;
   gap: 0.7rem;
   align-items: end;
 }
 .thumbs__item {
-  height: 108px;
+  height: var(--thumbs-h);
   padding: 0;
   border: 1px solid var(--gold-dim);
   position: relative;
