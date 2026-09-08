@@ -24,7 +24,7 @@ export function Header({ hidden, active }: Props) {
   return (
     <header className={`header ${hidden ? 'header--hidden' : ''}`}>
       <Logo compact />
-      <nav className={`header__nav ${open ? 'is-open' : ''}`} aria-label="Main">
+      <nav className={`header__nav glass glass--pill ${open ? 'is-open' : ''}`} aria-label="Main">
         {items.map((item) => (
           <a
             key={item.id}
@@ -37,7 +37,7 @@ export function Header({ hidden, active }: Props) {
         ))}
       </nav>
       <div className="header__right">
-        <div className="header__langs">
+        <div className="header__langs glass glass--pill">
           {(['ua', 'en'] as Lang[]).map((code) => (
             <button
               key={code}

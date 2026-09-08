@@ -6,7 +6,7 @@ import {
   IconUmbrella,
 } from '../components/Icons'
 import { UkraineMap } from '../components/Maps'
-import { Btn, Lead, Stage, Title, splitTitle } from '../components/Ui'
+import { Btn, Kicker, Lead, Ornament, Stage, Title, splitTitle } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 const statIcons = [IconTree, IconBuildings, IconUmbrella, IconShield]
@@ -31,7 +31,9 @@ export function AboutStats() {
     <Stage id="about-stats" className="stage--about-stats" next="about-intro">
       <div className="about-stats">
         <div className="about-stats__copy">
-          <h2 className="about-stats__title">{t.about.kicker}</h2>
+          <Kicker>{t.about.section}</Kicker>
+          <Title>{t.about.kicker}</Title>
+          <Ornament />
           <ul className="facts">
             {stats.map((item, i) => {
               const Icon = statIcons[i]
@@ -49,7 +51,11 @@ export function AboutStats() {
               )
             })}
           </ul>
-          <p className="about-stats__chips">{t.about.chips}</p>
+          <p className="about-stats__chips">
+            {t.about.chips.split('·').map((chip) => (
+              <span key={chip.trim()}>{chip.trim()}</span>
+            ))}
+          </p>
         </div>
         <div className="about-stats__map">
           <UkraineMap />
@@ -65,7 +71,9 @@ export function AboutIntro() {
     <Stage id="about-intro" className="stage--about-intro" next="architecture">
       <div className="about-intro">
         <div className="about-intro__copy">
-          <Title className="about-intro__title">{splitTitle(t.about.title)}</Title>
+          <Kicker>{t.about.section}</Kicker>
+          <Title>{splitTitle(t.about.title)}</Title>
+          <Ornament />
           <Lead>{t.about.lead}</Lead>
           <ul className="features">
             {t.about.features.map((item, i) => (
@@ -77,10 +85,14 @@ export function AboutIntro() {
               </li>
             ))}
           </ul>
-          <Lead className="lead--tight">{t.about.owner}</Lead>
+          <p className="about-intro__quote">{t.about.owner}</p>
           <div className="btn-row">
-            <Btn href="#apartments">{t.about.ctaApt}</Btn>
-            <Btn href="#invest-formats">{t.about.ctaInvest}</Btn>
+            <Btn href="#apartments" solid shine className="glass glass--chip">
+              {t.about.ctaApt}
+            </Btn>
+            <Btn href="#invest-formats" shine className="glass glass--chip">
+              {t.about.ctaInvest}
+            </Btn>
           </div>
         </div>
       </div>
