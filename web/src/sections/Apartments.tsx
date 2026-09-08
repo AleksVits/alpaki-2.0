@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FloorPlan, IsoApartment } from '../components/Maps'
 import { Placeholder } from '../components/Placeholder'
-import { Btn, Kicker, Lead, Pager, Stage, Title, splitTitle } from '../components/Ui'
+import { Btn, Kicker, Lead, Ornament, Pager, Stage, Title, splitTitle } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 export function Apartments() {
@@ -23,6 +23,7 @@ export function Apartments() {
           <div className="apt__copy">
             <Kicker>{t.apt.kicker}</Kicker>
             <Title>{splitTitle(t.apt.title)}</Title>
+            <Ornament />
             <Lead>{t.apt.lead}</Lead>
             <Btn onClick={() => setPage(1)}>{t.apt.cta}</Btn>
           </div>
@@ -53,6 +54,7 @@ export function Apartments() {
           <div className="apt-house__copy">
             <Kicker>{t.apt.kicker}</Kicker>
             <Title>{splitTitle(t.apt.houseTitle)}</Title>
+            <Ornament />
             <Lead>{t.apt.houseLead}</Lead>
             <ol className="apt-house__steps">
               {t.apt.steps.map((step, i) => (
@@ -104,6 +106,7 @@ export function Apartments() {
           <div className="apt-3d__copy">
             <Kicker>{t.apt.kicker}</Kicker>
             <Title>{splitTitle(t.apt.viewTitle)}</Title>
+            <Ornament />
             <Lead>{t.apt.viewLead}</Lead>
             <p className="apt-3d__meta">
               <b>{t.apt.buildings[house].title}</b>
@@ -133,6 +136,7 @@ export function Apartments() {
           <div className="apt-floor__copy">
             <Kicker>{t.apt.kicker}</Kicker>
             <Title>{splitTitle(t.apt.floorTitle)}</Title>
+            <Ornament />
             <Lead>{t.apt.floorLead}</Lead>
             <div className="apt-floor__list">
               {t.apt.floors.map((n, i) => (

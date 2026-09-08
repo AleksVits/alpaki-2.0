@@ -15,6 +15,7 @@ const ua = {
     tagline: 'Власний простір у Карпатах',
   },
   about: {
+    section: '01  ·  Про комплекс',
     kicker: 'Кілька штрихів про нас',
     ha: '5 га',
     haSub: 'території',
@@ -26,7 +27,7 @@ const ua = {
     chips: 'Апартаменти  ·  Відпочинок  ·  Інвестиції',
     kvasy: 'Кваси',
     tract: 'Урочище Тростянець',
-    title: 'Відпочинок та інвестиції —\nв одному проєкті',
+    title: 'Відпочинок та інвестиції\nв одному проєкті',
     lead: 'AL’PAKI LEGEND — майбутній комплекс у Карпатах, де\nвласне місце в горах поєднується з можливостями\nкурортної інфраструктури та відпочинку протягом року.',
     owner:
       'Власник зможе користуватися апартаментами сам\nабо передати їх в управління для отримання доходу.',
@@ -270,6 +271,7 @@ const en: typeof ua = {
     tagline: 'A private space in the Carpathians',
   },
   about: {
+    section: '01  ·  About the complex',
     kicker: 'A few notes about us',
     ha: '5 ha',
     haSub: 'of land',
@@ -281,7 +283,7 @@ const en: typeof ua = {
     chips: 'Apartments  ·  Leisure  ·  Investments',
     kvasy: 'Kvasy',
     tract: 'Trostyanets tract',
-    title: 'Leisure and investment —\nin one project',
+    title: 'Leisure and investment\nin one project',
     lead: 'AL’PAKI LEGEND is a forthcoming Carpathian resort\nwhere a private mountain home meets year-round\ninfrastructure and rest.',
     owner:
       'Owners may use the apartment themselves\nor place it under management to receive income.',

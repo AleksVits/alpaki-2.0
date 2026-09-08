@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { asset } from '../asset'
-import { Kicker, Lead, Pager, Stage, Title, splitTitle } from '../components/Ui'
+import { Kicker, Lead, Ornament, Stage, Title, resetShineCard, shineCard, splitTitle } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 const materialIcons = [
@@ -33,6 +33,7 @@ export function Architecture() {
         <div className="architecture__copy">
           <Kicker>{t.architecture.kicker}</Kicker>
           <Title>{splitTitle(t.architecture.title)}</Title>
+          <Ornament />
           <Lead>{t.architecture.text}</Lead>
           <ul className="materials">
             {t.architecture.materials.map((item, i) => (
@@ -46,7 +47,7 @@ export function Architecture() {
           </ul>
         </div>
       </div>
-      <div className="thumbs">
+      <div className="thumbs glass glass--bar">
         <button
           type="button"
           className="thumbs__arrow"
@@ -63,6 +64,8 @@ export function Architecture() {
               type="button"
               className={`thumbs__item ${n === index ? 'is-active' : ''}`}
               onClick={() => setIndex(n)}
+              onPointerMove={shineCard}
+              onPointerLeave={resetShineCard}
               aria-label={`${String(n + 1).padStart(2, '0')}`}
             >
               <img src={photos[n]} alt="" />
@@ -70,12 +73,19 @@ export function Architecture() {
             </button>
           )
         })}
-        <Pager
-          current={start + 1}
-          total={total}
-          onPrev={() => setIndex((v) => (v - 1 + total) % total)}
-          onNext={() => setIndex((v) => (v + 1) % total)}
-        />
+        <div className="pager">
+          <span className="pager__num">
+            {String(start + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+          </span>
+        </div>
+        <button
+          type="button"
+          className="thumbs__arrow"
+          onClick={() => setIndex((v) => (v + 1) % total)}
+          aria-label={t.ui.next}
+        >
+          ›
+        </button>
       </div>
     </Stage>
   )

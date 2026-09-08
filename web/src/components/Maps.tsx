@@ -16,7 +16,7 @@ export function UkraineMap() {
 
   return (
     <div className="ua-map" role="img" aria-label="Ukraine">
-      <img className="ua-map__img" src={asset('ukraine-map.png')} alt="" />
+      <img className="ua-map__img" src={asset('ukraine-map.png?v=2')} alt="" />
       {cities.map((city) => (
         <span
           key={city.id}
