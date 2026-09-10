@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { IconChevron } from '../components/Icons'
 import { Placeholder } from '../components/Placeholder'
-import { Kicker, Lead, Stage, Title, splitTitle } from '../components/Ui'
+import { Kicker, Lead, Ornament, Stage, Title, splitTitle } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 export function Construction() {
@@ -18,6 +18,7 @@ export function Construction() {
         <div className="build">
           <Kicker>{t.build.kicker}</Kicker>
           <Title>{splitTitle(t.build.title)}</Title>
+          <Ornament />
           <Lead>{t.build.lead}</Lead>
           <div className="build-line">
             <button
@@ -59,6 +60,7 @@ export function Construction() {
           <div className="build-detail__copy">
             <Kicker>{t.build.crumb}</Kicker>
             <Title>{houses[house].title}</Title>
+            <Ornament />
             <p className="build-detail__status">
               {t.build.current}
               <strong>{houses[house].status}</strong>

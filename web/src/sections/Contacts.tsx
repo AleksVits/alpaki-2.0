@@ -8,7 +8,7 @@ import {
   IconWhatsapp,
 } from '../components/Icons'
 import { Placeholder } from '../components/Placeholder'
-import { Btn, Kicker, Lead, Stage, Title, splitTitle } from '../components/Ui'
+import { Btn, Kicker, Lead, Ornament, Stage, Title, splitTitle } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 export function Contacts() {
@@ -28,6 +28,7 @@ export function Contacts() {
         <div className="contacts__copy">
           <Kicker>{t.contacts.company}</Kicker>
           <Title>{splitTitle(t.contacts.title)}</Title>
+          <Ornament />
           <Lead>{t.contacts.lead}</Lead>
           <p className="contacts__hours">
             <IconClock /> {t.contacts.hours}
