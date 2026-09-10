@@ -8,7 +8,7 @@ import {
   IconSpa,
   IconArrow,
 } from '../components/Icons'
-import { Kicker, Lead, Pager, Stage, Title, splitTitle } from '../components/Ui'
+import { Kicker, Lead, Ornament, Pager, Stage, Title, splitTitle } from '../components/Ui'
 import { Placeholder } from '../components/Placeholder'
 import { useI18n } from '../i18n'
 
@@ -26,6 +26,7 @@ export function Infrastructure() {
         <div className="infra__copy">
           <Kicker>{t.infra.kicker}</Kicker>
           <Title>{splitTitle(t.infra.title)}</Title>
+          <Ornament />
           <Lead>{t.infra.lead}</Lead>
         </div>
         <div className="infra-grid">
@@ -66,8 +67,9 @@ export function InfraDetail() {
       <div className="infra-detail">
         <Kicker>{t.infra.restoreKicker}</Kicker>
         <Title>{splitTitle(t.infra.restoreTitle)}</Title>
+        <Ornament />
         <Lead>{t.infra.restoreLead}</Lead>
-        <ul className="amenity-bar">
+        <ul className="amenity-bar glass glass--bar">
           {t.infra.amenities.map((item, i) => {
             const Icon = amenityIcons[i]
             return (

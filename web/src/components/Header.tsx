@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Logo } from './Logo'
 import { IconPhone } from './Icons'
+import { socialLinks } from './SocialRail'
+import { resetShineCard, shineCard } from './Ui'
 import { useI18n, type Lang } from '../i18n'
 
 type Props = {
@@ -17,50 +19,206 @@ const items = [
   { id: 'contacts', href: '#contacts' },
 ] as const
 
+const NAV_LOCK = 'is-nav-lock'
+
+function lockNavScroll() {
+  document.documentElement.classList.add(NAV_LOCK)
+}
+
+function unlockNavScroll() {
+  document.documentElement.classList.remove(NAV_LOCK)
+}
+
 export function Header({ hidden, active }: Props) {
   const { t, lang, setLang } = useI18n()
   const [open, setOpen] = useState(false)
+  const [exited, setExited] = useState(true)
+  const burgerRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  const pinOrigin = useCallback(() => {
+    const burger = burgerRef.current
+    const menu = menuRef.current
+    if (!burger || !menu) return
+    const rect = burger.getBoundingClientRect()
+    menu.style.setProperty('--menu-ox', `${rect.left + rect.width / 2}px`)
+    menu.style.setProperty('--menu-oy', `${rect.top + rect.height / 2}px`)
+  }, [])
+
+  const close = useCallback(() => {
+    pinOrigin()
+    setOpen(false)
+  }, [pinOrigin])
+
+  const toggle = useCallback(() => {
+    pinOrigin()
+    if (open) {
+      setOpen(false)
+      return
+    }
+    lockNavScroll()
+    setExited(false)
+    setOpen(true)
+  }, [open, pinOrigin])
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1367px)')
+    const onChange = () => {
+      if (mq.matches) close()
+    }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [close])
+
+  useLayoutEffect(() => {
+    pinOrigin()
+  }, [open, pinOrigin])
+
+  useEffect(() => {
+    pinOrigin()
+    window.addEventListener('resize', pinOrigin)
+    return () => window.removeEventListener('resize', pinOrigin)
+  }, [pinOrigin])
+
+  useEffect(() => {
+    return () => unlockNavScroll()
+  }, [])
+
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close()
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open, close])
+
+  useEffect(() => {
+    if (open) {
+      setExited(false)
+      return
+    }
+    if (exited) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const delay = reduce ? 0 : 900
+    const id = window.setTimeout(() => {
+      setExited(true)
+      unlockNavScroll()
+    }, delay)
+    return () => window.clearTimeout(id)
+  }, [open, exited])
+
+  const langs = (place: 'bar' | 'menu') => (
+    <div className={`header__langs glass glass--pill header__langs--${place}`}>
+      {(['ua', 'en'] as Lang[]).map((code) => (
+        <button
+          key={code}
+          type="button"
+          className={`header__lang ${lang === code ? 'is-active' : ''}`}
+          onClick={() => setLang(code)}
+        >
+          {code.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  )
 
   return (
-    <header className={`header ${hidden ? 'header--hidden' : ''}`}>
+    <header className={`header${hidden && !open ? ' header--hidden' : ''}${open ? ' header--menu' : ''}`}>
       <Logo compact />
-      <nav className={`header__nav ${open ? 'is-open' : ''}`} aria-label="Main">
+      <nav className="header__nav glass glass--pill" aria-label="Main">
         {items.map((item) => (
           <a
             key={item.id}
             href={item.href}
             className={`header__link ${active === item.id ? 'is-active' : ''}`}
-            onClick={() => setOpen(false)}
           >
             {t.nav[item.id]}
           </a>
         ))}
       </nav>
       <div className="header__right">
-        <div className="header__langs">
-          {(['ua', 'en'] as Lang[]).map((code) => (
-            <button
-              key={code}
-              type="button"
-              className={`header__lang ${lang === code ? 'is-active' : ''}`}
-              onClick={() => setLang(code)}
-            >
-              {code.toUpperCase()}
-            </button>
-          ))}
-        </div>
-        <a className="header__phone gold-orb" href="#contacts" aria-label={t.ui.phone}>
+        {langs('bar')}
+        <a className="header__phone gold-orb" href="#contacts" aria-label={t.ui.phone} onClick={close}>
           <IconPhone />
         </a>
         <button
+          ref={burgerRef}
           type="button"
           className={`header__burger ${open ? 'is-open' : ''}`}
-          aria-label="Menu"
-          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? 'Close menu' : 'Menu'}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={toggle}
         >
           <span />
           <span />
         </button>
+      </div>
+      <div
+        ref={menuRef}
+        className={`header__menu ${open ? 'is-open' : ''}`}
+        id="mobile-menu"
+        aria-hidden={exited}
+        inert={exited || undefined}
+      >
+        <button
+          type="button"
+          className="header__menu-scrim"
+          tabIndex={open ? 0 : -1}
+          aria-label="Close menu"
+          onClick={close}
+          onTransitionEnd={(e) => {
+            if (e.propertyName !== 'transform' && e.propertyName !== '-webkit-transform') return
+            if (open) return
+            setExited(true)
+            unlockNavScroll()
+          }}
+        />
+        <nav className="header__menu-panel" aria-label="Mobile">
+          {items.map((item) => (
+            <a
+              key={item.id}
+              href={item.href}
+              className={`header__link ${active === item.id ? 'is-active' : ''}`}
+              tabIndex={open ? 0 : -1}
+              onClick={close}
+            >
+              {t.nav[item.id]}
+            </a>
+          ))}
+          <div className="header__menu-actions">
+            <a
+              className="btn btn--solid btn--shine glass glass--chip header__menu-call"
+              href="#contacts"
+              tabIndex={open ? 0 : -1}
+              onClick={close}
+              onPointerMove={shineCard}
+              onPointerLeave={resetShineCard}
+            >
+              <span className="header__menu-call-ico" aria-hidden="true">
+                <IconPhone />
+              </span>
+              <span>{t.ui.phone}</span>
+            </a>
+            <div className="header__menu-social">
+              {socialLinks(t.contacts.viber).map((item) => (
+                <a
+                  key={item.label}
+                  className="header__menu-social-btn gold-orb"
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={item.label}
+                  tabIndex={open ? 0 : -1}
+                >
+                  <img src={item.icon} alt="" />
+                </a>
+              ))}
+            </div>
+            {langs('menu')}
+          </div>
+        </nav>
       </div>
     </header>
   )
