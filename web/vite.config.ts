@@ -1,4 +1,4 @@
-import { cpSync } from 'node:fs'
+import { cpSync, mkdirSync, rmSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
@@ -10,7 +10,10 @@ function copyToDocs(): Plugin {
   return {
     name: 'copy-to-docs',
     closeBundle() {
-      cpSync(resolve(root, 'dist'), resolve(root, '../docs'), { recursive: true })
+      const dest = resolve(root, '../docs')
+      rmSync(dest, { recursive: true, force: true })
+      mkdirSync(dest, { recursive: true })
+      cpSync(resolve(root, 'dist'), dest, { recursive: true })
     },
   }
 }
