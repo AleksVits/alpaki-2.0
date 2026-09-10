@@ -15,6 +15,8 @@ const ua = {
     tagline: 'Власний простір у Карпатах',
   },
   about: {
+    factsKicker: 'У цифрах',
+    ideaKicker: 'Ідея проєкту',
     kicker: 'Кілька штрихів про нас',
     ha: '5 га',
     haSub: 'території',
@@ -26,10 +28,10 @@ const ua = {
     chips: 'Апартаменти  ·  Відпочинок  ·  Інвестиції',
     kvasy: 'Кваси',
     tract: 'Урочище Тростянець',
-    title: 'Відпочинок та інвестиції —\nв одному проєкті',
-    lead: 'AL’PAKI LEGEND — майбутній комплекс у Карпатах, де\nвласне місце в горах поєднується з можливостями\nкурортної інфраструктури та відпочинку протягом року.',
+    title: 'Відпочинок та\u00A0інвестиції\nв\u00A0одному проєкті',
+    lead: 'AL’PAKI LEGEND — майбутній комплекс у\u00A0Карпатах,\nде\u00A0власне місце в\u00A0горах поєднується з\u00A0можливостями\nкурортної інфраструктури та\u00A0відпочинку протягом року.',
     owner:
-      'Власник зможе користуватися апартаментами сам\nабо передати їх в управління для отримання доходу.',
+      'Власник зможе користуватися апартаментами сам\u00A0або\nпередати їх\u00A0в\u00A0управління для отримання\u00A0доходу.',
     ctaApt: 'Обрати апартаменти',
     ctaInvest: 'Дізнатися про інвестиції',
     features: [
@@ -43,13 +45,14 @@ const ua = {
   architecture: {
     kicker: 'Архітектура',
     title: 'Архітектура\nсеред Карпат',
-    text: 'Камінь, дерево й скло формують сучасну архітектуру, відкриту до світла, простору та гірських краєвидів.',
+    text: 'Камінь, дерево й скло формують сучасну архітектуру,\nвідкриту до світла, простору та гірських краєвидів.',
     materials: [
       { id: 'stone', label: 'Камінь' },
       { id: 'wood', label: 'Дерево' },
       { id: 'glass', label: 'Скло' },
       { id: 'terrace', label: 'Панорамні тераси' },
     ],
+    note: 'Панорамні тераси стають продовженням житла,\nа краєвид — частиною щоденного ритму.',
   },
   location: {
     kicker: 'Локація',
@@ -270,6 +273,8 @@ const en: typeof ua = {
     tagline: 'A private space in the Carpathians',
   },
   about: {
+    factsKicker: 'In figures',
+    ideaKicker: 'The idea',
     kicker: 'A few notes about us',
     ha: '5 ha',
     haSub: 'of land',
@@ -281,10 +286,10 @@ const en: typeof ua = {
     chips: 'Apartments  ·  Leisure  ·  Investments',
     kvasy: 'Kvasy',
     tract: 'Trostyanets tract',
-    title: 'Leisure and investment —\nin one project',
-    lead: 'AL’PAKI LEGEND is a forthcoming Carpathian resort\nwhere a private mountain home meets year-round\ninfrastructure and rest.',
+    title: 'Leisure and\u00A0investment\nin one project',
+    lead: 'AL’PAKI LEGEND is a forthcoming Carpathian resort\nwhere a\u00A0private mountain home meets year-round\ninfrastructure and\u00A0rest.',
     owner:
-      'Owners may use the apartment themselves\nor place it under management to receive income.',
+      'Owners may use the apartment themselves\nor place it under management to\u00A0receive income.',
     ctaApt: 'Choose an apartment',
     ctaInvest: 'Learn about investing',
     features: [
@@ -298,13 +303,14 @@ const en: typeof ua = {
   architecture: {
     kicker: 'Architecture',
     title: 'Architecture\namong the Carpathians',
-    text: 'Stone, timber and glass shape a contemporary architecture open to light, space and mountain views.',
+    text: 'Stone, timber and glass shape a contemporary architecture,\nopen to light, space and mountain views.',
     materials: [
       { id: 'stone', label: 'Stone' },
       { id: 'wood', label: 'Timber' },
       { id: 'glass', label: 'Glass' },
       { id: 'terrace', label: 'Panoramic terraces' },
     ],
+    note: 'Panoramic terraces become an extension of the home,\nand the view a part of everyday rhythm.',
   },
   location: {
     kicker: 'Location',

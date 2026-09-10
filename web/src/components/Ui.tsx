@@ -1,5 +1,35 @@
-import type { ReactNode } from 'react'
+import type { PointerEvent, ReactNode } from 'react'
+import { asset } from '../asset'
 import { IconArrow, IconChevron } from './Icons'
+
+export function shineCard(e: PointerEvent<HTMLElement>) {
+  const el = e.currentTarget
+  const box = el.getBoundingClientRect()
+  const x = (e.clientX - box.left) / box.width
+  const y = (e.clientY - box.top) / box.height
+  el.style.setProperty('--mx', `${(x * 100).toFixed(2)}%`)
+  el.style.setProperty('--my', `${(y * 100).toFixed(2)}%`)
+
+  const dead = 0.2
+  const edge = (value: number) => {
+    const delta = value - 0.5
+    const over = Math.abs(delta) - dead
+    if (over <= 0) return 0
+    return Math.sign(delta) * (over / (0.5 - dead))
+  }
+  const nx = edge(x)
+  const ny = edge(y)
+  el.style.setProperty('--tilt-x', `${(nx * 14).toFixed(2)}deg`)
+  el.style.setProperty('--tilt-y', `${(-ny * 11).toFixed(2)}deg`)
+}
+
+export function resetShineCard(e: PointerEvent<HTMLElement>) {
+  const el = e.currentTarget
+  el.style.setProperty('--mx', '50%')
+  el.style.setProperty('--my', '38%')
+  el.style.setProperty('--tilt-x', '0deg')
+  el.style.setProperty('--tilt-y', '0deg')
+}
 
 type StageProps = {
   id: string
@@ -28,6 +58,16 @@ export function Kicker({ children }: { children: ReactNode }) {
   return <p className="kicker">{children}</p>
 }
 
+export function Ornament() {
+  return (
+    <span className="ornament" aria-hidden="true">
+      <span className="ornament__line" />
+      <img className="ornament__logo" src={asset('logo-mark.png?v=2')} alt="" />
+      <span className="ornament__line" />
+    </span>
+  )
+}
+
 export function Title({ children, className = '' }: { children: ReactNode; className?: string }) {
   return <h2 className={`title ${className}`}>{children}</h2>
 }
@@ -43,6 +83,8 @@ export function Btn({
   onClick,
   type = 'button',
   arrow = true,
+  shine = false,
+  className = '',
 }: {
   href?: string
   children: ReactNode
@@ -50,8 +92,13 @@ export function Btn({
   onClick?: () => void
   type?: 'button' | 'submit'
   arrow?: boolean
+  shine?: boolean
+  className?: string
 }) {
-  const className = `btn ${solid ? 'btn--solid' : 'btn--ghost'}`
+  const cls = `btn ${solid ? 'btn--solid' : 'btn--ghost'} ${shine ? 'btn--shine' : ''} ${className}`.trim()
+  const shineProps = shine
+    ? { onPointerMove: shineCard, onPointerLeave: resetShineCard }
+    : {}
   const content = (
     <>
       <span>{children}</span>
@@ -60,13 +107,13 @@ export function Btn({
   )
   if (href) {
     return (
-      <a className={className} href={href}>
+      <a className={cls} href={href} onClick={onClick} {...shineProps}>
         {content}
       </a>
     )
   }
   return (
-    <button className={className} type={type} onClick={onClick}>
+    <button className={cls} type={type} onClick={onClick} {...shineProps}>
       {content}
     </button>
   )
@@ -84,7 +131,7 @@ export function Pager({
   onNext: () => void
 }) {
   return (
-    <div className="pager">
+    <div className="pager glass glass--pill">
       <button type="button" className="pager__btn" onClick={onPrev} aria-label="Prev">
         <IconChevron dir="left" />
       </button>
@@ -99,10 +146,16 @@ export function Pager({
 }
 
 export function splitTitle(text: string) {
-  return text.split('\n').map((line) => (
-    <span key={line}>
+  const lines = text.split('\n')
+  return lines.map((line, i) => (
+    <span key={`${i}-${line}`}>
       {line}
-      <br />
+      {i < lines.length - 1 ? (
+        <>
+          {' '}
+          <br />
+        </>
+      ) : null}
     </span>
   ))
 }
