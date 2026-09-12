@@ -693,39 +693,40 @@ p, h1, h2, h3 { margin: 0; }
 .build::before {
   content: '';
   position: absolute;
-  top: -1.6rem;
-  right: -3.2rem;
-  bottom: -1.8rem;
-  left: calc(-1 * var(--stage-pad-left));
+  top: -8rem;
+  bottom: -8rem;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  right: auto;
   z-index: 0;
   pointer-events: none;
   background:
     radial-gradient(
-      ellipse 92% 78% at 0% 46%,
+      ellipse 140% 90% at 50% 46%,
       rgba(4, 9, 7, 0.42) 0%,
       rgba(4, 9, 7, 0.18) 52%,
-      transparent 78%
+      rgba(4, 9, 7, 0.06) 82%,
+      transparent 100%
     ),
     linear-gradient(
       90deg,
-      rgba(4, 9, 7, 0.3) 0%,
-      rgba(4, 9, 7, 0.12) 48%,
-      transparent 100%
+      rgba(4, 9, 7, 0.22) 0%,
+      rgba(4, 9, 7, 0.14) 50%,
+      rgba(4, 9, 7, 0.22) 100%
     );
-  mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
 }
 .intro::before {
-  top: -1.5rem;
-  right: -4.2rem;
-  bottom: -1.7rem;
-  left: calc(-1 * var(--stage-pad-left));
+  top: -10rem;
+  bottom: -10rem;
   background:
     radial-gradient(
-      ellipse 90% 88% at 50% 48%,
+      ellipse 150% 95% at 50% 48%,
       rgba(4, 9, 7, 0.4) 0%,
-      rgba(4, 9, 7, 0.14) 54%,
-      transparent 78%
+      rgba(4, 9, 7, 0.16) 54%,
+      rgba(4, 9, 7, 0.05) 84%,
+      transparent 100%
     );
 }
 
@@ -2730,26 +2731,28 @@ p, h1, h2, h3 { margin: 0; }
 }
 
 @media (max-width: 1100px) {
-  .rail { right: calc(0.55rem + env(safe-area-inset-right, 0px)); }
+  .rail { display: none; }
   .stage__inner {
     --stage-pad-left: calc(1.2rem + env(safe-area-inset-left, 0px));
-    --stage-pad-right: calc(var(--rail) + 0.8rem + env(safe-area-inset-right, 0px));
+    --stage-pad-right: calc(1.2rem + env(safe-area-inset-right, 0px));
     padding:
       calc(var(--header) + 0.2rem + env(safe-area-inset-top, 0px))
       var(--stage-pad-right)
       calc(3.6rem + env(safe-area-inset-bottom, 0px))
       var(--stage-pad-left);
   }
+  .intro::before,
   .architecture__copy::before,
   .about-stats__copy::before,
   .about-intro__copy::before,
   .location__copy::before,
   .infra-detail::before,
   .build::before {
-    top: -1.2rem;
-    right: -2rem;
-    bottom: -1.4rem;
-    left: calc(-1 * var(--stage-pad-left));
+    top: -8rem;
+    right: auto;
+    bottom: -8rem;
+    left: calc(50% - 50vw);
+    width: 100vw;
   }
   .stage--architecture .stage__inner { padding-bottom: 3.6rem; }
   .stage--location .stage__inner { padding-bottom: 1.2rem; }
@@ -2829,6 +2832,10 @@ p, h1, h2, h3 { margin: 0; }
   :root {
     --type-title: clamp(1.55rem, 6.4vw, 2.35rem);
     --type-copy-max: 100%;
+  }
+  .rail { display: none; }
+  .stage__inner {
+    --stage-pad-right: calc(1.2rem + env(safe-area-inset-right, 0px));
   }
   .stage:not(.stage--intro) .stage__inner {
     padding-top: calc(var(--header) + 4rem + env(safe-area-inset-top, 0px));
@@ -2917,14 +2924,17 @@ p, h1, h2, h3 { margin: 0; }
     min-height: 0;
     width: 100%;
   }
+  .about-intro__copy > .kicker { margin-top: auto; }
+  .about-intro__quote { margin-bottom: auto; }
   .about-intro .btn-row {
-    margin-top: auto;
+    margin-top: 0;
     width: 100%;
-    padding-top: 0.75rem;
+    padding-top: 1.1rem;
     padding-bottom: 0.15rem;
   }
   .stage--about-intro .stage__inner {
-    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
+    padding-top: calc(var(--header) + 0.75rem + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(3.15rem + env(safe-area-inset-bottom, 0px));
   }
   .architecture {
     display: block;
@@ -3297,6 +3307,8 @@ p, h1, h2, h3 { margin: 0; }
     color: color-mix(in srgb, var(--beige) 72%, transparent);
     text-shadow: none;
   }
+  .about-intro__quote { margin-bottom: auto; }
+  .architecture__quote { margin-bottom: 1.25rem; }
   .about-intro__quote::before,
   .architecture__quote::before {
     content: '';
@@ -3314,16 +3326,18 @@ p, h1, h2, h3 { margin: 0; }
   .location__copy::before,
   .infra-detail::before,
   .build::before {
-    top: -1.4rem;
-    right: -1.2rem;
-    bottom: -1.6rem;
-    left: calc(-1 * var(--stage-pad-left));
+    top: -10rem;
+    right: auto;
+    bottom: -10rem;
+    left: calc(50% - 50vw);
+    width: 100vw;
     background:
       radial-gradient(
-        ellipse 90% 82% at 50% 46%,
+        ellipse 160% 95% at 50% 46%,
         rgba(4, 9, 7, 0.44) 0%,
         rgba(4, 9, 7, 0.16) 52%,
-        transparent 78%
+        rgba(4, 9, 7, 0.05) 82%,
+        transparent 100%
       );
   }
   .architecture__heroes::after {
@@ -3344,7 +3358,7 @@ p, h1, h2, h3 { margin: 0; }
   .stage--about-intro .stage__shade,
   .stage--location .stage__shade {
     background:
-      radial-gradient(ellipse 86% 72% at 50% 36%, rgba(6, 12, 9, 0.4) 0%, rgba(6, 12, 9, 0.14) 52%, transparent 74%),
+      radial-gradient(ellipse 140% 90% at 50% 40%, rgba(6, 12, 9, 0.4) 0%, rgba(6, 12, 9, 0.14) 56%, rgba(6, 12, 9, 0.04) 86%, transparent 100%),
       linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, transparent 28%, rgba(6, 12, 9, 0.2) 100%);
   }
   .thumbs {
@@ -3408,8 +3422,30 @@ p, h1, h2, h3 { margin: 0; }
 @media (min-width: 721px) {
   .header__menu-call { display: none; }
 }
-@media (min-width: 721px) and (min-height: 501px) {
+@media (min-width: 1101px) and (min-height: 501px) {
   .header__menu-social { display: none; }
+}
+
+@media (max-width: 900px) and (min-width: 721px) {
+  .stage--architecture { --thumbs-h: clamp(5.4rem, 11vh, 7.4rem); }
+  .architecture__heroes.is-viewing .architecture__hero-photo {
+    top: calc(var(--header) + 11.6rem + env(safe-area-inset-top, 0px));
+    right: var(--stage-pad-left);
+    bottom: auto;
+    left: var(--stage-pad-left);
+    width: auto;
+    height: calc(
+      100dvh
+      - (var(--header) + 11.6rem + env(safe-area-inset-top, 0px))
+      - (var(--thumbs-h) + 4.2rem + env(safe-area-inset-bottom, 0px))
+    );
+    object-fit: cover;
+    object-position: center;
+  }
+  .thumbs {
+    grid-template-columns: 2rem repeat(4, minmax(0, 1fr)) 2rem;
+  }
+  .thumbs__item:nth-child(5) { display: block; }
 }
 
 @media (max-width: 720px) {
