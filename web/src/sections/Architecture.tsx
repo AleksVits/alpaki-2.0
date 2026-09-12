@@ -61,12 +61,12 @@ export function Architecture() {
         ))}
       </div>
       <div className="architecture">
-        <div className={`architecture__copy${copyHidden ? ' is-hidden' : ''}`} aria-hidden={copyHidden}>
+        <div className={`architecture__copy${copyHidden ? ' is-hidden' : ''}`}>
           <Kicker>{t.architecture.kicker}</Kicker>
           <Title>{splitTitle(t.architecture.title)}</Title>
           <Ornament />
-          <Lead>{t.architecture.text}</Lead>
-          <ul className="materials">
+          <Lead aria-hidden={copyHidden}>{t.architecture.text}</Lead>
+          <ul className="materials" aria-hidden={copyHidden}>
             {t.architecture.materials.map((item, i) => (
               <li key={item.id}>
                 <span className="materials__icon">
@@ -76,7 +76,7 @@ export function Architecture() {
               </li>
             ))}
           </ul>
-          <p className="architecture__quote">{t.architecture.note}</p>
+          <p className="architecture__quote" aria-hidden={copyHidden}>{t.architecture.note}</p>
         </div>
       </div>
       <div className="thumbs glass glass--bar">
