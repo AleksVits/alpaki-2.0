@@ -42,7 +42,7 @@ export function AboutStats() {
                     <img src={statIcons[i]} alt="" />
                   </span>
                   <span>
-                    <strong>{item.value}</strong>
+                    {long ? <small>{item.value}</small> : <strong>{item.value}</strong>}
                     {item.sub && <small>{item.sub}</small>}
                   </span>
                 </li>
