@@ -973,21 +973,24 @@ p, h1, h2, h3 { margin: 0; }
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.32);
 }
 .facts__item--long {
-  align-items: start;
-  padding-top: 0.15rem;
+  align-items: center;
+  padding-top: 0;
 }
 .facts .facts__item--long small,
 .facts .facts__item--long strong {
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.64rem;
   font-weight: 400;
-  line-height: 1.45;
-  letter-spacing: 0.2em;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--beige);
   text-shadow: none;
   white-space: pre-line;
-  max-width: 22ch;
+  max-width: 28ch;
+}
+.facts__item--long small {
+  margin-top: 0;
 }
 .facts small {
   display: block;
@@ -2454,8 +2457,25 @@ p, h1, h2, h3 { margin: 0; }
 @media (max-width: 1280px) and (min-width: 1101px) {
   .ua-map__city { display: none; }
   .facts strong { font-size: 2.2rem; }
+  .facts .facts__item--long small,
+  .facts .facts__item--long strong {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    max-width: 28ch;
+  }
   .features { gap: 0.45rem; }
   .features li { flex: 0 0 5.1rem; width: 5.1rem; }
+}
+
+@media (min-width: 1101px) {
+  .facts .facts__item--long small,
+  .facts .facts__item--long strong {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    max-width: 28ch;
+  }
 }
 
 @media (min-width: 1101px) and (max-height: 820px) {
@@ -3814,7 +3834,7 @@ p, h1, h2, h3 { margin: 0; }
   .facts strong { font-size: 2.15rem; }
   .facts .facts__item--long small,
   .facts .facts__item--long strong {
-    font-size: 0.72rem;
+    font-size: 0.6rem;
   }
   .stage--architecture { --thumbs-h: clamp(4.4rem, 15vh, 6.8rem); }
   .stage--architecture .stage__inner {
