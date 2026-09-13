@@ -14,6 +14,10 @@ export function reducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+export function isMobileFlow() {
+  return window.matchMedia('(max-width: 900px)').matches
+}
+
 let programmaticScroll = false
 let programmaticTimer = 0
 
@@ -26,9 +30,9 @@ export function scrollToStage(el: Element) {
   window.clearTimeout(programmaticTimer)
   el.scrollIntoView({
     behavior: reducedMotion() ? 'auto' : 'smooth',
-    block: 'start',
+    block: isMobileFlow() ? 'start' : 'start',
   })
   programmaticTimer = window.setTimeout(() => {
     programmaticScroll = false
-  }, 900)
+  }, isMobileFlow() ? 450 : 900)
 }
