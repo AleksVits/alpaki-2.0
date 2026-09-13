@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import {
   IconClock,
   IconMail,
@@ -20,6 +20,15 @@ export function Contacts() {
     e.preventDefault()
     setSent(true)
   }
+
+  useEffect(() => {
+    if (!privacyOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setPrivacyOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [privacyOpen])
 
   return (
     <Stage id="contacts" className="stage--contacts">
@@ -121,9 +130,15 @@ export function Contacts() {
       </div>
 
       {privacyOpen && (
-        <div className="modal" role="dialog" aria-modal="true">
-          <div className="modal__card">
-            <h3>{t.contacts.privacyTitle}</h3>
+        <div
+          className="modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="privacy-title"
+          onClick={() => setPrivacyOpen(false)}
+        >
+          <div className="modal__card" onClick={(e) => e.stopPropagation()}>
+            <h3 id="privacy-title">{t.contacts.privacyTitle}</h3>
             <p>{t.contacts.privacyText}</p>
             <button type="button" className="btn btn--ghost" onClick={() => setPrivacyOpen(false)}>
               {t.ui.close}

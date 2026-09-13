@@ -1,4 +1,5 @@
 import { IconCalendar, IconChart, IconDish, IconKeys } from '../components/Icons'
+import { scrollToStage } from '../scroll'
 import { Placeholder } from '../components/Placeholder'
 import { Btn, Kicker, Lead, Ornament, Pager, Stage, Title, splitTitle } from '../components/Ui'
 import { useI18n } from '../i18n'
@@ -71,8 +72,14 @@ export function InvestManage() {
           <Pager
             current={2}
             total={3}
-            onPrev={() => document.getElementById('invest-formats')?.scrollIntoView({ behavior: 'smooth' })}
-            onNext={() => document.getElementById('apartments')?.scrollIntoView({ behavior: 'smooth' })}
+            onPrev={() => {
+              const el = document.getElementById('invest-formats')
+              if (el) scrollToStage(el)
+            }}
+            onNext={() => {
+              const el = document.getElementById('apartments')
+              if (el) scrollToStage(el)
+            }}
           />
         </div>
       </div>
