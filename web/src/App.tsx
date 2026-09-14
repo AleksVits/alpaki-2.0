@@ -50,6 +50,7 @@ const sectionMap: Record<string, string> = {
 
 export default function App() {
   const [active, setActive] = useState('intro')
+  const [pastIntro, setPastIntro] = useState(false)
 
   useEffect(() => {
     const root = siteScroller()
@@ -63,11 +64,31 @@ export default function App() {
       },
       {
         root,
-        threshold: isMobileFlow() ? [0.12, 0.25, 0.4] : [0.35, 0.55, 0.75],
+        threshold: isMobileFlow() ? [0.08, 0.18, 0.35, 0.55] : [0.35, 0.55, 0.75],
       },
     )
     nodes.forEach((n) => io.observe(n))
     return () => io.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const root = siteScroller()
+    if (!root) return
+
+    const updatePastIntro = () => {
+      const intro = document.getElementById('intro')
+      if (!intro) return
+      // Show header once the intro has mostly left the viewport (second section enters).
+      setPastIntro(intro.getBoundingClientRect().bottom <= root.clientHeight * 0.62)
+    }
+
+    updatePastIntro()
+    root.addEventListener('scroll', updatePastIntro, { passive: true })
+    window.addEventListener('resize', updatePastIntro)
+    return () => {
+      root.removeEventListener('scroll', updatePastIntro)
+      window.removeEventListener('resize', updatePastIntro)
+    }
   }, [])
 
   useEffect(() => {
@@ -122,10 +143,12 @@ export default function App() {
     }
   }, [])
 
+  const showChrome = pastIntro
+
   return (
     <>
-      <Header hidden={active === 'intro'} active={sectionMap[active] ?? 'about'} />
-      {active !== 'intro' && <SocialRail />}
+      <Header hidden={!showChrome} active={sectionMap[active] ?? 'about'} />
+      {showChrome && <SocialRail />}
       <div className="site">
         <main>
           <Intro />
