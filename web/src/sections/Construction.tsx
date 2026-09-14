@@ -58,7 +58,7 @@ export function Construction() {
       <Stage id="build-detail" className="stage--build-detail" next="contacts">
         <div className="build-detail">
           <div className="build-detail__copy">
-            <Kicker>{t.build.crumb}</Kicker>
+            <Kicker>{t.build.crumb}  ·  {houses[house].title}</Kicker>
             <Title>{houses[house].title}</Title>
             <Ornament />
             <p className="build-detail__status">

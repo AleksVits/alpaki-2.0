@@ -1,4 +1,4 @@
-import type { PointerEvent, ReactNode } from 'react'
+import type { HTMLAttributes, PointerEvent, ReactNode } from 'react'
 import { asset } from '../asset'
 import { IconArrow, IconChevron } from './Icons'
 
@@ -72,8 +72,12 @@ export function Title({ children, className = '' }: { children: ReactNode; class
   return <h2 className={`title ${className}`}>{children}</h2>
 }
 
-export function Lead({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <p className={`lead ${className}`}>{children}</p>
+export function Lead({ children, className = '', ...rest }: HTMLAttributes<HTMLParagraphElement>) {
+  return (
+    <p className={`lead ${className}`} {...rest}>
+      {children}
+    </p>
+  )
 }
 
 export function Btn({

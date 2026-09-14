@@ -83,7 +83,7 @@ export function RouteMap() {
           {t.location.pin.split('\n')[1]}
         </text>
       </g>
-      <g className="route-map__elev" fill="#bc904d" fillOpacity="0.45" fontSize="11">
+      <g className="route-map__elev" fill="#bc904d" fillOpacity="0.45">
         <text x="780" y="70">1200</text>
         <text x="860" y="130">1000</text>
         <text x="930" y="190">800</text>

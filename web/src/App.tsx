@@ -10,32 +10,11 @@ import { InfraDetail, Infrastructure } from './sections/Infrastructure'
 import { Intro } from './sections/Intro'
 import { InvestFormats, InvestManage } from './sections/Invest'
 import { Location } from './sections/Location'
-
-function siteScroller() {
-  return document.querySelector<HTMLElement>('.site')
-}
-
-function reducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-}
-
-let programmaticScroll = false
-let programmaticTimer = 0
-
-function scrollToStage(el: Element) {
-  programmaticScroll = true
-  window.clearTimeout(programmaticTimer)
-  el.scrollIntoView({
-    behavior: reducedMotion() ? 'auto' : 'smooth',
-    block: 'start',
-  })
-  programmaticTimer = window.setTimeout(() => {
-    programmaticScroll = false
-  }, 900)
-}
+import { decodeHash, isMobileFlow, isProgrammaticScroll, scrollToStage, siteScroller } from './scroll'
 
 function snapNearest(root: HTMLElement) {
-  if (programmaticScroll) return
+  if (isMobileFlow()) return
+  if (isProgrammaticScroll()) return
   if (document.documentElement.classList.contains('is-nav-lock')) return
   const stages = Array.from(root.querySelectorAll<HTMLElement>('.stage'))
   if (!stages.length) return
@@ -82,7 +61,10 @@ export default function App() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
         if (visible?.target.id) setActive(visible.target.id)
       },
-      { root, threshold: [0.35, 0.55, 0.75] },
+      {
+        root,
+        threshold: isMobileFlow() ? [0.12, 0.25, 0.4] : [0.35, 0.55, 0.75],
+      },
     )
     nodes.forEach((n) => io.observe(n))
     return () => io.disconnect()
@@ -97,7 +79,7 @@ export default function App() {
       if (!(link instanceof HTMLAnchorElement)) return
       const href = link.getAttribute('href')
       if (!href || href === '#') return
-      const id = decodeURIComponent(href.slice(1))
+      const id = decodeHash(href.slice(1))
       const target = document.getElementById(id)
       if (!target) return
       e.preventDefault()
@@ -107,14 +89,18 @@ export default function App() {
 
     let snapTimer = 0
     const scheduleSnap = () => {
+      if (isMobileFlow()) return
       window.clearTimeout(snapTimer)
       snapTimer = window.setTimeout(() => snapNearest(root), 160)
     }
 
-    const onScrollEnd = () => snapNearest(root)
+    const onScrollEnd = () => {
+      if (isMobileFlow()) return
+      snapNearest(root)
+    }
     const onResize = () => scheduleSnap()
 
-    const hash = window.location.hash.slice(1)
+    const hash = decodeHash(window.location.hash.slice(1))
     if (hash) {
       const target = document.getElementById(hash)
       if (target) requestAnimationFrame(() => scrollToStage(target))

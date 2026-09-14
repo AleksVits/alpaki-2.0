@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 
 export type Lang = 'ua' | 'en'
 
@@ -191,7 +191,7 @@ const ua = {
       { id: 'orbita', n: '07', title: 'Orbita', status: 'У процесі' },
       { id: 'citadel', n: '08', title: 'Citadel', status: 'У процесі' },
     ],
-    crumb: 'Хід будівництва  ·  Vista',
+    crumb: 'Хід будівництва',
     current: 'Поточний статус',
     status: 'Проєктування',
     detailLead:
@@ -449,7 +449,7 @@ const en: typeof ua = {
       { id: 'orbita', n: '07', title: 'Orbita', status: 'In progress' },
       { id: 'citadel', n: '08', title: 'Citadel', status: 'In progress' },
     ],
-    crumb: 'Construction  ·  Vista',
+    crumb: 'Construction',
     current: 'Current status',
     status: 'Design',
     detailLead: 'Follow the building stages and review the latest project materials.',
@@ -530,6 +530,9 @@ const I18nContext = createContext<I18nValue | null>(null)
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>('ua')
   const value = useMemo(() => ({ lang, setLang, t: dictionaries[lang] }), [lang])
+  useEffect(() => {
+    document.documentElement.lang = lang === 'en' ? 'en' : 'uk'
+  }, [lang])
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
 }
 
