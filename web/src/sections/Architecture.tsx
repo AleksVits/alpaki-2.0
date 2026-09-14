@@ -41,7 +41,7 @@ export function Architecture() {
           setPrevIndex(null)
         }
       },
-      { root: document.querySelector('.site'), threshold: 0.25 },
+      { root: document.querySelector('.site'), threshold: 0.12, rootMargin: '0px' },
     )
     io.observe(section)
     return () => io.disconnect()

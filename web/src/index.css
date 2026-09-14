@@ -3012,8 +3012,16 @@ p, h1, h2, h3 { margin: 0; }
     bottom: auto;
     transform: none;
     align-self: center;
+    display: grid;
+    place-items: center;
     width: 1.75rem;
-    margin: 1.35rem auto 0.15rem;
+    height: 1.75rem;
+    margin: 1.15rem auto 0.45rem;
+    opacity: 0.9;
+    z-index: 4;
+  }
+  .stage > .scroll-hint {
+    display: grid;
   }
   .stage--intro .scroll-hint {
     position: absolute;
@@ -3217,16 +3225,21 @@ p, h1, h2, h3 { margin: 0; }
     inset: 0;
     z-index: 0;
     order: 0;
+    pointer-events: none;
   }
   .architecture__heroes.is-viewing {
     position: relative;
     inset: auto;
     z-index: 1;
     order: 2;
+    width: calc(100% + var(--stage-pad-left) + var(--stage-pad-right));
+    margin: 0.85rem calc(-1 * var(--stage-pad-right)) 0 calc(-1 * var(--stage-pad-left));
     height: auto;
-    min-height: 0;
-    margin: 0.35rem 0 0;
+    aspect-ratio: 4 / 3;
+    max-height: min(58vh, 26rem);
+    min-height: 12rem;
     overflow: hidden;
+    background: var(--marble);
     pointer-events: none;
   }
   .architecture__hero,
@@ -3237,21 +3250,26 @@ p, h1, h2, h3 { margin: 0; }
     position: absolute;
     inset: 0;
     z-index: 0;
+    width: 100%;
     height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: none;
     transition:
-      opacity 0.55s ease,
-      visibility 0s linear 0.55s;
+      opacity 0.45s ease,
+      visibility 0s linear 0.45s;
   }
   .architecture__heroes.is-viewing .architecture__hero.is-leaving {
     z-index: 1;
+    opacity: 1;
+    visibility: visible;
   }
   .architecture__heroes.is-viewing .architecture__hero.is-active {
-    position: relative;
-    inset: auto;
     z-index: 2;
-    height: auto;
+    opacity: 1;
+    visibility: visible;
     transition:
-      opacity 0.55s ease,
+      opacity 0.45s ease,
       visibility 0s linear 0s;
   }
   .architecture__heroes.is-viewing .architecture__hero:not(.is-active):not(.is-leaving) {
@@ -3266,25 +3284,26 @@ p, h1, h2, h3 { margin: 0; }
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center center;
     filter: blur(8px) saturate(0.92) brightness(0.62);
     transform: scale(1.18);
   }
   .architecture__heroes.is-viewing .architecture__hero-photo {
-    position: relative;
+    position: absolute;
+    inset: 0;
     z-index: 1;
     width: 100%;
-    height: auto;
-    max-height: min(52vh, 22rem);
-    margin: 0.85rem auto 0;
-    object-fit: contain;
-    object-position: center;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    object-fit: cover;
+    object-position: center center;
   }
   .stage--architecture .stage__inner {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
   }
   .thumbs {
     position: relative;
@@ -3292,20 +3311,34 @@ p, h1, h2, h3 { margin: 0; }
     right: auto;
     bottom: auto;
     width: 100%;
-    margin-top: 1.7rem;
-    margin-bottom: 0.45rem;
-    height: auto;
-    grid-template-rows: none;
-    padding-bottom: 0;
+    margin-top: 1.35rem;
+    margin-bottom: 0;
+    height: calc(var(--thumbs-h) + 0.85rem);
+    min-height: calc(var(--thumbs-h) + 0.85rem);
+    max-height: calc(var(--thumbs-h) + 0.85rem);
+    grid-template-rows: var(--thumbs-h);
+    align-content: center;
+    align-items: center;
+    padding: 0.4rem 0.55rem;
+    flex: none;
+    align-self: stretch;
     order: 3;
+    overflow: hidden;
+  }
+  .thumbs__item,
+  .thumbs__item:hover,
+  .thumbs__item.is-active,
+  .thumbs__item.is-active:hover {
+    transform: none;
   }
   .stage--architecture .scroll-hint {
-    display: block;
+    display: grid;
+    place-items: center;
     position: relative;
     left: auto;
     bottom: auto;
     transform: none;
-    margin: 1.1rem auto 0.2rem;
+    margin: 1rem auto 0.35rem;
     z-index: 4;
     order: 4;
   }
@@ -3465,7 +3498,7 @@ p, h1, h2, h3 { margin: 0; }
   }
   .location__near {
     margin-top: 1.2rem;
-    margin-bottom: 0;
+    margin-bottom: 1.35rem;
   }
   .location__copy .lead { margin-bottom: 0; }
   .features {
@@ -3715,18 +3748,18 @@ p, h1, h2, h3 { margin: 0; }
 
 @media (max-width: 900px) and (min-width: 721px) {
   .stage--architecture { --thumbs-h: clamp(5.4rem, 11vh, 7.4rem); }
+  .architecture__heroes.is-viewing {
+    max-height: min(62vh, 30rem);
+  }
   .architecture__heroes.is-viewing .architecture__hero-photo {
-    position: relative;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    max-height: min(56vh, 26rem);
-    margin: 1rem auto 0;
-    object-fit: contain;
-    object-position: center;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    object-fit: cover;
+    object-position: center center;
   }
   .thumbs {
     position: relative;
@@ -3999,6 +4032,9 @@ p, h1, h2, h3 { margin: 0; }
     position: relative;
     bottom: auto;
     margin-top: 1.1rem;
+    height: calc(var(--thumbs-h) + 0.75rem);
+    min-height: calc(var(--thumbs-h) + 0.75rem);
+    max-height: calc(var(--thumbs-h) + 0.75rem);
   }
   .infra-card--restore,
   .infra-card--gastro,
