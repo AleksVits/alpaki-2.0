@@ -1,0 +1,110 @@
+/* Shared rhythm for the mobile document layout. Keep component geometry in index.css. */
+@media (max-width: 900px) {
+  :root {
+    --mobile-space-small: 12px;
+    --mobile-space-medium: 16px;
+    --mobile-space-block: 24px;
+    --mobile-space-section: 32px;
+    --mobile-gutter: clamp(20px, 5vw, 28px);
+  }
+
+  .stage .stage__inner {
+    --stage-pad-left: calc(var(--mobile-gutter) + env(safe-area-inset-left, 0px));
+    --stage-pad-right: calc(var(--mobile-gutter) + env(safe-area-inset-right, 0px));
+  }
+  .site .stage:not(.stage--intro) .stage__inner {
+    padding-top: calc(var(--header) + var(--mobile-space-block) + env(safe-area-inset-top, 0px));
+    padding-bottom: 0;
+  }
+  .site .stage.stage--contacts .stage__inner {
+    padding-bottom: calc(var(--mobile-space-section) + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* One margin owns each heading interval, including display:contents layouts. */
+  .stage .kicker { margin-block: 0 var(--mobile-space-small); }
+  .stage .title { margin-block: 0; }
+  .stage .title + .ornament {
+    display: flex;
+    width: max-content;
+    flex-shrink: 0;
+    margin: var(--mobile-space-medium) auto var(--mobile-space-block);
+  }
+  .stage .lead { margin-block: 0 var(--mobile-space-block); }
+  .stage .about-stats { gap: 0; }
+  .stage .about-stats__map { margin-block: var(--mobile-space-block); }
+  .stage .about-stats__chips { margin-block: 0; }
+
+  .stage .btn-row {
+    margin-block: var(--mobile-space-block) 0;
+    padding-block: 0;
+    gap: var(--mobile-space-small);
+  }
+  .stage .btn-row .btn { margin-block: 0; }
+  .stage .features,
+  .stage .materials { margin-bottom: var(--mobile-space-block); }
+  .stage .about-intro__quote,
+  .stage .architecture__quote { margin-block: 0; padding-top: var(--mobile-space-medium); }
+  .stage .about-intro__quote::before,
+  .stage .architecture__quote::before { margin-bottom: var(--mobile-space-medium); }
+  .stage .invest-list { margin-block: 0 var(--mobile-space-block); }
+  .stage .invest__flow { margin-block: 0; }
+  .stage .manage-steps { padding-top: 0; row-gap: var(--mobile-space-block); }
+  .stage .manage__foot { margin-top: var(--mobile-space-block); gap: var(--mobile-space-block); }
+  .stage .location__facts { margin-top: 0; gap: var(--mobile-space-medium); }
+  .stage .location__near { margin-block: var(--mobile-space-section) var(--mobile-space-block); }
+  .stage .location .btn { margin-block: 0; }
+
+  .stage .apt,
+  .stage .apt-house,
+  .stage .apt-3d,
+  .stage .apt-floor,
+  .stage .build-detail,
+  .stage .contacts { row-gap: var(--mobile-space-block); }
+  .stage .apt,
+  .stage .apt__copy { padding-bottom: 0; }
+  .stage .apt-house__steps,
+  .stage .apt-3d__meta,
+  .stage .apt-floor__list,
+  .stage .build-detail__status { margin-bottom: var(--mobile-space-block); }
+  .stage .apt-house__steps { margin-bottom: 0; }
+  .stage .plan-card { margin-top: 0; }
+  .stage .build-line { margin-bottom: var(--mobile-space-block); }
+  .stage .build-detail__photos-label { margin-block: var(--mobile-space-block) var(--mobile-space-small); }
+  .stage .contacts__hours { margin-bottom: var(--mobile-space-block); }
+  .stage .form { gap: var(--mobile-space-block); }
+  .stage .form__title { margin-block: 0; }
+  .stage .form .btn { margin-top: 0; }
+
+  /* Pagers belong to the content flow, then the next-section arrow follows it. */
+  .stage .apt__pager {
+    display: flex;
+    position: relative;
+    inset: auto;
+    transform: none;
+    align-self: center;
+    margin-top: var(--mobile-space-block);
+  }
+  .stage .infra > .pager,
+  .stage .thumbs { margin-top: var(--mobile-space-block); margin-bottom: 0; }
+  .stage:not(.stage--intro) > .scroll-hint {
+    position: relative;
+    inset: auto;
+    transform: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    margin: var(--mobile-space-section) auto calc(var(--mobile-space-block) + env(safe-area-inset-bottom, 0px));
+  }
+  .stage--intro > .scroll-hint { bottom: calc(var(--mobile-space-block) + env(safe-area-inset-bottom, 0px)); }
+}
+
+@media (max-width: 720px) {
+  .stage--architecture.is-viewing .stage__inner {
+    min-height: calc(100svh - 100px - env(safe-area-inset-bottom, 0px));
+    gap: 0;
+  }
+  .stage .architecture__viewer-toolbar { margin-bottom: var(--mobile-space-block); }
+  .stage--architecture.is-viewing .thumbs { margin-top: var(--mobile-space-block); }
+}
