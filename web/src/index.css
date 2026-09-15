@@ -3049,6 +3049,11 @@ p, h1, h2, h3 { margin: 0; }
   .ornament {
     margin-bottom: 1.15rem;
   }
+  .title + .ornament {
+    margin-top: 0.8rem;
+    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+  }
   .lead {
     margin-bottom: 1.25rem;
   }
@@ -4148,10 +4153,6 @@ p, h1, h2, h3 { margin: 0; }
   .materials { gap: 1rem; margin-bottom: 1.25rem; }
   .materials li { gap: 0.7rem; }
   .architecture__quote { margin-bottom: 1rem; line-height: 1.65; }
-  .stage--location .title + .ornament {
-    margin-top: 0.8rem;
-    margin-bottom: 1.5rem;
-  }
   .location__copy .lead { margin-bottom: 0; }
   .location__facts { margin-top: 2rem; gap: 1.25rem; }
   .location__rule { margin-block: 0.25rem; }
