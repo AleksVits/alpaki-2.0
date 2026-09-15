@@ -610,7 +610,25 @@ p, h1, h2, h3 { margin: 0; }
 }
 .stage--about-stats .stage__shade { background: none; }
 .stage--about-intro {
-  background: url('/about-intro.jpg?v=3') 72% 52% / cover no-repeat;
+  background: var(--marble);
+}
+.about-sequence {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.about-sequence img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 52%;
+  visibility: hidden;
+}
+.about-sequence img.is-active {
+  visibility: visible;
 }
 .stage--about-intro .stage__shade { background: none; }
 .stage--architecture {

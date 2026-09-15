@@ -1,4 +1,5 @@
 import { asset } from '../asset'
+import { AboutSequence } from '../components/AboutSequence'
 import { UkraineMap } from '../components/Maps'
 import { Btn, Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
 import { useI18n } from '../i18n'
@@ -64,7 +65,7 @@ export function AboutStats() {
 export function AboutIntro() {
   const { t } = useI18n()
   return (
-    <Stage id="about-intro" className="stage--about-intro" next="architecture">
+    <Stage id="about-intro" className="stage--about-intro" next="architecture" overlay={<AboutSequence />}>
       <div className="about-intro">
         <div className="about-intro__copy">
           <SectionHeading kicker={t.about.ideaKicker}>{splitTitle(t.about.title)}</SectionHeading>
