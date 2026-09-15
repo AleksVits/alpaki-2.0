@@ -85,7 +85,7 @@ export function AboutIntro() {
             <Btn href="#apartments" solid shine className="glass glass--chip">
               {t.about.ctaApt}
             </Btn>
-            <Btn href="#invest-formats" shine className="glass glass--chip">
+            <Btn href="#invest-formats" className="btn--secondary">
               {t.about.ctaInvest}
             </Btn>
           </div>

@@ -30,8 +30,8 @@ export function InvestFormats() {
         </ol>
         <p className="invest__flow">{t.invest.flow}</p>
         <div className="btn-row">
-          <Btn href="#contacts">{t.invest.ctaOffer}</Btn>
-          <Btn href="#contacts">{t.invest.ctaConsult}</Btn>
+          <Btn href="#contacts" solid>{t.invest.ctaOffer}</Btn>
+          <Btn href="#contacts" className="btn--secondary">{t.invest.ctaConsult}</Btn>
         </div>
       </div>
     </Stage>
@@ -64,7 +64,7 @@ export function InvestManage() {
           })}
         </ol>
         <div className="manage__foot">
-          <Btn href="#contacts">{t.invest.ctaTerms}</Btn>
+          <Btn href="#contacts" solid>{t.invest.ctaTerms}</Btn>
           <Pager
             current={2}
             total={3}

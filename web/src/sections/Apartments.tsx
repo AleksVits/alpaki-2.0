@@ -23,7 +23,7 @@ export function Apartments() {
           <div className="apt__copy">
             <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.title)}</SectionHeading>
             <Lead>{t.apt.lead}</Lead>
-            <Btn onClick={() => setPage(1)}>{t.apt.cta}</Btn>
+            <Btn solid onClick={() => setPage(1)}>{t.apt.cta}</Btn>
           </div>
           <div className="apt-types">
             {t.apt.types.map((item, i) => (
@@ -75,7 +75,7 @@ export function Apartments() {
               </button>
             ))}
           </div>
-          <Btn onClick={() => setPage(2)}>{t.apt.ctaHouse}</Btn>
+          <Btn solid onClick={() => setPage(2)}>{t.apt.ctaHouse}</Btn>
           <aside className="plan-card">
             <p className="plan-card__kicker">{t.apt.planKicker}</p>
             <p className="plan-card__area">{t.apt.planArea}</p>
@@ -92,7 +92,7 @@ export function Apartments() {
                 </button>
               ))}
             </div>
-            <Btn onClick={() => setPage(2)}>{t.apt.planCta}</Btn>
+            <Btn className="btn--secondary" onClick={() => setPage(2)}>{t.apt.planCta}</Btn>
           </aside>
         </div>
       )}
@@ -108,7 +108,7 @@ export function Apartments() {
               <span>{t.apt.planArea}</span>
               <span>{t.apt.types[type].title}</span>
             </p>
-            <Btn href="#contacts">{t.apt.ctaPrice}</Btn>
+            <Btn solid href="#contacts">{t.apt.ctaPrice}</Btn>
             <button type="button" className="text-link" onClick={() => setPage(1)}>
               {t.apt.back}
             </button>
@@ -142,7 +142,7 @@ export function Apartments() {
                 </button>
               ))}
             </div>
-            <Btn onClick={() => setPage(2)}>{t.apt.planCta}</Btn>
+            <Btn solid onClick={() => setPage(2)}>{t.apt.planCta}</Btn>
           </div>
           <Placeholder className="apt-floor__ph" label={`${t.apt.buildings[house].title} · ${t.apt.floors[floor]}`} />
         </div>
