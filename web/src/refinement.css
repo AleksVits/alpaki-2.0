@@ -372,3 +372,18 @@
   .architecture__heroes.is-viewing .architecture__hero.is-active,
   .stage--architecture .thumbs__item { animation: none; }
 }
+
+@media (min-width: 901px) and (max-width: 1999px) {
+  .stage--location .location__bar { grid-template-columns: minmax(0, 1fr) auto; }
+  .stage--location .location__bar .btn {
+    width: auto;
+    min-height: 46px;
+    padding: 11px 18px;
+    gap: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: nowrap;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+}
