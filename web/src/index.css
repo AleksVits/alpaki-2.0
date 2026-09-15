@@ -4319,3 +4319,65 @@ p, h1, h2, h3 { margin: 0; }
     box-shadow: 0 0 0 2px #ffffff30;
   }
 }
+
+/* Keep the location panel inside the content column, clear of the social rail. */
+@media (min-width: 901px) {
+  .location { min-width: 0; grid-template-columns: minmax(0, 1fr); }
+  .location__bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, 12rem);
+    grid-template-areas: none;
+    width: 100%;
+    max-width: 100%;
+    justify-self: stretch;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 1rem 1.25rem;
+    overflow: visible;
+  }
+  .location__facts {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 2.5fr);
+    gap: 1.25rem;
+    align-items: center;
+    min-width: 0;
+  }
+  .location__ways { display: contents; }
+  .location__sep { display: none; }
+  .location__way,
+  .location__places,
+  .location__bar .btn { grid-area: auto; min-width: 0; }
+  .location__way { gap: 0.65rem; }
+  .location__way > span:last-child,
+  .location__cities > span,
+  .location__cities > span > span { min-width: 0; }
+  .location__cities {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+  .location__cities > span { flex-direction: column; align-items: center; gap: 0.5rem; }
+  .location__way strong,
+  .location__cities b { white-space: normal; font-size: 0.72rem; letter-spacing: 0.06em; }
+  .location__way small,
+  .location__cities em { white-space: normal; font-size: 0.68rem; }
+  .location__way--car small.pre {
+    display: block;
+    white-space: normal;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+  .location__bar .btn {
+    width: 100%;
+    margin: 0;
+    padding: 0.8rem;
+    white-space: normal;
+    justify-content: center;
+    font-size: 0.68rem;
+  }
+}
+@media (min-width: 901px) and (max-width: 1500px) {
+  .location__facts { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+  .location__places { grid-column: 1 / -1; }
+  .location__cities > span { flex-direction: row; justify-content: center; }
+}

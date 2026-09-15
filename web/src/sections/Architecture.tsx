@@ -53,7 +53,7 @@ export function Architecture() {
       id="architecture"
       className={`stage--architecture${copyHidden ? ' is-viewing' : ''}`}
       next="location"
-      overlay={copyHidden && (
+      overlay={(
         <div className="architecture__viewer-bg" aria-hidden="true">
           <img src={photos[index]} alt="" />
         </div>
@@ -103,6 +103,7 @@ export function Architecture() {
       <div className="architecture">
         <div className={`architecture__copy${copyHidden ? ' is-hidden' : ''}`}>
           <SectionHeading kicker={t.architecture.kicker}>{splitTitle(t.architecture.title)}</SectionHeading>
+          <div className="architecture__details">
           <Lead aria-hidden={copyHidden}>{t.architecture.text}</Lead>
           <ul className="materials" aria-hidden={copyHidden}>
             {t.architecture.materials.map((item, i) => (
@@ -115,6 +116,7 @@ export function Architecture() {
             ))}
           </ul>
           <p className="architecture__quote" aria-hidden={copyHidden}>{t.architecture.note}</p>
+          </div>
         </div>
       </div>
       <div className="thumbs glass glass--bar">

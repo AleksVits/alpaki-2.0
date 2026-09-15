@@ -30,7 +30,7 @@
     justify-items: center;
     gap: var(--mobile-space-medium);
     width: 100%;
-    order: 1;
+    order: 0;
     margin: 0 0 var(--mobile-space-block);
   }
   .stage .section-heading > .kicker,
@@ -126,4 +126,64 @@
     gap: 0;
   }
   .stage--architecture.is-viewing .thumbs { margin-top: var(--mobile-space-block); }
+}
+
+.architecture__details { display: contents; }
+
+@media (max-width: 720px) {
+  /* Both modes share the same rows; hidden copy still reserves the photo slot. */
+  .site .stage.stage--architecture .stage__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(auto, 1fr) auto;
+    min-height: calc(100svh - 100px - env(safe-area-inset-bottom, 0px));
+    gap: 0;
+    align-content: start;
+  }
+  .stage--architecture .architecture__copy,
+  .stage--architecture.is-viewing .architecture__copy { display: contents; }
+  .stage--architecture .section-heading { grid-row: 1; grid-column: 1; }
+  .stage--architecture .architecture__details {
+    display: flow-root;
+    min-height: calc(100vw * 9 / 16);
+    grid-row: 2;
+    grid-column: 1;
+    align-self: center;
+  }
+  .stage--architecture.is-viewing .architecture__details { visibility: hidden; pointer-events: none; }
+  .stage--architecture .architecture__copy.is-hidden .lead,
+  .stage--architecture .architecture__copy.is-hidden .architecture__quote { display: block; }
+  .stage--architecture .architecture__copy.is-hidden .materials { display: grid; }
+  .stage--architecture .architecture__heroes:not(.is-viewing) { display: none; }
+  .stage--architecture .architecture__heroes.is-viewing {
+    grid-row: 2;
+    grid-column: 1;
+    align-self: center;
+    aspect-ratio: 16 / 9;
+  }
+  .stage--architecture .architecture__heroes.is-viewing .architecture__hero.is-active { position: absolute; }
+  .stage--architecture .architecture__heroes.is-viewing .architecture__hero-photo {
+    height: 100%;
+    object-fit: contain;
+  }
+  .stage--architecture .thumbs,
+  .stage--architecture.is-viewing .thumbs {
+    grid-row: 3;
+    grid-column: 1;
+    --thumbs-h: clamp(4rem, 16vw, 5.5rem);
+    grid-template-columns: 44px repeat(3, minmax(0, 1fr)) 44px;
+    grid-template-rows: var(--thumbs-h);
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    gap: 0.5rem;
+    padding: 0.65rem 0.35rem;
+    margin: var(--mobile-space-block) 0 0;
+  }
+  .stage--architecture .thumbs__arrow { align-self: center; min-height: 44px; margin: 0; }
+  .stage--architecture { background: #101511; isolation: isolate; }
+  .stage--architecture:not(.is-viewing) .architecture__viewer-bg img {
+    filter: brightness(0.65);
+    transform: none;
+  }
 }
