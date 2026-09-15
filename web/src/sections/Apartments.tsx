@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FloorPlan, IsoApartment } from '../components/Maps'
 import { Placeholder } from '../components/Placeholder'
-import { Btn, Kicker, Lead, Ornament, Pager, Stage, Title, splitTitle } from '../components/Ui'
+import { Btn, Lead, Pager, Stage, splitTitle, SectionHeading } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 export function Apartments() {
@@ -21,9 +21,7 @@ export function Apartments() {
       {page === 0 && (
         <div className="apt">
           <div className="apt__copy">
-            <Kicker>{t.apt.kicker}</Kicker>
-            <Title>{splitTitle(t.apt.title)}</Title>
-            <Ornament />
+            <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.title)}</SectionHeading>
             <Lead>{t.apt.lead}</Lead>
             <Btn onClick={() => setPage(1)}>{t.apt.cta}</Btn>
           </div>
@@ -52,9 +50,7 @@ export function Apartments() {
       {page === 1 && (
         <div className="apt-house">
           <div className="apt-house__copy">
-            <Kicker>{t.apt.kicker}</Kicker>
-            <Title>{splitTitle(t.apt.houseTitle)}</Title>
-            <Ornament />
+            <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.houseTitle)}</SectionHeading>
             <Lead>{t.apt.houseLead}</Lead>
             <ol className="apt-house__steps">
               {t.apt.steps.map((step, i) => (
@@ -104,9 +100,7 @@ export function Apartments() {
       {page === 2 && (
         <div className="apt-3d">
           <div className="apt-3d__copy">
-            <Kicker>{t.apt.kicker}</Kicker>
-            <Title>{splitTitle(t.apt.viewTitle)}</Title>
-            <Ornament />
+            <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.viewTitle)}</SectionHeading>
             <Lead>{t.apt.viewLead}</Lead>
             <p className="apt-3d__meta">
               <b>{t.apt.buildings[house].title}</b>
@@ -134,9 +128,7 @@ export function Apartments() {
       {page === 3 && (
         <div className="apt-floor">
           <div className="apt-floor__copy">
-            <Kicker>{t.apt.kicker}</Kicker>
-            <Title>{splitTitle(t.apt.floorTitle)}</Title>
-            <Ornament />
+            <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.floorTitle)}</SectionHeading>
             <Lead>{t.apt.floorLead}</Lead>
             <div className="apt-floor__list">
               {t.apt.floors.map((n, i) => (

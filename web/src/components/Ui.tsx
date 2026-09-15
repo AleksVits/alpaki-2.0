@@ -72,6 +72,16 @@ export function Title({ children, className = '' }: { children: ReactNode; class
   return <h2 className={`title ${className}`}>{children}</h2>
 }
 
+export function SectionHeading({ kicker, children }: { kicker: ReactNode; children: ReactNode }) {
+  return (
+    <div className="section-heading">
+      <Kicker>{kicker}</Kicker>
+      <Title>{children}</Title>
+      <Ornament />
+    </div>
+  )
+}
+
 export function Lead({ children, className = '', ...rest }: HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p className={`lead ${className}`} {...rest}>

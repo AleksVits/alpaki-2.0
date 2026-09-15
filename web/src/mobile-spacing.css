@@ -1,3 +1,6 @@
+/* Preserve the desktop layout; mobile headings own their spacing as one unit. */
+.section-heading { display: contents; }
+
 /* Shared rhythm for the mobile document layout. Keep component geometry in index.css. */
 @media (max-width: 900px) {
   :root {
@@ -21,6 +24,23 @@
   }
 
   /* One margin owns each heading interval, including display:contents layouts. */
+  .stage .section-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: var(--mobile-space-medium);
+    width: 100%;
+    order: 1;
+    margin: 0 0 var(--mobile-space-block);
+  }
+  .stage .section-heading > .kicker,
+  .stage .section-heading > .title,
+  .stage .section-heading > .title + .ornament {
+    margin: 0;
+    padding: 0;
+    order: initial;
+  }
+  .stage .section-heading > .title { line-height: 1.18; }
   .stage .kicker { margin-block: 0 var(--mobile-space-small); }
   .stage .title { margin-block: 0; }
   .stage .title + .ornament {
@@ -105,6 +125,5 @@
     min-height: calc(100svh - 100px - env(safe-area-inset-bottom, 0px));
     gap: 0;
   }
-  .stage .architecture__viewer-toolbar { margin-bottom: var(--mobile-space-block); }
   .stage--architecture.is-viewing .thumbs { margin-top: var(--mobile-space-block); }
 }

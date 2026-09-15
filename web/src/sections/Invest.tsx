@@ -1,7 +1,7 @@
 import { IconCalendar, IconChart, IconDish, IconKeys } from '../components/Icons'
 import { scrollToStage } from '../scroll'
 import { Placeholder } from '../components/Placeholder'
-import { Btn, Kicker, Lead, Ornament, Pager, Stage, Title, splitTitle } from '../components/Ui'
+import { Btn, Lead, Pager, Stage, splitTitle, SectionHeading } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 const manageIcons = [IconKeys, IconCalendar, IconDish, IconChart]
@@ -13,9 +13,7 @@ export function InvestFormats() {
       <Placeholder className="stage__photo stage__photo--right" />
       <div className="invest">
         <div className="invest__copy">
-          <Kicker>{t.invest.kicker}</Kicker>
-          <Title>{splitTitle(t.invest.title)}</Title>
-          <Ornament />
+          <SectionHeading kicker={t.invest.kicker}>{splitTitle(t.invest.title)}</SectionHeading>
           <Lead>{t.invest.lead}</Lead>
         </div>
         <ol className="invest-list">
@@ -47,9 +45,7 @@ export function InvestManage() {
       <Placeholder className="stage__photo" />
       <div className="manage">
         <div className="manage__copy">
-          <Kicker>{t.invest.kicker}</Kicker>
-          <Title>{splitTitle(t.invest.manageTitle)}</Title>
-          <Ornament />
+          <SectionHeading kicker={t.invest.kicker}>{splitTitle(t.invest.manageTitle)}</SectionHeading>
           <Lead>{t.invest.manageLead}</Lead>
         </div>
         <ol className="manage-steps">

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { asset } from '../asset'
-import { Kicker, Lead, Ornament, Stage, Title, resetShineCard, shineCard, splitTitle } from '../components/Ui'
+import { Lead, Stage, resetShineCard, shineCard, splitTitle, SectionHeading } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 const materialIcons = [
@@ -59,12 +59,6 @@ export function Architecture() {
         </div>
       )}
     >
-      {copyHidden && (
-        <div className="architecture__viewer-toolbar">
-          <span aria-live="polite">{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
-          <button type="button" onClick={() => setCopyHidden(false)} aria-label={t.ui.close}>×</button>
-        </div>
-      )}
       <div
         className={`architecture__heroes${copyHidden ? ' is-viewing' : ''}`}
         onTouchStart={(event) => {
@@ -93,12 +87,22 @@ export function Architecture() {
             <img className="architecture__hero-photo" src={src} alt={`${t.architecture.kicker} — ${i + 1}`} />
           </div>
         ))}
+        {copyHidden && (
+          <button
+            type="button"
+            className="architecture__viewer-close"
+            onClick={() => setCopyHidden(false)}
+            aria-label={t.ui.close}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+        )}
       </div>
       <div className="architecture">
         <div className={`architecture__copy${copyHidden ? ' is-hidden' : ''}`}>
-          <Kicker>{t.architecture.kicker}</Kicker>
-          <Title>{splitTitle(t.architecture.title)}</Title>
-          <Ornament />
+          <SectionHeading kicker={t.architecture.kicker}>{splitTitle(t.architecture.title)}</SectionHeading>
           <Lead aria-hidden={copyHidden}>{t.architecture.text}</Lead>
           <ul className="materials" aria-hidden={copyHidden}>
             {t.architecture.materials.map((item, i) => (

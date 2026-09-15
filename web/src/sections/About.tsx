@@ -1,6 +1,6 @@
 import { asset } from '../asset'
 import { UkraineMap } from '../components/Maps'
-import { Btn, Kicker, Lead, Ornament, Stage, Title, splitTitle } from '../components/Ui'
+import { Btn, Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 const statIcons = [
@@ -30,9 +30,7 @@ export function AboutStats() {
     <Stage id="about-stats" className="stage--about-stats" next="about-intro">
       <div className="about-stats">
         <div className="about-stats__copy">
-          <Kicker>{t.about.factsKicker}</Kicker>
-          <Title>{t.about.kicker}</Title>
-          <Ornament />
+          <SectionHeading kicker={t.about.factsKicker}>{t.about.kicker}</SectionHeading>
           <ul className="facts">
             {stats.map((item, i) => {
               const long = !item.sub
@@ -69,9 +67,7 @@ export function AboutIntro() {
     <Stage id="about-intro" className="stage--about-intro" next="architecture">
       <div className="about-intro">
         <div className="about-intro__copy">
-          <Kicker>{t.about.ideaKicker}</Kicker>
-          <Title>{splitTitle(t.about.title)}</Title>
-          <Ornament />
+          <SectionHeading kicker={t.about.ideaKicker}>{splitTitle(t.about.title)}</SectionHeading>
           <Lead>{t.about.lead}</Lead>
           <ul className="features">
             {t.about.features.map((item, i) => (

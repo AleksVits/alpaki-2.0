@@ -1,5 +1,5 @@
 import { asset } from '../asset'
-import { Btn, Kicker, Lead, Ornament, Stage, Title, splitTitle } from '../components/Ui'
+import { Btn, Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 export function Location() {
@@ -9,9 +9,7 @@ export function Location() {
     <Stage id="location" className="stage--location" next="infrastructure">
       <div className="location">
         <div className="location__copy">
-          <Kicker>{t.location.kicker}</Kicker>
-          <Title>{splitTitle(t.location.title)}</Title>
-          <Ornament />
+          <SectionHeading kicker={t.location.kicker}>{splitTitle(t.location.title)}</SectionHeading>
           <Lead>{t.location.text}</Lead>
           <p className="location__near">{t.location.nearby}</p>
         </div>

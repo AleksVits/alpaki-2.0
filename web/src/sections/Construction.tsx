@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { IconChevron } from '../components/Icons'
 import { Placeholder } from '../components/Placeholder'
-import { Kicker, Lead, Ornament, Stage, Title, splitTitle } from '../components/Ui'
+import { Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
 import { useI18n } from '../i18n'
 
 export function Construction() {
@@ -16,9 +16,7 @@ export function Construction() {
       <Stage id="construction" className="stage--build" next="build-detail">
         <Placeholder className="stage__photo" />
         <div className="build">
-          <Kicker>{t.build.kicker}</Kicker>
-          <Title>{splitTitle(t.build.title)}</Title>
-          <Ornament />
+          <SectionHeading kicker={t.build.kicker}>{splitTitle(t.build.title)}</SectionHeading>
           <Lead>{t.build.lead}</Lead>
           <div className="build-line">
             <button
@@ -58,9 +56,7 @@ export function Construction() {
       <Stage id="build-detail" className="stage--build-detail" next="contacts">
         <div className="build-detail">
           <div className="build-detail__copy">
-            <Kicker>{t.build.crumb}  ·  {houses[house].title}</Kicker>
-            <Title>{houses[house].title}</Title>
-            <Ornament />
+            <SectionHeading kicker={<>{t.build.crumb} · {houses[house].title}</>}>{houses[house].title}</SectionHeading>
             <p className="build-detail__status">
               {t.build.current}
               <strong>{houses[house].status}</strong>

@@ -1555,7 +1555,7 @@ p, h1, h2, h3 { margin: 0; }
 }
 .thumbs__item.is-active:hover img { transform: scale(1.08); }
 .architecture__viewer-bg,
-.architecture__viewer-toolbar { display: none; }
+.architecture__viewer-close { display: none; }
 .architecture__heroes {
   position: absolute;
   inset: 0;
@@ -4242,23 +4242,32 @@ p, h1, h2, h3 { margin: 0; }
     padding-bottom: 1.5rem;
   }
   .stage--architecture.is-viewing .architecture__copy { display: block; }
-  .architecture__viewer-toolbar {
-    display: flex;
-    order: 0;
-    align-items: center;
-    justify-content: space-between;
-    color: var(--cream);
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-  }
-  .architecture__viewer-toolbar button {
+  .architecture__viewer-close {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 8px;
+    right: calc(8px + env(safe-area-inset-right, 0px));
+    z-index: 4;
     width: 44px;
     height: 44px;
-    border: 1px solid #ffffff40;
-    border-radius: 50%;
-    background: #ffffff0d;
-    font-size: 1.8rem;
-    line-height: 1;
+    padding: 8px;
+    color: white;
+    border-radius: 6px;
+    background: #10151180;
+    touch-action: manipulation;
+  }
+  .architecture__viewer-close svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+  .architecture__viewer-close:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
   }
   .architecture__heroes.is-viewing {
     flex: none;
