@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { asset } from '../asset'
 import { Kicker, Lead, Ornament, Stage, Title, resetShineCard, shineCard, splitTitle } from '../components/Ui'
 import { useI18n } from '../i18n'
@@ -16,6 +16,7 @@ export function Architecture() {
   const [index, setIndex] = useState(0)
   const [prevIndex, setPrevIndex] = useState<number | null>(null)
   const [copyHidden, setCopyHidden] = useState(false)
+  const touchStart = useRef<{ x: number; y: number } | null>(null)
   const total = photos.length
   const start = index % total
 
@@ -48,15 +49,48 @@ export function Architecture() {
   }, [])
 
   return (
-    <Stage id="architecture" className="stage--architecture" next="location">
-      <div className={`architecture__heroes${copyHidden ? ' is-viewing' : ''}`}>
+    <Stage
+      id="architecture"
+      className={`stage--architecture${copyHidden ? ' is-viewing' : ''}`}
+      next="location"
+      overlay={copyHidden && (
+        <div className="architecture__viewer-bg" aria-hidden="true">
+          <img src={photos[index]} alt="" />
+        </div>
+      )}
+    >
+      {copyHidden && (
+        <div className="architecture__viewer-toolbar">
+          <span aria-live="polite">{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+          <button type="button" onClick={() => setCopyHidden(false)} aria-label={t.ui.close}>×</button>
+        </div>
+      )}
+      <div
+        className={`architecture__heroes${copyHidden ? ' is-viewing' : ''}`}
+        onTouchStart={(event) => {
+          const touch = event.touches[0]
+          touchStart.current = { x: touch.clientX, y: touch.clientY }
+        }}
+        onTouchEnd={(event) => {
+          const start = touchStart.current
+          touchStart.current = null
+          if (!start || !copyHidden) return
+          const touch = event.changedTouches[0]
+          const dx = touch.clientX - start.x
+          const dy = touch.clientY - start.y
+          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            goTo((index + (dx < 0 ? 1 : -1) + total) % total)
+          }
+        }}
+        onTouchCancel={() => { touchStart.current = null }}
+      >
         {photos.map((src, i) => (
           <div
             key={src}
             className={`architecture__hero${i === index ? ' is-active' : ''}${i === prevIndex ? ' is-leaving' : ''}`}
           >
             {(i === index || i === prevIndex) && <img className="architecture__hero-bg" src={src} alt="" />}
-            <img className="architecture__hero-photo" src={src} alt="" />
+            <img className="architecture__hero-photo" src={src} alt={`${t.architecture.kicker} — ${i + 1}`} />
           </div>
         ))}
       </div>
@@ -99,6 +133,7 @@ export function Architecture() {
               onPointerMove={shineCard}
               onPointerLeave={resetShineCard}
               aria-label={`${String(n + 1).padStart(2, '0')}`}
+              aria-pressed={n === index}
             >
               <img src={photos[n]} alt="" />
               <span>{String(n + 1).padStart(2, '0')}</span>
