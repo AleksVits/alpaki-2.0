@@ -10,27 +10,7 @@ import { InfraDetail, Infrastructure } from './sections/Infrastructure'
 import { Intro } from './sections/Intro'
 import { InvestFormats, InvestManage } from './sections/Invest'
 import { Location } from './sections/Location'
-import { decodeHash, isMobileFlow, isProgrammaticScroll, scrollToStage, siteScroller } from './scroll'
-
-function snapNearest(root: HTMLElement) {
-  if (isMobileFlow()) return
-  if (isProgrammaticScroll()) return
-  if (document.documentElement.classList.contains('is-nav-lock')) return
-  const stages = Array.from(root.querySelectorAll<HTMLElement>('.stage'))
-  if (!stages.length) return
-  const origin = root.getBoundingClientRect().top
-  let best = stages[0]
-  let bestDist = Infinity
-  for (const stage of stages) {
-    const dist = Math.abs(stage.getBoundingClientRect().top - origin)
-    if (dist < bestDist) {
-      bestDist = dist
-      best = stage
-    }
-  }
-  if (bestDist < 8) return
-  scrollToStage(best)
-}
+import { decodeHash, isMobileFlow, scrollToStage, siteScroller } from './scroll'
 
 const sectionMap: Record<string, string> = {
   intro: 'intro',
@@ -108,19 +88,6 @@ export default function App() {
       history.pushState(null, '', href)
     }
 
-    let snapTimer = 0
-    const scheduleSnap = () => {
-      if (isMobileFlow()) return
-      window.clearTimeout(snapTimer)
-      snapTimer = window.setTimeout(() => snapNearest(root), 160)
-    }
-
-    const onScrollEnd = () => {
-      if (isMobileFlow()) return
-      snapNearest(root)
-    }
-    const onResize = () => scheduleSnap()
-
     const hash = decodeHash(window.location.hash.slice(1))
     if (hash) {
       const target = document.getElementById(hash)
@@ -128,18 +95,9 @@ export default function App() {
     }
 
     document.addEventListener('click', onClick)
-    root.addEventListener('scrollend', onScrollEnd)
-    root.addEventListener('scroll', scheduleSnap, { passive: true })
-    window.addEventListener('resize', onResize)
-    window.addEventListener('orientationchange', onResize)
 
     return () => {
-      window.clearTimeout(snapTimer)
       document.removeEventListener('click', onClick)
-      root.removeEventListener('scrollend', onScrollEnd)
-      root.removeEventListener('scroll', scheduleSnap)
-      window.removeEventListener('resize', onResize)
-      window.removeEventListener('orientationchange', onResize)
     }
   }, [])
 

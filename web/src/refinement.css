@@ -128,3 +128,95 @@
   .stage .features li { min-width: 0; }
   .stage .location__cities { gap: 16px; }
 }
+
+/* Natural page scrolling; content determines each section's height. */
+.site { scroll-snap-type: none; }
+@media (min-width: 901px) {
+  .site .stage:not(.stage--intro) {
+    height: auto;
+    min-height: 100svh;
+    max-height: none;
+    overflow: visible;
+    scroll-snap-align: none;
+  }
+  .site .stage:not(.stage--intro) .stage__inner {
+    height: auto;
+    min-height: 100svh;
+    max-height: none;
+    overflow: visible;
+  }
+  .site .contacts { overflow: visible; }
+  .stage--architecture .thumbs {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    margin-top: 24px;
+    flex: none;
+  }
+  .stage--architecture .architecture__copy { min-height: 0; }
+  .stage--architecture .architecture { min-height: 0; }
+}
+.about-sequence img {
+  visibility: visible;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  transform: scale(1.045);
+  transform-origin: 72% 55%;
+}
+.about-sequence img.is-active { opacity: 1; }
+.about-sequence.is-playing img { animation: sequence-camera 6s ease-out both; }
+@keyframes sequence-camera {
+  from { transform: scale(1.045); }
+  to { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-sequence img,
+  .about-sequence.is-playing img { animation: none; transition: none; transform: none; }
+}
+
+/* Large displays: a bounded, proportionately scaled location panel. */
+@media (min-width: 2000px) {
+  .stage--location .location__bar {
+    --location-scale: clamp(22px, 0.86vw, 33px);
+    font-size: var(--location-scale);
+    width: min(100%, clamp(1800px, 75vw, 2800px));
+    justify-self: center;
+    grid-template-columns: minmax(0, 1fr) 12em;
+    gap: 1.25em;
+    padding: 1.1em 1.4em;
+    border-radius: 0.5em;
+  }
+  .stage--location .location__facts {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 2.5fr);
+    gap: 1.25em;
+  }
+  .stage--location .location__way { gap: 0.75em; }
+  .stage--location .location__way strong,
+  .stage--location .location__cities b { font-size: 0.8em; }
+  .stage--location .location__way small,
+  .stage--location .location__cities em { font-size: 0.76em; }
+  .stage--location .location__way--car small { max-width: 19ch; }
+  .stage--location .location__cities { gap: 0.9em; }
+  .stage--location .location__cities > span { gap: 0.55em; }
+  .stage--location .location__ico,
+  .stage--location .location__ico img {
+    width: 3.35em;
+    height: 3.35em;
+    max-width: none;
+    max-height: none;
+  }
+  .stage--location .location__pin { width: 2em; height: 2em; }
+  .stage--location .location__bar .btn {
+    font-size: 0.8em;
+    min-height: 3.6em;
+    padding: 0.85em 1em;
+    gap: 0.8em;
+  }
+  .stage--location .location__bar .btn svg { width: 1em; height: 1em; }
+}
+
+/* Scale the shared rem-based typography and spacing continuously above Full HD. */
+@media (min-width: 1920px) {
+  html { font-size: clamp(1.375rem, calc(0.5rem + 0.729167vw), 2.25rem); }
+}

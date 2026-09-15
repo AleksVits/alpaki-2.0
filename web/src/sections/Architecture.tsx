@@ -1,3 +1,4 @@
+import { useNearSection } from '../useNearSection'
 import { useEffect, useRef, useState } from 'react'
 import { asset } from '../asset'
 import { Lead, Stage, resetShineCard, shineCard, splitTitle, SectionHeading } from '../components/Ui'
@@ -9,9 +10,10 @@ const materialIcons = [
   asset('icons/material-glass.png?v=4'),
   asset('icons/material-terrace.png?v=4'),
 ]
-const photos = Array.from({ length: 8 }, (_, i) => asset(`architecture/${String(i).padStart(2, '0')}.png`))
+const photos = Array.from({ length: 8 }, (_, i) => asset(`architecture/${String(i).padStart(2, '0')}.webp`))
 
 export function Architecture() {
+  const near = useNearSection('architecture')
   const { t } = useI18n()
   const [index, setIndex] = useState(0)
   const [prevIndex, setPrevIndex] = useState<number | null>(null)
@@ -55,7 +57,7 @@ export function Architecture() {
       next="location"
       overlay={(
         <div className="architecture__viewer-bg" aria-hidden="true">
-          <img src={photos[index]} alt="" />
+          <img src={near ? photos[index] : undefined} alt="" />
         </div>
       )}
     >
@@ -83,8 +85,8 @@ export function Architecture() {
             key={src}
             className={`architecture__hero${i === index ? ' is-active' : ''}${i === prevIndex ? ' is-leaving' : ''}`}
           >
-            {(i === index || i === prevIndex) && <img className="architecture__hero-bg" src={src} alt="" />}
-            <img className="architecture__hero-photo" src={src} alt={`${t.architecture.kicker} — ${i + 1}`} />
+            {(i === index || i === prevIndex) && <img className="architecture__hero-bg" src={near ? src : undefined} alt="" />}
+            <img className="architecture__hero-photo" src={near ? src : undefined} alt={`${t.architecture.kicker} — ${i + 1}`} />
           </div>
         ))}
         {copyHidden && (
@@ -141,7 +143,7 @@ export function Architecture() {
               aria-label={`${String(n + 1).padStart(2, '0')}`}
               aria-pressed={n === index}
             >
-              <img src={photos[n]} alt="" />
+              <img src={near ? photos[n] : undefined} alt="" />
               <span>{String(n + 1).padStart(2, '0')}</span>
             </button>
           )

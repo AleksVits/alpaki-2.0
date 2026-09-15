@@ -1,3 +1,4 @@
+import { useNearSection } from '../useNearSection'
 import { asset } from '../asset'
 import { AboutSequence } from '../components/AboutSequence'
 import { UkraineMap } from '../components/Maps'
@@ -63,9 +64,10 @@ export function AboutStats() {
 }
 
 export function AboutIntro() {
+  const near = useNearSection('about-intro')
   const { t } = useI18n()
   return (
-    <Stage id="about-intro" className="stage--about-intro" next="architecture" overlay={<AboutSequence />}>
+    <Stage id="about-intro" className="stage--about-intro" next="architecture" overlay={near ? <AboutSequence /> : null}>
       <div className="about-intro">
         <div className="about-intro__copy">
           <SectionHeading kicker={t.about.ideaKicker}>{splitTitle(t.about.title)}</SectionHeading>

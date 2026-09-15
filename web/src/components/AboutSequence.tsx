@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { asset } from '../asset'
 
-const frames = [1, 2, 3, 4].map((n) => asset(`about-sequence/${n}.png`))
+const frames = [1, 2, 3, 4].map((n) => asset(`about-sequence/${n}.webp`))
 
 export function AboutSequence() {
   const ref = useRef<HTMLDivElement>(null)
   const [frame, setFrame] = useState(0)
+  const [playing, setPlaying] = useState(false)
 
   useEffect(() => {
     const section = ref.current?.closest('.stage')
@@ -24,7 +25,8 @@ export function AboutSequence() {
         return
       }
       setFrame(0)
-      timers = [1, 2, 3].map((n) => window.setTimeout(() => setFrame(n), n * 1000))
+      setPlaying(true)
+      timers = [1, 2, 3].map((n) => window.setTimeout(() => setFrame(n), n * 1600))
     }
     // Decode every frame first so a slow download cannot interrupt the sequence.
     Promise.all(frames.map((src) => {
@@ -40,6 +42,7 @@ export function AboutSequence() {
         started = false
         clear()
         setFrame(0)
+        setPlaying(false)
       } else if (entry.intersectionRatio >= 0.25) {
         visible = true
         start()
@@ -50,8 +53,8 @@ export function AboutSequence() {
   }, [])
 
   return (
-    <div ref={ref} className="about-sequence" data-frame={frame + 1} aria-hidden="true">
-      {frames.map((src, i) => <img key={src} src={src} alt="" className={i === frame ? 'is-active' : ''} />)}
+    <div ref={ref} className={`about-sequence${playing ? ' is-playing' : ''}`} data-frame={frame + 1} aria-hidden="true">
+      {frames.map((src, i) => <img key={src} src={src} alt="" className={i <= frame ? 'is-active' : ''} />)}
     </div>
   )
 }
