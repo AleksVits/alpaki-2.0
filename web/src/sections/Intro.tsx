@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { asset } from '../asset'
 import { Logo } from '../components/Logo'
 import { Stage, splitTitle } from '../components/Ui'
 import { useI18n } from '../i18n'
@@ -8,7 +10,7 @@ export function Intro() {
   return (
     <Stage
       id="intro"
-      className="stage--intro"
+      className={`stage--intro${imageReady ? ' is-ready' : ''}`}
       next="about-stats"
       overlay={
         <div className={`intro__backdrop${imageReady ? ' is-ready' : ''}`} aria-hidden="true">
@@ -17,6 +19,7 @@ export function Intro() {
             alt=""
             fetchPriority="high"
             onLoad={() => setImageReady(true)}
+            onError={() => setImageReady(true)}
           />
         </div>
       }
@@ -28,5 +31,3 @@ export function Intro() {
     </Stage>
   )
 }
-import { useState } from 'react'
-import { asset } from '../asset'

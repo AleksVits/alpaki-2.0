@@ -555,11 +555,31 @@ p, h1, h2, h3 { margin: 0; }
   height: 100%;
   object-fit: cover;
   object-position: 58% 46%;
-  transform-origin: 50% 32%;
+  transform-origin: center;
   transform: scale(2.7);
 }
 .intro__backdrop.is-ready img {
-  animation: intro-pullback 4.5s cubic-bezier(0.2, 0.55, 0.3, 1) both;
+  animation: intro-pullback 4.5s cubic-bezier(0.4, 0, 0.2, 1) both, intro-image-in 0.5s ease-out both;
+}
+@keyframes intro-image-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.stage--intro .intro,
+.stage--intro > .scroll-hint {
+  opacity: 0;
+  visibility: hidden;
+}
+.stage--intro.is-ready .intro {
+  animation: intro-brand-in 0.5s ease-out 4.5s both;
+}
+.stage--intro.is-ready > .scroll-hint {
+  animation: intro-image-in 0.5s ease-out 4.5s both;
+  visibility: visible;
+}
+@keyframes intro-brand-in {
+  from { opacity: 0; visibility: hidden; transform: translateY(12px); }
+  to { opacity: 1; visibility: visible; transform: translateY(0); }
 }
 @keyframes intro-pullback {
   from { transform: scale(2.7); }
@@ -570,6 +590,14 @@ p, h1, h2, h3 { margin: 0; }
   .intro__backdrop.is-ready img {
     animation: none;
     transform: none;
+  }
+  .stage--intro .intro,
+  .stage--intro.is-ready .intro,
+  .stage--intro > .scroll-hint,
+  .stage--intro.is-ready > .scroll-hint {
+    animation: none;
+    opacity: 1;
+    visibility: visible;
   }
 }
 .stage--intro .stage__shade { background: none; }
