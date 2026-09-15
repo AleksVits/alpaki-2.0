@@ -79,24 +79,58 @@ const ua = {
     kicker: 'Простори AL’PAKI LEGEND',
     title: 'Інфраструктура,\nщо формує ритм\nвідпочинку',
     lead: 'Від відновлення й гастрономії до подій, спорту та відпочинку серед Карпат.',
-    cards: [
-      { id: 'restore', n: '01', title: 'Відновлення', tags: 'SPA  ·  Басейни  ·  GYM' },
-      { id: 'gastro', n: '02', title: 'Гастрономія', tags: 'Ресторани  ·  Бари  ·  Craft Fest' },
-      { id: 'events', n: '03', title: 'Події та розваги', tags: '«Орбіта»  ·  Кіно  ·  Game Lounge' },
-      { id: 'active', n: '04', title: 'Активний відпочинок', tags: 'Drive Club  ·  Eco Ranch  ·  Йога' },
-      { id: 'comfort', n: '05', title: 'Комфорт і сервіс', tags: 'Коворкінг  ·  Lounge  ·  BBQ' },
-    ],
-    restoreKicker: '01  ·  Відновлення',
-    restoreTitle: 'Відновлення\nсеред гір',
-    restoreLead:
-      'Панорамний SPA-простір об’єднує басейни, хамам, джакузі, бані, масажні кабінети та GYM.',
-    amenities: [
-      { id: 'pool', label: 'Басейн' },
-      { id: 'hammam', label: 'Хамам' },
-      { id: 'jacuzzi', label: 'Джакузі' },
-      { id: 'banya', label: 'Бані' },
-      { id: 'massage', label: 'Масаж' },
-      { id: 'gym', label: 'GYM' },
+    carouselLabel: 'Простори та розваги комплексу',
+    groups: [
+      {
+        id: 'wellness', n: '01', title: 'Відновлення', tags: 'Гірські чани  ·  Фітнес-зона Zen',
+        detailTitle: 'Відновлення\nсеред гір',
+        lead: 'Тепло гірських чанів і продумана фітнес-зона допомагають відновити сили у власному ритмі.',
+        items: [
+          { id: 'mountain-tubs', title: 'Гірські чани', images: ['infrastructure/mountain-tubs/01.jpg', 'infrastructure/mountain-tubs/02.jpg'] },
+          { id: 'fitness-zen', title: 'Фітнес-зона Zen', images: ['infrastructure/fitness-zen/01.jpg', 'infrastructure/fitness-zen/02.jpg', 'infrastructure/fitness-zen/03.jpg', 'infrastructure/fitness-zen/04.jpg'] },
+        ],
+      },
+      {
+        id: 'gastronomy', n: '02', title: 'Гастрономія', tags: 'Ресторан  ·  BBQ  ·  Cigar & Lounge',
+        detailTitle: 'Гастрономія\nз карпатським характером',
+        lead: 'Панорамний ресторан, відкрита BBQ-зона та камерний lounge створюють різні сценарії для зустрічей і вечорів.',
+        items: [
+          { id: 'restaurant', title: 'Ресторан', images: ['infrastructure/restaurant/01.jpg', 'infrastructure/restaurant/02.jpg'] },
+          { id: 'bbq', title: 'Зона барбекю', images: ['infrastructure/bbq/01.jpg', 'infrastructure/bbq/02.jpg'] },
+          { id: 'cigar-lounge', title: 'Cigar & Lounge Club', images: ['infrastructure/cigar-lounge/01.jpg', 'infrastructure/cigar-lounge/02.jpg', 'infrastructure/cigar-lounge/03.jpg', 'infrastructure/cigar-lounge/04.jpg', 'infrastructure/cigar-lounge/05.jpg', 'infrastructure/cigar-lounge/06.jpg'] },
+        ],
+      },
+      {
+        id: 'events', n: '03', title: 'Події та розваги', tags: 'Івент-зона  ·  Кінотеатр  ·  Game Lounge',
+        detailTitle: 'Враження,\nщо збирають разом',
+        lead: 'Подієві й ігрові простори збирають друзів та родину для спільного відпочинку за будь-якої погоди.',
+        items: [
+          { id: 'event-space', title: 'Івент-зона', images: ['infrastructure/event-space/01.jpg', 'infrastructure/event-space/02.jpg'] },
+          { id: 'cinema', title: 'Кінотеатр', images: ['infrastructure/cinema/01.jpg', 'infrastructure/cinema/02.jpg', 'infrastructure/cinema/03.jpg', 'infrastructure/cinema/04.jpg'] },
+          { id: 'planetarium', title: 'Планетарій', images: ['infrastructure/planetarium/01.jpg', 'infrastructure/planetarium/02.jpg', 'infrastructure/planetarium/03.jpg', 'infrastructure/planetarium/04.jpg', 'infrastructure/planetarium/05.jpg'] },
+          { id: 'billiards', title: 'Більярд', images: ['infrastructure/billiards/01.jpg', 'infrastructure/billiards/02.jpg'] },
+          { id: 'bowling', title: 'Боулінг', images: ['infrastructure/bowling/01.jpg', 'infrastructure/bowling/02.jpg'] },
+          { id: 'game-lounge', title: 'Game Lounge', images: ['infrastructure/game-lounge/01.jpg', 'infrastructure/game-lounge/02.jpg'] },
+        ],
+      },
+      {
+        id: 'active', n: '04', title: 'Активний відпочинок', tags: 'Drive Club  ·  AL’PAKI RANCH',
+        detailTitle: 'Рух і пригоди\nсеред Карпат',
+        lead: 'Гірські маршрути, техніка та атмосфера ранчо відкривають активний спосіб пізнавати Карпати.',
+        items: [
+          { id: 'drive-club', title: 'Drive Club', images: ['infrastructure/drive-club/02.jpg', 'infrastructure/drive-club/01.jpg'] },
+          { id: 'craft-fest-ranch', title: 'Craft Fest та AL’PAKI RANCH', images: ['infrastructure/craft-fest-ranch/01.jpg', 'infrastructure/craft-fest-ranch/02.jpg'] },
+        ],
+      },
+      {
+        id: 'comfort', n: '05', title: 'Комфорт і сервіс', tags: 'Дитяча зона  ·  Зона вогню',
+        detailTitle: 'Простори для\nвсієї родини',
+        lead: 'Продумані сімейні простори додають комфорту денному відпочинку й теплим вечорам просто неба.',
+        items: [
+          { id: 'kids-indoor', title: 'Закрита дитяча зона', images: ['infrastructure/kids-indoor/01.jpg'] },
+          { id: 'fire-zone', title: 'Зона вогню', images: ['infrastructure/fire-zone/01.jpg', 'infrastructure/fire-zone/02.jpg', 'infrastructure/fire-zone/03.jpg', 'infrastructure/fire-zone/04.jpg'] },
+        ],
+      },
     ],
   },
   invest: {
@@ -337,24 +371,58 @@ const en: typeof ua = {
     kicker: 'AL’PAKI LEGEND spaces',
     title: 'Infrastructure\nthat sets the rhythm\nof rest',
     lead: 'From recovery and gastronomy to events, sport and leisure in the Carpathians.',
-    cards: [
-      { id: 'restore', n: '01', title: 'Recovery', tags: 'SPA  ·  Pools  ·  GYM' },
-      { id: 'gastro', n: '02', title: 'Gastronomy', tags: 'Restaurants  ·  Bars  ·  Craft Fest' },
-      { id: 'events', n: '03', title: 'Events & entertainment', tags: '“Orbita”  ·  Cinema  ·  Game Lounge' },
-      { id: 'active', n: '04', title: 'Active leisure', tags: 'Drive Club  ·  Eco Ranch  ·  Yoga' },
-      { id: 'comfort', n: '05', title: 'Comfort & service', tags: 'Coworking  ·  Lounge  ·  BBQ' },
-    ],
-    restoreKicker: '01  ·  Recovery',
-    restoreTitle: 'Recovery\namong the mountains',
-    restoreLead:
-      'A panoramic SPA brings together pools, hammam, jacuzzi, banyas, massage rooms and a GYM.',
-    amenities: [
-      { id: 'pool', label: 'Pool' },
-      { id: 'hammam', label: 'Hammam' },
-      { id: 'jacuzzi', label: 'Jacuzzi' },
-      { id: 'banya', label: 'Banyas' },
-      { id: 'massage', label: 'Massage' },
-      { id: 'gym', label: 'GYM' },
+    carouselLabel: 'Resort spaces and activities',
+    groups: [
+      {
+        id: 'wellness', n: '01', title: 'Recovery', tags: 'Mountain hot tubs  ·  Zen fitness area',
+        detailTitle: 'Recovery\namong the mountains',
+        lead: 'Mountain hot tubs and a carefully designed fitness area help restore energy at your own pace.',
+        items: [
+          { id: 'mountain-tubs', title: 'Mountain hot tubs', images: ['infrastructure/mountain-tubs/01.jpg', 'infrastructure/mountain-tubs/02.jpg'] },
+          { id: 'fitness-zen', title: 'Zen fitness area', images: ['infrastructure/fitness-zen/01.jpg', 'infrastructure/fitness-zen/02.jpg', 'infrastructure/fitness-zen/03.jpg', 'infrastructure/fitness-zen/04.jpg'] },
+        ],
+      },
+      {
+        id: 'gastronomy', n: '02', title: 'Gastronomy', tags: 'Restaurant  ·  BBQ  ·  Cigar & Lounge',
+        detailTitle: 'Gastronomy\nwith Carpathian character',
+        lead: 'A panoramic restaurant, open BBQ area and intimate lounge offer different settings for meetings and evenings.',
+        items: [
+          { id: 'restaurant', title: 'Restaurant', images: ['infrastructure/restaurant/01.jpg', 'infrastructure/restaurant/02.jpg'] },
+          { id: 'bbq', title: 'BBQ area', images: ['infrastructure/bbq/01.jpg', 'infrastructure/bbq/02.jpg'] },
+          { id: 'cigar-lounge', title: 'Cigar & Lounge Club', images: ['infrastructure/cigar-lounge/01.jpg', 'infrastructure/cigar-lounge/02.jpg', 'infrastructure/cigar-lounge/03.jpg', 'infrastructure/cigar-lounge/04.jpg', 'infrastructure/cigar-lounge/05.jpg', 'infrastructure/cigar-lounge/06.jpg'] },
+        ],
+      },
+      {
+        id: 'events', n: '03', title: 'Events & entertainment', tags: 'Event space  ·  Cinema  ·  Game Lounge',
+        detailTitle: 'Experiences\nthat bring people together',
+        lead: 'Event and game spaces bring friends and families together in every season.',
+        items: [
+          { id: 'event-space', title: 'Event space', images: ['infrastructure/event-space/01.jpg', 'infrastructure/event-space/02.jpg'] },
+          { id: 'cinema', title: 'Cinema', images: ['infrastructure/cinema/01.jpg', 'infrastructure/cinema/02.jpg', 'infrastructure/cinema/03.jpg', 'infrastructure/cinema/04.jpg'] },
+          { id: 'planetarium', title: 'Planetarium', images: ['infrastructure/planetarium/01.jpg', 'infrastructure/planetarium/02.jpg', 'infrastructure/planetarium/03.jpg', 'infrastructure/planetarium/04.jpg', 'infrastructure/planetarium/05.jpg'] },
+          { id: 'billiards', title: 'Billiards', images: ['infrastructure/billiards/01.jpg', 'infrastructure/billiards/02.jpg'] },
+          { id: 'bowling', title: 'Bowling', images: ['infrastructure/bowling/01.jpg', 'infrastructure/bowling/02.jpg'] },
+          { id: 'game-lounge', title: 'Game Lounge', images: ['infrastructure/game-lounge/01.jpg', 'infrastructure/game-lounge/02.jpg'] },
+        ],
+      },
+      {
+        id: 'active', n: '04', title: 'Active leisure', tags: 'Drive Club  ·  AL’PAKI RANCH',
+        detailTitle: 'Movement and adventure\nin the Carpathians',
+        lead: 'Mountain routes, vehicles and the ranch atmosphere offer an active way to discover the Carpathians.',
+        items: [
+          { id: 'drive-club', title: 'Drive Club', images: ['infrastructure/drive-club/02.jpg', 'infrastructure/drive-club/01.jpg'] },
+          { id: 'craft-fest-ranch', title: 'Craft Fest & AL’PAKI RANCH', images: ['infrastructure/craft-fest-ranch/01.jpg', 'infrastructure/craft-fest-ranch/02.jpg'] },
+        ],
+      },
+      {
+        id: 'comfort', n: '05', title: 'Comfort & service', tags: 'Kids area  ·  Fire zone',
+        detailTitle: 'Spaces for\nthe whole family',
+        lead: 'Thoughtful family spaces add comfort to daytime rest and warm evenings outdoors.',
+        items: [
+          { id: 'kids-indoor', title: 'Indoor kids area', images: ['infrastructure/kids-indoor/01.jpg'] },
+          { id: 'fire-zone', title: 'Recreation fire zone', images: ['infrastructure/fire-zone/01.jpg', 'infrastructure/fire-zone/02.jpg', 'infrastructure/fire-zone/03.jpg', 'infrastructure/fire-zone/04.jpg'] },
+        ],
+      },
     ],
   },
   invest: {

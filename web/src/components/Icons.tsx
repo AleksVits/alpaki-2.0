@@ -335,3 +335,50 @@ export function IconArrow() {
     </svg>
   )
 }
+
+export function IconAmenity({ id }: { id: string }) {
+  const drawing = (() => {
+    switch (id) {
+      case 'mountain-tubs':
+        return <><path d="M6 19h20l-2 7H8l-2-7Z" /><path d="M9 19v-3h14v3M11 29v-3m10 3v-3M11 13c-2-2 2-3 0-6m5 6c-2-2 2-3 0-7m5 7c-2-2 2-3 0-6" /></>
+      case 'fitness-zen':
+        return <><path d="M5 13v6m4-9v12m14-12v12m4-9v6M9 16h14" /><path d="M3 14v4m26-4v4" /></>
+      case 'restaurant':
+        return <><path d="M6 23h20M8 21c.4-6.5 3.7-10 8-10s7.6 3.5 8 10H8Z" /><path d="M16 11V8m-2-1h4" /></>
+      case 'bbq':
+        return <><path d="M7 16h18c0 5-3.3 8-9 8s-9-3-9-8Z" /><path d="M11 24l-2 5m12-5 2 5M10 13c-1.8-2 1.8-3.2 0-5m6 5c-1.8-2 1.8-3.2 0-6m6 6c-1.8-2 1.8-3.2 0-5" /></>
+      case 'cigar-lounge':
+        return <><path d="M5 22h17l5-5H10l-5 5Zm5-5 3 5m9-5 2 2" /><path d="M7 26h19M6 9c3-3 7 1 10-2 3-2 6 0 9-2" /></>
+      case 'event-space':
+        return <><path d="M5 26V8h22v18M9 8c0 6 2 9 7 11 5-2 7-5 7-11" /><path d="M13 25v-5h6v5M4 28h24" /></>
+      case 'cinema':
+        return <><rect x="5" y="8" width="22" height="17" rx="2" /><path d="m14 13 7 4-7 4v-8ZM8 8v17m16-17v17M5 12h3m-3 5h3m-3 4h3m16-9h3m-3 5h3m-3 4h3" /></>
+      case 'planetarium':
+        return <><circle cx="16" cy="16" r="6" /><path d="M5 20c3 3 9 2 15-1s9-7 7-10c-2-2-6-1-9 0M7 24l-2 3m20-19 2-3" /><circle cx="24" cy="7" r="1" /></>
+      case 'billiards':
+        return <><circle cx="11" cy="18" r="5" /><circle cx="21" cy="18" r="5" /><circle cx="16" cy="10" r="5" /><path d="m5 27 22-22" /></>
+      case 'bowling':
+        return <><circle cx="23" cy="22" r="6" /><circle cx="21" cy="20" r=".8" fill="currentColor" stroke="none" /><circle cx="24" cy="18" r=".8" fill="currentColor" stroke="none" /><path d="M7 27c1-4 2-7 2-10L8 8c0-3 2-5 5-5s5 2 5 5l-1 9c0 1 .2 2 .5 3M9 11h8" /></>
+      case 'game-lounge':
+        return <><path d="M9 12h14c3 0 5 3 5 7v3c0 3-3 4-5 2l-3-3h-8l-3 3c-2 2-5 1-5-2v-3c0-4 2-7 5-7Z" /><path d="M10 16v5m-2.5-2.5h5M22 17h.1m3 3h.1" /></>
+      case 'drive-club':
+        return <><path d="m7 19 3-7h12l4 7M5 19h23v6H5v-6Z" /><circle cx="10" cy="25" r="2" /><circle cx="23" cy="25" r="2" /><path d="M11 16h10" /></>
+      case 'craft-fest-ranch':
+        return <><path d="M8 6v11c0 6 3 10 8 10s8-4 8-10V6h-5v11c0 3-1 5-3 5s-3-2-3-5V6H8Z" /><path d="M8 12h5m6 0h5" /></>
+      case 'kids-indoor':
+        return <><rect x="5" y="17" width="9" height="9" rx="1" /><path d="M9.5 17v9m-4.5-4.5h9" /><circle cx="21" cy="11" r="5" /><path d="m18 9 6 4m-6 0 6-4M17 26h11l-5.5-9-5.5 9Z" /></>
+      case 'fire-zone':
+        return <><path d="M16 4c3 5-1 7 2 10 2 2 4-1 4-4 4 4 5 8 3 13-2 4-5 6-9 6s-8-2-9-6c-2-6 2-10 6-14 0 4 0 7 3 8 2-4-2-7 0-13Z" /><path d="M16 18c2 2 3 4 2 6-.5 1.5-1.3 2-2 2s-1.7-.5-2-2c-.5-2 1-3.5 2-6Z" /></>
+      default:
+        return <><circle cx="16" cy="16" r="10" /><path d="M11 16h10M16 11v10" /></>
+    }
+  })()
+
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <g stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
+        {drawing}
+      </g>
+    </svg>
+  )
+}

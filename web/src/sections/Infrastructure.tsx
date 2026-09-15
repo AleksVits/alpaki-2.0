@@ -1,24 +1,19 @@
-import { useState } from 'react'
-import {
-  IconBanya,
-  IconGym,
-  IconHammam,
-  IconJacuzzi,
-  IconPool,
-  IconSpa,
-  IconArrow,
-} from '../components/Icons'
+import { useEffect, useState } from 'react'
+import { IconAmenity, IconArrow, IconChevron } from '../components/Icons'
 import { Lead, Pager, Stage, splitTitle, SectionHeading } from '../components/Ui'
-import { Placeholder } from '../components/Placeholder'
+import { asset } from '../asset'
 import { useI18n } from '../i18n'
 
-const amenityIcons = [IconPool, IconHammam, IconJacuzzi, IconBanya, IconSpa, IconGym]
-
-export function Infrastructure() {
+export function Infrastructure({
+  activeGroupId,
+  onSelectGroup,
+}: {
+  activeGroupId: string
+  onSelectGroup: (id: string) => void
+}) {
   const { t } = useI18n()
-  const [page, setPage] = useState(0)
-  const cards = t.infra.cards
-  const total = cards.length
+  const groups = t.infra.groups
+  const activeIndex = Math.max(0, groups.findIndex((group) => group.id === activeGroupId))
 
   return (
     <Stage id="infrastructure" className="stage--infra" next="infra-detail">
@@ -27,67 +22,125 @@ export function Infrastructure() {
           <SectionHeading kicker={t.infra.kicker}>{splitTitle(t.infra.title)}</SectionHeading>
           <Lead>{t.infra.lead}</Lead>
         </div>
-        <div className="infra-grid">
-          {cards.map((card) => (
-            <a key={card.id} className={`infra-card infra-card--${card.id}`} href="#infra-detail">
-              <Placeholder className="infra-card__ph" />
-              <div className="infra-card__meta">
-                <span>
-                  {card.n}  {card.title}
-                </span>
-                <small>{card.tags}</small>
-              </div>
-              <span className="infra-card__go">
-                <IconArrow />
-              </span>
-            </a>
-          ))}
+        <div
+          className="infra-carousel"
+          role="region"
+          aria-label={t.infra.carouselLabel}
+        >
+          <div className="infra-page infra-page--count-5">
+            <div className="infra-grid">
+              {groups.map((group, cardIndex) => (
+                <a
+                  key={group.id}
+                  className={`infra-card infra-card--slot-${cardIndex + 1}${cardIndex === activeIndex ? ' is-active' : ''}`}
+                  href="#infra-detail"
+                  onClick={() => onSelectGroup(group.id)}
+                >
+                  <img
+                    className="infra-card__image"
+                    src={asset(group.items[0].images[0])}
+                    alt=""
+                    loading="eager"
+                    decoding="async"
+                  />
+                  <div className="infra-card__meta">
+                    <span>
+                      <b>{group.n}</b> {group.title}
+                    </span>
+                    <small>{group.tags}</small>
+                  </div>
+                  <span className="infra-card__go" aria-hidden="true">
+                    <IconArrow />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-        <Pager
-          current={page + 1}
-          total={total}
-          onPrev={() => setPage((v) => (v - 1 + total) % total)}
-          onNext={() => setPage((v) => (v + 1) % total)}
-        />
       </div>
     </Stage>
   )
 }
 
-export function InfraDetail() {
+export function InfraDetail({ groupId }: { groupId: string }) {
   const { t } = useI18n()
-  const [index, setIndex] = useState(0)
-  const total = t.infra.amenities.length
+  const group = t.infra.groups.find((entry) => entry.id === groupId) ?? t.infra.groups[0]
+  const [itemIndex, setItemIndex] = useState(0)
+  const [photoIndex, setPhotoIndex] = useState(0)
+  const item = group.items[itemIndex]
+  const photo = item.images[photoIndex] ?? item.images[0]
+
+  const showItem = (next: number) => {
+    setItemIndex((next + group.items.length) % group.items.length)
+    setPhotoIndex(0)
+  }
+  const showPhoto = (next: number) => setPhotoIndex((next + item.images.length) % item.images.length)
+
+  useEffect(() => {
+    group.items.forEach((entry) => {
+      entry.images.forEach((src) => {
+        const image = new Image()
+        image.src = asset(src)
+      })
+    })
+  }, [group])
 
   return (
-    <Stage id="infra-detail" className="stage--infra-detail" next="invest-formats">
-      <Placeholder className="stage__photo" />
+    <Stage
+      id="infra-detail"
+      className="stage--infra-detail"
+      next="invest-formats"
+      overlay={(
+        <div className="infra-detail__media" aria-hidden="true">
+          <img key={photo} src={asset(photo)} alt="" decoding="async" />
+        </div>
+      )}
+    >
       <div className="infra-detail">
-        <SectionHeading kicker={t.infra.restoreKicker}>{splitTitle(t.infra.restoreTitle)}</SectionHeading>
-        <Lead>{t.infra.restoreLead}</Lead>
-        <ul className="amenity-bar glass glass--bar">
-          {t.infra.amenities.map((item, i) => {
-            const Icon = amenityIcons[i]
-            return (
-              <li key={item.id} className={i === index ? 'is-active' : ''}>
-                <button type="button" onClick={() => setIndex(i)}>
-                  <span className="amenity-bar__icon">
-                    <Icon />
-                  </span>
-                  {item.label}
-                </button>
-              </li>
-            )
-          })}
-          <li className="amenity-bar__pager">
+        <div className="infra-detail__copy">
+          <SectionHeading kicker={`${group.n}  ·  ${group.title}`}>
+            {splitTitle(group.detailTitle)}
+          </SectionHeading>
+          <Lead>{group.lead}</Lead>
+        </div>
+
+        {item.images.length > 1 && (
+          <div className="infra-detail__photo-nav glass glass--pill">
+            <button type="button" onClick={() => showPhoto(photoIndex - 1)} aria-label={t.ui.prev}>
+              <IconChevron dir="left" />
+            </button>
+            <strong>{item.title}</strong>
+            <span>{String(photoIndex + 1).padStart(2, '0')} / {String(item.images.length).padStart(2, '0')}</span>
+            <button type="button" onClick={() => showPhoto(photoIndex + 1)} aria-label={t.ui.next}>
+              <IconChevron dir="right" />
+            </button>
+          </div>
+        )}
+
+        <div className="infra-detail__picker glass glass--bar">
+          <div className="infra-detail__items">
+            {group.items.map((entry, index) => (
+              <button
+                key={entry.id}
+                type="button"
+                className={index === itemIndex ? 'is-active' : ''}
+                onClick={() => showItem(index)}
+                aria-pressed={index === itemIndex}
+              >
+                <span className="infra-detail__item-icon"><IconAmenity id={entry.id} /></span>
+                <span className="infra-detail__item-label">{entry.title}</span>
+              </button>
+            ))}
+          </div>
+          <div className="infra-detail__pager">
             <Pager
-              current={index + 1}
-              total={total}
-              onPrev={() => setIndex((v) => (v - 1 + total) % total)}
-              onNext={() => setIndex((v) => (v + 1) % total)}
+              current={itemIndex + 1}
+              total={group.items.length}
+              onPrev={() => showItem(itemIndex - 1)}
+              onNext={() => showItem(itemIndex + 1)}
             />
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </Stage>
   )

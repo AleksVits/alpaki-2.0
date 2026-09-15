@@ -31,6 +31,7 @@ const sectionMap: Record<string, string> = {
 export default function App() {
   const [active, setActive] = useState('intro')
   const [pastIntro, setPastIntro] = useState(false)
+  const [infraGroup, setInfraGroup] = useState('wellness')
 
   useEffect(() => {
     const root = siteScroller()
@@ -145,8 +146,8 @@ export default function App() {
           <AboutIntro />
           <Architecture />
           <Location />
-          <Infrastructure />
-          <InfraDetail />
+          <Infrastructure activeGroupId={infraGroup} onSelectGroup={setInfraGroup} />
+          <InfraDetail key={infraGroup} groupId={infraGroup} />
           <InvestFormats />
           <InvestManage />
           <Apartments />

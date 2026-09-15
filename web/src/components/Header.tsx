@@ -35,6 +35,8 @@ export function Header({ hidden, active }: Props) {
   const [exited, setExited] = useState(true)
   const burgerRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
+  const navRef = useRef<HTMLElement>(null)
+  const navMarkerRef = useRef<HTMLSpanElement>(null)
 
   const pinOrigin = useCallback(() => {
     const burger = burgerRef.current
@@ -73,6 +75,46 @@ export function Header({ hidden, active }: Props) {
   useLayoutEffect(() => {
     pinOrigin()
   }, [open, pinOrigin])
+
+  useLayoutEffect(() => {
+    const nav = navRef.current
+    const marker = navMarkerRef.current
+    if (!nav || !marker) return
+
+    const moveMarker = (animate = true) => {
+      const link = nav.querySelector<HTMLElement>(`[data-nav-id="${active}"]`)
+      if (!link || link.offsetWidth === 0) return
+      const navRect = nav.getBoundingClientRect()
+      const linkRect = link.getBoundingClientRect()
+      const target = linkRect.left - navRect.left + linkRect.width / 2
+      const markerRect = marker.getBoundingClientRect()
+      const current = marker.dataset.ready
+        ? markerRect.left - navRect.left + markerRect.width / 2
+        : target
+
+      marker.getAnimations().forEach((animation) => animation.cancel())
+      marker.style.left = `${target}px`
+      marker.dataset.ready = 'true'
+
+      if (!animate || Math.abs(current - target) < 1
+        || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+      const delta = current - target
+      marker.animate([
+        { transform: `translate3d(${delta}px, 0, 0) rotate(45deg) scale(1)` },
+        { transform: `translate3d(${delta * 0.55}px, -7px, 0) rotate(45deg) scale(1.2)`, offset: 0.48 },
+        { transform: 'translate3d(0, 0, 0) rotate(45deg) scale(1)' },
+      ], {
+        duration: 560,
+        easing: 'cubic-bezier(.22,.75,.2,1)',
+      })
+    }
+
+    moveMarker(marker.dataset.ready === 'true')
+    const onResize = () => moveMarker(false)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [active, lang])
 
   useEffect(() => {
     pinOrigin()
@@ -127,16 +169,18 @@ export function Header({ hidden, active }: Props) {
   return (
     <header className={`header${hidden && !open ? ' header--hidden' : ''}${open ? ' header--menu' : ''}`}>
       <Logo compact />
-      <nav className="header__nav glass glass--pill" aria-label="Main">
+      <nav ref={navRef} className="header__nav glass glass--pill" aria-label="Main">
         {items.map((item) => (
           <a
             key={item.id}
             href={item.href}
+            data-nav-id={item.id}
             className={`header__link ${active === item.id ? 'is-active' : ''}`}
           >
             {t.nav[item.id]}
           </a>
         ))}
+        <span ref={navMarkerRef} className="header__nav-marker" aria-hidden="true" />
       </nav>
       <div className="header__right">
         {langs('bar')}
