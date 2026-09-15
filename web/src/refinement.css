@@ -220,3 +220,115 @@
 @media (min-width: 1920px) {
   html { font-size: clamp(1.375rem, calc(0.5rem + 0.729167vw), 2.25rem); }
 }
+
+/* Matching segmented language switch and softly animated smartphone control. */
+.header__langs.glass {
+  padding: 4px;
+  gap: 2px;
+  border-radius: 12px;
+  background: #102017b3;
+  border: 1px solid var(--glass-edge);
+  box-shadow: none;
+}
+.header__lang,
+.header__lang + .header__lang {
+  padding: 0.55rem 0.65rem;
+  min-height: 40px;
+  border-radius: 8px;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  transition: background .25s, color .25s;
+}
+.header__lang + .header__lang::before { display: none; }
+.header__lang.is-active { background: #e4d8cd1a; color: var(--cream); }
+.header__phone.gold-orb {
+  width: 2.8rem;
+  height: 2.8rem;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 12px;
+  background: #102017b3;
+  border: 1px solid var(--glass-edge);
+}
+.header__phone.gold-orb::before,
+.header__phone.gold-orb::after { display: none; }
+.header__phone.gold-orb svg { width: 1.3rem; height: 1.3rem; animation: smartphone-ring 5s ease-in-out infinite; }
+@keyframes smartphone-ring {
+  0%, 75%, 100% { transform: rotate(0); }
+  79%, 87% { transform: rotate(-9deg); }
+  83%, 91% { transform: rotate(9deg); }
+  95% { transform: rotate(-3deg); }
+}
+@media (min-width: 1101px) {
+  .rail { right: 1.1rem; bottom: 1.3rem; gap: 0.65rem; }
+  .rail__btn.gold-orb { width: max(46px, 2.4rem); height: max(46px, 2.4rem); }
+  .rail__btn.gold-orb img,
+  .rail__btn.gold-orb svg { width: max(21px, 1.1rem); height: max(21px, 1.1rem); }
+}
+@media (max-width: 1366px) {
+  .header__menu-actions {
+    width: min(100%, 360px);
+    align-self: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 20px 16px;
+    border: 1px solid var(--glass-edge);
+    border-radius: 16px;
+    background: #0a1f1480;
+  }
+  .header__menu-actions .header__menu-call {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--gold);
+    color: var(--marble);
+    border: 0;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0.025em;
+    box-shadow: none;
+  }
+  .header__menu-call::before,
+  .header__menu-call-ico::after { display: none; }
+  .header__menu-call-ico { border: 0; width: 24px; height: 24px; }
+  .header__menu-call-ico svg { width: 24px; height: 24px; animation: smartphone-ring 5s ease-in-out infinite; }
+  .header__menu-social { width: 100%; gap: 8px; }
+  .header__menu-social-btn.gold-orb {
+    flex: 1;
+    width: auto;
+    height: auto;
+    min-height: 68px;
+    padding: 10px 4px;
+    gap: 6px;
+    border: 1px solid var(--glass-edge);
+    border-radius: 10px;
+    box-shadow: none;
+    background: #ffffff05;
+  }
+  .header__menu-social-btn.gold-orb::before { display: none; }
+  .header__menu-social-btn span { font-size: 11px; letter-spacing: 0; color: var(--beige); }
+  .header__menu-actions .header__langs { align-self: center; margin: 0; }
+  .header__menu-actions .header__lang { font-size: 13px; min-width: 52px; }
+}
+@media (max-width: 720px) {
+  .architecture__heroes.is-viewing .architecture__hero.is-active {
+    animation: gallery-reveal 0.6s cubic-bezier(.2,.65,.3,1) both;
+  }
+  .stage--architecture .thumbs__item { animation: thumbnail-reveal 0.35s ease-out both; }
+  @keyframes gallery-reveal {
+    from { opacity: 0; transform: translateX(16px) scale(1.015); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+  }
+  @keyframes thumbnail-reveal {
+    from { opacity: 0.4; transform: translateX(8px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header__phone.gold-orb svg,
+  .header__menu-call-ico svg,
+  .architecture__heroes.is-viewing .architecture__hero.is-active,
+  .stage--architecture .thumbs__item { animation: none; }
+}

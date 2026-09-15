@@ -172,6 +172,15 @@ export function IconClock() {
   )
 }
 
+export function IconSmartphone() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="6" y="2" width="12" height="20" rx="3" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M10 5h4M11 19h2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export function IconPhone() {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">

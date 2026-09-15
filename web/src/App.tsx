@@ -10,7 +10,7 @@ import { InfraDetail, Infrastructure } from './sections/Infrastructure'
 import { Intro } from './sections/Intro'
 import { InvestFormats, InvestManage } from './sections/Invest'
 import { Location } from './sections/Location'
-import { decodeHash, isMobileFlow, scrollToStage, siteScroller } from './scroll'
+import { decodeHash, isMobileFlow, isProgrammaticScroll, reducedMotion, scrollToStage, siteScroller } from './scroll'
 
 const sectionMap: Record<string, string> = {
   intro: 'intro',
@@ -31,6 +31,37 @@ const sectionMap: Record<string, string> = {
 export default function App() {
   const [active, setActive] = useState('intro')
   const [pastIntro, setPastIntro] = useState(false)
+
+  useEffect(() => {
+    const root = siteScroller()
+    if (!root) return
+    let timer = 0
+    let dragging = false
+    const settle = () => {
+      if (isMobileFlow() || reducedMotion() || dragging || isProgrammaticScroll()
+        || document.documentElement.classList.contains('is-nav-lock')) return
+      const origin = root.getBoundingClientRect().top
+      const nearest = [...root.querySelectorAll<HTMLElement>('.stage')]
+        .map(el => ({ el, distance: Math.abs(el.getBoundingClientRect().top - origin) }))
+        .sort((a, b) => a.distance - b.distance)[0]
+      // Only finish a nearly completed transition; never pull away from long content.
+      if (nearest && nearest.distance > 2 && nearest.distance < Math.min(96, root.clientHeight * 0.08)) {
+        scrollToStage(nearest.el)
+      }
+    }
+    const schedule = () => { window.clearTimeout(timer); timer = window.setTimeout(settle, 450) }
+    const down = () => { dragging = true; window.clearTimeout(timer) }
+    const up = () => { dragging = false; schedule() }
+    root.addEventListener('scroll', schedule, { passive: true })
+    root.addEventListener('pointerdown', down)
+    window.addEventListener('pointerup', up)
+    return () => {
+      window.clearTimeout(timer)
+      root.removeEventListener('scroll', schedule)
+      root.removeEventListener('pointerdown', down)
+      window.removeEventListener('pointerup', up)
+    }
+  }, [])
 
   useEffect(() => {
     const root = siteScroller()

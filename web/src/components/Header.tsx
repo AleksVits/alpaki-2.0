@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Logo } from './Logo'
-import { IconPhone } from './Icons'
+import { IconSmartphone } from './Icons'
 import { socialLinks } from './SocialRail'
 import { resetShineCard, shineCard } from './Ui'
 import { useI18n, type Lang } from '../i18n'
@@ -115,6 +115,7 @@ export function Header({ hidden, active }: Props) {
           key={code}
           type="button"
           className={`header__lang ${lang === code ? 'is-active' : ''}`}
+          aria-pressed={lang === code}
           onClick={() => setLang(code)}
         >
           {code.toUpperCase()}
@@ -140,7 +141,7 @@ export function Header({ hidden, active }: Props) {
       <div className="header__right">
         {langs('bar')}
         <a className="header__phone gold-orb" href="#contacts" aria-label={t.ui.phone} onClick={close}>
-          <IconPhone />
+          <IconSmartphone />
         </a>
         <button
           ref={burgerRef}
@@ -197,7 +198,7 @@ export function Header({ hidden, active }: Props) {
               onPointerLeave={resetShineCard}
             >
               <span className="header__menu-call-ico" aria-hidden="true">
-                <IconPhone />
+                <IconSmartphone />
               </span>
               <span>{t.ui.phone}</span>
             </a>
@@ -213,6 +214,7 @@ export function Header({ hidden, active }: Props) {
                   tabIndex={open ? 0 : -1}
                 >
                   <img src={item.icon} alt="" />
+                  <span>{item.label}</span>
                 </a>
               ))}
             </div>
