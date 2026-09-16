@@ -8,6 +8,7 @@ import {
   IconWhatsapp,
 } from '../components/Icons'
 import { asset } from '../asset'
+import { emailHref, phoneHref, viberHref, whatsappHref } from '../contactLinks'
 import { Btn, Kicker, Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
 import { useI18n } from '../i18n'
 
@@ -44,47 +45,43 @@ export function Contacts() {
             <IconClock /> {t.contacts.hours}
           </p>
           <ul className="contacts__list">
-            <li>
+            <li className="contacts__place contacts__place--main">
               <IconPin />
               <span>
                 <b>{t.contacts.addressComplex}</b>
                 <small className="pre">{t.contacts.addressComplexVal}</small>
               </span>
             </li>
-            <li>
+            <li className="contacts__place contacts__place--office">
               <IconPin />
               <span>
                 <b>{t.contacts.addressOffice}</b>
                 <small>{t.contacts.addressOfficeVal}</small>
               </span>
             </li>
-            <li>
-              <IconWhatsapp />
-              <span>
-                <b>{t.contacts.whatsapp}</b>
-                <small>{t.contacts.messenger}</small>
-              </span>
+            <li className="contacts__channel">
+              <a href={whatsappHref} target="_blank" rel="noreferrer">
+                <IconWhatsapp />
+                <span><b>{t.contacts.whatsapp}</b><small>{t.contacts.messenger}</small></span>
+              </a>
             </li>
-            <li>
-              <IconViber />
-              <span>
-                <b>{t.contacts.viber}</b>
-                <small>{t.contacts.messenger}</small>
-              </span>
+            <li className="contacts__channel">
+              <a href={viberHref}>
+                <IconViber />
+                <span><b>{t.contacts.viber}</b><small>{t.contacts.messenger}</small></span>
+              </a>
             </li>
-            <li>
-              <IconPhone />
-              <span>
-                <b>{t.contacts.phone}</b>
-                <small>{t.contacts.phoneVal}</small>
-              </span>
+            <li className="contacts__channel">
+              <a href={phoneHref}>
+                <IconPhone />
+                <span><b>{t.contacts.phone}</b><small>{t.contacts.phoneVal}</small></span>
+              </a>
             </li>
-            <li>
-              <IconMail />
-              <span>
-                <b>{t.contacts.email}</b>
-                <small>{t.contacts.emailVal}</small>
-              </span>
+            <li className="contacts__channel">
+              <a href={emailHref}>
+                <IconMail />
+                <span><b>{t.contacts.email}</b><small>{t.contacts.emailVal}</small></span>
+              </a>
             </li>
           </ul>
         </div>

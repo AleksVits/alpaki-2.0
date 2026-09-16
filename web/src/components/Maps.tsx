@@ -39,60 +39,6 @@ export function UkraineMap() {
   )
 }
 
-export function RouteMap() {
-  const { t } = useI18n()
-  return (
-    <svg className="route-map" viewBox="0 0 1100 520" aria-hidden="true">
-      <defs>
-        <linearGradient id="road" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#bc904d" />
-          <stop offset="100%" stopColor="#f5f2ed" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M140 340 C260 330 340 300 430 250 C540 190 640 160 760 120 C820 100 870 70 910 40"
-        fill="none"
-        stroke="url(#road)"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-      />
-      <g transform="translate(140 340)">
-        <circle r="16" fill="#0a1f14" stroke="#bc904d" />
-        <path d="M-6 -2 H6 M-4 4 H4" stroke="#bc904d" strokeWidth="1.2" />
-        <rect x="-5" y="-8" width="10" height="7" rx="1" stroke="#bc904d" strokeWidth="1.2" fill="none" />
-        <text className="route-map__label" x="24" y="4">
-          {t.location.station}
-        </text>
-      </g>
-      <g transform="translate(430 250)">
-        <rect x="-64" y="-28" width="128" height="40" rx="2" fill="#0a1f14" stroke="#bc904d" strokeOpacity="0.5" />
-        <text className="route-map__box" x="0" y="-6">
-          {t.location.distance}
-        </text>
-        <text className="route-map__box-sub" x="0" y="10">
-          {t.location.distanceSub}
-        </text>
-      </g>
-      <g transform="translate(910 40)">
-        <path d="M0 0 C-14 0 -24 12 -24 24 C-24 40 0 64 0 64 C0 64 24 40 24 24 C24 12 14 0 0 0 Z" fill="#0a1f14" stroke="#bc904d" />
-        <path d="M-6 16 L0 6 L6 16 L2 22 Z" fill="#bc904d" />
-        <text className="route-map__pin" x="36" y="20">
-          {t.location.pin.split('\n')[0]}
-        </text>
-        <text className="route-map__pin-sub" x="36" y="38">
-          {t.location.pin.split('\n')[1]}
-        </text>
-      </g>
-      <g className="route-map__elev" fill="#bc904d" fillOpacity="0.45">
-        <text x="780" y="70">1200</text>
-        <text x="860" y="130">1000</text>
-        <text x="930" y="190">800</text>
-        <text x="980" y="260">600</text>
-      </g>
-    </svg>
-  )
-}
-
 export function FloorPlan() {
   return (
     <svg className="floorplan" viewBox="0 0 420 300" aria-hidden="true">
@@ -120,7 +66,7 @@ export function FloorPlan() {
 export function IsoApartment() {
   return (
     <svg className="iso" viewBox="0 0 640 420" aria-hidden="true">
-      <g fill="none" stroke="#bc904d" strokeWidth="1.2">
+      <g fill="none" stroke="#aaa69d" strokeWidth="1.2">
         <path d="M80 240 L240 160 L560 200 L400 300 Z" />
         <path d="M240 160 L240 40 L560 80 L560 200" />
         <path d="M80 240 L80 140 L240 40" />

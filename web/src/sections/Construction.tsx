@@ -74,10 +74,6 @@ export function Construction() {
               <IconChevron dir="right" />
             </button>
           </div>
-          <a className="text-link build__cta" href="#build-detail">
-            {t.build.cta}
-            <IconChevron />
-          </a>
         </div>
       </Stage>
 

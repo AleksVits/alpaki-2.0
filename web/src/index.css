@@ -1,38 +1,9 @@
-@font-face {
-  font-family: 'Accia Piano';
-  src: url('/fonts/AcciaPiano-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Accia Piano';
-  src: url('/fonts/AcciaPiano-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Accia Piano';
-  src: url('/fonts/AcciaPiano-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Accia Piano';
-  src: url('/fonts/AcciaPiano-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --white: #f4f4f4;
   --cream: #f5f2ed;
   --beige: #e4d8cd;
   --graphite: #1e1e1d;
-  --gold: #bc904d;
+  --titanium: #aaa69d;
   --marble: #0a1f14;
   --silver: #c0c0c0;
   --pine: #203123;
@@ -41,14 +12,14 @@
   --bg-2: var(--pine);
   --ink: var(--cream);
   --muted: var(--beige);
-  --gold-2: color-mix(in srgb, var(--gold) 58%, var(--cream));
-  --gold-dim: rgba(188, 144, 77, 0.38);
-  --line: rgba(188, 144, 77, 0.32);
+  --titanium-2: #d8d4cb;
+  --titanium-dim: rgba(170, 166, 157, 0.38);
+  --line: rgba(170, 166, 157, 0.32);
   --card: color-mix(in srgb, var(--pine) 78%, transparent);
-  --font-display: 'Accia Piano', Georgia, serif;
-  --font-brand: 'Accia Piano', Georgia, serif;
-  --font-display-weight: 300;
-  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-display: 'Montserrat', system-ui, sans-serif;
+  --font-brand: 'Montserrat', system-ui, sans-serif;
+  --font-display-weight: 500;
+  --font-body: 'Montserrat', system-ui, sans-serif;
   --type-kicker: 0.78rem;
   --type-kicker-track: 0.22em;
   --type-kicker-lh: 1.35;
@@ -68,7 +39,7 @@
   --glass-tint: rgba(20, 32, 26, 0.28);
   --glass-tint-strong: rgba(12, 20, 16, 0.42);
   --glass-highlight: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 16%, transparent 46%);
-  --glass-edge: color-mix(in srgb, var(--gold) 30%, rgba(255, 255, 255, 0.22));
+  --glass-edge: color-mix(in srgb, var(--titanium) 30%, rgba(255, 255, 255, 0.22));
   --glass-shadow:
     0 16px 44px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.28),
@@ -691,16 +662,10 @@ p, h1, h2, h3 { margin: 0; }
   margin-top: calc(var(--type-stack) - var(--type-block));
 }
 .ornament__line {
-  width: 2.7rem;
+  width: clamp(5.5rem, 8vw, 8rem);
   height: 1px;
   background: currentColor;
   opacity: 0.78;
-}
-.ornament__logo {
-  width: 1.05rem;
-  height: 1.05rem;
-  flex: none;
-  object-fit: contain;
 }
 .title {
   font-family: var(--font-display);
@@ -902,7 +867,7 @@ p, h1, h2, h3 { margin: 0; }
       180% 140% at var(--mx) var(--my),
       rgba(255, 248, 232, 0.28) 0%,
       rgba(255, 248, 232, 0.12) 18%,
-      rgba(188, 144, 77, 0.08) 38%,
+      rgba(170, 166, 157, 0.08) 38%,
       transparent 72%
     );
   mix-blend-mode: soft-light;
@@ -1197,10 +1162,10 @@ p, h1, h2, h3 { margin: 0; }
   width: calc(var(--ua-dot) * 3.75);
   height: calc(var(--ua-dot) * 3.75);
   background:
-    linear-gradient(#f5f2ed, #bc904d 42%, transparent 78%) 50% 0 / 1.2px 50% no-repeat,
-    linear-gradient(transparent 22%, #bc904d 55%, #f5f2ed) 50% 100% / 1.2px 50% no-repeat,
-    linear-gradient(90deg, #f5f2ed, #bc904d 42%, transparent 78%) 0 50% / 50% 1.2px no-repeat,
-    linear-gradient(90deg, transparent 22%, #bc904d 55%, #f5f2ed) 100% 50% / 50% 1.2px no-repeat;
+    linear-gradient(#f5f2ed, #aaa69d 42%, transparent 78%) 50% 0 / 1.2px 50% no-repeat,
+    linear-gradient(transparent 22%, #aaa69d 55%, #f5f2ed) 50% 100% / 1.2px 50% no-repeat,
+    linear-gradient(90deg, #f5f2ed, #aaa69d 42%, transparent 78%) 0 50% / 50% 1.2px no-repeat,
+    linear-gradient(90deg, transparent 22%, #aaa69d 55%, #f5f2ed) 100% 50% / 50% 1.2px no-repeat;
   filter: drop-shadow(0 0 6px color-mix(in srgb, var(--gold) 70%, transparent));
   transform: scale(0.45) rotate(12deg);
 }
@@ -1209,10 +1174,10 @@ p, h1, h2, h3 { margin: 0; }
   height: calc(var(--ua-dot) * 2.5);
   rotate: 45deg;
   background:
-    linear-gradient(#f5f2ed, #bc904d 50%, transparent 80%) 50% 0 / 1px 50% no-repeat,
-    linear-gradient(transparent 20%, #bc904d, #f5f2ed) 50% 100% / 1px 50% no-repeat,
-    linear-gradient(90deg, #f5f2ed, #bc904d 50%, transparent 80%) 0 50% / 50% 1px no-repeat,
-    linear-gradient(90deg, transparent 20%, #bc904d, #f5f2ed) 100% 50% / 50% 1px no-repeat;
+    linear-gradient(#f5f2ed, #aaa69d 50%, transparent 80%) 50% 0 / 1px 50% no-repeat,
+    linear-gradient(transparent 20%, #aaa69d, #f5f2ed) 50% 100% / 1px 50% no-repeat,
+    linear-gradient(90deg, #f5f2ed, #aaa69d 50%, transparent 80%) 0 50% / 50% 1px no-repeat,
+    linear-gradient(90deg, transparent 20%, #aaa69d, #f5f2ed) 100% 50% / 50% 1px no-repeat;
   filter: drop-shadow(0 0 4px color-mix(in srgb, var(--gold) 55%, transparent));
   transform: scale(0.3);
 }
@@ -1576,7 +1541,7 @@ p, h1, h2, h3 { margin: 0; }
       180% 140% at var(--mx) var(--my),
       rgba(255, 248, 232, 0.28) 0%,
       rgba(255, 248, 232, 0.12) 18%,
-      rgba(188, 144, 77, 0.08) 38%,
+      rgba(170, 166, 157, 0.08) 38%,
       transparent 72%
     );
   mix-blend-mode: soft-light;
@@ -1738,11 +1703,6 @@ p, h1, h2, h3 { margin: 0; }
 }
 .location__copy .title span:first-child {
   white-space: nowrap;
-}
-.location__scene {
-  display: none;
-  min-height: 0;
-  pointer-events: none;
 }
 .location__bar {
   position: relative;
@@ -2169,23 +2129,6 @@ p, h1, h2, h3 { margin: 0; }
   font-size: 1.125rem;
   letter-spacing: 0.3em;
   font-family: var(--font-body);
-}
-.route-map {
-  width: 100%;
-  height: auto;
-  font-family: var(--font-body);
-}
-.route-map__label,
-.route-map__pin {
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.route-map__box { font-size: 0.78rem; }
-.route-map__box-sub,
-.route-map__pin-sub,
-.route-map__elev {
-  font-size: 0.62rem;
 }
 .apt-3d__zone {
   position: absolute;

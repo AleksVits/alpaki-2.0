@@ -32,7 +32,7 @@ export function AboutStats() {
     <Stage id="about-stats" className="stage--about-stats" next="about-intro">
       <div className="about-stats">
         <div className="about-stats__copy">
-          <SectionHeading kicker={t.about.factsKicker}>{t.about.kicker}</SectionHeading>
+          <SectionHeading kicker={t.about.factsKicker}>{splitTitle(t.about.kicker)}</SectionHeading>
           <ul className="facts">
             {stats.map((item, i) => {
               const long = !item.sub

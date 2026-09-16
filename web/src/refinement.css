@@ -1,10 +1,49 @@
 /* Quiet surfaces and readable supporting type across all layouts. */
 :root {
+  --gold: var(--titanium);
+  --gold-2: var(--titanium-2);
+  --gold-dim: var(--titanium-dim);
   --line: rgba(228, 216, 205, 0.18);
   --glass-edge: rgba(228, 216, 205, 0.23);
   --glass-highlight: linear-gradient(180deg, #ffffff0a, transparent 60%);
   --glass-shadow: 0 8px 24px #00000020, inset 0 1px 0 #ffffff0a;
 }
+
+/* The site uses one typographic voice, including display and brand text. */
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+}
+
+/* Hero statement: stronger scale, weight and Titanium contrast over the landscape. */
+.stage--intro .intro__tag {
+  width: max-content;
+  max-width: calc(100vw - 2 * var(--mobile-gutter, 1.25rem));
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.7vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: 0.08em;
+  color: var(--titanium-2);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.62), 0 0 1px rgba(216, 212, 203, 0.8);
+  white-space: nowrap;
+}
+.stage--intro .intro__tag span { display: block; }
+
+@media (max-width: 720px) {
+  .stage--intro .intro__tag {
+    width: auto;
+    max-width: 16ch;
+    font-size: clamp(1rem, 4.5vw, 1.5rem);
+    letter-spacing: 0.055em;
+    white-space: normal;
+  }
+}
+
 .ornament__line { opacity: 0.4; }
 .stage + .stage {
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--gold) 28%, transparent);
@@ -258,6 +297,66 @@
   .stage--location .location__bar .btn svg { width: 1em; height: 1em; }
 }
 
+/* Location content rests over the uninterrupted mountain photograph. */
+@media (min-width: 1101px) {
+  .stage--location .location__bar {
+    display: grid;
+    grid-template-columns: minmax(24rem, 1.05fr) minmax(30rem, 1.45fr) auto;
+    align-items: stretch;
+    gap: 1.4rem;
+    width: min(100%, 86rem);
+    padding: 0.9rem 1.15rem;
+    text-align: left;
+  }
+
+  .stage--location .location__facts {
+    display: contents;
+  }
+
+  .stage--location .location__ways {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .stage--location .location__way {
+    min-width: 0;
+  }
+
+  .stage--location .location__way--train,
+  .stage--location .location__way--car {
+    padding-right: 1.2rem;
+    border-right: 1px solid rgba(228, 216, 205, 0.2);
+  }
+
+  .stage--location .location__way--car { border-right: 0; }
+  .stage--location .location__way--car small.pre { max-width: 20ch; }
+
+  .stage--location .location__places {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    padding-left: 1.3rem;
+    border-left: 1px solid rgba(228, 216, 205, 0.2);
+  }
+
+  .stage--location .location__cities {
+    width: 100%;
+    justify-content: space-between;
+    gap: 1.1rem;
+  }
+
+  .stage--location .location__bar > .btn {
+    align-self: center;
+    white-space: nowrap;
+  }
+
+  .stage--location .location__sep,
+  .stage--location .location__rule { display: none; }
+}
+
 /* Scale the shared rem-based typography and spacing continuously above Full HD. */
 @media (min-width: 1920px) {
   html { font-size: clamp(1.375rem, calc(0.5rem + 0.729167vw), 2.25rem); }
@@ -274,7 +373,7 @@
   margin-left: -2.5px;
   background: var(--gold-2);
   transform: rotate(45deg);
-  box-shadow: 0 0 7px rgba(188, 144, 77, 0.36);
+  box-shadow: 0 0 7px rgba(170, 166, 157, 0.36);
   pointer-events: none;
   will-change: left, transform;
 }
@@ -302,7 +401,7 @@
   border: 1px solid rgba(228, 216, 205, 0.13);
   border-radius: 8px;
   background:
-    linear-gradient(155deg, rgba(255, 255, 255, 0.19), rgba(255, 255, 255, 0.055) 48%, rgba(188, 144, 77, 0.07)),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.19), rgba(255, 255, 255, 0.055) 48%, rgba(170, 166, 157, 0.07)),
     rgba(228, 216, 205, 0.045);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 4px 12px rgba(0, 0, 0, 0.12);
   transform: translate3d(0, 0, 0);
@@ -591,7 +690,7 @@
 .infra-card__ph {
   border: 0;
   background:
-    radial-gradient(circle at 70% 24%, rgba(188, 144, 77, 0.14), transparent 30%),
+    radial-gradient(circle at 70% 24%, rgba(170, 166, 157, 0.14), transparent 30%),
     linear-gradient(145deg, rgba(38, 64, 47, 0.96), rgba(8, 22, 14, 0.98) 70%);
   transition: transform 0.8s cubic-bezier(0.22, 0.76, 0.24, 1), filter 0.5s ease;
 }
@@ -978,7 +1077,7 @@
 }
 .infra-detail__items button.is-active {
   border-color: var(--gold-2);
-  background: linear-gradient(180deg, rgba(188, 144, 77, 0.13), rgba(255, 255, 255, 0.035));
+  background: linear-gradient(180deg, rgba(170, 166, 157, 0.13), rgba(255, 255, 255, 0.035));
   box-shadow: inset 0 0 0 1px rgba(228, 192, 125, 0.1), 0 8px 22px rgba(0, 0, 0, 0.14);
 }
 .infra-detail__items button.is-active::after { opacity: 0.72; }
@@ -990,7 +1089,7 @@
   width: 2.15rem;
   height: 2.15rem;
   color: var(--gold-2);
-  filter: drop-shadow(0 2px 8px rgba(188, 144, 77, 0.18));
+  filter: drop-shadow(0 2px 8px rgba(170, 166, 157, 0.18));
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.3s ease;
 }
 .infra-detail__item-icon svg {
@@ -1220,11 +1319,9 @@
 
 :is(
   .location__bar.glass,
-  .infra-detail__picker.glass,
   .infra-detail__photo-nav.glass,
   .invest-list__item,
   .plan-card,
-  .contacts__list li,
   .form,
   .modal__card
 ) {
@@ -1237,7 +1334,7 @@
 }
 
 /* Larger panes retain the dark center needed for labels over bright landscape photos. */
-:is(.location__bar.glass, .infra-detail__picker.glass, .form, .modal__card) {
+:is(.location__bar.glass, .form, .modal__card) {
   background: var(--liquid-glass-highlight), var(--liquid-glass-tint-strong);
 }
 .stage--architecture .thumbs::before {
@@ -1323,7 +1420,7 @@
 
 @media (max-width: 900px) {
   :root { --liquid-glass-blur: 11px; }
-  :is(.location__bar.glass, .infra-detail__picker.glass, .form) {
+  :is(.location__bar.glass, .form) {
     background: var(--liquid-glass-highlight), rgba(7, 23, 15, 0.77);
   }
   .stage--architecture .thumbs::before {
@@ -1342,8 +1439,8 @@
 
 @media (prefers-reduced-transparency: reduce) {
   :is(
-    .location__bar.glass, .infra-detail__picker.glass, .infra-detail__photo-nav.glass,
-    .invest-list__item, .plan-card, .contacts__list li, .form, .modal__card,
+    .location__bar.glass, .infra-detail__photo-nav.glass,
+    .invest-list__item, .plan-card, .form, .modal__card,
     .header__langs.glass, .header__phone.gold-orb, .rail__btn.gold-orb,
     .stage .btn.btn--ghost:not(.btn--secondary), .infra-detail__items button,
     .manage-steps__icon, .build-line span, .apt-3d__zone
@@ -1522,10 +1619,11 @@
 .stage--invest .invest {
   display: grid;
   grid-template-columns: minmax(17rem, 0.85fr) minmax(27rem, 1.25fr);
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
   align-items: center;
+  align-content: center;
   column-gap: clamp(2rem, 4vw, 6.5rem);
-  row-gap: clamp(1.5rem, 3.5vh, 3.5rem);
+  row-gap: clamp(1.8rem, 4vh, 3.4rem);
   width: 100%;
   max-width: 94rem;
   min-width: 0;
@@ -1621,7 +1719,7 @@
 .stage--invest .invest-list__sq {
   width: clamp(2.75rem, 3.3vw, 3.8rem);
   height: clamp(2.75rem, 3.3vw, 3.8rem);
-  border-color: rgba(188, 144, 77, 0.56);
+  border-color: rgba(170, 166, 157, 0.56);
   border-radius: 0.25rem;
   font-size: clamp(0.68rem, 0.72vw, 0.85rem);
 }
@@ -2242,7 +2340,7 @@
 .stage--build .build-line li button:focus-visible span {
   border-color: rgba(218, 185, 122, 0.92);
   background: var(--liquid-glass-highlight), rgba(48, 40, 25, 0.72);
-  box-shadow: 0 0 0 0.25rem rgba(188, 144, 77, 0.12), 0 0 1.3rem rgba(188, 144, 77, 0.22);
+  box-shadow: 0 0 0 0.25rem rgba(170, 166, 157, 0.12), 0 0 1.3rem rgba(170, 166, 157, 0.22);
   transform: translateY(-2px);
 }
 .stage--build .build-line strong {
@@ -2754,19 +2852,100 @@
   }
 }
 
-/* Airy contact directory and section-specific social position. */
-.stage.stage--contacts .contacts__list li {
- background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none;
- box-shadow: none; border: 0; border-bottom: 1px solid rgba(228,216,205,.18);
- padding: .85rem 0; grid-template-columns: 2rem minmax(0,1fr); gap: .8rem;
+/* Contact directory: one address feature, then open and unboxed channels. */
+.stage.stage--contacts .contacts__list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2.5vw, 2.5rem);
+  row-gap: .35rem;
+  margin-top: clamp(1rem, 2vh, 1.5rem);
 }
-.stage.stage--contacts .contacts__list li:last-child { border-bottom: 0; }
+.stage.stage--contacts .contacts__list li {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: .85rem;
+  padding: .7rem 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
 .stage.stage--contacts .contacts__list li::before,
 .stage.stage--contacts .contacts__list li::after { display: none; }
-.stage.stage--contacts .contacts__list li > span { grid-template-columns: minmax(0,.85fr) minmax(0,1.25fr); gap: 1rem; }
-.stage.stage--contacts .contacts__list svg { width: 1.35rem; height: 1.35rem; color: var(--gold-2); opacity: .85; }
-.stage.stage--contacts .contacts__list b { font-size: .82rem; letter-spacing: 0; text-transform: none; font-weight: 500; color: var(--beige); }
-.stage.stage--contacts .contacts__list small { font-size: .85rem; line-height: 1.6; color: #f5f2ed; }
+.stage.stage--contacts .contacts__list li > span { display: flex; flex-direction: column; align-items: flex-start; gap: .3rem; width: auto; min-width: 0; }
+.stage.stage--contacts .contacts__list svg { flex: 0 0 auto; width: 1.2rem; height: 1.2rem; margin: .08rem 0 0; color: var(--gold-2); opacity: .9; }
+.stage.stage--contacts .contacts__list b { font-size: clamp(.74rem, .8vw, .9rem); letter-spacing: .025em; text-transform: none; font-weight: 500; color: var(--beige); }
+.stage.stage--contacts .contacts__list small { display: block; font-size: clamp(.82rem, .9vw, 1rem); line-height: 1.55; color: #f5f2ed; overflow-wrap: anywhere; }
+.stage.stage--contacts .contacts__list .contacts__place { grid-column: 1 / -1; }
+.stage.stage--contacts .contacts__list .contacts__place--main {
+  position: relative;
+  padding: .75rem 0 1rem 1.4rem;
+  margin-left: -.1rem;
+  background: linear-gradient(90deg, rgba(8, 26, 18, .48), transparent 90%);
+}
+.stage.stage--contacts .contacts__list .contacts__place--main::before {
+  display: block;
+  position: absolute;
+  content: '';
+  left: 0;
+  top: .75rem;
+  bottom: 1rem;
+  width: 1px;
+  background: linear-gradient(var(--gold-2), rgba(216, 212, 203, .08));
+}
+.stage.stage--contacts .contacts__list .contacts__place--main small {
+  max-width: 34rem;
+  font-size: clamp(.95rem, 1.1vw, 1.22rem);
+  line-height: 1.5;
+}
+.stage.stage--contacts .contacts__list .contacts__place--office {
+  padding: .55rem 0 1rem 1.3rem;
+  border-bottom: 1px solid rgba(216, 212, 203, .22);
+}
+.stage.stage--contacts .contacts__list .contacts__place--office small { color: var(--beige); }
+.stage.stage--contacts .contacts__list .contacts__channel {
+  min-height: 4.4rem;
+  align-items: center;
+  padding: .7rem 0;
+}
+.stage.stage--contacts .contacts__list .contacts__channel svg {
+  box-sizing: content-box;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  padding: .55rem;
+  border: 1px solid rgba(216, 212, 203, .28);
+  border-radius: 50%;
+  background: rgba(8, 26, 18, .24);
+}
+.stage.stage--contacts .contacts__list .contacts__channel small { font-size: clamp(.72rem, .76vw, .88rem); color: var(--beige); }
+.stage.stage--contacts .contacts__list .contacts__channel { padding: 0; }
+.stage.stage--contacts .contacts__list .contacts__channel a {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  width: 100%;
+  min-height: 4.4rem;
+  padding: .7rem 0;
+  color: inherit;
+  border-radius: .45rem;
+  transition: color 220ms ease, background 220ms ease;
+}
+.stage.stage--contacts .contacts__list .contacts__channel a > span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .3rem;
+  min-width: 0;
+}
+.stage.stage--contacts .contacts__list .contacts__channel a:is(:hover, :focus-visible) {
+  color: var(--titanium-2);
+  background: rgba(216, 212, 203, .07);
+}
+.stage.stage--contacts .contacts__list .contacts__channel a:is(:hover, :focus-visible) svg { border-color: var(--titanium-2); }
+.stage.stage--contacts .contacts__list .contacts__channel a:focus-visible { outline: 2px solid var(--titanium-2); outline-offset: 3px; }
 @media (min-width: 901px) {
  .rail { transition: bottom .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1); }
  .rail.rail--contacts { bottom: 50%; transform: translateY(50%); gap: 1.1rem; }
@@ -2774,8 +2953,152 @@
  .rail .rail__btn { transition: scale .5s ease, background .25s ease, border-color .25s ease; }
 }
 @media (max-width: 520px) {
- .stage.stage--contacts .contacts__list li > span { grid-template-columns: 1fr; gap: .2rem; }
+  .stage.stage--contacts .contacts__list { column-gap: .8rem; }
+  .stage.stage--contacts .contacts__list .contacts__channel { gap: .5rem; }
+  .stage.stage--contacts .contacts__list .contacts__channel svg { padding: .4rem; }
+  .stage.stage--contacts .contacts__list .contacts__channel small { font-size: .72rem; }
+}
+@media (max-width: 360px) {
+  .stage.stage--contacts .contacts__list { grid-template-columns: 1fr; }
+  .stage.stage--contacts .contacts__list .contacts__channel { min-height: 3.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage.stage--contacts .contacts__list .contacts__channel a { transition: none; }
 }
 @media (prefers-reduced-motion: reduce) {
  .rail, .rail .rail__btn { transition: none; }
 }
+
+/* The investment formats read as ascending steps on wide screens. */
+@media (min-width: 901px) {
+  .stage--invest .invest-list__item { justify-self: start; }
+  .stage--invest .invest-list__item:nth-child(1) { width: 82%; }
+  .stage--invest .invest-list__item:nth-child(2) { width: 91%; }
+  .stage--invest .invest-list__item:nth-child(3) { width: 100%; }
+}
+
+/* The purchase-to-income sequence sits directly on the landscape. */
+.stage--invest .invest__flow,
+.stage--invest .invest__flow:is(:hover, :focus-within) {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+@media (min-width: 1921px) {
+  .stage--invest .invest__flow { min-height: 0; padding: 0; }
+}
+@media (max-width: 900px) {
+  .stage--invest .invest-list__item { width: 100%; }
+  .stage--invest .invest__flow { padding: 0; }
+}
+
+/* Keep the three information groups in one deliberate row on desktop. */
+@media (min-width: 1101px) {
+  .stage--location .location__bar {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.45fr) auto;
+  }
+  .stage--location .location__bar > .btn {
+    width: auto;
+    min-width: 12rem;
+  }
+}
+/* Keep the amenity picker visually tied to the raised architecture gallery. */
+.stage--infra-detail .infra-detail__picker.glass {
+  padding-top: 0.18rem;
+  padding-bottom: clamp(0.68rem, 0.95vw, 1.05rem);
+}
+.stage--infra-detail .infra-detail__picker.glass::before { inset: 40% 0 0; }
+.stage--infra-detail .infra-detail__items {
+  align-items: flex-start;
+  gap: clamp(0.5rem, 0.72vw, 0.82rem);
+  padding: 0.8rem 0.16rem 0.3rem;
+}
+.stage--infra-detail .infra-detail__items button {
+  flex-basis: clamp(8rem, 9vw, 10.8rem);
+  width: clamp(8rem, 9vw, 10.8rem);
+  height: clamp(7.5rem, 8.1vw, 9.6rem);
+  aspect-ratio: auto;
+  border-radius: clamp(0.48rem, 0.52vw, 0.72rem);
+  transform: translateY(-0.18rem);
+}
+.stage--infra-detail .infra-detail__items button.is-active {
+  transform: translateY(-0.4rem);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.17);
+}
+.stage--infra-detail .infra-detail__item-icon {
+  width: clamp(2.2rem, 2.55vw, 3.15rem);
+  height: clamp(2.2rem, 2.55vw, 3.15rem);
+}
+.stage--infra-detail .infra-detail__item-label {
+  max-width: 12ch;
+  font-size: clamp(0.7rem, 0.76vw, 0.92rem);
+  line-height: 1.25;
+}
+.stage--infra-detail .infra-detail__picker-count {
+  border-left: 1px solid rgba(228, 216, 205, 0.16);
+  padding-left: clamp(0.65rem, 0.85vw, 1rem);
+}
+
+@media (min-width: 901px) {
+  .stage--infra-detail .infra-detail__picker-arrow,
+  .stage--infra-detail .infra-detail__picker-count {
+    margin-bottom: -0.35rem;
+  }
+  .stage--build .build-line { transform: translateY(clamp(2rem, 6vh, 4.8rem)); }
+}
+
+@media (min-width: 901px) and (max-height: 820px) {
+  .stage--infra-detail .infra-detail__picker.glass::before { inset: 36% 0 0; }
+  .stage--infra-detail .infra-detail__items button {
+    flex-basis: clamp(7rem, 8vw, 8.8rem);
+    width: clamp(7rem, 8vw, 8.8rem);
+    height: clamp(6.6rem, 7.2vw, 8rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .stage--infra-detail .infra-detail__picker.glass::before { inset: 34% 0 0; }
+  .stage--infra-detail .infra-detail__items button {
+    flex-basis: clamp(7.5rem, 32vw, 9.5rem);
+    width: clamp(7.5rem, 32vw, 9.5rem);
+    height: clamp(7.1rem, 30vw, 9rem);
+  }
+  .stage--infra-detail .infra-detail__picker-count {
+    border-left: 0;
+    padding-left: 0;
+  }
+}
+
+/* Give the infrastructure intro the same breathing room across desktop sizes. */
+@media (min-width: 901px) {
+  .stage--infra .infra__copy { top: clamp(0.45rem, 1.25vh, 1.15rem); }
+  .stage--infra .infra__copy > .section-heading > .kicker { margin-bottom: clamp(0.8rem, 1.15vh, 1.15rem); }
+  .stage--infra .infra__copy > .section-heading > .title { margin-bottom: clamp(0.85rem, 1.35vh, 1.35rem); }
+  .stage--infra .infra__copy > .section-heading > .ornament { margin-bottom: clamp(0.9rem, 1.45vh, 1.45rem); }
+  .stage--infra .infra__copy .lead {
+    margin-top: clamp(0.65rem, 1.15vh, 1.1rem);
+    line-height: 1.55;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 820px) {
+  .stage--infra .infra__copy > .section-heading > .kicker { margin-bottom: 0.7rem; }
+  .stage--infra .infra__copy > .section-heading > .title { margin-bottom: 0.75rem; }
+  .stage--infra .infra__copy > .section-heading > .ornament { margin-bottom: 0.8rem; }
+  .stage--infra .infra__copy .lead { margin-top: 0.55rem; }
+}
+
+/* Keep the four-word about heading in two deliberate pairs. */
+.stage--about-stats .section-heading > .title {
+  font-size: clamp(1.55rem, 2.25vw, 3.1rem);
+}
+.stage--about-stats .section-heading > .title span {
+  display: block;
+  white-space: nowrap;
+}
+.stage--about-stats .section-heading > .title br { display: none; }

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import { Logo } from './Logo'
 import { IconSmartphone } from './Icons'
 import { socialLinks } from './SocialRail'
+import { phoneHref } from '../contactLinks'
 import { resetShineCard, shineCard } from './Ui'
 import { useI18n, type Lang } from '../i18n'
 
@@ -187,7 +188,7 @@ export function Header({ hidden, active }: Props) {
       </nav>
       <div className="header__right">
         {langs('bar')}
-        <a className="header__phone gold-orb" href="#contacts" aria-label={t.ui.phone} onClick={close}>
+        <a className="header__phone gold-orb" href={phoneHref} aria-label={t.ui.phone} onClick={close}>
           <IconSmartphone />
         </a>
         <button
@@ -238,7 +239,7 @@ export function Header({ hidden, active }: Props) {
           <div className="header__menu-actions">
             <a
               className="btn btn--solid btn--shine glass glass--chip header__menu-call"
-              href="#contacts"
+              href={phoneHref}
               tabIndex={open ? 0 : -1}
               onClick={close}
               onPointerMove={shineCard}

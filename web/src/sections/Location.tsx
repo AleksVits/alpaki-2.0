@@ -13,7 +13,6 @@ export function Location() {
           <Lead>{t.location.text}</Lead>
           <p className="location__near">{t.location.nearby}</p>
         </div>
-        <div className="location__scene" aria-hidden="true" />
         <div className="location__bar glass glass--bar">
           <div className="location__facts">
             <div className="location__ways">

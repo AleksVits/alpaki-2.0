@@ -1,5 +1,4 @@
 import type { HTMLAttributes, PointerEvent, ReactNode } from 'react'
-import { asset } from '../asset'
 import { IconArrow, IconChevron } from './Icons'
 
 export function shineCard(e: PointerEvent<HTMLElement>) {
@@ -61,8 +60,6 @@ export function Kicker({ children }: { children: ReactNode }) {
 export function Ornament() {
   return (
     <span className="ornament" aria-hidden="true">
-      <span className="ornament__line" />
-      <img className="ornament__logo" src={asset('logo-mark.png?v=2')} alt="" />
       <span className="ornament__line" />
     </span>
   )

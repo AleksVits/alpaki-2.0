@@ -1,0 +1,206 @@
+/* Shared Titanium finish for every action, independent of section styling. */
+:root {
+  --control-surface: rgba(67, 64, 58, 0.8);
+  --control-hover: rgba(88, 84, 77, 0.9);
+  --control-pressed: rgba(49, 46, 41, 0.94);
+  --control-edge: rgba(170, 166, 157, 0.65);
+  --control-highlight: linear-gradient(160deg, #ffffff1f, #ffffff04 55%, #aaa69d10);
+}
+
+#root :is(button, .btn, .gold-orb) {
+  color: var(--titanium-2);
+  border-color: var(--control-edge);
+  background: var(--control-highlight), var(--control-surface);
+  box-shadow: inset 0 1px 0 #ffffff21, 0 4px 16px #00000018;
+}
+
+#root :is(button, .btn, .gold-orb):is(:hover, :focus-visible) {
+  color: #f3f0e9;
+  border-color: var(--titanium-2);
+  background: var(--control-highlight), var(--control-hover);
+}
+
+#root :is(button, .btn, .gold-orb):is(.is-active, [aria-pressed="true"], :active),
+#root .btn--solid {
+  color: #292722;
+  border-color: var(--titanium-2);
+  background: var(--control-highlight), var(--titanium);
+  text-shadow: none;
+}
+
+#root .btn--solid:is(:hover, :focus-visible) {
+  color: #292722;
+  background: var(--control-highlight), var(--titanium-2);
+}
+
+#root :is(button, .btn, .gold-orb):active {
+  color: #f3f0e9;
+  background: var(--control-pressed);
+}
+#root button:disabled {
+  color: var(--titanium);
+  background: var(--control-surface);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#root :is(button, .btn, .gold-orb):focus-visible {
+  outline: 2px solid var(--titanium-2);
+  outline-offset: 3px;
+}
+
+/* Photographic cards keep their images; only the frame changes. */
+#root :is(.thumbs__item, .apt-type, .apt-house__card) {
+  background-color: var(--control-surface);
+}
+#root .gold-orb img { filter: grayscale(1); }
+#root .gold-orb::before { background: var(--control-edge); }
+#root .build-line li button span {
+  color: var(--titanium-2);
+  border-color: var(--control-edge);
+  background: var(--control-highlight), var(--control-surface);
+  box-shadow: none;
+}
+#root .build-line li.is-active button span {
+  color: #292722;
+  background: var(--titanium);
+  border-color: var(--titanium-2);
+}
+
+/* Text actions and image navigation retain their lightweight silhouettes. */
+#root :is(.text-link, .header__lang, .header__burger, .header__menu-close,
+  .thumbs__arrow, .pager__btn, .infra-detail__picker-arrow, .build-line__arrow) {
+  background: transparent;
+  box-shadow: none;
+  color: var(--titanium-2);
+}
+#root .header__lang.is-active { color: #f3f0e9; }
+#root .scroll-hint { color: var(--titanium-2); }
+
+/* CTA hierarchy: a light outline leads, an unboxed text action follows. */
+#root .btn.btn--solid,
+#root .btn.glass.btn--solid {
+  color: var(--titanium-2);
+  border: 1px solid var(--titanium-2);
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+#root .btn.btn--solid:is(:hover, :focus-visible),
+#root .btn.glass.btn--solid:is(:hover, :focus-visible) {
+  color: #fffaf1;
+  border-color: #f3f0e9;
+  background: rgba(170, 166, 157, 0.09);
+  box-shadow: none;
+}
+#root .btn.btn--solid:active { background: rgba(170, 166, 157, 0.21); }
+
+#root .btn.btn--ghost,
+#root .btn.btn--secondary,
+#root .btn.glass.btn--ghost {
+  color: var(--titanium-2);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+#root .btn.btn--ghost:is(:hover, :focus-visible),
+#root .btn.btn--secondary:is(:hover, :focus-visible),
+#root .btn.glass.btn--ghost:is(:hover, :focus-visible) {
+  color: #fffaf1;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+#root .btn.btn--ghost:active,
+#root .btn.btn--secondary:active { background: transparent; }
+#root .btn.btn--secondary > span { text-decoration: none; }
+#root .btn.btn--secondary:is(:hover, :focus-visible) > span { text-decoration: underline; text-underline-offset: .35em; }
+
+/* Photo paging and floating messengers stay legible without opaque circles. */
+#root .infra-detail__photo-nav button,
+#root .infra-detail__photo-nav button:is(:hover, :focus-visible, :active) {
+  color: var(--titanium-2);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#root .infra-detail__photo-nav button:is(:hover, :focus-visible) { color: #fffaf1; }
+
+#root .rail__btn.gold-orb,
+#root .rail__btn.gold-orb:is(:hover, :focus-visible, :active) {
+  border-color: rgba(216, 212, 203, .42);
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+#root .rail__btn.gold-orb:is(:hover, :focus-visible) { border-color: var(--titanium-2); }
+#root .rail__btn.gold-orb img {
+  width: clamp(26px, 1.5vw, 34px);
+  height: clamp(26px, 1.5vw, 34px);
+  filter: none;
+}
+
+/* Selection relies on the line and typography, leaving the photography visible. */
+#root .stage--build .build-line li button,
+#root .stage--build .build-line li button:is(:hover, :focus-visible, :active) {
+  color: var(--beige);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#root .stage--build .build-line li button span,
+#root .stage--build .build-line li.is-active button span,
+#root .stage--build .build-line li button:is(:hover, :focus-visible, :active) span {
+  color: var(--titanium-2);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+#root .stage--build .build-line li.is-active button span,
+#root .stage--build .build-line li button:is(:hover, :focus-visible) span {
+  border-color: var(--titanium-2);
+}
+#root .stage--build .build-line li.is-active button span {
+  background: rgba(170, 166, 157, 0.1);
+}
+
+/* The moving language highlight supplies the fill without a second static layer. */
+#root .header__langs--bar::before {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.24), rgba(170, 166, 157, 0.1)), rgba(170, 166, 157, 0.16);
+}
+#root .header__langs--bar .header__lang,
+#root .header__langs--bar .header__lang:is(:hover, :focus-visible, :active),
+#root .header__langs--bar .header__lang.is-active {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+#root .stage--infra-detail .infra-detail__items button,
+#root .stage--infra-detail .infra-detail__items button:is(:hover, :focus-visible, :active),
+#root .stage--infra-detail .infra-detail__items button.is-active {
+  color: var(--titanium-2);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+#root .stage--infra-detail .infra-detail__items button.is-active {
+  border-color: var(--titanium-2);
+  background: rgba(170, 166, 157, 0.08);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --control-surface: #43403a;
+    --control-hover: #58544d;
+    --control-pressed: #312e29;
+  }
+  #root .btn.btn--solid,
+  #root .btn.glass.btn--solid { background: transparent; }
+}
