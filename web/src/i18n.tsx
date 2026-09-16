@@ -134,7 +134,7 @@ const ua = {
     ],
   },
   invest: {
-    kicker: '03  ·  Інвестиції',
+    kicker: 'Інвестиції',
     title: 'Оберіть свій\nформат\nінвестування',
     lead: 'Від придбання апартаментів до формування дохідного активу від 1 м².',
     items: [
@@ -143,6 +143,7 @@ const ua = {
       { n: '03', title: 'Інвестування від 1 м²', text: 'Формат для поступового формування дохідного активу.' },
     ],
     flow: 'Придбання  →  Передача в управління  →  Дохід від оренди',
+    minArea: '1 м²',
     ctaOffer: 'Отримати інвестиційну пропозицію',
     ctaConsult: 'Записатися на консультацію',
     manageTitle: 'Як працює\nуправління\nапартаментами',
@@ -173,7 +174,7 @@ const ua = {
     ctaTerms: 'Дізнатися умови управління',
   },
   apt: {
-    kicker: '04  ·  Апартаменти',
+    kicker: 'Апартаменти',
     title: 'Оберіть\nсвій простір',
     lead: 'Від панорамних студій до просторових апартаментів — оберіть формат, що відповідає вашому ритму.',
     cta: 'Оберіть простір',
@@ -211,7 +212,7 @@ const ua = {
     floors: ['01', '02', '03', '04', '05'],
   },
   build: {
-    kicker: '05  ·  Хід будівництва',
+    kicker: 'Хід будівництва',
     title: 'Будуємо\nлегенду',
     lead: 'Стежте за реалізацією проєкту, етапами робіт та регулярними оновленнями з будівельного майданчика.',
     cta: 'Дивитися оновлення',
@@ -426,7 +427,7 @@ const en: typeof ua = {
     ],
   },
   invest: {
-    kicker: '03  ·  Investments',
+    kicker: 'Investments',
     title: 'Choose your\ninvestment\nformat',
     lead: 'From purchasing an apartment to building a yield-bearing asset from 1 m².',
     items: [
@@ -435,6 +436,7 @@ const en: typeof ua = {
       { n: '03', title: 'Invest from 1 m²', text: 'A format for gradually forming a yield-bearing asset.' },
     ],
     flow: 'Purchase  →  Transfer to management  →  Rental income',
+    minArea: '1 m²',
     ctaOffer: 'Request an investment offer',
     ctaConsult: 'Book a consultation',
     manageTitle: 'How apartment\nmanagement\nworks',
@@ -465,7 +467,7 @@ const en: typeof ua = {
     ctaTerms: 'Learn the management terms',
   },
   apt: {
-    kicker: '04  ·  Apartments',
+    kicker: 'Apartments',
     title: 'Choose\nyour space',
     lead: 'From panoramic studios to spacious apartments — choose the format that matches your rhythm.',
     cta: 'Choose a space',
@@ -503,7 +505,7 @@ const en: typeof ua = {
     floors: ['01', '02', '03', '04', '05'],
   },
   build: {
-    kicker: '05  ·  Construction progress',
+    kicker: 'Construction progress',
     title: 'Building\na legend',
     lead: 'Follow the project’s delivery, work stages and regular updates from the construction site.',
     cta: 'View updates',

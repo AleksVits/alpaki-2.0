@@ -84,10 +84,10 @@ export function AboutIntro() {
           </ul>
           <p className="about-intro__quote">{t.about.owner}</p>
           <div className="btn-row">
-            <Btn href="#apartments" solid shine className="glass glass--chip">
+            <Btn href="#apartments" solid arrow>
               {t.about.ctaApt}
             </Btn>
-            <Btn href="#invest-formats" className="btn--secondary">
+            <Btn href="#invest-formats" className="btn--secondary" arrow>
               {t.about.ctaInvest}
             </Btn>
           </div>

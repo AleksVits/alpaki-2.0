@@ -29,7 +29,7 @@ const sectionMap: Record<string, string> = {
 }
 
 export default function App() {
-  const [active, setActive] = useState('intro')
+  const [active, setActive] = useState(() => decodeHash(window.location.hash.slice(1)) || 'intro')
   const [pastIntro, setPastIntro] = useState(false)
   const [infraGroup, setInfraGroup] = useState('wellness')
 
@@ -45,12 +45,12 @@ export default function App() {
       const nearest = [...root.querySelectorAll<HTMLElement>('.stage')]
         .map(el => ({ el, distance: Math.abs(el.getBoundingClientRect().top - origin) }))
         .sort((a, b) => a.distance - b.distance)[0]
-      // Only finish a nearly completed transition; never pull away from long content.
-      if (nearest && nearest.distance > 2 && nearest.distance < Math.min(96, root.clientHeight * 0.08)) {
+      // Snap toward the nearest stage edge after scrolling settles.
+      if (nearest && nearest.distance > 2 && nearest.distance < Math.min(280, root.clientHeight * 0.3)) {
         scrollToStage(nearest.el)
       }
     }
-    const schedule = () => { window.clearTimeout(timer); timer = window.setTimeout(settle, 450) }
+    const schedule = () => { window.clearTimeout(timer); timer = window.setTimeout(settle, 180) }
     const down = () => { dragging = true; window.clearTimeout(timer) }
     const up = () => { dragging = false; schedule() }
     root.addEventListener('scroll', schedule, { passive: true })
@@ -66,21 +66,40 @@ export default function App() {
 
   useEffect(() => {
     const root = siteScroller()
+    if (!root) return
     const nodes = Array.from(document.querySelectorAll<HTMLElement>('.stage'))
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (visible?.target.id) setActive(visible.target.id)
-      },
-      {
-        root,
-        threshold: isMobileFlow() ? [0.08, 0.18, 0.35, 0.55] : [0.35, 0.55, 0.75],
-      },
-    )
-    nodes.forEach((n) => io.observe(n))
-    return () => io.disconnect()
+    let frame = 0
+
+    const updateActive = () => {
+      frame = 0
+      const rootRect = root.getBoundingClientRect()
+      const viewportHeight = rootRect.height
+      const visible = nodes
+        .map((node) => {
+          const rect = node.getBoundingClientRect()
+          const overlap = Math.max(0, Math.min(rect.bottom, rootRect.bottom) - Math.max(rect.top, rootRect.top))
+          const score = overlap / Math.max(1, Math.min(rect.height, viewportHeight))
+          const centerDistance = Math.abs((rect.top + rect.bottom) / 2 - (rootRect.top + rootRect.bottom) / 2)
+          return { node, score, centerDistance }
+        })
+        .filter(({ score }) => score > 0)
+        .sort((a, b) => b.score - a.score || a.centerDistance - b.centerDistance)[0]
+
+      if (visible?.node.id) setActive(visible.node.id)
+    }
+    const scheduleActive = () => {
+      if (frame) return
+      frame = window.requestAnimationFrame(updateActive)
+    }
+
+    updateActive()
+    root.addEventListener('scroll', scheduleActive, { passive: true })
+    window.addEventListener('resize', scheduleActive)
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame)
+      root.removeEventListener('scroll', scheduleActive)
+      window.removeEventListener('resize', scheduleActive)
+    }
   }, [])
 
   useEffect(() => {
@@ -116,6 +135,7 @@ export default function App() {
       const target = document.getElementById(id)
       if (!target) return
       e.preventDefault()
+      setActive(id)
       scrollToStage(target)
       history.pushState(null, '', href)
     }
@@ -126,10 +146,20 @@ export default function App() {
       if (target) requestAnimationFrame(() => scrollToStage(target))
     }
 
+    const onHistoryNavigation = () => {
+      const id = decodeHash(window.location.hash.slice(1))
+      const target = id ? document.getElementById(id) : null
+      if (!target) return
+      setActive(id)
+      scrollToStage(target)
+    }
+
     document.addEventListener('click', onClick)
+    window.addEventListener('popstate', onHistoryNavigation)
 
     return () => {
       document.removeEventListener('click', onClick)
+      window.removeEventListener('popstate', onHistoryNavigation)
     }
   }, [])
 

@@ -151,7 +151,10 @@ export function Header({ hidden, active }: Props) {
   }, [open, exited])
 
   const langs = (place: 'bar' | 'menu') => (
-    <div className={`header__langs glass glass--pill header__langs--${place}`}>
+    <div
+      className={`header__langs glass glass--pill header__langs--${place}`}
+      data-active-lang={lang}
+    >
       {(['ua', 'en'] as Lang[]).map((code) => (
         <button
           key={code}

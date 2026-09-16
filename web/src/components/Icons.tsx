@@ -260,8 +260,16 @@ export function IconViber() {
 export function IconKeys() {
   return (
     <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <circle cx="12" cy="14" r="5" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M16 14 H26 V18 H22 V21" stroke="currentColor" strokeWidth="1.2" />
+      <path
+        d="M8.5 22.5 C8.5 19.5 11 17.5 14.2 17.5 H17.5 C19.2 17.5 20.5 18.8 20.5 20.5 V24.5 H10.2 C9.1 24.5 8.5 23.6 8.5 22.5 Z"
+        stroke="currentColor"
+        strokeWidth="1.15"
+        strokeLinejoin="round"
+      />
+      <path d="M12.2 17.8 V15.2 L16 12.2 L19.8 15.2 V17.8" stroke="currentColor" strokeWidth="1.15" strokeLinejoin="round" />
+      <path d="M14.6 17.8 V15.8 H17.4 V17.8" stroke="currentColor" strokeWidth="1.15" />
+      <circle cx="22.8" cy="11.2" r="2.6" stroke="currentColor" strokeWidth="1.15" />
+      <path d="M24.8 13.2 L28 16.4 M26.2 14.8 L28.2 14.2 M26.2 14.8 L26.8 16.8" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
     </svg>
   )
 }
@@ -269,8 +277,22 @@ export function IconKeys() {
 export function IconCalendar() {
   return (
     <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <rect x="6" y="8" width="20" height="18" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M6 13 H26 M11 6 V10 M21 6 V10" stroke="currentColor" strokeWidth="1.2" />
+      <rect x="6" y="8" width="18" height="16" rx="1.4" stroke="currentColor" strokeWidth="1.15" />
+      <path d="M6 12.5 H24 M11 6.2 V9.2 M19 6.2 V9.2" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
+      <path d="M10 16 H14 M10 19.5 H14 M17 16 H20" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+      <path d="M18.2 21.2 L20.4 23.4 L26.2 17.2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+export function IconBell() {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M10 20.5 C10 14.8 13.2 11.2 16 11.2 C18.8 11.2 22 14.8 22 20.5" stroke="currentColor" strokeWidth="1.15" strokeLinejoin="round" />
+      <path d="M8.5 20.5 H23.5" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
+      <path d="M11 23 H21" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
+      <circle cx="16" cy="8.6" r="1.35" stroke="currentColor" strokeWidth="1.15" />
+      <path d="M16 9.9 V11.2" stroke="currentColor" strokeWidth="1.15" />
     </svg>
   )
 }
@@ -278,7 +300,10 @@ export function IconCalendar() {
 export function IconChart() {
   return (
     <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path d="M6 24 H26 M10 24 V16 M16 24 V10 M22 24 V18" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M9 7.5 H19 L24 12.5 V24.5 H9 V7.5 Z" stroke="currentColor" strokeWidth="1.15" strokeLinejoin="round" />
+      <path d="M19 7.5 V12.5 H24" stroke="currentColor" strokeWidth="1.15" strokeLinejoin="round" />
+      <path d="M12 19.5 L15.2 16.2 L17.6 18.2 L21.5 13.5" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M19.2 13.5 H21.5 V15.8" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }

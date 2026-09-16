@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { IconAmenity, IconArrow, IconChevron } from '../components/Icons'
-import { Lead, Pager, Stage, splitTitle, SectionHeading } from '../components/Ui'
+import { Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
 import { asset } from '../asset'
 import { useI18n } from '../i18n'
 
@@ -16,7 +16,22 @@ export function Infrastructure({
   const activeIndex = Math.max(0, groups.findIndex((group) => group.id === activeGroupId))
 
   return (
-    <Stage id="infrastructure" className="stage--infra" next="infra-detail">
+    <Stage
+      id="infrastructure"
+      className="stage--infra"
+      next="infra-detail"
+      overlay={(
+        <div className="infra__backdrop" aria-hidden="true">
+          <img
+            src={asset('infrastructure/overview-night.jpg')}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+          />
+        </div>
+      )}
+    >
       <div className="infra">
         <div className="infra__copy">
           <SectionHeading kicker={t.infra.kicker}>{splitTitle(t.infra.title)}</SectionHeading>
@@ -67,6 +82,7 @@ export function InfraDetail({ groupId }: { groupId: string }) {
   const group = t.infra.groups.find((entry) => entry.id === groupId) ?? t.infra.groups[0]
   const [itemIndex, setItemIndex] = useState(0)
   const [photoIndex, setPhotoIndex] = useState(0)
+  const itemsRef = useRef<HTMLDivElement>(null)
   const item = group.items[itemIndex]
   const photo = item.images[photoIndex] ?? item.images[0]
 
@@ -85,6 +101,22 @@ export function InfraDetail({ groupId }: { groupId: string }) {
     })
   }, [group])
 
+  useEffect(() => {
+    const strip = itemsRef.current
+    const selected = strip?.querySelectorAll('button')[itemIndex]
+    if (!strip || !selected) return
+    const stripRect = strip.getBoundingClientRect()
+    const selectedRect = selected.getBoundingClientRect()
+    const fullyVisible = selectedRect.left >= stripRect.left && selectedRect.right <= stripRect.right
+    if (fullyVisible) return
+    const centeredLeft = strip.scrollLeft + selectedRect.left - stripRect.left
+      - (stripRect.width - selectedRect.width) / 2
+    strip.scrollTo({
+      left: centeredLeft,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    })
+  }, [itemIndex, groupId])
+
   return (
     <Stage
       id="infra-detail"
@@ -98,7 +130,7 @@ export function InfraDetail({ groupId }: { groupId: string }) {
     >
       <div className="infra-detail">
         <div className="infra-detail__copy">
-          <SectionHeading kicker={`${group.n}  ·  ${group.title}`}>
+          <SectionHeading kicker={group.title}>
             {splitTitle(group.detailTitle)}
           </SectionHeading>
           <Lead>{group.lead}</Lead>
@@ -118,7 +150,15 @@ export function InfraDetail({ groupId }: { groupId: string }) {
         )}
 
         <div className="infra-detail__picker glass glass--bar">
-          <div className="infra-detail__items">
+          <button
+            className="infra-detail__picker-arrow infra-detail__picker-arrow--prev"
+            type="button"
+            onClick={() => showItem(itemIndex - 1)}
+            aria-label={t.ui.prev}
+          >
+            <IconChevron dir="left" />
+          </button>
+          <div className="infra-detail__items" ref={itemsRef}>
             {group.items.map((entry, index) => (
               <button
                 key={entry.id}
@@ -132,14 +172,17 @@ export function InfraDetail({ groupId }: { groupId: string }) {
               </button>
             ))}
           </div>
-          <div className="infra-detail__pager">
-            <Pager
-              current={itemIndex + 1}
-              total={group.items.length}
-              onPrev={() => showItem(itemIndex - 1)}
-              onNext={() => showItem(itemIndex + 1)}
-            />
-          </div>
+          <span className="infra-detail__picker-count" aria-live="polite">
+            {String(itemIndex + 1).padStart(2, '0')} / {String(group.items.length).padStart(2, '0')}
+          </span>
+          <button
+            className="infra-detail__picker-arrow infra-detail__picker-arrow--next"
+            type="button"
+            onClick={() => showItem(itemIndex + 1)}
+            aria-label={t.ui.next}
+          >
+            <IconChevron dir="right" />
+          </button>
         </div>
       </div>
     </Stage>
