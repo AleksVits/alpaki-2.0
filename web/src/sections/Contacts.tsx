@@ -7,7 +7,7 @@ import {
   IconViber,
   IconWhatsapp,
 } from '../components/Icons'
-import { Placeholder } from '../components/Placeholder'
+import { asset } from '../asset'
 import { Btn, Kicker, Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
 import { useI18n } from '../i18n'
 
@@ -31,8 +31,11 @@ export function Contacts() {
   }, [privacyOpen])
 
   return (
-    <Stage id="contacts" className="stage--contacts">
-      <Placeholder className="stage__photo" />
+    <Stage id="contacts" className="stage--contacts" overlay={
+      <div className="contacts__backdrop" aria-hidden="true">
+        <img src={asset('contacts-background.jpg')} alt="" loading="lazy" decoding="async" />
+      </div>
+    }>
       <div className="contacts">
         <div className="contacts__copy">
           <SectionHeading kicker={t.contacts.company}>{splitTitle(t.contacts.title)}</SectionHeading>

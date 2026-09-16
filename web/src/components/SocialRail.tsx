@@ -9,11 +9,11 @@ export function socialLinks(viberLabel: string) {
   ]
 }
 
-export function SocialRail() {
+export function SocialRail({ centered = false }: { centered?: boolean }) {
   const { t } = useI18n()
 
   return (
-    <aside className="rail" aria-label="Social">
+    <aside className={`rail${centered ? ' rail--contacts' : ''}`} aria-label="Social">
       {socialLinks(t.contacts.viber).map((item) => (
         <a
           key={item.label}

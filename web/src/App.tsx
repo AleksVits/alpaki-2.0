@@ -46,7 +46,7 @@ export default function App() {
         .map(el => ({ el, distance: Math.abs(el.getBoundingClientRect().top - origin) }))
         .sort((a, b) => a.distance - b.distance)[0]
       // Snap toward the nearest stage edge after scrolling settles.
-      if (nearest && nearest.distance > 2 && nearest.distance < Math.min(280, root.clientHeight * 0.3)) {
+      if (nearest && nearest.distance > 2 && nearest.distance < Math.min(480, root.clientHeight * 0.35)) {
         scrollToStage(nearest.el)
       }
     }
@@ -168,7 +168,7 @@ export default function App() {
   return (
     <>
       <Header hidden={!showChrome} active={sectionMap[active] ?? 'about'} />
-      {showChrome && <SocialRail />}
+      {showChrome && <SocialRail centered={active === 'contacts'} />}
       <div className="site">
         <main>
           <Intro />
