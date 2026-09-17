@@ -25,7 +25,7 @@ export function Intro() {
       }
     >
       <div className="intro">
-        <Logo />
+        <Logo animatedMark />
         <p className="intro__tag">{splitTitle(t.intro.tagline)}</p>
       </div>
     </Stage>

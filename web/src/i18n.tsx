@@ -12,7 +12,7 @@ const ua = {
     contacts: 'Контакти',
   },
   intro: {
-    tagline: 'Власний простір у Карпатах',
+    tagline: 'Власний простір\nу Карпатах',
   },
   about: {
     factsKicker: 'У цифрах',
@@ -306,7 +306,7 @@ const en: typeof ua = {
     contacts: 'Contacts',
   },
   intro: {
-    tagline: 'A private space in the Carpathians',
+    tagline: 'A private space\nin the Carpathians',
   },
   about: {
     factsKicker: 'In figures',

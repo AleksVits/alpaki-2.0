@@ -129,6 +129,38 @@
 }
 #root .infra-detail__photo-nav button:is(:hover, :focus-visible) { color: #fffaf1; }
 
+/* Construction gallery controls let the photograph remain unobstructed. */
+#root .stage--build-detail .build-detail__nav,
+#root .stage--build-detail .build-detail__nav:is(:hover, :focus-visible, :active) {
+  color: var(--titanium-2);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+#root .stage--build-detail .build-detail__nav:is(:hover, :focus-visible) { color: #fffaf1; }
+
+#root .stage--build-detail .months button,
+#root .stage--build-detail .months button:is(:hover, :focus-visible, :active) {
+  color: var(--titanium-2);
+  border-color: rgba(170, 166, 157, 0.48);
+  background: transparent;
+  box-shadow: none;
+}
+#root .stage--build-detail .months button:is(:hover, :focus-visible) {
+  color: #fffaf1;
+  border-color: var(--titanium-2);
+}
+#root .stage--build-detail .months button.is-active,
+#root .stage--build-detail .months button.is-active:is(:hover, :focus-visible) {
+  color: #f3f0e9;
+  border-color: var(--titanium-2);
+  background: rgba(170, 166, 157, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
 #root .rail__btn.gold-orb,
 #root .rail__btn.gold-orb:is(:hover, :focus-visible, :active) {
   border-color: rgba(216, 212, 203, .42);
