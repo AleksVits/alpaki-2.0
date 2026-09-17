@@ -181,6 +181,18 @@
   box-shadow: none;
 }
 
+#root .header__phone.gold-orb {
+  color: var(--titanium-2);
+  border-color: rgba(170, 166, 157, 0.48);
+  background: var(--liquid-glass-highlight), rgba(10, 31, 20, 0.82);
+  box-shadow: var(--liquid-glass-shadow);
+}
+#root .header__phone.gold-orb:is(:hover, :focus-visible) {
+  color: #f3f0e9;
+  border-color: var(--titanium-2);
+  background: var(--liquid-glass-highlight), rgba(20, 46, 30, 0.88);
+}
+
 #root .stage--infra-detail .infra-detail__items button,
 #root .stage--infra-detail .infra-detail__items button:is(:hover, :focus-visible, :active),
 #root .stage--infra-detail .infra-detail__items button.is-active {

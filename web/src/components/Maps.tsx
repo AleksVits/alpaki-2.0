@@ -1,14 +1,16 @@
 import { asset } from '../asset'
 import { useI18n } from '../i18n'
 
+// Percentages are projected from real city coordinates onto ukraine-map.png.
+// The bitmap spans roughly 22.14–40.22° E and 44.39–52.38° N.
 const cities = [
-  { id: 'lviv', x: 14.2, y: 28.0 },
-  { id: 'kyiv', x: 46.6, y: 25.8 },
-  { id: 'kharkiv', x: 76.4, y: 30.6 },
-  { id: 'uzh', x: 3.6, y: 46.0 },
-  { id: 'if', x: 21.4, y: 45.0 },
-  { id: 'dnipro', x: 72.6, y: 46.6 },
-  { id: 'odesa', x: 47.0, y: 67.4 },
+  { id: 'lviv', x: 11.4, y: 32.5 },
+  { id: 'kyiv', x: 46.1, y: 26.1 },
+  { id: 'kharkiv', x: 76.5, y: 30.5 },
+  { id: 'uzh', x: 2.3, y: 46.6 },
+  { id: 'if', x: 15.1, y: 43.1 },
+  { id: 'dnipro', x: 69.8, y: 48.5 },
+  { id: 'odesa', x: 47.2, y: 71.5 },
 ] as const
 
 export function UkraineMap() {
@@ -28,7 +30,7 @@ export function UkraineMap() {
           {t.cities[city.id]}
         </span>
       ))}
-      <span className="ua-map__kvasy" style={{ left: '14.8%', top: '47.6%' }} tabIndex={0}>
+      <span className="ua-map__kvasy" style={{ left: '12.8%', top: '51.9%' }} tabIndex={0}>
         <span className="ua-map__pin">
           <img src={asset('logo-mark.png?v=2')} alt="" />
         </span>

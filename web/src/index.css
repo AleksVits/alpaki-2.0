@@ -164,7 +164,8 @@ p, h1, h2, h3 { margin: 0; }
   justify-content: center;
   justify-self: center;
   gap: 1.55rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  white-space: nowrap;
   margin-top: 0.15rem;
   padding: 0.38rem 0.2rem 0.42rem;
   background: none;
@@ -2574,7 +2575,12 @@ p, h1, h2, h3 { margin: 0; }
   }
 }
 
-@media (max-width: 1366px) {
+@media (min-width: 1581px) and (max-width: 1800px) {
+  .header__nav,
+  .header__nav.glass { gap: clamp(0.9rem, 1.25vw, 1.55rem); }
+}
+
+@media (max-width: 1580px) {
   .header {
     grid-template-columns: 1fr auto;
     padding-inline: calc(1.1rem + env(safe-area-inset-left, 0px)) calc(1.1rem + env(safe-area-inset-right, 0px));

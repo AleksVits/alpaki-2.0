@@ -136,28 +136,7 @@ export function InfraDetail({ groupId }: { groupId: string }) {
           <Lead>{group.lead}</Lead>
         </div>
 
-        {item.images.length > 1 && (
-          <div className="infra-detail__photo-nav glass glass--pill">
-            <button type="button" onClick={() => showPhoto(photoIndex - 1)} aria-label={t.ui.prev}>
-              <IconChevron dir="left" />
-            </button>
-            <strong>{item.title}</strong>
-            <span>{String(photoIndex + 1).padStart(2, '0')} / {String(item.images.length).padStart(2, '0')}</span>
-            <button type="button" onClick={() => showPhoto(photoIndex + 1)} aria-label={t.ui.next}>
-              <IconChevron dir="right" />
-            </button>
-          </div>
-        )}
-
         <div className="infra-detail__picker glass glass--bar">
-          <button
-            className="infra-detail__picker-arrow infra-detail__picker-arrow--prev"
-            type="button"
-            onClick={() => showItem(itemIndex - 1)}
-            aria-label={t.ui.prev}
-          >
-            <IconChevron dir="left" />
-          </button>
           <div className="infra-detail__items" ref={itemsRef}>
             {group.items.map((entry, index) => (
               <button
@@ -172,17 +151,18 @@ export function InfraDetail({ groupId }: { groupId: string }) {
               </button>
             ))}
           </div>
-          <span className="infra-detail__picker-count" aria-live="polite">
-            {String(itemIndex + 1).padStart(2, '0')} / {String(group.items.length).padStart(2, '0')}
-          </span>
-          <button
-            className="infra-detail__picker-arrow infra-detail__picker-arrow--next"
-            type="button"
-            onClick={() => showItem(itemIndex + 1)}
-            aria-label={t.ui.next}
-          >
-            <IconChevron dir="right" />
-          </button>
+          {item.images.length > 1 && (
+            <div className="infra-detail__photo-nav">
+              <button type="button" onClick={() => showPhoto(photoIndex - 1)} aria-label={t.ui.prev}>
+                <IconChevron dir="left" />
+              </button>
+              <strong>{item.title}</strong>
+              <span aria-live="polite">{String(photoIndex + 1).padStart(2, '0')} / {String(item.images.length).padStart(2, '0')}</span>
+              <button type="button" onClick={() => showPhoto(photoIndex + 1)} aria-label={t.ui.next}>
+                <IconChevron dir="right" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </Stage>
