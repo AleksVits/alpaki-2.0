@@ -82,6 +82,7 @@ export function InfraDetail({ groupId }: { groupId: string }) {
   const group = t.infra.groups.find((entry) => entry.id === groupId) ?? t.infra.groups[0]
   const [itemIndex, setItemIndex] = useState(0)
   const [photoIndex, setPhotoIndex] = useState(0)
+  const [hasNextItem, setHasNextItem] = useState(false)
   const itemsRef = useRef<HTMLDivElement>(null)
   const item = group.items[itemIndex]
   const photo = item.images[photoIndex] ?? item.images[0]
@@ -117,6 +118,20 @@ export function InfraDetail({ groupId }: { groupId: string }) {
     })
   }, [itemIndex, groupId])
 
+  useEffect(() => {
+    const strip = itemsRef.current
+    if (!strip) return
+    const updateOverflow = () => setHasNextItem(strip.scrollWidth - strip.clientWidth - strip.scrollLeft > 4)
+    updateOverflow()
+    strip.addEventListener('scroll', updateOverflow, { passive: true })
+    const observer = new ResizeObserver(updateOverflow)
+    observer.observe(strip)
+    return () => {
+      strip.removeEventListener('scroll', updateOverflow)
+      observer.disconnect()
+    }
+  }, [groupId, group.items.length])
+
   return (
     <Stage
       id="infra-detail"
@@ -137,7 +152,7 @@ export function InfraDetail({ groupId }: { groupId: string }) {
         </div>
 
         <div className="infra-detail__picker glass glass--bar">
-          <div className="infra-detail__items" ref={itemsRef}>
+          <div className={`infra-detail__items${hasNextItem ? ' has-next' : ''}`} ref={itemsRef}>
             {group.items.map((entry, index) => (
               <button
                 key={entry.id}

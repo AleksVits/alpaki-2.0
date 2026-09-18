@@ -636,6 +636,14 @@ select {
   left: 0;
   width: min(28%, 25rem);
   max-width: none;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: clamp(0.8rem, 1.25vw, 1.25rem);
+  border: 1px solid rgba(216, 212, 203, 0.2);
+  border-radius: clamp(0.42rem, 0.55vw, 0.72rem);
+  background: rgba(5, 20, 12, 0.2);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
   pointer-events: none;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.62);
 }
@@ -891,6 +899,7 @@ select {
     max-width: 38rem;
     min-width: 0;
     margin-inline: auto;
+    padding: clamp(0.8rem, 3.5vw, 1.15rem);
     overflow-wrap: anywhere;
   }
   .infra__copy::before { display: none; }
@@ -3027,9 +3036,28 @@ select {
 }
 .stage--infra-detail .infra-detail__picker.glass::before { inset: 40% 0 0; }
 .stage--infra-detail .infra-detail__items {
+  position: relative;
   align-items: flex-start;
   gap: clamp(0.5rem, 0.72vw, 0.82rem);
   padding: 0.8rem 0.16rem 0.3rem;
+}
+.stage--infra-detail .infra-detail__items.has-next::after {
+  content: '›';
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: clamp(2rem, 3vw, 2.8rem);
+  height: clamp(3.2rem, 5vw, 4.8rem);
+  transform: translateY(-50%);
+  color: var(--titanium-2);
+  font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72);
+  background: linear-gradient(90deg, transparent, rgba(5, 20, 12, 0.9) 44%);
+  pointer-events: none;
 }
 .stage--infra-detail .infra-detail__items button {
   --tilt-x: 0deg;
