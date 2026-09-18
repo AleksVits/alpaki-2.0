@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { IconAmenity, IconArrow, IconChevron } from '../components/Icons'
-import { Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
+import { IconArrow, IconChevron } from '../components/Icons'
+import { Lead, Stage, splitTitle, SectionHeading, resetShineCard, shineCard } from '../components/Ui'
 import { asset } from '../asset'
 import { useI18n } from '../i18n'
 
@@ -144,9 +144,13 @@ export function InfraDetail({ groupId }: { groupId: string }) {
                 type="button"
                 className={index === itemIndex ? 'is-active' : ''}
                 onClick={() => showItem(index)}
+                onPointerMove={shineCard}
+                onPointerLeave={resetShineCard}
                 aria-pressed={index === itemIndex}
               >
-                <span className="infra-detail__item-icon"><IconAmenity id={entry.id} /></span>
+                <span className="infra-detail__item-icon">
+                  <img src={asset(entry.images[0])} alt="" loading="lazy" decoding="async" />
+                </span>
                 <span className="infra-detail__item-label">{entry.title}</span>
               </button>
             ))}

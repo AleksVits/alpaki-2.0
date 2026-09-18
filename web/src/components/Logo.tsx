@@ -1,7 +1,7 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { asset } from '../asset'
 
-const logoFrames = [1, 2, 3, 4, 5].map((number) => asset(`logo-animation/${number}.png`))
+const logoFrames = Array.from({ length: 10 }, (_, index) => asset(`logo-animation/${index + 1}.png`))
 
 type Props = {
   compact?: boolean

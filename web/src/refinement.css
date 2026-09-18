@@ -43,15 +43,20 @@ select {
   height: 100%;
   object-fit: contain;
   opacity: 0;
-  animation: intro-logo-frame 700ms linear infinite;
+  animation: intro-logo-frame 3000ms linear infinite;
 }
-.stage--intro .logo__frame--2 { animation-delay: 140ms; }
-.stage--intro .logo__frame--3 { animation-delay: 280ms; }
-.stage--intro .logo__frame--4 { animation-delay: 420ms; }
-.stage--intro .logo__frame--5 { animation-delay: 560ms; }
+.stage--intro .logo__frame--2 { animation-delay: 300ms; }
+.stage--intro .logo__frame--3 { animation-delay: 600ms; }
+.stage--intro .logo__frame--4 { animation-delay: 900ms; }
+.stage--intro .logo__frame--5 { animation-delay: 1200ms; }
+.stage--intro .logo__frame--6 { animation-delay: 1500ms; }
+.stage--intro .logo__frame--7 { animation-delay: 1800ms; }
+.stage--intro .logo__frame--8 { animation-delay: 2100ms; }
+.stage--intro .logo__frame--9 { animation-delay: 2400ms; }
+.stage--intro .logo__frame--10 { animation-delay: 2700ms; }
 @keyframes intro-logo-frame {
-  0%, 19.9% { opacity: 1; }
-  20%, 100% { opacity: 0; }
+  0%, 9.9% { opacity: 1; }
+  10%, 100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .stage--intro .logo__frame { animation: none; opacity: 0; }
@@ -881,9 +886,27 @@ select {
     flex-direction: column;
     gap: 0;
   }
-  .infra__copy { max-width: 38rem; margin-inline: auto; }
+  .infra__copy {
+    width: 100%;
+    max-width: 38rem;
+    min-width: 0;
+    margin-inline: auto;
+    overflow-wrap: anywhere;
+  }
   .infra__copy::before { display: none; }
-  .infra__copy .lead { margin-bottom: var(--mobile-space-block); }
+  .infra__copy .title {
+    max-width: 100%;
+    font-size: clamp(1.42rem, 6.4vw, 1.85rem);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+  .infra__copy .lead {
+    max-width: 34ch;
+    margin-bottom: var(--mobile-space-block);
+    font-size: clamp(0.78rem, 3.45vw, 0.98rem);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
   .infra-carousel {
     width: 100%;
     margin-top: 0;
@@ -1122,13 +1145,14 @@ select {
   filter: drop-shadow(0 2px 8px rgba(170, 166, 157, 0.18));
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.3s ease;
 }
-.infra-detail__item-icon svg {
+.infra-detail__item-icon img {
   display: block;
   width: 100%;
   height: 100%;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  border-radius: 0.28rem;
 }
 .infra-detail__items button:hover .infra-detail__item-icon,
 .infra-detail__items button:focus-visible .infra-detail__item-icon { transform: translateY(-0.12rem); }
@@ -1738,7 +1762,7 @@ select {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  margin: 0;
+  margin: clamp(0.75rem, 1.8vh, 1.35rem) 0 0;
   gap: clamp(0.85rem, 1.8vw, 2rem);
 }
 .stage--invest .invest__actions .btn {
@@ -3008,20 +3032,75 @@ select {
   padding: 0.8rem 0.16rem 0.3rem;
 }
 .stage--infra-detail .infra-detail__items button {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
   flex-basis: clamp(8rem, 9vw, 10.8rem);
   width: clamp(8rem, 9vw, 10.8rem);
-  height: clamp(7.5rem, 8.1vw, 9.6rem);
-  aspect-ratio: auto;
+  height: auto;
+  aspect-ratio: 1;
   border-radius: clamp(0.48rem, 0.52vw, 0.72rem);
-  transform: translateY(-0.18rem);
+  transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(-0.18rem);
+  transform-style: preserve-3d;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.18s ease;
 }
 .stage--infra-detail .infra-detail__items button.is-active {
-  transform: translateY(-0.4rem);
+  transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(-0.4rem);
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.17);
 }
+.stage--infra-detail .infra-detail__items button:hover,
+.stage--infra-detail .infra-detail__items button:focus-visible {
+  z-index: 2;
+  transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(-0.65rem) scale(1.03);
+  box-shadow: 0 20px 34px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(228, 192, 125, 0.32);
+}
+.stage--infra-detail .infra-detail__items button.is-active:hover {
+  transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(-0.85rem) scale(1.03);
+}
 .stage--infra-detail .infra-detail__item-icon {
-  width: clamp(2.2rem, 2.55vw, 3.15rem);
-  height: clamp(2.2rem, 2.55vw, 3.15rem);
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  opacity: 0.78;
+  filter: none;
+  transform: none;
+}
+.stage--infra-detail .infra-detail__item-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  filter: brightness(0.72) saturate(0.82);
+}
+.stage--infra-detail .infra-detail__items button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(2, 12, 8, 0.18), rgba(2, 12, 8, 0.68));
+}
+.stage--infra-detail .infra-detail__item-label {
+  z-index: 2;
+  max-width: 14ch;
+  padding: 0.35rem 0.55rem;
+  color: #f3f0e9;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.78);
+}
+.stage--infra-detail .infra-detail__items button:hover .infra-detail__item-icon,
+.stage--infra-detail .infra-detail__items button:focus-visible .infra-detail__item-icon {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage--infra-detail .infra-detail__items button,
+  .stage--infra-detail .infra-detail__items button.is-active,
+  .stage--infra-detail .infra-detail__items button:hover,
+  .stage--infra-detail .infra-detail__items button.is-active:hover,
+  .stage--infra-detail .infra-detail__items button:focus-visible {
+    transform: translateY(-0.18rem);
+    transition: none;
+  }
+  .stage--infra-detail .infra-detail__items button.is-active { transform: translateY(-0.4rem); }
 }
 .stage--infra-detail .infra-detail__item-label {
   max-width: 12ch;
@@ -3037,7 +3116,7 @@ select {
   .stage--infra-detail .infra-detail__items button {
     flex-basis: clamp(7rem, 8vw, 8.8rem);
     width: clamp(7rem, 8vw, 8.8rem);
-    height: clamp(6.6rem, 7.2vw, 8rem);
+    height: auto;
   }
 }
 
@@ -3046,7 +3125,7 @@ select {
   .stage--infra-detail .infra-detail__items button {
     flex-basis: clamp(7.5rem, 32vw, 9.5rem);
     width: clamp(7.5rem, 32vw, 9.5rem);
-    height: clamp(7.1rem, 30vw, 9rem);
+    height: auto;
   }
 }
 
