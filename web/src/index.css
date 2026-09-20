@@ -616,7 +616,7 @@ p, h1, h2, h3 { margin: 0; }
   bottom: 0.45rem;
 }
 .stage--location {
-  background: url('/location-111.png') 66% 42% / cover no-repeat;
+  background: url('/location-bg.jpg') center / cover no-repeat;
 }
 .stage--location .stage__shade { background: none; }
 .stage__photo {
