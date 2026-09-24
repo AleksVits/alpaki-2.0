@@ -405,12 +405,10 @@ select {
 .header__nav-marker {
   position: absolute;
   bottom: 0.12rem;
-  width: 5px;
-  height: 5px;
-  margin-left: -2.5px;
-  background: var(--gold-2);
-  transform: rotate(45deg);
-  box-shadow: 0 0 7px rgba(170, 166, 157, 0.36);
+  width: 0;
+  height: 1px;
+  background: var(--titanium-2);
+  transform: translateX(-50%);
   pointer-events: none;
   will-change: left, transform;
 }
@@ -637,13 +635,15 @@ select {
   width: min(28%, 25rem);
   max-width: none;
   box-sizing: border-box;
+  container-type: inline-size;
   min-width: 0;
   padding: clamp(0.8rem, 1.25vw, 1.25rem);
-  border: 1px solid rgba(216, 212, 203, 0.2);
+  overflow: hidden;
+  border: 1px solid transparent;
   border-radius: clamp(0.42rem, 0.55vw, 0.72rem);
-  background: rgba(5, 20, 12, 0.2);
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   pointer-events: none;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.62);
 }
@@ -656,12 +656,17 @@ select {
   filter: blur(8px);
 }
 .infra__copy .title {
-  font-size: clamp(1.95rem, 2.2vw, 3rem);
+  max-width: 100%;
+  font-size: clamp(1.25rem, 8cqi, 3rem);
   line-height: 1.12;
+  overflow-wrap: break-word;
+  text-wrap: balance;
 }
 .infra__copy .lead {
-  max-width: 28rem;
+  max-width: 100%;
   margin-bottom: 0;
+  font-size: clamp(0.75rem, 3.7cqi, 1rem);
+  overflow-wrap: break-word;
 }
 .infra-carousel {
   grid-row: 1;
@@ -905,16 +910,16 @@ select {
   .infra__copy::before { display: none; }
   .infra__copy .title {
     max-width: 100%;
-    font-size: clamp(1.42rem, 6.4vw, 1.85rem);
+    font-size: clamp(1.25rem, 8cqi, 1.85rem);
     line-height: 1.12;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
   }
   .infra__copy .lead {
     max-width: 34ch;
     margin-bottom: var(--mobile-space-block);
-    font-size: clamp(0.78rem, 3.45vw, 0.98rem);
+    font-size: clamp(0.76rem, 3.8cqi, 0.98rem);
     line-height: 1.45;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
   }
   .infra-carousel {
     width: 100%;
@@ -2045,20 +2050,18 @@ select {
 @media (min-width: 901px) {
   .stage--invest-manage .manage {
     position: relative;
-    display: block;
-    height: 100%;
+    display: grid;
+    grid-template-rows: minmax(min-content, 1fr) auto auto;
+    height: auto;
+    row-gap: clamp(1.25rem, 2.5vh, 2rem);
   }
   .stage--invest-manage .manage__copy {
-    position: absolute;
-    top: 42%;
-    left: 0;
-    transform: translateY(-50%);
+    position: relative;
+    align-self: center;
+    transform: none;
   }
   .stage--invest-manage .manage-steps {
-    position: absolute;
-    right: 0;
-    bottom: clamp(3.8rem, 6vh, 5rem);
-    left: 0;
+    position: relative;
   }
   .stage--invest-manage .manage-steps::after {
     content: '';
@@ -2080,17 +2083,14 @@ select {
     );
   }
   .stage--invest-manage .manage__foot {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    position: relative;
   }
 }
 
 @media (min-width: 901px) and (max-height: 760px) {
   .stage--invest-manage .stage__inner { padding-bottom: 2.75rem; }
-  .stage--invest-manage .manage { gap: 0.45rem; }
-  .stage--invest-manage .manage__copy { top: 39%; padding-block: 0.2rem; }
+  .stage--invest-manage .manage { gap: 1rem; }
+  .stage--invest-manage .manage__copy { padding-block: 0.2rem; }
   .stage--invest-manage .manage__copy .title { font-size: clamp(2rem, 2.6vw, 3.35rem); }
   .stage--invest-manage .manage__copy .lead { font-size: 0.84rem; line-height: 1.45; }
   .stage--invest-manage .manage-steps { padding-bottom: 0.45rem; }
@@ -2310,15 +2310,21 @@ select {
   min-width: 0;
 }
 .stage--build .build-line ol::before {
-  content: '';
-  position: absolute;
-  top: clamp(1.55rem, 2.1vw, 2rem);
-  right: 5%;
-  left: 5%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(228, 216, 205, 0.45) 7%, rgba(228, 216, 205, 0.45) 93%, transparent);
+  display: none;
 }
 .stage--build .build-line li { min-width: 0; }
+@media (min-width: 901px) {
+  .stage--build .build-line li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: clamp(1.55rem, 2.1vw, 2rem);
+    left: calc(50% + clamp(1.55rem, 2.1vw, 2rem) + 2px);
+    width: max(0px, calc(100% - clamp(3.1rem, 4.2vw, 4rem) - 4px));
+    height: 1px;
+    background: rgba(216, 212, 203, 0.45);
+    pointer-events: none;
+  }
+}
 .stage--build .build-line li:not(:first-child)::before {
   content: '';
   position: absolute;
@@ -3039,7 +3045,8 @@ select {
   position: relative;
   align-items: flex-start;
   gap: clamp(0.5rem, 0.72vw, 0.82rem);
-  padding: 0.8rem 0.16rem 0.3rem;
+  /* Reserve room inside the scrolling viewport for the raised, tilted edge. */
+  padding: 1.1rem 0.35rem 0.3rem;
 }
 .stage--infra-detail .infra-detail__items.has-next::after {
   content: '›';
@@ -3062,27 +3069,29 @@ select {
 .stage--infra-detail .infra-detail__items button {
   --tilt-x: 0deg;
   --tilt-y: 0deg;
+  --infra-tilt-x: clamp(-6deg, var(--tilt-x), 6deg);
+  --infra-tilt-y: clamp(-5deg, var(--tilt-y), 5deg);
   flex-basis: clamp(8rem, 9vw, 10.8rem);
   width: clamp(8rem, 9vw, 10.8rem);
   height: auto;
   aspect-ratio: 1;
   border-radius: clamp(0.48rem, 0.52vw, 0.72rem);
-  transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(-0.18rem);
+  transform: perspective(820px) rotateX(var(--infra-tilt-y)) rotateY(var(--infra-tilt-x)) translateY(-0.18rem);
   transform-style: preserve-3d;
   transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.18s ease;
 }
 .stage--infra-detail .infra-detail__items button.is-active {
-  transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(-0.4rem);
+  transform: perspective(820px) rotateX(var(--infra-tilt-y)) rotateY(var(--infra-tilt-x)) translateY(-0.4rem);
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.17);
 }
 .stage--infra-detail .infra-detail__items button:hover,
 .stage--infra-detail .infra-detail__items button:focus-visible {
   z-index: 2;
-  transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(-0.65rem) scale(1.03);
+  transform: perspective(820px) rotateX(var(--infra-tilt-y)) rotateY(var(--infra-tilt-x)) translateY(-0.45rem);
   box-shadow: 0 20px 34px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(228, 192, 125, 0.32);
 }
 .stage--infra-detail .infra-detail__items button.is-active:hover {
-  transform: perspective(820px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(-0.85rem) scale(1.03);
+  transform: perspective(820px) rotateX(var(--infra-tilt-y)) rotateY(var(--infra-tilt-x)) translateY(-0.5rem);
 }
 .stage--infra-detail .infra-detail__item-icon {
   position: absolute;

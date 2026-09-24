@@ -25,9 +25,9 @@ export function InvestFormats() {
         </div>
         <div className="invest__formats">
           <ol className="invest-list">
-            {t.invest.items.map((item) => (
+            {[t.invest.items[2], t.invest.items[1], t.invest.items[0]].map((item, index) => (
               <li key={item.n} className="invest-list__item">
-                <span className="invest-list__n">{item.n}</span>
+                <span className="invest-list__n">{String(index + 1).padStart(2, '0')}</span>
                 <span className="invest-list__divider" aria-hidden="true" />
                 <span className="invest-list__text">
                   <strong>{item.title}</strong>

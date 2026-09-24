@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Logo } from './Logo'
-import { IconSmartphone } from './Icons'
+import { IconPhone } from './Icons'
 import { socialLinks } from './SocialRail'
 import { phoneHref } from '../contactLinks'
 import { resetShineCard, shineCard } from './Ui'
@@ -95,6 +95,7 @@ export function Header({ hidden, active }: Props) {
 
       marker.getAnimations().forEach((animation) => animation.cancel())
       marker.style.left = `${target}px`
+      marker.style.width = `${linkRect.width}px`
       marker.dataset.ready = 'true'
 
       if (!animate || Math.abs(current - target) < 1
@@ -102,9 +103,8 @@ export function Header({ hidden, active }: Props) {
 
       const delta = current - target
       marker.animate([
-        { transform: `translate3d(${delta}px, 0, 0) rotate(45deg) scale(1)` },
-        { transform: `translate3d(${delta * 0.55}px, -7px, 0) rotate(45deg) scale(1.2)`, offset: 0.48 },
-        { transform: 'translate3d(0, 0, 0) rotate(45deg) scale(1)' },
+        { transform: `translateX(calc(-50% + ${delta}px))` },
+        { transform: 'translateX(-50%)' },
       ], {
         duration: 560,
         easing: 'cubic-bezier(.22,.75,.2,1)',
@@ -179,6 +179,7 @@ export function Header({ hidden, active }: Props) {
             key={item.id}
             href={item.href}
             data-nav-id={item.id}
+            aria-current={active === item.id ? 'location' : undefined}
             className={`header__link ${active === item.id ? 'is-active' : ''}`}
           >
             {t.nav[item.id]}
@@ -189,7 +190,7 @@ export function Header({ hidden, active }: Props) {
       <div className="header__right">
         {langs('bar')}
         <a className="header__phone gold-orb" href={phoneHref} aria-label={t.ui.phone} onClick={close}>
-          <IconSmartphone />
+          <IconPhone />
         </a>
         <button
           ref={burgerRef}
@@ -229,6 +230,7 @@ export function Header({ hidden, active }: Props) {
             <a
               key={item.id}
               href={item.href}
+              aria-current={active === item.id ? 'location' : undefined}
               className={`header__link ${active === item.id ? 'is-active' : ''}`}
               tabIndex={open ? 0 : -1}
               onClick={close}
@@ -246,7 +248,7 @@ export function Header({ hidden, active }: Props) {
               onPointerLeave={resetShineCard}
             >
               <span className="header__menu-call-ico" aria-hidden="true">
-                <IconSmartphone />
+                <IconPhone />
               </span>
               <span>{t.ui.phone}</span>
             </a>

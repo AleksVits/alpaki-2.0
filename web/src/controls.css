@@ -248,3 +248,176 @@
   #root .btn.btn--solid,
   #root .btn.glass.btn--solid { background: transparent; }
 }
+
+/* Persistent map pulse and animated handset respect reduced motion. */
+.ua-map__pin::after {
+  animation: ua-kvasy-ring 2.8s ease-out infinite;
+  border-color: var(--titanium-2);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--titanium) 40%, transparent);
+}
+.ua-map__pin img { animation: map-mark-pulse 2.8s ease-in-out infinite; }
+@keyframes map-mark-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+#root .header__phone.gold-orb svg,
+#root .header__phone.gold-orb:hover svg,
+#root .header__menu-call-ico svg {
+  animation: smartphone-ring 5s ease-in-out infinite;
+  transform-origin: center;
+}
+#root .header__menu-panel .header__link.is-active::after {
+  width: 100%;
+  height: 1px;
+  clip-path: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ua-map__pin::after,
+  .ua-map__kvasy:is(:hover, :focus, :focus-visible) .ua-map__pin::after,
+  .ua-map__pin img,
+  #root .header__phone.gold-orb svg,
+  #root .header__phone.gold-orb:hover svg,
+  #root .header__menu-call-ico svg { animation: none; }
+}
+
+/* Compact navigation keeps the site's dark-green atmosphere with Titanium accents. */
+@media (max-width: 1580px) {
+  #root .header__menu-scrim,
+  #root .header__menu-scrim:is(:hover, :focus-visible, :active) {
+    background: radial-gradient(circle at 72% 12%, rgba(35, 66, 49, 0.98), rgba(5, 22, 14, 0.99) 58%, #031009 100%);
+    box-shadow: none;
+    outline: none;
+  }
+  #root .header__menu-panel {
+    min-height: 100dvh;
+    color: var(--titanium-2);
+    background: linear-gradient(180deg, rgba(10, 35, 23, 0.72), rgba(4, 18, 11, 0.9));
+  }
+  #root .header__menu-panel::before,
+  #root .header__menu-actions::before {
+    background: linear-gradient(90deg, transparent, rgba(216, 212, 203, 0.74), transparent);
+  }
+  #root .header__menu-panel .header__link {
+    color: rgba(216, 212, 203, 0.82);
+  }
+  #root .header__menu-panel .header__link:is(:hover, :focus-visible),
+  #root .header__menu-panel .header__link.is-active {
+    color: #f3f0e9;
+  }
+  #root .header__menu-panel .header__link.is-active::after {
+    background: var(--titanium-2);
+  }
+  #root .header__menu-actions .header__menu-call.glass,
+  #root .header__menu-social-btn.gold-orb,
+  #root .header__menu-actions .header__lang.is-active,
+  #root .header__menu-close {
+    color: var(--titanium-2);
+  }
+  #root .header__menu-actions .header__lang.is-active {
+    text-decoration-color: var(--titanium-2);
+  }
+}
+
+/* Menu controls have one silhouette in every interaction state. */
+#root .header__burger,
+#root .header__burger:is(:hover, :focus-visible, :active) {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(216, 212, 203, 0.4);
+  border-radius: 50%;
+  background: rgba(10, 31, 20, 0.8);
+  box-shadow: none;
+}
+#root .header__burger::after { display: none; }
+#root .header__burger span { background: var(--titanium-2); box-shadow: none; }
+
+@media (max-width: 1580px) {
+  #root .header__menu-panel {
+    background: linear-gradient(160deg, #183b29, #0a1f14 55%, #06170f);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s;
+  }
+  #root .header__menu.is-open .header__menu-panel { visibility: visible; opacity: 1; }
+}
+
+@media (max-width: 720px) {
+  #root .header__menu-panel {
+    min-height: 100dvh;
+    max-height: 100dvh;
+    box-sizing: border-box;
+    padding: calc(var(--header) + 20px + env(safe-area-inset-top, 0px)) 24px calc(24px + env(safe-area-inset-bottom, 0px));
+    gap: 0;
+    overscroll-behavior: contain;
+  }
+  #root .header__menu-panel > .header__link {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    box-sizing: border-box;
+    padding: 10px 0;
+    font-size: clamp(12px, 3.5vw, 15px);
+    letter-spacing: 0.14em;
+  }
+  #root .header__menu-actions {
+    flex: none;
+    width: min(100%, 340px);
+    margin-top: 20px;
+    padding-top: 20px;
+    gap: 18px;
+  }
+  #root .header__menu-actions .header__menu-call.glass,
+  #root .header__menu-actions .header__menu-call.glass:is(:hover, :focus-visible, :active) {
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    box-sizing: border-box;
+    border: 1px solid rgba(216, 212, 203, 0.5);
+    border-radius: 8px;
+    padding: 12px 16px;
+    background: rgba(216, 212, 203, 0.04);
+    color: var(--titanium-2);
+    box-shadow: none;
+    transform: none;
+  }
+  #root .header__menu-social { display: flex; gap: 12px; }
+  #root .header__menu-social-btn.gold-orb,
+  #root .header__menu-social-btn.gold-orb:is(:hover, :focus-visible, :active) {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 60px;
+    gap: 8px;
+    padding: 8px 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--titanium-2);
+  }
+  #root .header__menu-social-btn img { width: 24px; height: 24px; }
+  #root .header__menu-social-btn span { color: var(--titanium-2); font-size: 11px; }
+  #root .header__menu-actions .header__langs {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid rgba(216, 212, 203, 0.3);
+    border-radius: 10px;
+    background: #0a1f14;
+    box-shadow: none;
+  }
+  #root .header__menu-actions .header__lang,
+  #root .header__menu-actions .header__lang:is(:hover, :focus-visible, :active) {
+    min-width: 48px;
+    min-height: 48px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    box-shadow: none;
+    color: var(--titanium-2);
+    text-decoration: none;
+  }
+  #root .header__menu-actions .header__lang.is-active { background: rgba(216, 212, 203, 0.16); }
+}
