@@ -407,10 +407,27 @@ select {
   bottom: 0.12rem;
   width: 0;
   height: 1px;
-  background: var(--titanium-2);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--titanium) 38%, transparent) 0%,
+    var(--titanium-2) 38%,
+    #fff 50%,
+    var(--titanium-2) 62%,
+    color-mix(in srgb, var(--titanium) 38%, transparent) 100%
+  );
+  background-size: 220% 100%;
+  box-shadow: 0 0 0.32rem color-mix(in srgb, var(--titanium-2) 28%, transparent);
   transform: translateX(-50%);
   pointer-events: none;
   will-change: left, transform;
+  animation: header-nav-marker-shimmer 2.6s ease-in-out infinite;
+}
+@keyframes header-nav-marker-shimmer {
+  0%, 100% { background-position: 100% 50%; opacity: 0.58; }
+  50% { background-position: 0% 50%; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header__nav-marker { animation: none; opacity: 1; }
 }
 .header__langs.glass {
   position: relative;
