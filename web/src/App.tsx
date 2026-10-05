@@ -40,6 +40,7 @@ export default function App() {
     let dragging = false
     const settle = () => {
       if (isMobileFlow() || reducedMotion() || dragging || isProgrammaticScroll()
+        || root.querySelector('.is-viewing')
         || document.documentElement.classList.contains('is-nav-lock')) return
       const origin = root.getBoundingClientRect().top
       const nearest = [...root.querySelectorAll<HTMLElement>('.stage')]
@@ -56,25 +57,26 @@ export default function App() {
     root.addEventListener('scroll', schedule, { passive: true })
     root.addEventListener('pointerdown', down)
     window.addEventListener('pointerup', up)
+    window.addEventListener('pointercancel', up)
     return () => {
       window.clearTimeout(timer)
       root.removeEventListener('scroll', schedule)
       root.removeEventListener('pointerdown', down)
       window.removeEventListener('pointerup', up)
+      window.removeEventListener('pointercancel', up)
     }
   }, [])
 
   useEffect(() => {
     const root = siteScroller()
     if (!root) return
-    const nodes = Array.from(document.querySelectorAll<HTMLElement>('.stage'))
     let frame = 0
 
     const updateActive = () => {
       frame = 0
       const rootRect = root.getBoundingClientRect()
       const viewportHeight = rootRect.height
-      const visible = nodes
+      const visible = Array.from(root.querySelectorAll<HTMLElement>('.stage'))
         .map((node) => {
           const rect = node.getBoundingClientRect()
           const overlap = Math.max(0, Math.min(rect.bottom, rootRect.bottom) - Math.max(rect.top, rootRect.top))
@@ -127,6 +129,7 @@ export default function App() {
     if (!root) return
 
     const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
       const link = (e.target as HTMLElement | null)?.closest?.('a[href^="#"]')
       if (!(link instanceof HTMLAnchorElement)) return
       const href = link.getAttribute('href')
@@ -147,8 +150,8 @@ export default function App() {
     }
 
     const onHistoryNavigation = () => {
-      const id = decodeHash(window.location.hash.slice(1))
-      const target = id ? document.getElementById(id) : null
+      const id = decodeHash(window.location.hash.slice(1)) || 'intro'
+      const target = document.getElementById(id)
       if (!target) return
       setActive(id)
       scrollToStage(target)
@@ -156,10 +159,12 @@ export default function App() {
 
     document.addEventListener('click', onClick)
     window.addEventListener('popstate', onHistoryNavigation)
+    window.addEventListener('hashchange', onHistoryNavigation)
 
     return () => {
       document.removeEventListener('click', onClick)
       window.removeEventListener('popstate', onHistoryNavigation)
+      window.removeEventListener('hashchange', onHistoryNavigation)
     }
   }, [])
 

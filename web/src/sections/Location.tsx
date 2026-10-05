@@ -1,6 +1,7 @@
 import { asset } from '../asset'
-import { Btn, Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
-import { useI18n } from '../i18n'
+import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
+import { splitTitle } from '../components/titleText'
+import { useI18n } from '../useI18n'
 
 export function Location() {
   const { t } = useI18n()

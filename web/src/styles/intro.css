@@ -1,0 +1,164 @@
+/* Intro — the opening screen. */
+
+.stage--intro { background: var(--marble); }
+.intro__backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.intro__backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--marble) 28%, transparent) 0%, transparent 42%, color-mix(in srgb, var(--marble) 36%, transparent) 100%);
+}
+.intro__backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 46%;
+  transform-origin: center;
+  transform: scale(2.7);
+}
+.intro__backdrop.is-ready img {
+  animation: intro-pullback 4.5s cubic-bezier(0.4, 0, 0.2, 1) both, intro-image-in 0.5s ease-out both;
+}
+
+@keyframes intro-image-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.stage--intro .intro,
+.stage--intro > .scroll-hint {
+  opacity: 0;
+  visibility: hidden;
+}
+.stage--intro.is-ready .intro { animation: intro-brand-in 0.5s ease-out 4.5s both; }
+.stage--intro.is-ready > .scroll-hint {
+  animation: intro-image-in 0.5s ease-out 4.5s both;
+  visibility: visible;
+}
+
+@keyframes intro-brand-in {
+  from { opacity: 0; visibility: hidden; transform: translateY(12px); }
+  to { opacity: 1; visibility: visible; transform: translateY(0); }
+}
+
+@keyframes intro-pullback {
+  from { transform: scale(2.7); }
+  to { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro__backdrop img,
+  .intro__backdrop.is-ready img {
+    animation: none;
+    transform: none;
+  }
+  .stage--intro .intro,
+  .stage--intro.is-ready .intro,
+  .stage--intro > .scroll-hint,
+  .stage--intro.is-ready > .scroll-hint {
+    animation: none;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.stage--intro .stage__shade { background: none; }
+.stage--intro .stage__inner { padding-top: 7vh; align-items: center; }
+.intro {
+  position: relative;
+  isolation: isolate;
+  margin-top: 5vh;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 1.35rem;
+  text-shadow: 0 2px 24px rgba(10, 31, 20, 0.55);
+}
+
+/* Intro */
+.intro__tag {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.86rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+
+@media (max-width: 900px) {
+  .stage--intro {
+    height: 100svh;
+    height: 100dvh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    max-height: 100svh;
+    max-height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
+  .stage--intro .scroll-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 1.1rem;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+  .intro__tag { white-space: normal; text-wrap: balance; hyphens: manual; }
+  .intro__tag span { white-space: normal; }
+  .intro__tag br { display: none; }
+}
+
+@media (max-width: 720px) {
+  .intro { gap: 1rem; margin-top: 5vh; }
+  .stage--intro .stage__inner { padding-top: 4.5vh; }
+}
+
+@media (max-width: 430px) and (max-height: 700px) {
+  .intro { margin-top: 3.2vh; gap: 0.7rem; }
+}
+
+@media (max-height: 860px) and (min-width: 721px) {
+  .intro { margin-top: 2.4vh; }
+  .stage--intro .stage__inner { padding-top: 3.5vh; }
+}
+
+@media (max-height: 500px) {
+  .intro { margin-top: 0; gap: 0.6rem; }
+}
+
+@media (max-width: 900px) {
+  .stage--intro > .scroll-hint { bottom: calc(var(--mobile-space-block) + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* Hero statement: stronger scale, weight and Titanium contrast over the landscape. */
+.stage--intro .intro__tag {
+  width: max-content;
+  max-width: calc(100vw - 2 * var(--mobile-gutter, 1.25rem));
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.7vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: 0.08em;
+  color: var(--titanium-2);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.62), 0 0 1px rgba(216, 212, 203, 0.8);
+  white-space: nowrap;
+}
+.stage--intro .intro__tag span { display: inline; }
+.stage--intro .intro__tag br { display: none; }
+
+@media (max-width: 720px) {
+  .stage--intro .intro__tag {
+    width: auto;
+    max-width: calc(100vw - 2 * var(--mobile-gutter, 1.25rem));
+    font-size: clamp(1rem, 4.5vw, 1.5rem);
+    letter-spacing: 0.055em;
+    white-space: normal;
+  }
+  .stage--intro .intro__tag span { display: block; white-space: nowrap; }
+}

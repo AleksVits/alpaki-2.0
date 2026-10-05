@@ -1,34 +1,7 @@
-import type { HTMLAttributes, PointerEvent, ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 import { IconArrow, IconChevron } from './Icons'
-
-export function shineCard(e: PointerEvent<HTMLElement>) {
-  const el = e.currentTarget
-  const box = el.getBoundingClientRect()
-  const x = (e.clientX - box.left) / box.width
-  const y = (e.clientY - box.top) / box.height
-  el.style.setProperty('--mx', `${(x * 100).toFixed(2)}%`)
-  el.style.setProperty('--my', `${(y * 100).toFixed(2)}%`)
-
-  const dead = 0.2
-  const edge = (value: number) => {
-    const delta = value - 0.5
-    const over = Math.abs(delta) - dead
-    if (over <= 0) return 0
-    return Math.sign(delta) * (over / (0.5 - dead))
-  }
-  const nx = edge(x)
-  const ny = edge(y)
-  el.style.setProperty('--tilt-x', `${(nx * 14).toFixed(2)}deg`)
-  el.style.setProperty('--tilt-y', `${(-ny * 11).toFixed(2)}deg`)
-}
-
-export function resetShineCard(e: PointerEvent<HTMLElement>) {
-  const el = e.currentTarget
-  el.style.setProperty('--mx', '50%')
-  el.style.setProperty('--my', '38%')
-  el.style.setProperty('--tilt-x', '0deg')
-  el.style.setProperty('--tilt-y', '0deg')
-}
+import { shineCard, resetShineCard } from './uiEffects'
+import { useI18n } from '../useI18n'
 
 type StageProps = {
   id: string
@@ -39,13 +12,14 @@ type StageProps = {
 }
 
 export function Stage({ id, className = '', children, next, overlay }: StageProps) {
+  const { t } = useI18n()
   return (
     <section id={id} className={`stage ${className}`}>
       <div className="stage__shade" />
       {overlay}
       <div className="stage__inner">{children}</div>
       {next && (
-        <a className="scroll-hint" href={`#${next}`} aria-label="Next">
+        <a className="scroll-hint" href={`#${next}`} aria-label={t.ui.nextSection}>
           <IconChevron />
         </a>
       )}
@@ -141,32 +115,18 @@ export function Pager({
   onPrev: () => void
   onNext: () => void
 }) {
+  const { t } = useI18n()
   return (
     <div className="pager glass glass--pill">
-      <button type="button" className="pager__btn" onClick={onPrev} aria-label="Prev">
+      <button type="button" className="pager__btn" onClick={onPrev} aria-label={t.ui.prev}>
         <IconChevron dir="left" />
       </button>
       <span className="pager__num">
         {String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}
       </span>
-      <button type="button" className="pager__btn" onClick={onNext} aria-label="Next">
+      <button type="button" className="pager__btn" onClick={onNext} aria-label={t.ui.next}>
         <IconChevron dir="right" />
       </button>
     </div>
   )
-}
-
-export function splitTitle(text: string) {
-  const lines = text.split('\n')
-  return lines.map((line, i) => (
-    <span key={`${i}-${line}`}>
-      {line}
-      {i < lines.length - 1 ? (
-        <>
-          {' '}
-          <br />
-        </>
-      ) : null}
-    </span>
-  ))
 }

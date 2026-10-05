@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Logo } from './Logo'
 import { IconPhone } from './Icons'
-import { socialLinks } from './SocialRail'
+import { socialLinks } from '../socialLinks'
 import { phoneHref } from '../contactLinks'
-import { resetShineCard, shineCard } from './Ui'
-import { useI18n, type Lang } from '../i18n'
+import { resetShineCard, shineCard } from './uiEffects'
+import { useI18n } from '../useI18n'
+import type { Lang } from '../i18n'
 
 type Props = {
   hidden?: boolean
@@ -51,6 +52,7 @@ export function Header({ hidden, active }: Props) {
   const close = useCallback(() => {
     pinOrigin()
     setOpen(false)
+    if (menuRef.current?.contains(document.activeElement)) burgerRef.current?.focus({ preventScroll: true })
   }, [pinOrigin])
 
   const toggle = useCallback(() => {
@@ -129,18 +131,27 @@ export function Header({ hidden, active }: Props) {
 
   useEffect(() => {
     if (!open) return
+    const site = document.querySelector<HTMLElement>('.site')
+    if (site) site.inert = true
+    menuRef.current?.querySelector<HTMLAnchorElement>('.header__menu-panel a')?.focus({ preventScroll: true })
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close()
+      if (e.key !== 'Tab') return
+      const controls = [burgerRef.current, ...menuRef.current!.querySelectorAll<HTMLElement>('.header__menu-panel a, .header__menu-panel button')]
+        .filter((el): el is HTMLElement => !!el && el.getClientRects().length > 0)
+      const current = controls.indexOf(document.activeElement as HTMLElement)
+      e.preventDefault()
+      controls[(current + (e.shiftKey ? -1 : 1) + controls.length) % controls.length]?.focus()
     }
     document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
+    return () => {
+      if (site) site.inert = false
+      document.removeEventListener('keydown', onKey)
+    }
   }, [open, close])
 
   useEffect(() => {
-    if (open) {
-      setExited(false)
-      return
-    }
+    if (open) return
     if (exited) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const delay = reduce ? 0 : 900
@@ -155,6 +166,8 @@ export function Header({ hidden, active }: Props) {
     <div
       className={`header__langs glass glass--pill header__langs--${place}`}
       data-active-lang={lang}
+      role="group"
+      aria-label={t.ui.language}
     >
       {(['ua', 'en'] as Lang[]).map((code) => (
         <button
@@ -173,7 +186,7 @@ export function Header({ hidden, active }: Props) {
   return (
     <header className={`header${hidden && !open ? ' header--hidden' : ''}${open ? ' header--menu' : ''}`}>
       <Logo compact />
-      <nav ref={navRef} className="header__nav glass glass--pill" aria-label="Main">
+      <nav ref={navRef} className="header__nav glass glass--pill" aria-label={t.ui.mainNav}>
         {items.map((item) => (
           <a
             key={item.id}
@@ -196,7 +209,7 @@ export function Header({ hidden, active }: Props) {
           ref={burgerRef}
           type="button"
           className={`header__burger ${open ? 'is-open' : ''}`}
-          aria-label={open ? 'Close menu' : 'Menu'}
+          aria-label={open ? t.ui.closeMenu : t.ui.menu}
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={toggle}
@@ -209,14 +222,14 @@ export function Header({ hidden, active }: Props) {
         ref={menuRef}
         className={`header__menu ${open ? 'is-open' : ''}`}
         id="mobile-menu"
-        aria-hidden={exited}
-        inert={exited || undefined}
+        aria-hidden={!open}
+        inert={!open || undefined}
       >
         <button
           type="button"
           className="header__menu-scrim"
           tabIndex={open ? 0 : -1}
-          aria-label="Close menu"
+          aria-label={t.ui.closeMenu}
           onClick={close}
           onTransitionEnd={(e) => {
             if (e.propertyName !== 'transform' && e.propertyName !== '-webkit-transform') return
@@ -225,7 +238,7 @@ export function Header({ hidden, active }: Props) {
             unlockNavScroll()
           }}
         />
-        <nav className="header__menu-panel" aria-label="Mobile">
+        <nav className="header__menu-panel" aria-label={t.ui.mobileNav}>
           {items.map((item) => (
             <a
               key={item.id}

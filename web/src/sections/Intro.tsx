@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { asset } from '../asset'
 import { Logo } from '../components/Logo'
-import { Stage, splitTitle } from '../components/Ui'
-import { useI18n } from '../i18n'
+import { Stage } from '../components/Ui'
+import { splitTitle } from '../components/titleText'
+import { useI18n } from '../useI18n'
 
 export function Intro() {
   const { t } = useI18n()

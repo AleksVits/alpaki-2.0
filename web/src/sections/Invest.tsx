@@ -1,7 +1,8 @@
 import { IconBell, IconCalendar, IconChart, IconKeys } from '../components/Icons'
-import { Btn, Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
+import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
+import { splitTitle } from '../components/titleText'
 import { asset } from '../asset'
-import { useI18n } from '../i18n'
+import { useI18n } from '../useI18n'
 
 const manageIcons = [IconKeys, IconCalendar, IconBell, IconChart]
 

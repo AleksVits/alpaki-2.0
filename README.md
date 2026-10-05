@@ -14,15 +14,24 @@ npm run dev
 
 Відкрийте [http://localhost:5173](http://localhost:5173) — це лише ваш комп’ютер.
 
-## GitHub Pages (гілка `main`, папка `/docs`)
+## Мови та адреса сайту
 
-У **Settings → Pages** залиште:
+- Українська версія — корінь сайту, англійська — `/en/`.
+- Публічна адреса задана одним рядком `siteUrl` у `web/vite.config.ts`. При переїзді на власний домен змініть лише його: шлях `base`, canonical, hreflang, Open Graph, `sitemap.xml` і `robots.txt` збираються з цього значення.
 
-- Source: **Deploy from a branch**
-- Branch: **main**
-- Folder: **/docs**
+## Публікація на GitHub Pages
 
-Після змін на сайті зберіть статику і запуште папку `docs`:
+### Автоматично (GitHub Actions)
+
+Файл `.github/workflows/deploy.yml` після кожного push у `main` встановлює залежності, запускає `npm run lint` та `npm run build` і публікує `web/dist`.
+
+Одноразове налаштування: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+Після цього папку `docs` збирати й комітити не потрібно.
+
+### Вручну (гілка `main`, папка `/docs`)
+
+Працює, доки в **Settings → Pages** вибрано **Deploy from a branch**, гілка **main**, папка **/docs**. Після змін зберіть статику і запуште папку `docs`:
 
 ```powershell
 cd web

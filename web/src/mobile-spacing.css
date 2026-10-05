@@ -1,7 +1,7 @@
 /* Preserve the desktop layout; mobile headings own their spacing as one unit. */
 .section-heading { display: contents; }
 
-/* Shared rhythm for the mobile document layout. Keep component geometry in index.css. */
+/* Shared rhythm for the mobile document layout. Keep component geometry in styles/<section>.css. */
 @media (max-width: 900px) {
   :root {
     --mobile-space-small: 12px;
@@ -10,7 +10,6 @@
     --mobile-space-section: 32px;
     --mobile-gutter: clamp(20px, 5vw, 28px);
   }
-
   .stage .stage__inner {
     --stage-pad-left: calc(var(--mobile-gutter) + env(safe-area-inset-left, 0px));
     --stage-pad-right: calc(var(--mobile-gutter) + env(safe-area-inset-right, 0px));
@@ -18,9 +17,6 @@
   .site .stage:not(.stage--intro) .stage__inner {
     padding-top: calc(var(--header) + var(--mobile-space-block) + env(safe-area-inset-top, 0px));
     padding-bottom: 0;
-  }
-  .site .stage.stage--contacts .stage__inner {
-    padding-bottom: calc(var(--mobile-space-section) + env(safe-area-inset-bottom, 0px));
   }
 
   /* One margin owns each heading interval, including display:contents layouts. */
@@ -49,63 +45,7 @@
     flex-shrink: 0;
     margin: var(--mobile-space-medium) auto var(--mobile-space-block);
   }
-  .stage .lead { margin-block: 0 var(--mobile-space-block); }
-  .stage .about-stats { gap: 0; }
-  .stage .about-stats__map { margin-block: var(--mobile-space-block); }
-  .stage .about-stats__chips { margin-block: 0; }
-
-  .stage .btn-row {
-    margin-block: var(--mobile-space-block) 0;
-    padding-block: 0;
-    gap: var(--mobile-space-small);
-  }
   .stage .btn-row .btn { margin-block: 0; }
-  .stage .features,
-  .stage .materials { margin-bottom: var(--mobile-space-block); }
-  .stage .about-intro__quote,
-  .stage .architecture__quote { margin-block: 0; padding-top: var(--mobile-space-medium); }
-  .stage .about-intro__quote::before,
-  .stage .architecture__quote::before { margin-bottom: var(--mobile-space-medium); }
-  .stage .invest-list { margin-block: 0 var(--mobile-space-block); }
-  .stage .invest__flow { margin-block: 0; }
-  .stage .manage-steps { padding-top: 0; row-gap: var(--mobile-space-block); }
-  .stage .manage__foot { margin-top: var(--mobile-space-block); gap: var(--mobile-space-block); }
-  .stage .location__facts { margin-top: 0; gap: var(--mobile-space-medium); }
-  .stage .location__near { margin-block: var(--mobile-space-section) var(--mobile-space-block); }
-  .stage .location .btn { margin-block: 0; }
-
-  .stage .apt,
-  .stage .apt-house,
-  .stage .apt-3d,
-  .stage .apt-floor,
-  .stage .build-detail,
-  .stage .contacts { row-gap: var(--mobile-space-block); }
-  .stage .apt,
-  .stage .apt__copy { padding-bottom: 0; }
-  .stage .apt-house__steps,
-  .stage .apt-3d__meta,
-  .stage .apt-floor__list,
-  .stage .build-detail__status { margin-bottom: var(--mobile-space-block); }
-  .stage .apt-house__steps { margin-bottom: 0; }
-  .stage .plan-card { margin-top: 0; }
-  .stage .build-line { margin-bottom: var(--mobile-space-block); }
-  .stage .build-detail__photos-label { margin-block: var(--mobile-space-block) var(--mobile-space-small); }
-  .stage .contacts__hours { margin-bottom: var(--mobile-space-block); }
-  .stage .form { gap: var(--mobile-space-block); }
-  .stage .form__title { margin-block: 0; }
-  .stage .form .btn { margin-top: 0; }
-
-  /* Pagers belong to the content flow, then the next-section arrow follows it. */
-  .stage .apt__pager {
-    display: flex;
-    position: relative;
-    inset: auto;
-    transform: none;
-    align-self: center;
-    margin-top: var(--mobile-space-block);
-  }
-  .stage .infra > .pager,
-  .stage .thumbs { margin-top: var(--mobile-space-block); margin-bottom: 0; }
   .stage:not(.stage--intro) > .scroll-hint {
     position: relative;
     inset: auto;
@@ -116,74 +56,5 @@
     height: 44px;
     flex: none;
     margin: var(--mobile-space-section) auto calc(var(--mobile-space-block) + env(safe-area-inset-bottom, 0px));
-  }
-  .stage--intro > .scroll-hint { bottom: calc(var(--mobile-space-block) + env(safe-area-inset-bottom, 0px)); }
-}
-
-@media (max-width: 720px) {
-  .stage--architecture.is-viewing .stage__inner {
-    min-height: calc(100svh - 100px - env(safe-area-inset-bottom, 0px));
-    gap: 0;
-  }
-  .stage--architecture.is-viewing .thumbs { margin-top: var(--mobile-space-block); }
-}
-
-.architecture__details { display: contents; }
-
-@media (max-width: 720px) {
-  /* Both modes share the same rows; hidden copy still reserves the photo slot. */
-  .site .stage.stage--architecture .stage__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto minmax(auto, 1fr) auto;
-    min-height: calc(100svh - 100px - env(safe-area-inset-bottom, 0px));
-    gap: 0;
-    align-content: start;
-  }
-  .stage--architecture .architecture__copy,
-  .stage--architecture.is-viewing .architecture__copy { display: contents; }
-  .stage--architecture .section-heading { grid-row: 1; grid-column: 1; }
-  .stage--architecture .architecture__details {
-    display: flow-root;
-    min-height: calc(100vw * 9 / 16);
-    grid-row: 2;
-    grid-column: 1;
-    align-self: center;
-  }
-  .stage--architecture.is-viewing .architecture__details { visibility: hidden; pointer-events: none; }
-  .stage--architecture .architecture__copy.is-hidden .lead,
-  .stage--architecture .architecture__copy.is-hidden .architecture__quote { display: block; }
-  .stage--architecture .architecture__copy.is-hidden .materials { display: grid; }
-  .stage--architecture .architecture__heroes:not(.is-viewing) { display: none; }
-  .stage--architecture .architecture__heroes.is-viewing {
-    grid-row: 2;
-    grid-column: 1;
-    align-self: center;
-    aspect-ratio: 16 / 9;
-  }
-  .stage--architecture .architecture__heroes.is-viewing .architecture__hero.is-active { position: absolute; }
-  .stage--architecture .architecture__heroes.is-viewing .architecture__hero-photo {
-    height: 100%;
-    object-fit: contain;
-  }
-  .stage--architecture .thumbs,
-  .stage--architecture.is-viewing .thumbs {
-    grid-row: 3;
-    grid-column: 1;
-    --thumbs-h: clamp(4rem, 16vw, 5.5rem);
-    grid-template-columns: 44px repeat(3, minmax(0, 1fr)) 44px;
-    grid-template-rows: var(--thumbs-h);
-    height: auto;
-    min-height: 0;
-    max-height: none;
-    gap: 0.5rem;
-    padding: 0.65rem 0.35rem;
-    margin: var(--mobile-space-block) 0 0;
-  }
-  .stage--architecture .thumbs__arrow { align-self: center; min-height: 44px; margin: 0; }
-  .stage--architecture { background: #101511; isolation: isolate; }
-  .stage--architecture:not(.is-viewing) .architecture__viewer-bg img {
-    filter: brightness(0.65);
-    transform: none;
   }
 }

@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { IconArrow, IconChevron } from '../components/Icons'
-import { Lead, Stage, splitTitle, SectionHeading, resetShineCard, shineCard } from '../components/Ui'
+import { Lead, Stage, SectionHeading } from '../components/Ui'
+import { resetShineCard, shineCard } from '../components/uiEffects'
+import { splitTitle } from '../components/titleText'
 import { asset } from '../asset'
-import { useI18n } from '../i18n'
+import { useI18n } from '../useI18n'
 
 export function Infrastructure({
   activeGroupId,

@@ -1,5 +1,5 @@
 import { asset } from '../asset'
-import { useI18n } from '../i18n'
+import { useI18n } from '../useI18n'
 
 // Percentages are projected from real city coordinates onto ukraine-map.png.
 // The bitmap spans roughly 22.14–40.22° E and 44.39–52.38° N.
@@ -17,7 +17,7 @@ export function UkraineMap() {
   const { t } = useI18n()
 
   return (
-    <div className="ua-map" role="img" aria-label="Ukraine">
+    <div className="ua-map" role="img" aria-label={t.ui.map}>
       <img className="ua-map__img" src={asset('ukraine-map.png?v=2')} alt="" />
       {cities.map((city) => (
         <span

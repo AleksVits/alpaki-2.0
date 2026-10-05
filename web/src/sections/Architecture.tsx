@@ -1,8 +1,10 @@
 import { useNearSection } from '../useNearSection'
 import { useEffect, useRef, useState } from 'react'
 import { asset } from '../asset'
-import { Lead, Stage, resetShineCard, shineCard, splitTitle, SectionHeading } from '../components/Ui'
-import { useI18n } from '../i18n'
+import { Lead, Stage, SectionHeading } from '../components/Ui'
+import { resetShineCard, shineCard } from '../components/uiEffects'
+import { splitTitle } from '../components/titleText'
+import { useI18n } from '../useI18n'
 
 const materialIcons = [
   asset('icons/material-stone.png?v=4'),
@@ -140,7 +142,7 @@ export function Architecture() {
               onClick={() => goTo(n)}
               onPointerMove={shineCard}
               onPointerLeave={resetShineCard}
-              aria-label={`${String(n + 1).padStart(2, '0')}`}
+              aria-label={`${t.ui.photo} ${n + 1}`}
               aria-pressed={n === index}
             >
               <img src={near ? photos[n] : undefined} alt="" />

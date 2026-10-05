@@ -6,37 +6,17 @@
   --control-edge: rgba(170, 166, 157, 0.65);
   --control-highlight: linear-gradient(160deg, #ffffff1f, #ffffff04 55%, #aaa69d10);
 }
-
-#root :is(button, .btn, .gold-orb) {
-  color: var(--titanium-2);
-  border-color: var(--control-edge);
-  background: var(--control-highlight), var(--control-surface);
-  box-shadow: inset 0 1px 0 #ffffff21, 0 4px 16px #00000018;
-}
-
-#root :is(button, .btn, .gold-orb):is(:hover, :focus-visible) {
-  color: #f3f0e9;
-  border-color: var(--titanium-2);
-  background: var(--control-highlight), var(--control-hover);
-}
-
-#root :is(button, .btn, .gold-orb):is(.is-active, [aria-pressed="true"], :active),
 #root .btn--solid {
   color: #292722;
   border-color: var(--titanium-2);
   background: var(--control-highlight), var(--titanium);
   text-shadow: none;
 }
-
 #root .btn--solid:is(:hover, :focus-visible) {
   color: #292722;
   background: var(--control-highlight), var(--titanium-2);
 }
-
-#root :is(button, .btn, .gold-orb):active {
-  color: #f3f0e9;
-  background: var(--control-pressed);
-}
+#root :is(button, .btn, .gold-orb):active { color: #f3f0e9; background: var(--control-pressed); }
 #root button:disabled {
   color: var(--titanium);
   background: var(--control-surface);
@@ -44,38 +24,23 @@
   cursor: not-allowed;
 }
 
-#root :is(button, .btn, .gold-orb):focus-visible {
-  outline: 2px solid var(--titanium-2);
-  outline-offset: 3px;
-}
-
 /* Photographic cards keep their images; only the frame changes. */
-#root :is(.thumbs__item, .apt-type, .apt-house__card) {
-  background-color: var(--control-surface);
-}
-#root .gold-orb img { filter: grayscale(1); }
-#root .gold-orb::before { background: var(--control-edge); }
-#root .build-line li button span {
-  color: var(--titanium-2);
-  border-color: var(--control-edge);
-  background: var(--control-highlight), var(--control-surface);
-  box-shadow: none;
-}
-#root .build-line li.is-active button span {
-  color: #292722;
-  background: var(--titanium);
-  border-color: var(--titanium-2);
-}
+#root :is(.thumbs__item, .apt-type, .apt-house__card) { background-color: var(--control-surface); }
 
 /* Text actions and image navigation retain their lightweight silhouettes. */
-#root :is(.text-link, .header__lang, .header__burger, .header__menu-close,
-  .thumbs__arrow, .pager__btn, .infra-detail__picker-arrow, .build-line__arrow) {
+#root :is(.text-link, .header__lang, .header__burger, .header__menu-close, .thumbs__arrow, .pager__btn, .infra-detail__picker-arrow, .build-line__arrow) {
   background: transparent;
   box-shadow: none;
   color: var(--titanium-2);
 }
 #root .header__lang.is-active { color: #f3f0e9; }
-#root .scroll-hint { color: var(--titanium-2); }
+#root .scroll-hint {
+  color: var(--titanium-2);
+  min-width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+}
 
 /* CTA hierarchy: a light outline leads, an unboxed text action follows. */
 #root .btn.btn--solid,
@@ -95,7 +60,6 @@
   box-shadow: none;
 }
 #root .btn.btn--solid:active { background: rgba(170, 166, 157, 0.21); }
-
 #root .btn.btn--ghost,
 #root .btn.btn--secondary,
 #root .btn.glass.btn--ghost {
@@ -115,9 +79,14 @@
   box-shadow: none;
 }
 #root .btn.btn--ghost:active,
-#root .btn.btn--secondary:active { background: transparent; }
+#root .btn.btn--secondary:active {
+  background: transparent;
+}
 #root .btn.btn--secondary > span { text-decoration: none; }
-#root .btn.btn--secondary:is(:hover, :focus-visible) > span { text-decoration: underline; text-underline-offset: .35em; }
+#root .btn.btn--secondary:is(:hover, :focus-visible) > span {
+  text-decoration: underline;
+  text-underline-offset: .35em;
+}
 
 /* Photo paging and floating messengers stay legible without opaque circles. */
 #root .infra-detail__photo-nav button,
@@ -141,26 +110,6 @@
   backdrop-filter: none;
 }
 #root .stage--build-detail .build-detail__nav:is(:hover, :focus-visible) { color: #fffaf1; }
-
-#root .stage--build-detail .months button,
-#root .stage--build-detail .months button:is(:hover, :focus-visible, :active) {
-  color: var(--titanium-2);
-  border-color: rgba(170, 166, 157, 0.48);
-  background: transparent;
-  box-shadow: none;
-}
-#root .stage--build-detail .months button:is(:hover, :focus-visible) {
-  color: #fffaf1;
-  border-color: var(--titanium-2);
-}
-#root .stage--build-detail .months button.is-active,
-#root .stage--build-detail .months button.is-active:is(:hover, :focus-visible) {
-  color: #f3f0e9;
-  border-color: var(--titanium-2);
-  background: rgba(170, 166, 157, 0.14);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
 #root .rail__btn.gold-orb,
 #root .rail__btn.gold-orb:is(:hover, :focus-visible, :active) {
   border-color: rgba(216, 212, 203, .42);
@@ -170,41 +119,6 @@
   backdrop-filter: none;
 }
 #root .rail__btn.gold-orb:is(:hover, :focus-visible) { border-color: var(--titanium-2); }
-#root .rail__btn.gold-orb img {
-  width: clamp(26px, 1.5vw, 34px);
-  height: clamp(26px, 1.5vw, 34px);
-  filter: none;
-}
-
-/* Selection relies on the line and typography, leaving the photography visible. */
-#root .stage--build .build-line li button,
-#root .stage--build .build-line li button:is(:hover, :focus-visible, :active) {
-  color: var(--beige);
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
-#root .stage--build .build-line li button span,
-#root .stage--build .build-line li.is-active button span,
-#root .stage--build .build-line li button:is(:hover, :focus-visible, :active) span {
-  color: var(--titanium-2);
-  background: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  box-shadow: none;
-}
-#root .stage--build .build-line li.is-active button span,
-#root .stage--build .build-line li button:is(:hover, :focus-visible) span {
-  border-color: var(--titanium-2);
-}
-#root .stage--build .build-line li.is-active button span {
-  background: rgba(170, 166, 157, 0.1);
-}
-
-/* The moving language highlight supplies the fill without a second static layer. */
-#root .header__langs--bar::before {
-  background: linear-gradient(155deg, rgba(255, 255, 255, 0.24), rgba(170, 166, 157, 0.1)), rgba(170, 166, 157, 0.16);
-}
 #root .header__langs--bar .header__lang,
 #root .header__langs--bar .header__lang:is(:hover, :focus-visible, :active),
 #root .header__langs--bar .header__lang.is-active {
@@ -212,72 +126,19 @@
   background: transparent;
   box-shadow: none;
 }
-
 #root .header__phone.gold-orb {
   color: var(--titanium-2);
   border-color: rgba(170, 166, 157, 0.48);
   background: var(--liquid-glass-highlight), rgba(10, 31, 20, 0.82);
   box-shadow: var(--liquid-glass-shadow);
 }
-#root .header__phone.gold-orb:is(:hover, :focus-visible) {
-  color: #f3f0e9;
-  border-color: var(--titanium-2);
-  background: var(--liquid-glass-highlight), rgba(20, 46, 30, 0.88);
-}
-
-#root .stage--infra-detail .infra-detail__items button,
-#root .stage--infra-detail .infra-detail__items button:is(:hover, :focus-visible, :active),
-#root .stage--infra-detail .infra-detail__items button.is-active {
-  color: var(--titanium-2);
-  background: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  box-shadow: none;
-}
-#root .stage--infra-detail .infra-detail__items button.is-active {
-  border-color: var(--titanium-2);
-  background: rgba(170, 166, 157, 0.08);
-}
 
 @media (prefers-reduced-transparency: reduce) {
-  :root {
-    --control-surface: #43403a;
-    --control-hover: #58544d;
-    --control-pressed: #312e29;
-  }
+  :root { --control-surface: #43403a; --control-hover: #58544d; --control-pressed: #312e29; }
   #root .btn.btn--solid,
-  #root .btn.glass.btn--solid { background: transparent; }
-}
-
-/* Persistent map pulse and animated handset respect reduced motion. */
-.ua-map__pin::after {
-  animation: ua-kvasy-ring 2.8s ease-out infinite;
-  border-color: var(--titanium-2);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--titanium) 40%, transparent);
-}
-.ua-map__pin img { animation: map-mark-pulse 2.8s ease-in-out infinite; }
-@keyframes map-mark-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-#root .header__phone.gold-orb svg,
-#root .header__phone.gold-orb:hover svg,
-#root .header__menu-call-ico svg {
-  animation: smartphone-ring 5s ease-in-out infinite;
-  transform-origin: center;
-}
-#root .header__menu-panel .header__link.is-active::after {
-  width: 100%;
-  height: 1px;
-  clip-path: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .ua-map__pin::after,
-  .ua-map__kvasy:is(:hover, :focus, :focus-visible) .ua-map__pin::after,
-  .ua-map__pin img,
-  #root .header__phone.gold-orb svg,
-  #root .header__phone.gold-orb:hover svg,
-  #root .header__menu-call-ico svg { animation: none; }
+  #root .btn.glass.btn--solid {
+    background: transparent;
+  }
 }
 
 /* Compact navigation keeps the site's dark-green atmosphere with Titanium accents. */
@@ -288,33 +149,10 @@
     box-shadow: none;
     outline: none;
   }
-  #root .header__menu-panel {
-    min-height: 100dvh;
-    color: var(--titanium-2);
-    background: linear-gradient(180deg, rgba(10, 35, 23, 0.72), rgba(4, 18, 11, 0.9));
-  }
-  #root .header__menu-panel::before,
-  #root .header__menu-actions::before {
-    background: linear-gradient(90deg, transparent, rgba(216, 212, 203, 0.74), transparent);
-  }
-  #root .header__menu-panel .header__link {
-    color: rgba(216, 212, 203, 0.82);
-  }
-  #root .header__menu-panel .header__link:is(:hover, :focus-visible),
-  #root .header__menu-panel .header__link.is-active {
-    color: #f3f0e9;
-  }
-  #root .header__menu-panel .header__link.is-active::after {
-    background: var(--titanium-2);
-  }
   #root .header__menu-actions .header__menu-call.glass,
   #root .header__menu-social-btn.gold-orb,
-  #root .header__menu-actions .header__lang.is-active,
-  #root .header__menu-close {
-    color: var(--titanium-2);
-  }
   #root .header__menu-actions .header__lang.is-active {
-    text-decoration-color: var(--titanium-2);
+    color: var(--titanium-2);
   }
 }
 
@@ -328,46 +166,8 @@
   background: transparent;
   box-shadow: none;
 }
-#root .header__burger::after { display: none; }
-#root .header__burger span { background: var(--titanium-2); box-shadow: none; }
-
-@media (max-width: 1580px) {
-  #root .header__menu-panel {
-    background: linear-gradient(160deg, #183b29, #0a1f14 55%, #06170f);
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s;
-  }
-  #root .header__menu.is-open .header__menu-panel { visibility: visible; opacity: 1; }
-}
 
 @media (max-width: 720px) {
-  #root .header__menu-panel {
-    min-height: 100dvh;
-    max-height: 100dvh;
-    box-sizing: border-box;
-    padding: calc(var(--header) + 20px + env(safe-area-inset-top, 0px)) 24px calc(24px + env(safe-area-inset-bottom, 0px));
-    gap: 0;
-    overscroll-behavior: contain;
-  }
-  #root .header__menu-panel > .header__link {
-    flex: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 48px;
-    box-sizing: border-box;
-    padding: 10px 0;
-    font-size: clamp(12px, 3.5vw, 15px);
-    letter-spacing: 0.14em;
-  }
-  #root .header__menu-actions {
-    flex: none;
-    width: min(100%, 340px);
-    margin-top: 20px;
-    padding-top: 20px;
-    gap: 18px;
-  }
   #root .header__menu-actions .header__menu-call.glass,
   #root .header__menu-actions .header__menu-call.glass:is(:hover, :focus-visible, :active) {
     display: flex;
@@ -382,7 +182,6 @@
     box-shadow: none;
     transform: none;
   }
-  #root .header__menu-social { display: flex; gap: 12px; }
   #root .header__menu-social-btn.gold-orb,
   #root .header__menu-social-btn.gold-orb:is(:hover, :focus-visible, :active) {
     display: flex;
@@ -397,17 +196,6 @@
     box-shadow: none;
     color: var(--titanium-2);
   }
-  #root .header__menu-social-btn img { width: 24px; height: 24px; }
-  #root .header__menu-social-btn span { color: var(--titanium-2); font-size: 11px; }
-  #root .header__menu-actions .header__langs {
-    display: flex;
-    gap: 4px;
-    padding: 4px;
-    border: 1px solid rgba(216, 212, 203, 0.3);
-    border-radius: 10px;
-    background: #0a1f14;
-    box-shadow: none;
-  }
   #root .header__menu-actions .header__lang,
   #root .header__menu-actions .header__lang:is(:hover, :focus-visible, :active) {
     min-width: 48px;
@@ -420,4 +208,9 @@
     text-decoration: none;
   }
   #root .header__menu-actions .header__lang.is-active { background: rgba(216, 212, 203, 0.16); }
+}
+
+/* Keep the visible icons compact while making the whole control easy to tap. */
+@media (pointer: coarse) {
+  #root .scroll-hint { min-height: 48px; min-width: 48px; }
 }

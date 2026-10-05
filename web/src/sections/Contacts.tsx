@@ -1,4 +1,5 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { createPortal } from 'react-dom'
 import {
   IconClock,
   IconMail,
@@ -9,26 +10,39 @@ import {
 } from '../components/Icons'
 import { asset } from '../asset'
 import { emailHref, phoneHref, viberHref, whatsappHref } from '../contactLinks'
-import { Btn, Kicker, Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
-import { useI18n } from '../i18n'
+import { Btn, Kicker, Lead, Stage, SectionHeading } from '../components/Ui'
+import { splitTitle } from '../components/titleText'
+import { useI18n } from '../useI18n'
 
 export function Contacts() {
   const { t } = useI18n()
-  const [sent, setSent] = useState(false)
+  const [draftOpened, setDraftOpened] = useState(false)
   const [privacyOpen, setPrivacyOpen] = useState(false)
+  const privacyRef = useRef<HTMLDialogElement>(null)
+  const privacyTriggerRef = useRef<HTMLButtonElement>(null)
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSent(true)
+    const fields = new FormData(e.currentTarget)
+    const body = [
+      `${t.contacts.name}: ${fields.get('name')}`,
+      `${t.contacts.emailField}: ${fields.get('email')}`,
+      `${t.contacts.phoneField}: ${fields.get('phone')}`,
+      '', String(fields.get('message') || ''),
+    ].join('\n')
+    window.location.href = `${emailHref}?subject=${encodeURIComponent(t.contacts.formKicker)}&body=${encodeURIComponent(body)}`
+    setDraftOpened(true)
   }
 
   useEffect(() => {
     if (!privacyOpen) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setPrivacyOpen(false)
+    const dialog = privacyRef.current
+    const trigger = privacyTriggerRef.current
+    dialog?.showModal()
+    return () => {
+      dialog?.close()
+      trigger?.focus({ preventScroll: true })
     }
-    document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
   }, [privacyOpen])
 
   return (
@@ -90,49 +104,44 @@ export function Contacts() {
           <Kicker>{t.contacts.formKicker}</Kicker>
           <h3 className="form__title">{t.contacts.formTitle}</h3>
           <p className="form__lead">{t.contacts.formLead}</p>
-          {sent ? (
-            <p className="form__ok">{t.contacts.success}</p>
-          ) : (
-            <>
-              <label>
-                {t.contacts.name}
-                <input name="name" required autoComplete="name" />
-              </label>
-              <label>
-                {t.contacts.emailField}
-                <input name="email" type="email" required autoComplete="email" />
-              </label>
-              <label>
-                {t.contacts.phoneField}
-                <input name="phone" type="tel" required autoComplete="tel" />
-              </label>
-              <label>
-                {t.contacts.message}
-                <textarea name="message" rows={3} />
-              </label>
-              <label className="form__check">
-                <input type="checkbox" required />
-                <span>
-                  {t.contacts.privacy}{' '}
-                  <button type="button" className="text-link" onClick={() => setPrivacyOpen(true)}>
-                    ({t.contacts.privacyTitle})
-                  </button>
-                </span>
-              </label>
-              <Btn type="submit" solid arrow={false}>
-                {t.contacts.submit}
-              </Btn>
-            </>
-          )}
+          {draftOpened && <p className="form__ok" role="status">{t.contacts.success}</p>}
+          <label>
+            {t.contacts.name}
+            <input name="name" required autoComplete="name" />
+          </label>
+          <label>
+            {t.contacts.emailField}
+            <input name="email" type="email" required autoComplete="email" />
+          </label>
+          <label>
+            {t.contacts.phoneField}
+            <input name="phone" type="tel" required autoComplete="tel" />
+          </label>
+          <label>
+            {t.contacts.message}
+            <textarea name="message" rows={3} />
+          </label>
+          <label className="form__check">
+            <input type="checkbox" required />
+            <span>
+              {t.contacts.privacy}{' '}
+              <button ref={privacyTriggerRef} type="button" className="text-link" onClick={() => setPrivacyOpen(true)}>
+                ({t.contacts.privacyTitle})
+              </button>
+            </span>
+          </label>
+          <Btn type="submit" solid arrow={false}>
+            {t.contacts.submit}
+          </Btn>
         </form>
       </div>
 
-      {privacyOpen && (
-        <div
+      {privacyOpen && createPortal(
+        <dialog
+          ref={privacyRef}
           className="modal"
-          role="dialog"
-          aria-modal="true"
           aria-labelledby="privacy-title"
+          onCancel={() => setPrivacyOpen(false)}
           onClick={() => setPrivacyOpen(false)}
         >
           <div className="modal__card" onClick={(e) => e.stopPropagation()}>
@@ -142,7 +151,7 @@ export function Contacts() {
               {t.ui.close}
             </button>
           </div>
-        </div>
+        </dialog>, document.body,
       )}
     </Stage>
   )

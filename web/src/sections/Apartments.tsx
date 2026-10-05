@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { FloorPlan, IsoApartment } from '../components/Maps'
 import { Placeholder } from '../components/Placeholder'
-import { Btn, Lead, Pager, Stage, splitTitle, SectionHeading } from '../components/Ui'
-import { useI18n } from '../i18n'
+import { Btn, Lead, Pager, Stage, SectionHeading } from '../components/Ui'
+import { splitTitle } from '../components/titleText'
+import { useI18n } from '../useI18n'
 
 export function Apartments() {
   const { t } = useI18n()
@@ -75,7 +76,7 @@ export function Apartments() {
               </button>
             ))}
           </div>
-          <Btn solid onClick={() => setPage(2)}>{t.apt.ctaHouse}</Btn>
+          <Btn solid onClick={() => setPage(3)}>{t.apt.ctaHouse}</Btn>
           <aside className="plan-card">
             <p className="plan-card__kicker">{t.apt.planKicker}</p>
             <p className="plan-card__area">{t.apt.planArea}</p>
@@ -104,7 +105,7 @@ export function Apartments() {
             <Lead>{t.apt.viewLead}</Lead>
             <p className="apt-3d__meta">
               <b>{t.apt.buildings[house].title}</b>
-              <span>{t.apt.floor}</span>
+              <span>{t.apt.floor.replace(/\d+/, t.apt.floors[floor])}</span>
               <span>{t.apt.planArea}</span>
               <span>{t.apt.types[type].title}</span>
             </p>

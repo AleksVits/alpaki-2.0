@@ -2,8 +2,9 @@ import { useNearSection } from '../useNearSection'
 import { asset } from '../asset'
 import { AboutSequence } from '../components/AboutSequence'
 import { UkraineMap } from '../components/Maps'
-import { Btn, Lead, Stage, splitTitle, SectionHeading } from '../components/Ui'
-import { useI18n } from '../i18n'
+import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
+import { splitTitle } from '../components/titleText'
+import { useI18n } from '../useI18n'
 
 const statIcons = [
   asset('icons/fact-tree.png?v=1'),

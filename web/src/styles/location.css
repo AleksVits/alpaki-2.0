@@ -1,0 +1,634 @@
+/* Location — copy and the bottom transport panel. */
+
+.stage--location .scroll-hint { bottom: 0.45rem; }
+.stage--location { background: url('/location-telegram.jpg') center / cover no-repeat; overflow: hidden; }
+.stage--location .stage__shade { background: none; }
+.location__copy {
+  max-width: var(--type-copy-max);
+  isolation: isolate;
+  min-width: 0;
+  min-height: 34.7rem;
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  margin-top: calc(2.05rem - 4.2rem);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+}
+
+/* Location */
+.stage--location .stage__inner {
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  padding-bottom: 2.05rem;
+}
+.location {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  position: relative;
+}
+.location__copy .title span:first-child { white-space: nowrap; }
+.location__bar {
+  position: relative;
+  z-index: 3;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.1rem 1.6rem;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+  justify-self: center;
+  margin-inline: auto;
+  padding: 1.05rem 1.55rem 1.15rem;
+  text-align: center;
+}
+.location__sep {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  background: var(--gold-2);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--gold) 50%, transparent);
+  opacity: 0.85;
+}
+.location__way {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  text-align: left;
+}
+.location__cities > span { display: flex; gap: 0.42rem; align-items: flex-start; }
+.location__ico { width: 3.375rem; height: 3.375rem; flex: none; }
+.location__ico img {
+  width: 3.375rem;
+  height: 3.375rem;
+  max-width: 3.375rem;
+  max-height: 3.375rem;
+  object-fit: contain;
+}
+.location__cities svg,
+.location__pin {
+  width: 2rem;
+  height: 2rem;
+  color: var(--gold);
+  flex: none;
+  margin-top: 0.02rem;
+}
+.location__pin { object-fit: contain; }
+.location__way strong {
+  display: block;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.92rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--cream);
+  margin-bottom: 0.18rem;
+}
+.location__cities b {
+  display: block;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.86rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--cream);
+}
+.location__way small {
+  display: block;
+  color: var(--beige);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+.location__way small.pre { white-space: pre-line; }
+.location__cities em {
+  display: block;
+  font-style: normal;
+  color: var(--beige);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.location__facts { display: contents; }
+.location__ways { display: contents; }
+.location__rule { display: none; }
+.location__places { min-width: 0; }
+.location__cities { display: flex; gap: 2rem; flex-wrap: nowrap; }
+.location__copy .lead { margin-bottom: 1.9rem; }
+.location__near {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--gold-2);
+  margin: 0;
+  text-align: left;
+}
+.location__bar .btn {
+  align-self: center;
+  font-size: 0.78rem;
+  min-height: 3rem;
+  padding: 0 1.3rem;
+}
+
+@media (max-width: 1500px) and (min-width: 1101px) {
+  .location__bar {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    justify-self: stretch;
+    gap: 0.65rem 0.85rem;
+    padding: 0.82rem 1.05rem 0.9rem;
+    margin: 0;
+    overflow: hidden;
+  }
+  .location__sep { display: none; }
+  .location__way { gap: 0.55rem; min-width: 0; }
+  .location__way--car small.pre {
+    white-space: normal;
+    max-width: 15rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .location__way strong { font-size: 0.78rem; letter-spacing: 0.1em; }
+  .location__way small { font-size: 0.72rem; }
+  .location__places { min-width: 0; flex: 1; }
+  .location__cities { flex-wrap: nowrap; justify-content: space-between; gap: 0.55rem 0.85rem; }
+  .location__cities b { font-size: 0.72rem; letter-spacing: 0.08em; }
+  .location__cities em { font-size: 0.68rem; white-space: nowrap; }
+  .location__cities svg,
+  .location__pin {
+    width: 1.55rem;
+    height: 1.55rem;
+  }
+  .location__bar .btn {
+    flex: none;
+    min-height: 2.7rem;
+    padding: 0 1.05rem;
+    font-size: 0.68rem;
+  }
+  .location__ico,
+  .location__ico img {
+    width: 2.55rem;
+    height: 2.55rem;
+    max-width: 2.55rem;
+    max-height: 2.55rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .stage--location .stage__inner { padding-bottom: 1.2rem; }
+  .location__bar { margin: 0; padding-left: 1.1rem; padding-right: 1.1rem; }
+  .location__sep { display: none; }
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .location__bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) auto;
+    grid-template-areas:
+      "train car route"
+      "cities cities route";
+    width: 100%;
+    max-width: 100%;
+    justify-self: stretch;
+    align-items: center;
+    column-gap: 0.9rem;
+    row-gap: 0.7rem;
+    overflow: hidden;
+  }
+  .location__way--train { grid-area: train; }
+  .location__way--car { grid-area: car; }
+  .location__places { grid-area: cities; }
+  .location__bar .btn { grid-area: route; align-self: center; justify-self: end; }
+  .location__cities { flex-wrap: nowrap; justify-content: space-between; }
+  .location__way--car small.pre {
+    white-space: normal;
+    max-width: 16rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 900px) {
+  .stage--location .stage__inner,
+  .stage.stage--location .stage__inner {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+  .location__copy { min-height: 0; }
+  .stage--location { overflow: visible; }
+  .stage--location .stage__inner { overflow: visible; }
+  .location {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    flex: none;
+    min-height: 0;
+  }
+  .location::before,
+  .location::after {
+    content: none;
+  }
+  .location::before { order: 0; }
+  .location::after { order: 9; }
+  .location__copy,
+  .location__bar,
+  .location__bar.glass,
+  .location__facts,
+  .location__places {
+    display: contents;
+  }
+  .stage--location .kicker { order: 1; }
+  .stage--location .title { order: 2; }
+  .stage--location .ornament { order: 3; }
+  .stage--location .lead { order: 4; }
+  .location__ways {
+    order: 5;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.6rem 2.2rem;
+    width: 100%;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .location__rule {
+    display: block;
+    order: 6;
+    width: 4.5rem;
+    height: 1px;
+    margin: 0.08rem auto;
+    background: var(--gold-2);
+    opacity: 0.85;
+    border: 0;
+    flex: none;
+  }
+  .location__cities {
+    order: 7;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 0.7rem 1.2rem;
+    width: 100%;
+    max-width: 23.5rem;
+    margin-top: 0;
+    justify-content: space-evenly;
+  }
+  .location__near {
+    order: 8;
+    margin-top: 1.2rem;
+    margin-bottom: 1.35rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .stage--location .title br { display: block; }
+  .stage--location .title span:last-child { display: block; margin-top: 0.12em; }
+  .stage--location .scroll-hint {
+    display: block;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin: 1.1rem auto 0;
+    z-index: 4;
+  }
+  .stage.stage--location .stage__inner {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding-top: calc(var(--header) + 1.45rem + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(2.8rem + env(safe-area-inset-bottom, 0px));
+  }
+  .location__facts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    order: 5;
+    width: 100%;
+    margin-top: 1.45rem;
+    flex: none;
+  }
+  .location__sep { display: none; }
+  .location__way,
+  .location__cities > span {
+    flex: 1 1 0;
+    width: auto;
+    max-width: 7.2rem;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+  .location__way small { display: none; }
+  .location__way strong,
+  .location__cities b {
+    white-space: normal;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .location__cities em {
+    font-size: 0.6rem;
+    letter-spacing: 0.02em;
+    white-space: normal;
+    line-height: 1.3;
+  }
+  .location__ico,
+  .location__ico img {
+    width: 2.85rem;
+    height: 2.85rem;
+    max-width: 2.85rem;
+    max-height: 2.85rem;
+  }
+  .location__cities svg,
+  .location__pin {
+    width: 1.85rem;
+    height: 1.85rem;
+    margin-top: 0;
+  }
+  .location .btn {
+    flex: none;
+    order: 10;
+    width: 100%;
+    max-width: none;
+    justify-content: center;
+    margin-top: 0;
+    margin-inline: 0;
+  }
+  .location__copy .lead { margin-bottom: 0; }
+  .location__copy .title span:first-child { white-space: normal; }
+}
+
+@media (max-width: 720px) {
+  .location__copy { margin-top: 0; }
+  .location__copy .lead { margin-bottom: 0; }
+  .location__way,
+  .location__cities > span {
+    flex: 1 1 0;
+    width: auto;
+    max-width: 7.2rem;
+    gap: 0.8rem;
+  }
+  .location__way strong,
+  .location__cities b {
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+  }
+  .location__cities em { font-size: 0.62rem; margin-top: 0.4rem; line-height: 1.5; }
+}
+
+@media (max-height: 860px) and (min-width: 721px) {
+  .location__copy { margin-top: 0; }
+  .location__copy .lead { margin-bottom: 1rem; }
+}
+
+@media (max-width: 720px) {
+  .location__facts { margin-top: 2rem; gap: 1.25rem; }
+  .location__rule { margin-block: 0.25rem; }
+  .location__cities { column-gap: 1rem; }
+  .location__cities b { line-height: 1.45; }
+  .location__near { margin-block: 2rem 1.5rem; line-height: 1.65; }
+  .location .btn { margin-block: 0; }
+}
+
+/* Keep the location panel inside the content column, clear of the social rail. */
+@media (min-width: 901px) {
+  .location { min-width: 0; grid-template-columns: minmax(0, 1fr); }
+  .location__bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, 12rem);
+    grid-template-areas: none;
+    width: 100%;
+    max-width: 100%;
+    justify-self: stretch;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 1rem 1.25rem;
+    overflow: visible;
+  }
+  .location__facts {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 2.5fr);
+    gap: 1.25rem;
+    align-items: center;
+    min-width: 0;
+  }
+  .location__ways { display: contents; }
+  .location__sep { display: none; }
+  .location__way,
+  .location__places,
+  .location__bar .btn {
+    grid-area: auto;
+    min-width: 0;
+  }
+  .location__way { gap: 0.65rem; }
+  .location__way > span:last-child,
+  .location__cities > span,
+  .location__cities > span > span {
+    min-width: 0;
+  }
+  .location__cities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
+  .location__cities > span { flex-direction: column; align-items: center; gap: 0.5rem; }
+  .location__way strong,
+  .location__cities b {
+    white-space: normal;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+  .location__way small,
+  .location__cities em {
+    white-space: normal;
+    font-size: 0.68rem;
+  }
+  .location__way--car small.pre {
+    display: block;
+    white-space: normal;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+  .location__bar .btn {
+    width: 100%;
+    margin: 0;
+    padding: 0.8rem;
+    white-space: normal;
+    justify-content: center;
+    font-size: 0.68rem;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1500px) {
+  .location__facts { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+  .location__places { grid-column: 1 / -1; }
+  .location__cities > span { flex-direction: row; justify-content: center; }
+}
+
+@media (max-width: 900px) {
+  .stage .location__facts { margin-top: 0; gap: var(--mobile-space-medium); }
+  .stage .location__near { margin-block: var(--mobile-space-section) var(--mobile-space-block); }
+  .stage .location .btn { margin-block: 0; }
+}
+
+.stage .location__way strong,
+.stage .location__cities b,
+.stage .location__cities em,
+.stage .location__way small {
+  font-size: max(12px, 0.72rem);
+  line-height: 1.5;
+  text-transform: none;
+  letter-spacing: 0.025em;
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .stage .location__cities { gap: 16px; }
+}
+
+/* Large displays: a bounded, proportionately scaled location panel. */
+@media (min-width: 2000px) {
+  .stage--location .location__bar {
+    --location-scale: clamp(22px, 0.86vw, 33px);
+    font-size: var(--location-scale);
+    width: min(100%, clamp(1800px, 75vw, 2800px));
+    justify-self: center;
+    grid-template-columns: minmax(0, 1fr) 12em;
+    gap: 1.25em;
+    padding: 1.1em 1.4em;
+    border-radius: 0.5em;
+  }
+  .stage--location .location__facts {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 2.5fr);
+    gap: 1.25em;
+  }
+  .stage--location .location__way { gap: 0.75em; }
+  .stage--location .location__way strong,
+  .stage--location .location__cities b {
+    font-size: 0.8em;
+  }
+  .stage--location .location__way small,
+  .stage--location .location__cities em {
+    font-size: 0.76em;
+  }
+  .stage--location .location__way--car small { max-width: 19ch; }
+  .stage--location .location__cities { gap: 0.9em; }
+  .stage--location .location__cities > span { gap: 0.55em; }
+  .stage--location .location__ico,
+  .stage--location .location__ico img {
+    width: 3.35em;
+    height: 3.35em;
+    max-width: none;
+    max-height: none;
+  }
+  .stage--location .location__pin { width: 2em; height: 2em; }
+  .stage--location .location__bar .btn {
+    font-size: 0.8em;
+    min-height: 3.6em;
+    padding: 0.85em 1em;
+    gap: 0.8em;
+  }
+  .stage--location .location__bar .btn svg { width: 1em; height: 1em; }
+}
+
+/* Location content rests over the uninterrupted mountain photograph. */
+@media (min-width: 1101px) {
+  .stage--location .location__bar {
+    display: grid;
+    grid-template-columns: minmax(24rem, 1.05fr) minmax(30rem, 1.45fr) auto;
+    align-items: stretch;
+    gap: 1.4rem;
+    width: min(100%, 86rem);
+    padding: 0.9rem 1.15rem;
+    text-align: left;
+  }
+  .stage--location .location__facts { display: contents; }
+  .stage--location .location__ways {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+    align-items: center;
+    min-width: 0;
+  }
+  .stage--location .location__way { min-width: 0; }
+  .stage--location .location__way--train,
+  .stage--location .location__way--car {
+    padding-right: 1.2rem;
+    border-right: 1px solid rgba(228, 216, 205, 0.2);
+  }
+  .stage--location .location__way--car { border-right: 0; }
+  .stage--location .location__way--car small.pre { max-width: 20ch; }
+  .stage--location .location__places {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    padding-left: 1.3rem;
+    border-left: 1px solid rgba(228, 216, 205, 0.2);
+  }
+  .stage--location .location__cities { width: 100%; justify-content: space-between; gap: 1.1rem; }
+  .stage--location .location__bar > .btn { align-self: center; white-space: nowrap; }
+  .stage--location .location__sep,
+  .stage--location .location__rule {
+    display: none;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1999px) {
+  .stage--location .location__bar { grid-template-columns: minmax(0, 1fr) auto; }
+  .stage--location .location__bar .btn {
+    width: auto;
+    min-height: 46px;
+    padding: 11px 18px;
+    gap: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: nowrap;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+}
+
+/* Center the location copy in the space above its bottom information panel. */
+@media (min-width: 901px) {
+  .stage--location .location { grid-template-rows: minmax(0, 1fr) auto; }
+  .stage--location .location__copy {
+    grid-row: 1;
+    align-self: center;
+    min-height: 0;
+    margin-top: 0;
+    padding-block: 2rem;
+  }
+  .stage--location .location__bar { grid-row: 2; align-self: end; }
+}
+
+/* Keep the three information groups in one deliberate row on desktop. */
+@media (min-width: 1101px) {
+  .stage--location .location__bar { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.45fr) auto; }
+  .stage--location .location__bar > .btn { width: auto; min-width: 12rem; }
+}

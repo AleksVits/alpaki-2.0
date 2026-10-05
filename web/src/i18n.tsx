@@ -1,8 +1,14 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { I18nContext } from './useI18n'
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 
 export type Lang = 'ua' | 'en'
 
 const ua = {
+  meta: {
+    title: 'AL’PAKI LEGEND — власний простір у Карпатах',
+    description:
+      'AL’PAKI LEGEND — власний простір у Карпатах. Апартаменти, відпочинок та інвестиції в урочищі Тростянець, Кваси.',
+  },
   nav: {
     about: 'Про комплекс',
     infra: 'Інфраструктура',
@@ -69,7 +75,7 @@ const ua = {
     if: 'Івано-Франківськ',
     ifMeta: '120 км  ·  2,5–3 год',
     lviv: 'Львів',
-    lvivMeta: '230 км  ·  ~8 год',
+    lvivMeta: '255 км  ·  ~4,5 год',
     uzh: 'Ужгород',
     uzhMeta: '216 км  ·  ~4 год',
     nearby: 'Поруч: Драгобрат  ·  Буковель',
@@ -266,14 +272,14 @@ const ua = {
     emailVal: 'info@alpaki.ua',
     formKicker: 'Консультація',
     formTitle: 'Напишіть нам',
-    formLead: 'Відповімо протягом 1–2 робочих днів.',
+    formLead: 'Заповніть форму, щоб підготувати лист у вашій поштовій програмі.',
     name: 'Ім’я *',
     emailField: 'Email *',
     phoneField: 'Телефон *',
     message: 'Повідомлення',
     privacy: 'Погоджуюсь з політикою конфіденційності',
-    submit: 'Надіслати повідомлення',
-    success: 'Дякуємо. Ми зв’яжемося з вами найближчим часом.',
+    submit: 'Підготувати лист',
+    success: 'Завершіть надсилання у поштовій програмі. Якщо вона не відкрилася, напишіть на info@alpaki.ua. Дані форми залишаються тут.',
     privacyTitle: 'Політика конфіденційності',
     privacyText:
       'Текст політики конфіденційності буде додано після погодження з юристами. Надсилаючи форму, ви підтверджуєте згоду на обробку контактних даних для відповіді на запит.',
@@ -293,10 +299,24 @@ const ua = {
     close: 'Закрити',
     phone: 'Зателефонувати',
     placeholder: 'Зображення',
+    menu: 'Меню',
+    closeMenu: 'Закрити меню',
+    mainNav: 'Основна навігація',
+    mobileNav: 'Мобільна навігація',
+    social: 'Месенджери',
+    language: 'Мова сайту',
+    nextSection: 'Наступний розділ',
+    map: 'Карта України',
+    photo: 'Фото',
   },
 }
 
 const en: typeof ua = {
+  meta: {
+    title: 'AL’PAKI LEGEND — a private space in the Carpathians',
+    description:
+      'AL’PAKI LEGEND — a private space in the Carpathians. Apartments, leisure and investment in the Trostyanets tract, Kvasy.',
+  },
   nav: {
     about: 'About',
     infra: 'Infrastructure',
@@ -363,7 +383,7 @@ const en: typeof ua = {
     if: 'Ivano-Frankivsk',
     ifMeta: '120 km  ·  2.5–3 h',
     lviv: 'Lviv',
-    lvivMeta: '230 km  ·  ~8 h',
+    lvivMeta: '255 km  ·  ~4.5 h',
     uzh: 'Uzhhorod',
     uzhMeta: '216 km  ·  ~4 h',
     nearby: 'Nearby: Dragobrat  ·  Bukovel',
@@ -559,14 +579,14 @@ const en: typeof ua = {
     emailVal: 'info@alpaki.ua',
     formKicker: 'Consultation',
     formTitle: 'Write to us',
-    formLead: 'We reply within 1–2 business days.',
+    formLead: 'Fill in the form to prepare a message in your email app.',
     name: 'Name *',
     emailField: 'Email *',
     phoneField: 'Phone *',
     message: 'Message',
     privacy: 'I agree to the privacy policy',
-    submit: 'Send message',
-    success: 'Thank you. We will contact you shortly.',
+    submit: 'Prepare email',
+    success: 'Complete sending in your email app. If it did not open, email info@alpaki.ua. Your form entries remain here.',
     privacyTitle: 'Privacy policy',
     privacyText:
       'The privacy policy text will be added after legal review. By submitting the form you consent to processing of contact data in order to reply to your enquiry.',
@@ -586,30 +606,71 @@ const en: typeof ua = {
     close: 'Close',
     phone: 'Call',
     placeholder: 'Image',
+    menu: 'Menu',
+    closeMenu: 'Close menu',
+    mainNav: 'Main navigation',
+    mobileNav: 'Mobile navigation',
+    social: 'Messengers',
+    language: 'Site language',
+    nextSection: 'Next section',
+    map: 'Map of Ukraine',
+    photo: 'Photo',
   },
 }
 
 const dictionaries = { ua, en }
 
-type I18nValue = {
-  lang: Lang
-  setLang: (lang: Lang) => void
-  t: typeof ua
+export type Translations = typeof ua
+
+const LANG_STORAGE_KEY = 'alpaki-lang'
+const base = import.meta.env.BASE_URL
+
+/** English lives at `<base>en/`; the site root is Ukrainian. */
+function langFromPath(): Lang {
+  return /^en(\/|$)/.test(window.location.pathname.slice(base.length)) ? 'en' : 'ua'
 }
 
-const I18nContext = createContext<I18nValue | null>(null)
+function langPath(lang: Lang) {
+  return lang === 'en' ? `${base}en/` : base
+}
+
+function storedLang(): Lang | null {
+  try {
+    const value = window.localStorage.getItem(LANG_STORAGE_KEY)
+    return value === 'ua' || value === 'en' ? value : null
+  } catch {
+    return null
+  }
+}
+
+// The address decides the language; at the site root a saved choice is restored.
+function initialLang(): Lang {
+  const fromPath = langFromPath()
+  return fromPath === 'en' ? fromPath : storedLang() ?? fromPath
+}
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>('ua')
-  const value = useMemo(() => ({ lang, setLang, t: dictionaries[lang] }), [lang])
+  const [lang, setLangState] = useState<Lang>(initialLang)
+  const setLang = useCallback((next: Lang) => {
+    try {
+      window.localStorage.setItem(LANG_STORAGE_KEY, next)
+    } catch {
+      // Private mode or blocked storage: the address still carries the language.
+    }
+    setLangState(next)
+  }, [])
+  const value = useMemo(() => ({ lang, setLang, t: dictionaries[lang] }), [lang, setLang])
   useEffect(() => {
+    const { meta } = dictionaries[lang]
+    const path = langPath(lang)
     document.documentElement.lang = lang === 'en' ? 'en' : 'uk'
+    document.title = meta.title
+    document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description)
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${window.location.origin}${path}`)
+    if (langFromPath() !== lang) {
+      // Keep the current history entry: switching language is not a navigation step.
+      window.history.replaceState(window.history.state, '', `${path}${window.location.search}${window.location.hash}`)
+    }
   }, [lang])
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
-}
-
-export function useI18n() {
-  const ctx = useContext(I18nContext)
-  if (!ctx) throw new Error('useI18n must be used within I18nProvider')
-  return ctx
 }
