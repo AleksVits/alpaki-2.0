@@ -13,10 +13,20 @@ import { emailHref, phoneHref, viberHref, whatsappHref } from '../contactLinks'
 import { Btn, Kicker, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
+import { inquiryMessage, inquirySubject, type Inquiry } from '../inquiry'
 
-export function Contacts() {
+export function Contacts({ inquiry }: { inquiry: Inquiry | null }) {
   const { t } = useI18n()
   const [draftOpened, setDraftOpened] = useState(false)
+  // The message opens with what the visitor asked about. It follows a new request or a
+  // language switch only while the visitor has not written anything of their own.
+  const suggested = inquiryMessage(inquiry, t)
+  const [message, setMessage] = useState('')
+  const [shownSuggestion, setShownSuggestion] = useState('')
+  if (suggested !== shownSuggestion) {
+    setShownSuggestion(suggested)
+    if (message === shownSuggestion || message.trim() === '') setMessage(suggested)
+  }
   const [privacyOpen, setPrivacyOpen] = useState(false)
   const privacyRef = useRef<HTMLDialogElement>(null)
   const privacyTriggerRef = useRef<HTMLButtonElement>(null)
@@ -30,7 +40,9 @@ export function Contacts() {
       `${t.contacts.phoneField}: ${fields.get('phone')}`,
       '', String(fields.get('message') || ''),
     ].join('\n')
-    window.location.href = `${emailHref}?subject=${encodeURIComponent(t.contacts.formKicker)}&body=${encodeURIComponent(body)}`
+    const topic = inquirySubject(inquiry, t)
+    const subject = topic ? `${t.contacts.formKicker}: ${topic}` : t.contacts.formKicker
+    window.location.href = `${emailHref}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
     setDraftOpened(true)
   }
 
@@ -119,7 +131,7 @@ export function Contacts() {
           </label>
           <label>
             {t.contacts.message}
-            <textarea name="message" rows={3} />
+            <textarea name="message" rows={3} value={message} onChange={(e) => setMessage(e.target.value)} />
           </label>
           <label className="form__check">
             <input type="checkbox" required />

@@ -24,6 +24,59 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="AL’PAKI LEGEND — комплекс серед карпатських гір" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "__SITE_URL__#website",
+            "url": "__SITE_URL__",
+            "name": "AL’PAKI LEGEND",
+            "inLanguage": ["uk", "en"],
+            "publisher": { "@id": "__SITE_URL__#organization" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "__SITE_URL__#organization",
+            "name": "ТОВ «Альпакі»",
+            "url": "__SITE_URL__",
+            "logo": "__SITE_URL__logo-mark.png",
+            "email": "info@alpaki.ua"
+          },
+          {
+            "@type": "ApartmentComplex",
+            "@id": "__SITE_URL__#complex",
+            "name": "AL’PAKI LEGEND",
+            "description": "Майбутній комплекс у Карпатах: апартаменти, відпочинок та інвестиції в урочищі Тростянець, Кваси.",
+            "url": "__SITE_URL__",
+            "image": "__SITE_URL__og-image.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "UA",
+              "addressRegion": "Закарпатська область",
+              "addressLocality": "с. Кваси, Рахівський район",
+              "streetAddress": "урочище Тростянець"
+            }
+          }
+        ]
+      }
+    </script>
+    <script>
+      // A visitor who chose English earlier lands on the English page before anything is shown.
+      try {
+        if (localStorage.getItem('alpaki-lang') === 'en') {
+          location.replace(location.pathname.replace(/\/?(index\.html)?$/, '/en/') + location.search + location.hash)
+        }
+      } catch (e) {}
+    </script>
+    <noscript>
+      <style>
+        /* Without the script nothing starts the entrance animation: show the first screen as is. */
+        .intro__backdrop img { opacity: 1 !important; transform: none !important; }
+        .stage--intro .intro { opacity: 1 !important; visibility: visible !important; }
+      </style>
+    </noscript>
   </head>
   <body>
     <div id="root"></div>

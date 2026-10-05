@@ -20,6 +20,18 @@ const ua = {
   intro: {
     tagline: 'Власний простір\nу Карпатах',
   },
+  inquiry: {
+    apartment: 'Цікавить вартість апартаментів: {house}, поверх {floor}, {type}.',
+    offer: 'Прошу надіслати інвестиційну пропозицію.',
+    consultation: 'Хочу записатися на консультацію щодо інвестування.',
+    management: 'Цікавлять умови управління апартаментами.',
+    subject: {
+      apartment: 'Вартість апартаментів',
+      offer: 'Інвестиційна пропозиція',
+      consultation: 'Консультація щодо інвестування',
+      management: 'Умови управління',
+    },
+  },
   about: {
     factsKicker: 'У цифрах',
     ideaKicker: 'Ідея проєкту',
@@ -328,6 +340,18 @@ const en: typeof ua = {
   intro: {
     tagline: 'A private space\nin the Carpathians',
   },
+  inquiry: {
+    apartment: 'I would like to know the price of an apartment: {house}, floor {floor}, {type}.',
+    offer: 'Please send me the investment offer.',
+    consultation: 'I would like to book a consultation about investing.',
+    management: 'I would like to learn the apartment management terms.',
+    subject: {
+      apartment: 'Apartment price',
+      offer: 'Investment offer',
+      consultation: 'Investment consultation',
+      management: 'Management terms',
+    },
+  },
   about: {
     factsKicker: 'In figures',
     ideaKicker: 'The idea',
@@ -634,23 +658,11 @@ function langPath(lang: Lang) {
   return lang === 'en' ? `${base}en/` : base
 }
 
-function storedLang(): Lang | null {
-  try {
-    const value = window.localStorage.getItem(LANG_STORAGE_KEY)
-    return value === 'ua' || value === 'en' ? value : null
-  } catch {
-    return null
-  }
-}
-
-// The address decides the language; at the site root a saved choice is restored.
-function initialLang(): Lang {
-  const fromPath = langFromPath()
-  return fromPath === 'en' ? fromPath : storedLang() ?? fromPath
-}
-
-export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(initialLang)
+// The address alone decides the language, so the first render always matches the
+// prerendered page. A saved choice of English is restored by the small script in
+// index.html, which redirects from the site root before anything is shown.
+export function I18nProvider({ children, initialLang }: { children: ReactNode; initialLang?: Lang }) {
+  const [lang, setLangState] = useState<Lang>(() => initialLang ?? langFromPath())
   const setLang = useCallback((next: Lang) => {
     try {
       window.localStorage.setItem(LANG_STORAGE_KEY, next)

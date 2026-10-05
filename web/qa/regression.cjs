@@ -30,6 +30,30 @@ const { baseUrl, launch } = require('./browser.cjs');
  await page.locator('.apt-floor__list button').last().click();
  await page.locator('.apt-floor__copy .btn').click();
  assert.match(await page.locator('.apt-3d__meta').innerText(),/05/);
+ // The price request carries the chosen building, floor and type into the form.
+ await page.locator('.apt-3d__copy .btn').click();
+ await page.waitForFunction(()=>location.hash==='#contacts');
+ assert.match(await page.locator('[name="message"]').inputValue(),/Vista.*05.*студія/);
+ // A message the visitor wrote is never replaced; an emptied field takes the next request.
+ await page.locator('[name="message"]').fill('Свій текст');
+ await jump('invest-formats');
+ await page.locator('.invest__actions .btn').first().click();
+ await page.waitForFunction(()=>location.hash==='#contacts');
+ assert.equal(await page.locator('[name="message"]').inputValue(),'Свій текст');
+ await page.locator('[name="message"]').fill('');
+ await jump('invest-manage');
+ await page.locator('.manage__foot .btn').click();
+ await page.waitForFunction(()=>location.hash==='#contacts');
+ assert.match(await page.locator('[name="message"]').inputValue(),/умови управління/);
+ // The pager walks the same path as the buttons: type → building → floor → 3D.
+ await jump('apartments');
+ const nextApt=()=>page.locator('#apartments .pager__btn').last().evaluate(el=>el.click());
+ await nextApt();
+ for(const screen of ['.apt-types','.apt-house','.apt-floor','.apt-3d']){
+  assert.equal(await page.locator('#apartments '+screen).count(),1,`Pager must show ${screen}`);
+  await nextApt();
+ }
+ assert.equal(await page.locator('h1').count(),1,'The page needs exactly one h1');
  await jump('architecture');
  await page.locator('.thumbs__item').first().click();
  assert(await page.locator('#architecture').evaluate(el=>el.classList.contains('is-viewing')));
@@ -94,5 +118,5 @@ const { baseUrl, launch } = require('./browser.cjs');
  await animated.close();
  assert.deepEqual(errors,[]);
  await browser.close();
- console.log('PASS: navigation/history, menu focus, apartment flow, gallery, construction, responsive dialog, pager spacing, form draft, language address.');
+ console.log('PASS: navigation/history, menu focus, apartment flow, gallery, construction, responsive dialog, pager spacing, form draft and request context, language address.');
 })().catch(e=>{console.error(e);process.exit(1)});

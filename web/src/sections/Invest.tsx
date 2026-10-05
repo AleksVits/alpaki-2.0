@@ -3,10 +3,13 @@ import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { asset } from '../asset'
 import { useI18n } from '../useI18n'
+import type { Inquiry } from '../inquiry'
+
+type InquiryProps = { onInquiry: (inquiry: Inquiry) => void }
 
 const manageIcons = [IconKeys, IconCalendar, IconBell, IconChart]
 
-export function InvestFormats() {
+export function InvestFormats({ onInquiry }: InquiryProps) {
   const { t } = useI18n()
   return (
     <Stage
@@ -54,15 +57,15 @@ export function InvestFormats() {
           </ol>
         </div>
         <div className="invest__actions btn-row">
-          <Btn href="#contacts" solid arrow>{t.invest.ctaOffer}</Btn>
-          <Btn href="#contacts" className="btn--secondary" arrow>{t.invest.ctaConsult}</Btn>
+          <Btn href="#contacts" solid arrow onClick={() => onInquiry({ kind: 'offer' })}>{t.invest.ctaOffer}</Btn>
+          <Btn href="#contacts" className="btn--secondary" arrow onClick={() => onInquiry({ kind: 'consultation' })}>{t.invest.ctaConsult}</Btn>
         </div>
       </div>
     </Stage>
   )
 }
 
-export function InvestManage() {
+export function InvestManage({ onInquiry }: InquiryProps) {
   const { t } = useI18n()
   return (
     <Stage
@@ -96,7 +99,7 @@ export function InvestManage() {
           })}
         </ol>
         <div className="manage__foot">
-          <Btn href="#contacts" solid arrow>{t.invest.ctaTerms}</Btn>
+          <Btn href="#contacts" solid arrow onClick={() => onInquiry({ kind: 'management' })}>{t.invest.ctaTerms}</Btn>
         </div>
       </div>
     </Stage>

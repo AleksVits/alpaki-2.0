@@ -1,4 +1,3 @@
-import { cpSync, mkdirSync, rmSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
@@ -10,18 +9,6 @@ const root = dirname(fileURLToPath(import.meta.url))
 // змініть лише цей рядок: від нього залежать base, canonical, hreflang,
 // Open Graph, sitemap.xml і robots.txt.
 const siteUrl = 'https://aleksvits.github.io/alpaki-2.0/'
-
-function copyToDocs(): Plugin {
-  return {
-    name: 'copy-to-docs',
-    closeBundle() {
-      const dest = resolve(root, '../docs')
-      rmSync(dest, { recursive: true, force: true })
-      mkdirSync(dest, { recursive: true })
-      cpSync(resolve(root, 'dist'), dest, { recursive: true })
-    },
-  }
-}
 
 /** Absolute URLs for crawlers and link previews, generated from `siteUrl`. */
 function siteMeta(): Plugin {
@@ -58,19 +45,25 @@ function siteMeta(): Plugin {
   }
 }
 
-export default defineConfig(({ command, isPreview }) => ({
-  plugins: [react(), siteMeta(), copyToDocs()],
+export default defineConfig(({ command, isPreview, isSsrBuild }) => ({
+  plugins: isSsrBuild ? [react()] : [react(), siteMeta()],
   // `npm run preview` serves the production build, so it needs the production base too.
   base: command === 'build' || isPreview ? new URL(siteUrl).pathname : '/',
-  build: {
-    outDir: 'dist',
-    emptyOutDir: true,
-    rolldownOptions: {
-      // Українська версія — у корені, англійська — за адресою /en/.
-      input: {
-        main: resolve(root, 'index.html'),
-        en: resolve(root, 'en/index.html'),
+  build: isSsrBuild
+    ? {
+        // Server bundle used once by scripts/prerender.mjs; it never ships.
+        outDir: 'node_modules/.prerender',
+        emptyOutDir: true,
+      }
+    : {
+        outDir: 'dist',
+        emptyOutDir: true,
+        rolldownOptions: {
+          // Українська версія — у корені, англійська — за адресою /en/.
+          input: {
+            main: resolve(root, 'index.html'),
+            en: resolve(root, 'en/index.html'),
+          },
+        },
       },
-    },
-  },
 }))

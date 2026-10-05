@@ -10,6 +10,7 @@ import { InfraDetail, Infrastructure } from './sections/Infrastructure'
 import { Intro } from './sections/Intro'
 import { InvestFormats, InvestManage } from './sections/Invest'
 import { Location } from './sections/Location'
+import type { Inquiry } from './inquiry'
 import { decodeHash, isMobileFlow, isProgrammaticScroll, reducedMotion, scrollToStage, siteScroller } from './scroll'
 
 const sectionMap: Record<string, string> = {
@@ -29,9 +30,12 @@ const sectionMap: Record<string, string> = {
 }
 
 export default function App() {
-  const [active, setActive] = useState(() => decodeHash(window.location.hash.slice(1)) || 'intro')
+  // Starts at the intro so the first render matches the prerendered page; the effects below
+  // pick up the address hash and the visible section right after mount.
+  const [active, setActive] = useState('intro')
   const [pastIntro, setPastIntro] = useState(false)
   const [infraGroup, setInfraGroup] = useState('wellness')
+  const [inquiry, setInquiry] = useState<Inquiry | null>(null)
 
   useEffect(() => {
     const root = siteScroller()
@@ -183,11 +187,11 @@ export default function App() {
           <Location />
           <Infrastructure activeGroupId={infraGroup} onSelectGroup={setInfraGroup} />
           <InfraDetail key={infraGroup} groupId={infraGroup} />
-          <InvestFormats />
-          <InvestManage />
-          <Apartments />
+          <InvestFormats onInquiry={setInquiry} />
+          <InvestManage onInquiry={setInquiry} />
+          <Apartments onInquiry={setInquiry} />
           <Construction />
-          <Contacts />
+          <Contacts inquiry={inquiry} />
         </main>
       </div>
     </>

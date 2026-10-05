@@ -24,6 +24,51 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="AL’PAKI LEGEND — a resort among the Carpathian mountains" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "__SITE_URL__#website",
+            "url": "__SITE_URL__",
+            "name": "AL’PAKI LEGEND",
+            "inLanguage": ["uk", "en"],
+            "publisher": { "@id": "__SITE_URL__#organization" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "__SITE_URL__#organization",
+            "name": "ALPAKI LLC",
+            "url": "__SITE_URL__",
+            "logo": "__SITE_URL__logo-mark.png",
+            "email": "info@alpaki.ua"
+          },
+          {
+            "@type": "ApartmentComplex",
+            "@id": "__SITE_URL__#complex",
+            "name": "AL’PAKI LEGEND",
+            "description": "A forthcoming Carpathian resort: apartments, leisure and investment in the Trostyanets tract, Kvasy.",
+            "url": "__SITE_URL__en/",
+            "image": "__SITE_URL__og-image-en.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "UA",
+              "addressRegion": "Zakarpattia Oblast",
+              "addressLocality": "Kvasy, Rakhiv district",
+              "streetAddress": "Trostyanets tract"
+            }
+          }
+        ]
+      }
+    </script>
+    <noscript>
+      <style>
+        /* Without the script nothing starts the entrance animation: show the first screen as is. */
+        .intro__backdrop img { opacity: 1 !important; transform: none !important; }
+        .stage--intro .intro { opacity: 1 !important; visibility: visible !important; }
+      </style>
+    </noscript>
   </head>
   <body>
     <div id="root"></div>

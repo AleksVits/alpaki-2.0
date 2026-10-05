@@ -2,6 +2,7 @@ import { asset } from '../asset'
 import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
+import { routeHref } from '../place'
 
 export function Location() {
   const { t } = useI18n()
@@ -66,7 +67,7 @@ export function Location() {
             </div>
             <span className="location__sep" aria-hidden="true" />
           </div>
-          <Btn href="https://maps.google.com/?q=Kvasy+Trostyanets" solid shine className="glass glass--chip">
+          <Btn href={routeHref} solid shine className="glass glass--chip">
             {t.location.route}
           </Btn>
         </div>

@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 // Порядок таблиць стилів має значення — див. DESIGN_SYSTEM.md, розділ 13.
 import './fonts.css'
 import './index.css'
@@ -19,10 +19,15 @@ import './controls.css'
 import App from './App.tsx'
 import { I18nProvider } from './i18n.tsx'
 
-createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root')!
+const app = (
   <StrictMode>
     <I18nProvider>
       <App />
     </I18nProvider>
-  </StrictMode>,
+  </StrictMode>
 )
+
+// The production build ships prerendered markup (scripts/prerender.mjs); the dev server does not.
+if (container.hasChildNodes()) hydrateRoot(container, app)
+else createRoot(container).render(app)

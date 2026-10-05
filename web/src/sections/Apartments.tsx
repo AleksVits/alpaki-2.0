@@ -4,10 +4,17 @@ import { Placeholder } from '../components/Placeholder'
 import { Btn, Lead, Pager, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
+import type { Inquiry } from '../inquiry'
 
-export function Apartments() {
+// Screens follow one path, and the pager walks it in the same order.
+const TYPES = 0
+const HOUSE = 1
+const FLOOR = 2
+const VIEW = 3
+
+export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => void }) {
   const { t } = useI18n()
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(TYPES)
   const [type, setType] = useState(0)
   const [house, setHouse] = useState(0)
   const [floor, setFloor] = useState(2)
@@ -17,14 +24,14 @@ export function Apartments() {
 
   return (
     <Stage id="apartments" className={`stage--apt stage--apt-${page}`} next="construction">
-      {page !== 1 && <Placeholder className="stage__photo" />}
+      {page !== HOUSE && <Placeholder className="stage__photo" />}
 
-      {page === 0 && (
+      {page === TYPES && (
         <div className="apt">
           <div className="apt__copy">
             <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.title)}</SectionHeading>
             <Lead>{t.apt.lead}</Lead>
-            <Btn solid onClick={() => setPage(1)}>{t.apt.cta}</Btn>
+            <Btn solid onClick={() => setPage(HOUSE)}>{t.apt.cta}</Btn>
           </div>
           <div className="apt-types">
             {t.apt.types.map((item, i) => (
@@ -34,7 +41,7 @@ export function Apartments() {
                 className={`apt-type ${type === i ? 'is-active' : ''}`}
                 onClick={() => {
                   setType(i)
-                  setPage(1)
+                  setPage(HOUSE)
                 }}
               >
                 <Placeholder className="apt-type__ph" />
@@ -48,7 +55,7 @@ export function Apartments() {
         </div>
       )}
 
-      {page === 1 && (
+      {page === HOUSE && (
         <div className="apt-house">
           <div className="apt-house__copy">
             <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.houseTitle)}</SectionHeading>
@@ -76,7 +83,7 @@ export function Apartments() {
               </button>
             ))}
           </div>
-          <Btn solid onClick={() => setPage(3)}>{t.apt.ctaHouse}</Btn>
+          <Btn solid onClick={() => setPage(FLOOR)}>{t.apt.ctaHouse}</Btn>
           <aside className="plan-card">
             <p className="plan-card__kicker">{t.apt.planKicker}</p>
             <p className="plan-card__area">{t.apt.planArea}</p>
@@ -93,40 +100,12 @@ export function Apartments() {
                 </button>
               ))}
             </div>
-            <Btn className="btn--secondary" onClick={() => setPage(2)}>{t.apt.planCta}</Btn>
+            <Btn className="btn--secondary" onClick={() => setPage(VIEW)}>{t.apt.planCta}</Btn>
           </aside>
         </div>
       )}
 
-      {page === 2 && (
-        <div className="apt-3d">
-          <div className="apt-3d__copy">
-            <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.viewTitle)}</SectionHeading>
-            <Lead>{t.apt.viewLead}</Lead>
-            <p className="apt-3d__meta">
-              <b>{t.apt.buildings[house].title}</b>
-              <span>{t.apt.floor.replace(/\d+/, t.apt.floors[floor])}</span>
-              <span>{t.apt.planArea}</span>
-              <span>{t.apt.types[type].title}</span>
-            </p>
-            <Btn solid href="#contacts">{t.apt.ctaPrice}</Btn>
-            <button type="button" className="text-link" onClick={() => setPage(1)}>
-              {t.apt.back}
-            </button>
-          </div>
-          <div className="apt-3d__scene">
-            <Placeholder className="apt-3d__ph" />
-            <IsoApartment />
-            {t.apt.zones.map((zone) => (
-              <span key={zone.id} className={`apt-3d__zone apt-3d__zone--${zone.id}`}>
-                {zone.label}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {page === 3 && (
+      {page === FLOOR && (
         <div className="apt-floor">
           <div className="apt-floor__copy">
             <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.floorTitle)}</SectionHeading>
@@ -143,9 +122,37 @@ export function Apartments() {
                 </button>
               ))}
             </div>
-            <Btn solid onClick={() => setPage(2)}>{t.apt.planCta}</Btn>
+            <Btn solid onClick={() => setPage(VIEW)}>{t.apt.planCta}</Btn>
           </div>
           <Placeholder className="apt-floor__ph" label={`${t.apt.buildings[house].title} · ${t.apt.floors[floor]}`} />
+        </div>
+      )}
+
+      {page === VIEW && (
+        <div className="apt-3d">
+          <div className="apt-3d__copy">
+            <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.viewTitle)}</SectionHeading>
+            <Lead>{t.apt.viewLead}</Lead>
+            <p className="apt-3d__meta">
+              <b>{t.apt.buildings[house].title}</b>
+              <span>{t.apt.floor.replace(/\d+/, t.apt.floors[floor])}</span>
+              <span>{t.apt.planArea}</span>
+              <span>{t.apt.types[type].title}</span>
+            </p>
+            <Btn solid href="#contacts" onClick={() => onInquiry({ kind: 'apartment', house, floor, type })}>{t.apt.ctaPrice}</Btn>
+            <button type="button" className="text-link" onClick={() => setPage(HOUSE)}>
+              {t.apt.back}
+            </button>
+          </div>
+          <div className="apt-3d__scene">
+            <Placeholder className="apt-3d__ph" />
+            <IsoApartment />
+            {t.apt.zones.map((zone) => (
+              <span key={zone.id} className={`apt-3d__zone apt-3d__zone--${zone.id}`}>
+                {zone.label}
+              </span>
+            ))}
+          </div>
         </div>
       )}
 
