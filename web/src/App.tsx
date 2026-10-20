@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useI18n } from './useI18n'
 import { Header } from './components/Header'
 import { SectionDots } from './components/SectionDots'
 import { SocialRail } from './components/SocialRail'
@@ -12,12 +13,12 @@ import { Intro } from './sections/Intro'
 import { InvestFormats, InvestManage } from './sections/Invest'
 import { Location } from './sections/Location'
 import type { Inquiry } from './inquiry'
-import { decodeHash, isMobileFlow, isProgrammaticScroll, reducedMotion, scrollToStage, siteScroller } from './scroll'
+import { decodeHash, scrollToStage, siteScroller } from './scroll'
 
 const sectionMap: Record<string, string> = {
   intro: 'intro',
-  'about-stats': 'about',
   'about-intro': 'about',
+  'about-stats': 'about',
   architecture: 'about',
   location: 'about',
   infrastructure: 'infra',
@@ -33,44 +34,19 @@ const sectionMap: Record<string, string> = {
 export default function App() {
   // Starts at the intro so the first render matches the prerendered page; the effects below
   // pick up the address hash and the visible section right after mount.
+  const { t } = useI18n()
+  const [contactsVisible, setContactsVisible] = useState(false)
+  useEffect(() => {
+    const contacts = document.getElementById('contacts')
+    if (!contacts) return
+    const observer = new IntersectionObserver(([entry]) => setContactsVisible(entry.isIntersecting), { root: siteScroller(), rootMargin: '0px 0px 100px 0px' })
+    observer.observe(contacts)
+    return () => observer.disconnect()
+  }, [])
   const [active, setActive] = useState('intro')
   const [pastIntro, setPastIntro] = useState(false)
   const [infraGroup, setInfraGroup] = useState('wellness')
   const [inquiry, setInquiry] = useState<Inquiry | null>(null)
-
-  useEffect(() => {
-    const root = siteScroller()
-    if (!root) return
-    let timer = 0
-    let dragging = false
-    const settle = () => {
-      if (isMobileFlow() || reducedMotion() || dragging || isProgrammaticScroll()
-        || root.querySelector('.is-viewing')
-        || document.documentElement.classList.contains('is-nav-lock')) return
-      const origin = root.getBoundingClientRect().top
-      const nearest = [...root.querySelectorAll<HTMLElement>('.stage')]
-        .map(el => ({ el, distance: Math.abs(el.getBoundingClientRect().top - origin) }))
-        .sort((a, b) => a.distance - b.distance)[0]
-      // Snap toward the nearest stage edge after scrolling settles.
-      if (nearest && nearest.distance > 2 && nearest.distance < Math.min(480, root.clientHeight * 0.35)) {
-        scrollToStage(nearest.el)
-      }
-    }
-    const schedule = () => { window.clearTimeout(timer); timer = window.setTimeout(settle, 180) }
-    const down = () => { dragging = true; window.clearTimeout(timer) }
-    const up = () => { dragging = false; schedule() }
-    root.addEventListener('scroll', schedule, { passive: true })
-    root.addEventListener('pointerdown', down)
-    window.addEventListener('pointerup', up)
-    window.addEventListener('pointercancel', up)
-    return () => {
-      window.clearTimeout(timer)
-      root.removeEventListener('scroll', schedule)
-      root.removeEventListener('pointerdown', down)
-      window.removeEventListener('pointerup', up)
-      window.removeEventListener('pointercancel', up)
-    }
-  }, [])
 
   useEffect(() => {
     const root = siteScroller()
@@ -180,11 +156,12 @@ export default function App() {
       <Header hidden={!showChrome} active={sectionMap[active] ?? 'about'} />
       {showChrome && <SocialRail centered={active === 'contacts'} />}
       {showChrome && <SectionDots ids={Object.keys(sectionMap)} active={active} />}
+      {pastIntro && !contactsVisible && active !== 'apartments' && <a className="mobile-apartment-cta" href="#apartments">{t.about.ctaApt}</a>}
       <div className="site">
         <main>
           <Intro />
-          <AboutStats />
           <AboutIntro />
+          <AboutStats />
           <Architecture />
           <Location />
           <Infrastructure activeGroupId={infraGroup} onSelectGroup={setInfraGroup} />

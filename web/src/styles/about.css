@@ -321,7 +321,7 @@
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 .ua-map__kvasy:is(:hover, :focus, :focus-visible) .ua-map__pin::after {
-  animation: ua-kvasy-ring 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation: none;
 }
 
 @keyframes ua-kvasy-ring {
@@ -332,7 +332,7 @@
 .ua-map__pin img {
   width: var(--ua-mark);
   height: var(--ua-mark);
-  animation: map-mark-pulse 2.8s ease-in-out infinite;
+  animation: none;
 }
 .ua-map__kvasy-name {
   font-size: var(--ua-kvasy);
@@ -965,7 +965,7 @@
   border: 2px solid color-mix(in srgb, var(--gold) 80%, #f5f2ed);
   opacity: 0;
   transform: scale(1);
-  animation: ua-kvasy-ring 2.8s ease-out infinite;
+  animation: none;
   border-color: var(--gold-2);
   box-shadow: 0 0 12px color-mix(in srgb, var(--gold) 40%, transparent);
 }

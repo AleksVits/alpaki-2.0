@@ -19,9 +19,11 @@ const ua = {
   },
   intro: {
     tagline: 'Власний простір\nу Карпатах',
+    summary: 'Майбутній комплекс апартаментів для відпочинку та інвестицій.',
+    location: 'Кваси · урочище Тростянець · Карпати',
   },
   inquiry: {
-    apartment: 'Цікавить вартість апартаментів: {house}, поверх {floor}, {type}.',
+    apartment: 'Цікавить вартість апартаментів: {house}, {type}.',
     offer: 'Прошу надіслати інвестиційну пропозицію.',
     consultation: 'Хочу записатися на консультацію щодо інвестування.',
     management: 'Цікавлять умови управління апартаментами.',
@@ -62,6 +64,7 @@ const ua = {
   },
   architecture: {
     kicker: 'Архітектура',
+    captions: ['Панорама комплексу серед гір', 'Фасад і вхід до будинку', 'Тераси на гірському схилі', 'Дерев’яний фасад і панорамне скління', 'Вечірнє освітлення фасаду', 'Апартаменти з балконами', 'Забудова на схилі', 'Під’їзд до будинків'],
     title: 'Архітектура\nсеред Карпат',
     text: 'Камінь, дерево й скло формують сучасну архітектуру,\nвідкриту до світла, простору та гірських краєвидів.',
     materials: [
@@ -202,8 +205,8 @@ const ua = {
       { id: 'two', n: '03', title: '2 кімнати', meta: 'від  …  до  …  м²' },
     ],
     houseTitle: 'Оберіть\nбудинок',
-    houseLead: 'Після вибору будинку перегляньте доступні поверхи та планування.',
-    steps: ['Будинок', 'Поверх', 'Планування'],
+    houseLead: 'Оберіть будинок і перегляньте планування обраного типу апартаментів.',
+    steps: ['Тип', 'Будинок', 'Планування'],
     buildings: [
       { id: 'vista', n: '01', title: 'Vista' },
       { id: 'astra', n: '02', title: 'Astra' },
@@ -224,7 +227,7 @@ const ua = {
     floor: 'Поверх 03',
     room: '1 кімната',
     ctaPrice: 'Дізнатися вартість',
-    back: 'Повернутися до планувань',
+    back: 'Повернутися до будинків',
     zones: [
       { id: 'room', label: 'Кімната' },
       { id: 'bath', label: 'Санвузол' },
@@ -361,9 +364,11 @@ const en: typeof ua = {
   },
   intro: {
     tagline: 'A private space\nin the Carpathians',
+    summary: 'A future apartment resort for holidays and investment.',
+    location: 'Kvasy · Trostianets · Carpathians',
   },
   inquiry: {
-    apartment: 'I would like to know the price of an apartment: {house}, floor {floor}, {type}.',
+    apartment: 'I would like to know the price of an apartment: {house}, {type}.',
     offer: 'Please send me the investment offer.',
     consultation: 'I would like to book a consultation about investing.',
     management: 'I would like to learn the apartment management terms.',
@@ -404,6 +409,7 @@ const en: typeof ua = {
   },
   architecture: {
     kicker: 'Architecture',
+    captions: ['Resort panorama in the mountains', 'Building facade and entrance', 'Terraces on the hillside', 'Timber facade and panoramic glazing', 'Evening facade lighting', 'Apartments with balconies', 'Hillside buildings', 'Access to the buildings'],
     title: 'Architecture\namong the Carpathians',
     text: 'Stone, timber and glass shape a contemporary architecture,\nopen to light, space and mountain views.',
     materials: [
@@ -544,8 +550,8 @@ const en: typeof ua = {
       { id: 'two', n: '03', title: '2 bedrooms', meta: 'from  …  to  …  m²' },
     ],
     houseTitle: 'Choose\na building',
-    houseLead: 'After choosing a building, browse available floors and layouts.',
-    steps: ['Building', 'Floor', 'Layout'],
+    houseLead: 'Choose a building and explore layouts for your selected apartment type.',
+    steps: ['Type', 'Building', 'Layout'],
     buildings: [
       { id: 'vista', n: '01', title: 'Vista' },
       { id: 'astra', n: '02', title: 'Astra' },
@@ -566,7 +572,7 @@ const en: typeof ua = {
     floor: 'Floor 03',
     room: '1 bedroom',
     ctaPrice: 'Request the price',
-    back: 'Back to layouts',
+    back: 'Back to buildings',
     zones: [
       { id: 'room', label: 'Bedroom' },
       { id: 'bath', label: 'Bathroom' },

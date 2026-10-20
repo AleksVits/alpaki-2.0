@@ -20,7 +20,7 @@ export function AboutStats() {
   ]
 
   return (
-    <Stage id="about-stats" className="stage--about-stats" next="about-intro">
+    <Stage id="about-stats" className="stage--about-stats" next="architecture">
       <div className="about-stats">
         <div className="about-stats__copy">
           <SectionHeading kicker={t.about.factsKicker}>{splitTitle(t.about.kicker)}</SectionHeading>
@@ -58,11 +58,12 @@ export function AboutIntro() {
   const near = useNearSection('about-intro')
   const { t } = useI18n()
   return (
-    <Stage id="about-intro" className="stage--about-intro" next="architecture" overlay={near ? <AboutSequence /> : null}>
+    <Stage id="about-intro" className="stage--about-intro" next="about-stats" overlay={near ? <AboutSequence /> : null}>
       <div className="about-intro">
         <div className="about-intro__copy">
           <SectionHeading kicker={t.about.ideaKicker}>{splitTitle(t.about.title)}</SectionHeading>
           <Lead>{t.about.lead}</Lead>
+          <p className="about-intro__location">{t.intro.location}</p>
           <ul className="features">
             {t.about.features.map((item, i) => (
               <li key={item.id}>

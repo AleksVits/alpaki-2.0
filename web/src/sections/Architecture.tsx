@@ -1,4 +1,5 @@
 import { GoldIcon } from '../components/GoldIcon'
+import { IconChevron } from '../components/Icons'
 import { IconStone, IconWood, IconGlass, IconTerrace } from '../components/RasterIcons'
 import { useNearSection } from '../useNearSection'
 import { createElement, useEffect, useRef, useState } from 'react'
@@ -85,7 +86,7 @@ export function Architecture() {
             className={`architecture__hero${i === index ? ' is-active' : ''}${i === prevIndex ? ' is-leaving' : ''}`}
           >
             {(i === index || i === prevIndex) && <img className="architecture__hero-bg" src={near ? src : undefined} alt="" />}
-            <img className="architecture__hero-photo" src={near ? src : undefined} alt={`${t.architecture.kicker} — ${i + 1}`} />
+            <img className="architecture__hero-photo" src={near ? src : undefined} alt={t.architecture.captions[i]} />
           </div>
         ))}
         {copyHidden && (
@@ -120,6 +121,7 @@ export function Architecture() {
           </div>
         </div>
       </div>
+      <p className="architecture__caption" aria-live="polite">{t.architecture.captions[index]}</p>
       <div className="thumbs glass glass--bar">
         <button
           type="button"
@@ -127,7 +129,7 @@ export function Architecture() {
           onClick={() => goTo((index - 1 + total) % total)}
           aria-label={t.ui.prev}
         >
-          ‹
+          <IconChevron dir="left" />
         </button>
         {Array.from({ length: 4 }, (_, i) => {
           const n = (start + i) % total
@@ -139,7 +141,7 @@ export function Architecture() {
               onClick={() => goTo(n)}
               onPointerMove={shineCard}
               onPointerLeave={resetShineCard}
-              aria-label={`${t.ui.photo} ${n + 1}`}
+              aria-label={`${t.ui.photo} ${n + 1} · ${t.architecture.captions[n]}`}
               aria-pressed={n === index}
             >
               <img src={near ? photos[n] : undefined} alt="" />
@@ -158,7 +160,7 @@ export function Architecture() {
           onClick={() => goTo((index + 1) % total)}
           aria-label={t.ui.next}
         >
-          ›
+          <IconChevron dir="right" />
         </button>
       </div>
     </Stage>

@@ -2,7 +2,7 @@ import { asset } from '../asset'
 
 /** Decorative raster artwork; the adjacent text provides the accessible label. */
 function RasterIcon({ name }: { name: string }) {
-  return <img className="premium-icon" src={asset(`icons/gold-raster/${name}.png`)} width="256" height="256" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+  return <img className="premium-icon" src={asset(`icons/gold-raster/${name}.webp`)} width="256" height="256" alt="" aria-hidden="true" loading="lazy" decoding="async" />
 }
 
 export function IconTree() { return <RasterIcon name="tree" /> }

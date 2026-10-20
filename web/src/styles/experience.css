@@ -1,0 +1,59 @@
+/* Shared palette roles and calm interaction rules, DESIGN_SYSTEM §20. */
+:root {
+  --card: var(--pine);
+  --liquid-glass-tint: rgba(32, 49, 35, .86);
+  --liquid-glass-tint-strong: rgba(32, 49, 35, .96);
+  --line: color-mix(in srgb, var(--gold) 30%, transparent);
+  --control-surface: var(--pine);
+  --control-hover: var(--pine);
+  --control-pressed: var(--marble);
+  --gold-metal: linear-gradient(var(--gold-2), var(--gold-2));
+  --icon-gold: var(--gold-2);
+  --icon-gold-light: var(--gold-2);
+  --icon-gold-shade: var(--gold-2);
+}
+#root .btn.btn--solid, #root .btn.glass.btn--solid { background: var(--gold-2); color: var(--on-gold); border-color: var(--gold-2); box-shadow: none; text-shadow: none; }
+#root .btn.btn--solid:is(:hover, :focus-visible), #root .btn.glass.btn--solid:is(:hover, :focus-visible) { background: var(--gold-3); box-shadow: none; }
+#root :is(.thumbs__item, .apt-type, .apt-house__card, .apt-thumbs__item, .build-detail__thumbs button):is(.is-active, [aria-pressed="true"]) { color: var(--gold-2); background: var(--pine); box-shadow: none; }
+.stage--architecture .thumbs__item:hover, .stage--architecture .thumbs__item.is-active:hover { transform: translateY(-.15rem); }
+.stage--architecture .thumbs__item:hover img { transform: none; }
+.site { scroll-snap-type: none; }
+.stage--intro .intro,
+.stage--intro.is-ready .intro,
+.stage--intro > .scroll-hint,
+.stage--intro.is-ready > .scroll-hint { opacity: 1; visibility: visible; animation: none; }
+.intro__backdrop img { transform: scale(1.06); }
+.intro__backdrop.is-ready img { animation: intro-calm 5s ease-out both; }
+@keyframes intro-calm { from { transform: scale(1.06); } to { transform: scale(1); } }
+.stage--intro .intro { margin-top: 0; gap: 1rem; padding: 1.5rem 0; }
+.stage--intro .intro__tag { color: var(--cream); white-space: normal; text-wrap: balance; }
+.about-intro__location { margin: 1rem 0 0; color: var(--gold-2); font-size: .85rem; line-height: 1.6; letter-spacing: .04em; text-wrap: balance; }
+.stage--intro .logo__mark { max-height: min(28svh, 13rem); width: auto; object-fit: contain; }
+.intro__backdrop::after { background: radial-gradient(ellipse at center, rgba(10,31,20,.65), rgba(10,31,20,.12)); }
+.stage--intro { height: auto; max-height: none; min-height: 100svh; }
+.stage--intro .stage__inner { display: flex; justify-content: center; min-height: 100svh; padding-block: 3rem 5rem; }
+.header__phone, .header__phone::after, .header__phone svg,
+.header__nav-marker, .burger-menu svg { animation: none !important; }
+.apt-progress { position: sticky; top: calc(var(--header) + .5rem); z-index: 6; width: 100%; margin: 0 0 1.5rem; padding: .6rem 1rem; border-radius: .5rem; background: var(--pine); color: var(--cream); }
+.apt-progress ol { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; padding: 0; margin: 0; list-style: none; }
+#root .apt-progress button { background: transparent; border: 0; border-bottom: 1px solid transparent; box-shadow: none; color: var(--cream); font: inherit; min-height: 44px; cursor: pointer; }
+#root .apt-progress button[aria-current] { color: var(--gold-2); border-color: var(--gold); }
+.apt-progress p { margin: .5rem 0 0; font-size: .85rem; color: var(--gold-2); }
+.stage--apt .stage__inner { display: flex; flex-direction: column; justify-content: center; align-items: stretch; }
+.pager__btn:disabled { opacity: .3; cursor: default; pointer-events: none; }
+.architecture__caption { position: absolute; left: 50%; bottom: 10rem; transform: translateX(-50%); z-index: 5; margin: 0; padding: .6rem 1rem; max-width: 90%; background: var(--pine); color: var(--cream); text-align: center; border-radius: .5rem; font-size: .85rem; }
+:is(.thumbs__arrow, .build-detail__nav, .infra-detail__caption button, .pager__btn) { color: var(--gold-2); min-width: 44px; min-height: 44px; }
+.thumbs__arrow svg { width: 1.25rem; height: 1.25rem; }
+:is(.thumbs__item, .apt-thumbs__item, .build-detail__thumbs button)[aria-pressed="true"] { outline: 1px solid var(--gold-2); outline-offset: 2px; }
+.mobile-apartment-cta { display: none; }
+@media (max-width: 900px) {
+  .mobile-apartment-cta { display: block; position: fixed; z-index: 35; bottom: calc(.75rem + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); max-width: calc(100% - 2rem); padding: .8rem 1.2rem; min-height: 48px; border-radius: .5rem; background: var(--pine); border: 1px solid var(--gold); color: var(--gold-2); text-decoration: none; text-align: center; box-shadow: 0 4px 20px #0a1f1466; }
+  html.is-nav-lock .mobile-apartment-cta { display: none; }
+  .site .stage:not(.stage--intro) .stage__inner { padding-bottom: 7rem; }
+  .apt-progress ol { gap: .35rem .75rem; }
+  #root .apt-progress button { min-height: 48px; font-size: .8rem; }
+  .architecture__caption { position: relative; inset: auto; transform: none; align-self: center; margin: 1rem auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro__backdrop.is-ready img { animation: none; transform: none; }
+}

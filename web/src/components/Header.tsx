@@ -13,7 +13,7 @@ type Props = {
 }
 
 const items = [
-  { id: 'about', href: '#about-stats' },
+  { id: 'about', href: '#about-intro' },
   { id: 'infra', href: '#infrastructure' },
   { id: 'invest', href: '#invest-formats' },
   { id: 'apartments', href: '#apartments' },

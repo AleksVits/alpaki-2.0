@@ -166,7 +166,7 @@
 .gold-orb img { object-fit: contain; }
 .gold-orb:hover { color: var(--cream); box-shadow: none; transform: translateY(-1px); }
 .header__phone.gold-orb {
-  animation: phone-glow 2.8s ease-in-out infinite;
+  animation: none;
   width: 2.8rem;
   height: 2.8rem;
   min-width: 44px;
@@ -183,12 +183,12 @@
   border: 1px solid color-mix(in srgb, var(--gold) 48%, transparent);
   background: none;
   pointer-events: none;
-  animation: phone-ripple 2.8s ease-out infinite;
+  animation: none;
 }
 .header__phone.gold-orb svg {
   width: 1.4rem;
   height: 1.4rem;
-  animation: phone-nudge 3.8s ease-in-out infinite;
+  animation: none;
 }
 .header__phone.gold-orb:hover {
   color: var(--cream);
@@ -592,12 +592,12 @@
     border-radius: 50%;
     border: 1px solid color-mix(in srgb, var(--cream) 55%, transparent);
     pointer-events: none;
-    animation: phone-ripple 2.8s ease-out infinite;
+    animation: none;
   }
   .header__menu-call-ico svg {
     width: 24px;
     height: 24px;
-    animation: smartphone-ring 5s ease-in-out infinite;
+    animation: none;
   }
   .header__menu-call:hover svg,
   .header__menu-call:active svg {
@@ -695,7 +695,7 @@
   transform: translateX(-50%);
   pointer-events: none;
   will-change: left, transform;
-  animation: header-nav-marker-shimmer 2.6s ease-in-out infinite;
+  animation: none;
 }
 
 @keyframes header-nav-marker-shimmer {
@@ -748,7 +748,7 @@
 .header__phone.gold-orb svg {
   width: 1.3rem;
   height: 1.3rem;
-  animation: smartphone-ring 5s ease-in-out infinite;
+  animation: none;
   transition: transform 320ms cubic-bezier(.2, .75, .25, 1), color 240ms ease;
   transform-origin: center;
 }
@@ -897,7 +897,7 @@
 #root .header__phone.gold-orb svg,
 #root .header__phone.gold-orb:hover svg,
 #root .header__menu-call-ico svg {
-  animation: smartphone-ring 5s ease-in-out infinite;
+  animation: none;
   transform-origin: center;
 }
 #root .header__menu-panel .header__link.is-active::after { width: 100%; height: 1px; clip-path: none; }

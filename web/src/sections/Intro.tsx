@@ -17,7 +17,7 @@ export function Intro() {
     <Stage
       id="intro"
       className={`stage--intro${imageReady ? ' is-ready' : ''}`}
-      next="about-stats"
+      next="about-intro"
       overlay={
         <div className={`intro__backdrop${imageReady ? ' is-ready' : ''}`} aria-hidden="true">
           <img
@@ -32,7 +32,7 @@ export function Intro() {
       }
     >
       <div className="intro">
-        <Logo animatedMark />
+        <Logo />
         <h1 className="intro__tag">
           <span className="visually-hidden">AL’PAKI LEGEND — </span>
           {splitTitle(t.intro.tagline)}

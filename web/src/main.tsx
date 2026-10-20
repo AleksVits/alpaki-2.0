@@ -16,6 +16,7 @@ import './styles/construction.css'
 import './styles/contacts.css'
 import './refinement.css'
 import './controls.css'
+import './styles/experience.css'
 import App from './App.tsx'
 import { I18nProvider } from './i18n.tsx'
 

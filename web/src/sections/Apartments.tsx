@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { scrollToStage } from '../scroll'
 import { FloorPlan, IsoApartment } from '../components/Maps'
 import { Placeholder } from '../components/Placeholder'
 import { Btn, Lead, Pager, Stage, SectionHeading } from '../components/Ui'
@@ -10,8 +11,7 @@ import type { Inquiry } from '../inquiry'
 // Screens follow one path, and the pager walks it in the same order.
 const TYPES = 0
 const HOUSE = 1
-const FLOOR = 2
-const VIEW = 3
+const VIEW = 2
 
 function Thumbs({ items, active, onSelect, label }: { items: Media[]; active: number; onSelect: (i: number) => void; label: (item: Media, i: number) => string }) {
   return (
@@ -35,15 +35,21 @@ function Thumbs({ items, active, onSelect, label }: { items: Media[]; active: nu
 export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => void }) {
   const { t } = useI18n()
   const [page, setPage] = useState(TYPES)
+  const previousPage = useRef(page)
+  useEffect(() => {
+    if (previousPage.current === page) return
+    previousPage.current = page
+    const section = document.getElementById('apartments')
+    if (section) scrollToStage(section)
+  }, [page])
   const [type, setTypeState] = useState(0)
   const [house, setHouseState] = useState(0)
-  const [floor, setFloor] = useState(2)
   const [render, setRender] = useState(0)
   const [layoutIndex, setLayoutIndex] = useState(0)
   const [view, setView] = useState(0)
-  const total = 4
+  const total = 3
 
-  const go = (dir: number) => setPage((v) => (v + dir + total) % total)
+  const go = (dir: number) => setPage((v) => Math.max(TYPES, Math.min(VIEW, v + dir)))
   const setType = (i: number) => {
     setTypeState(i)
     setLayoutIndex(0)
@@ -79,6 +85,10 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
         </div>
       )}
     >
+      <nav className="apt-progress" aria-label={t.apt.kicker}>
+        <ol>{t.apt.steps.map((step, i) => <li key={step}><button type="button" aria-current={page === i ? 'step' : undefined} onClick={() => setPage(i)}>{String(i + 1).padStart(2, '0')} · {step}</button></li>)}</ol>
+        <p aria-live="polite">{t.apt.types[type].title} · {building.title}{page === VIEW && layoutName ? ` · ${layoutName}` : ''}</p>
+      </nav>
       {page === TYPES && (
         <div className="apt">
           <div className="apt__copy">
@@ -115,13 +125,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
           <div className="apt-house__copy">
             <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.houseTitle)}</SectionHeading>
             <Lead>{t.apt.houseLead}</Lead>
-            <ol className="apt-house__steps">
-              {t.apt.steps.map((step, i) => (
-                <li key={step} className={i === 0 ? 'is-active' : ''}>
-                  {String(i + 1).padStart(2, '0')}  {step}
-                </li>
-              ))}
-            </ol>
+
           </div>
           <div className="apt-house__row">
             {t.apt.buildings.map((item, i) => (
@@ -152,7 +156,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
               />
             </div>
           )}
-          <Btn solid onClick={() => setPage(FLOOR)}>{t.apt.ctaHouse}</Btn>
+          <Btn solid onClick={() => setPage(VIEW)}>{t.apt.planCta}</Btn>
           <aside className="plan-card">
             <p className="plan-card__kicker">{t.apt.planKicker}</p>
             <p className="plan-card__area">{t.apt.planArea}</p>
@@ -178,29 +182,6 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
         </div>
       )}
 
-      {page === FLOOR && (
-        <div className="apt-floor">
-          <div className="apt-floor__copy">
-            <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.floorTitle)}</SectionHeading>
-            <Lead>{t.apt.floorLead}</Lead>
-            <div className="apt-floor__list">
-              {t.apt.floors.map((n, i) => (
-                <button
-                  key={n}
-                  type="button"
-                  className={floor === i ? 'is-active' : ''}
-                  onClick={() => setFloor(i)}
-                >
-                  {n}
-                </button>
-              ))}
-            </div>
-            <Btn solid onClick={() => setPage(VIEW)}>{t.apt.planCta}</Btn>
-          </div>
-          <Placeholder className="apt-floor__ph" label={`${building.title} · ${t.apt.floors[floor]}`} caption={`${building.title} · ${t.apt.floors[floor]} · ${t.apt.floorPlanSoon}`} />
-        </div>
-      )}
-
       {page === VIEW && (
         <div className={`apt-3d${layout ? ' apt-3d--media' : ''}`}>
           <div className="apt-3d__copy">
@@ -208,7 +189,6 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
             <Lead>{t.apt.viewLead}</Lead>
             <p className="apt-3d__meta">
               <b>{building.title}</b>
-              <span>{t.apt.floor.replace(/\d+/, t.apt.floors[floor])}</span>
               <span>{t.apt.planArea}</span>
               <span>{t.apt.types[type].title}{layout ? ` · ${layoutName}` : ''}</span>
             </p>
@@ -221,7 +201,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
                 ))}
               </div>
             )}
-            <Btn solid href="#contacts" onClick={() => onInquiry({ kind: 'apartment', house, floor, type, layout: layout?.n })}>{t.apt.ctaPrice}</Btn>
+            <Btn solid href="#contacts" onClick={() => onInquiry({ kind: 'apartment', house, type, layout: layout?.n })}>{t.apt.ctaPrice}</Btn>
             <button type="button" className="text-link" onClick={() => setPage(HOUSE)}>
               {t.apt.back}
             </button>
@@ -253,7 +233,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
       )}
 
       <div className="apt__pager">
-        <Pager current={page + 1} total={total} onPrev={() => go(-1)} onNext={() => go(1)} />
+        <Pager current={page + 1} total={total} bounded onPrev={() => go(-1)} onNext={() => go(1)} />
       </div>
     </Stage>
   )

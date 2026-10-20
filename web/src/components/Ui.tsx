@@ -107,9 +107,11 @@ export function Btn({
 export function Pager({
   current,
   total,
+  bounded = false,
   onPrev,
   onNext,
 }: {
+  bounded?: boolean
   current: number
   total: number
   onPrev: () => void
@@ -118,13 +120,13 @@ export function Pager({
   const { t } = useI18n()
   return (
     <div className="pager glass glass--pill">
-      <button type="button" className="pager__btn" onClick={onPrev} aria-label={t.ui.prev}>
+      <button type="button" className="pager__btn" disabled={bounded && current === 1} onClick={onPrev} aria-label={t.ui.prev}>
         <IconChevron dir="left" />
       </button>
       <span className="pager__num">
         {String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}
       </span>
-      <button type="button" className="pager__btn" onClick={onNext} aria-label={t.ui.next}>
+      <button type="button" className="pager__btn" disabled={bounded && current === total} onClick={onNext} aria-label={t.ui.next}>
         <IconChevron dir="right" />
       </button>
     </div>

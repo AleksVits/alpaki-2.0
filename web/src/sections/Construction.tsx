@@ -127,6 +127,7 @@ export function Construction() {
             {gallery.length > 0 && (
               <div className="build-detail__gallery-foot">
                 <p className="build-detail__photos-label">{t.build.photos}</p>
+                <span className="pager__num" aria-live="polite">{String(photo + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}</span>
                 <div className="build-detail__thumbs">
                   {gallery.map((image, i) => (
                     <button key={image} type="button" className={photo === i ? 'is-active' : ''} onClick={() => setPhoto(i)} aria-label={`${houses[house].title} · ${t.build.months[month]} · ${i + 1}`} aria-pressed={photo === i}>
