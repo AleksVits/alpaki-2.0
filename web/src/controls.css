@@ -49,24 +49,30 @@
   place-items: center;
 }
 
-/* CTA hierarchy: a light outline leads, an unboxed text action follows. */
+/* CTA hierarchy: one polished gold action per screen leads, an unboxed text action follows. */
 #root .btn.btn--solid,
 #root .btn.glass.btn--solid {
-  color: var(--gold-2);
-  border: 1px solid var(--gold-2);
-  background: transparent;
-  box-shadow: none;
+  color: var(--on-gold);
+  font-weight: 600;
+  border: 1px solid rgba(246, 230, 189, 0.85);
+  background: var(--control-highlight), var(--gold-metal);
+  box-shadow: inset 0 1px 0 rgba(255, 248, 225, 0.55), inset 0 -1px 0 rgba(122, 86, 30, 0.45), 0 8px 22px rgba(0, 0, 0, 0.28);
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.35);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
 #root .btn.btn--solid:is(:hover, :focus-visible),
 #root .btn.glass.btn--solid:is(:hover, :focus-visible) {
-  color: #fff7e4;
-  border-color: #fbf0d6;
-  background: rgba(201, 161, 90, 0.09);
-  box-shadow: none;
+  color: var(--on-gold);
+  border-color: var(--gold-3);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.04) 55%), var(--gold-metal);
+  box-shadow: inset 0 1px 0 rgba(255, 248, 225, 0.7), 0 10px 26px rgba(0, 0, 0, 0.3), 0 0 18px rgba(214, 169, 79, 0.28);
 }
-#root .btn.btn--solid:active { background: rgba(201, 161, 90, 0.21); }
+#root .btn.btn--solid:active {
+  color: var(--on-gold);
+  background: linear-gradient(0deg, rgba(60, 40, 10, 0.18), rgba(60, 40, 10, 0.18)), var(--gold-metal);
+  box-shadow: inset 0 2px 6px rgba(60, 40, 10, 0.35);
+}
 #root .btn.btn--ghost,
 #root .btn.btn--secondary,
 #root .btn.glass.btn--ghost {
@@ -149,7 +155,7 @@
 }
 
 /* Compact navigation keeps the site's dark-green atmosphere with gold accents. */
-@media (max-width: 1580px) {
+@media (max-width: 1279px) {
   #root .header__menu-scrim,
   #root .header__menu-scrim:is(:hover, :focus-visible, :active) {
     background: radial-gradient(circle at 72% 12%, rgba(35, 66, 49, 0.98), rgba(5, 22, 14, 0.99) 58%, #031009 100%);
@@ -238,4 +244,97 @@
   #root .gold-icon [stroke="currentColor"] { stroke: currentColor; }
   #root .gold-icon [fill="currentColor"] { fill: currentColor; }
   #root .header__burger span { background: ButtonText; }
+}
+
+/* Call button matches the round messenger buttons of the side rail. */
+#root .header__phone.gold-orb {
+  border-radius: 50%;
+  border: 1px solid rgba(233, 207, 148, 0.42);
+  background: rgba(10, 31, 20, 0.38);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+#root .header__phone.gold-orb::after { border-radius: 50%; }
+#root .header__phone.gold-orb:is(:hover, :focus-visible) {
+  border-color: var(--gold-2);
+  background: rgba(201, 161, 90, 0.14);
+}
+
+/* Phones get a one-tap call next to the menu. */
+@media (max-width: 720px) {
+  #root .header__right .header__phone.gold-orb {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  #root .header__right .header__phone.gold-orb svg { width: 1.2rem; height: 1.2rem; }
+}
+
+/* Primary actions keep their natural width on tablets instead of stretching across the grid. */
+@media (max-width: 1100px) {
+  .stage--apt .apt-house > .btn { justify-self: start; }
+}
+@media (max-width: 900px) {
+  .stage--apt .apt-house > .btn { justify-self: center; }
+}
+
+/* Readable type on phones and small tablets: captions at least 13px, descriptions 14px, leads 15px. */
+@media (max-width: 900px) {
+  #root .stage .kicker { font-size: 12.5px; }
+  #root .stage .lead { font-size: 15px; line-height: 1.55; }
+  #root .stage :is(.about-intro__quote, .architecture__quote) { font-size: 14px; }
+  #root .stage .btn > span { font-size: 14px; }
+  #root .stage .text-link { font-size: 13px; }
+  #root .stage :is(
+    .facts small,
+    .about-stats__chips span,
+    .features li > span:not(.features__icon),
+    .materials li > span:not(.materials__icon),
+    .apt-type > span,
+    .apt-type small,
+    .pager__num,
+    .thumbs__item > span,
+    .build-line button small,
+    .months button,
+    .build-detail__status,
+    .build-detail__photos-label,
+    .contacts__hours,
+    .contacts__list b,
+    .form > label,
+    .form__check span,
+    .infra-card__meta > span,
+    .infra-card__meta > small,
+    .infra-card b,
+    .infra-detail__item-label,
+    .infra-detail__photo-nav :is(span, strong),
+    .invest__flow li,
+    .manage-steps__n,
+    .location__near,
+    .location__cities :is(b, em),
+    .location__way strong
+  ) { font-size: 13px; }
+  #root .stage .location__way small { font-size: 13px; }
+  #root .stage :is(.build-line button strong, .contacts__list small, .form__lead, .invest-list__text small, .manage-steps li > small, .manage-steps li > strong, .invest-list__text strong) {
+    font-size: 14px;
+  }
+  #root .stage .invest-list__text strong,
+  #root .stage .manage-steps li > strong { font-size: 15px; }
+  #root .stage .ua-map__kvasy-name { font-size: 12px; }
+  #root .stage .ua-map__kvasy-sub { font-size: 10px; }
+  #root .logo__legend { font-size: 9.5px; }
+}
+@media (min-width: 901px) {
+  #root .stage :is(.infra-card__meta > small, .build-line button small, .about-intro .btn > span) { font-size: max(12.5px, 0.78rem); }
+  #root .stage .ua-map__kvasy-sub { font-size: max(12px, 0.72rem); }
+}
+
+/* Arrows inside the gold primary action are drawn in the dark ink, not in gold on gold. */
+#root .btn.btn--solid .gold-icon g,
+#root .btn.btn--solid .gold-icon [stroke="currentColor"] { stroke: var(--on-gold); }
+@media (max-width: 430px) {
+  #root .stage .build-line button small { font-size: 12px; letter-spacing: 0; overflow-wrap: normal; word-break: normal; -webkit-hyphens: auto; hyphens: auto; }
 }

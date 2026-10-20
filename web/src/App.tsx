@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Header } from './components/Header'
+import { SectionDots } from './components/SectionDots'
 import { SocialRail } from './components/SocialRail'
 import { AboutIntro, AboutStats } from './sections/About'
 import { Apartments } from './sections/Apartments'
@@ -178,6 +179,7 @@ export default function App() {
     <>
       <Header hidden={!showChrome} active={sectionMap[active] ?? 'about'} />
       {showChrome && <SocialRail centered={active === 'contacts'} />}
+      {showChrome && <SectionDots ids={Object.keys(sectionMap)} active={active} />}
       <div className="site">
         <main>
           <Intro />

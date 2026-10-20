@@ -18,7 +18,7 @@ export function UkraineMap() {
 
   return (
     <div className="ua-map" role="img" aria-label={t.ui.map}>
-      <img className="ua-map__img" src={asset('ukraine-map.png?v=3')} alt="" />
+      <img className="ua-map__img" src={asset('ukraine-map.png?v=4')} alt="" />
       {cities.map((city) => (
         <span
           key={city.id}
@@ -32,7 +32,7 @@ export function UkraineMap() {
       ))}
       <span className="ua-map__kvasy" style={{ left: '12.8%', top: '51.9%' }} tabIndex={0}>
         <span className="ua-map__pin">
-          <img src={asset('logo-mark-header.png?v=3')} alt="" />
+          <img src={asset('logo-mark-header.webp?v=4')} alt="" />
         </span>
         <span className="ua-map__kvasy-name">{t.about.kvasy}</span>
         <span className="ua-map__kvasy-sub">{t.about.tract}</span>

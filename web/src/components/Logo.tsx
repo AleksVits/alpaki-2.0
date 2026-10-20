@@ -1,7 +1,7 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { asset } from '../asset'
 
-const logoFrames = Array.from({ length: 10 }, (_, index) => asset(`logo-animation/${index + 1}.png?v=3`))
+const logoFrames = Array.from({ length: 10 }, (_, index) => asset(`logo-animation/${index + 1}.webp?v=4`))
 
 type Props = {
   compact?: boolean
@@ -27,7 +27,7 @@ function AnimatedLogoMark() {
     return () => { cancelled = true }
   }, [])
 
-  if (!ready) return <img className="logo__mark" src={asset('logo-mark.png?v=2')} alt="" />
+  if (!ready) return <img className="logo__mark" src={asset('logo-mark.webp?v=4')} alt="" />
 
   return (
     <span className="logo__mark logo__mark--animated" aria-hidden="true">
@@ -39,7 +39,7 @@ function AnimatedLogoMark() {
 export function Logo({ compact = false, animatedMark = false, className = '', style }: Props) {
   return (
     <a href="#intro" className={`logo ${compact ? 'logo--compact' : ''} ${className}`} style={style} aria-label="AL'PAKI LEGEND">
-      {animatedMark ? <AnimatedLogoMark /> : <img className="logo__mark" src={asset('logo-mark-header.png?v=3')} alt="" />}
+      {animatedMark ? <AnimatedLogoMark /> : <img className="logo__mark" src={asset('logo-mark-header.webp?v=4')} alt="" />}
       <span className="logo__text">
         <span className="logo__name">
           AL<span className="logo__apos">’</span>PAKI

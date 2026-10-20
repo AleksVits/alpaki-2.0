@@ -67,7 +67,7 @@ export function Header({ hidden, active }: Props) {
   }, [open, pinOrigin])
 
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1581px)')
+    const mq = window.matchMedia('(min-width: 1280px)')
     const onChange = () => {
       if (mq.matches) close()
     }

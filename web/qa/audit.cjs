@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const out = process.env.QA_OUTPUT || 'qa-output';
 fs.mkdirSync(out, { recursive: true });
-const sizes = process.env.QA_TOUCH ? [[320,568],[390,844],[768,1024],[1024,768]] : [[320,568],[375,667],[390,844],[430,932],[720,1024],[768,1024],[844,390],[900,700],[901,700],[1024,768],[1366,768],[1440,900],[1580,900],[1581,900],[1920,1080],[2560,1440],[3840,2160]];
+const sizes = process.env.QA_TOUCH ? [[320,568],[390,844],[768,1024],[1024,768]] : [[320,568],[375,667],[390,844],[430,932],[720,1024],[768,1024],[844,390],[900,700],[901,700],[1024,768],[1366,768],[1440,900],[1279,800],[1280,800],[1580,900],[1920,1080],[2560,1440],[3840,2160]];
 (async () => {
  const browser = await launch();
  const page = await browser.newPage({ reducedMotion: 'reduce', hasTouch: !!process.env.QA_TOUCH });

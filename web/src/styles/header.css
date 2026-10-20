@@ -375,14 +375,14 @@
   .rail { right: 1.1rem; bottom: 1.3rem; gap: 0.65rem; }
 }
 
-@media (min-width: 1581px) and (max-width: 1800px) {
+@media (min-width: 1280px) and (max-width: 1800px) {
   .header__nav,
   .header__nav.glass {
     gap: clamp(0.9rem, 1.25vw, 1.55rem);
   }
 }
 
-@media (max-width: 1580px) {
+@media (max-width: 1279px) {
   .header {
     grid-template-columns: 1fr auto;
     padding-inline: calc(1.1rem + env(safe-area-inset-left, 0px)) calc(1.1rem + env(safe-area-inset-right, 0px));
@@ -761,7 +761,7 @@
   95% { transform: rotate(-3deg); }
 }
 
-@media (max-width: 1580px) {
+@media (max-width: 1279px) {
   .header__menu-actions::before {
     content: '';
     position: absolute;
@@ -910,7 +910,7 @@
   }
 }
 
-@media (max-width: 1580px) {
+@media (max-width: 1279px) {
   #root .header__menu-panel {
     min-height: 100dvh;
     color: var(--gold-2);
@@ -935,7 +935,7 @@
 #root .header__burger::after { display: none; }
 #root .header__burger span { background: var(--gold-2); box-shadow: none; }
 
-@media (max-width: 1580px) {
+@media (max-width: 1279px) {
   #root .header__menu.is-open .header__menu-panel { visibility: visible; opacity: 1; }
 }
 
@@ -984,4 +984,89 @@
 
 @media (pointer: coarse) {
   #root .logo--compact { min-height: 48px; }
+}
+
+/* Section progress: slim gold dots on the free left edge, the current section drawn as a bar. */
+.section-dots {
+  position: fixed;
+  z-index: 34;
+  left: calc(1.15rem + env(safe-area-inset-left, 0px));
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+.section-dots ol {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.section-dots__dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.05rem;
+  pointer-events: auto;
+}
+.section-dots__dot::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(233, 207, 148, 0.38);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
+  transition: height 260ms ease, background 260ms ease, box-shadow 260ms ease;
+}
+.section-dots__dot:hover::before,
+.section-dots__dot:focus-visible::before { background: var(--gold-2); }
+.section-dots__dot.is-active::before {
+  height: 18px;
+  background: var(--gold-metal);
+  box-shadow: 0 0 10px rgba(214, 169, 79, 0.45);
+}
+.section-dots__dot.is-active { height: 1.7rem; }
+.section-dots__dot:focus-visible { outline: 1px solid var(--gold-2); outline-offset: 1px; border-radius: 4px; }
+.section-dots__label {
+  position: absolute;
+  left: calc(100% + 0.55rem);
+  top: 50%;
+  translate: -0.3rem -50%;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(233, 207, 148, 0.32);
+  border-radius: 6px;
+  background: rgba(8, 24, 16, 0.86);
+  color: var(--gold-2);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, translate 180ms ease;
+}
+.section-dots__dot:is(:hover, :focus-visible) .section-dots__label { opacity: 1; translate: 0 -50%; }
+.section-dots__count {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--gold-2);
+  font-variant-numeric: tabular-nums;
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+}
+.section-dots__count i { font-style: normal; color: rgba(233, 207, 148, 0.5); }
+@media (max-width: 900px), (max-height: 620px) {
+  .section-dots { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-dots__dot::before,
+  .section-dots__label { transition: none; }
+}
+@media (forced-colors: active) {
+  .section-dots__dot::before { background: CanvasText; }
+  .section-dots__dot.is-active::before { background: Highlight; }
 }

@@ -241,7 +241,7 @@ const ua = {
     lead: 'Стежте за реалізацією проєкту, етапами робіт та регулярними оновленнями з будівельного майданчика.',
     cta: 'Дивитися оновлення',
     houses: [
-      { id: 'vista', n: '01', title: 'Vista', status: 'Проєктування' },
+      { id: 'vista', n: '01', title: 'Vista', status: 'Проєкту\u00ADвання' },
       { id: 'astra', n: '02', title: 'Astra', status: 'У процесі' },
       { id: 'vela', n: '03', title: 'Vela', status: 'У процесі' },
       { id: 'cascade', n: '04', title: 'Cascade', status: 'У процесі' },
@@ -252,7 +252,7 @@ const ua = {
     ],
     crumb: 'Хід будівництва',
     current: 'Поточний статус',
-    status: 'Проєктування',
+    status: 'Проєкту\u00ADвання',
     detailLead:
       'Стежте за етапами реалізації будинку та переглядайте актуальні матеріали проєкту.',
     photos: 'Ілюстрації будівництва · візуалізація',
@@ -326,6 +326,22 @@ const ua = {
     nextSection: 'Наступний розділ',
     map: 'Карта України',
     photo: 'Фото',
+    sectionsNav: 'Розділи сторінки',
+    sections: {
+      intro: 'Головна',
+      'about-stats': 'У цифрах',
+      'about-intro': 'Ідея проєкту',
+      architecture: 'Архітектура',
+      location: 'Локація',
+      infrastructure: 'Інфраструктура',
+      'infra-detail': 'Простори',
+      'invest-formats': 'Формати інвестування',
+      'invest-manage': 'Управління',
+      apartments: 'Апартаменти',
+      construction: 'Хід будівництва',
+      'build-detail': 'Оновлення з майданчика',
+      contacts: 'Контакти',
+    },
   },
 }
 
@@ -651,6 +667,22 @@ const en: typeof ua = {
     nextSection: 'Next section',
     map: 'Map of Ukraine',
     photo: 'Photo',
+    sectionsNav: 'Page sections',
+    sections: {
+      intro: 'Home',
+      'about-stats': 'In numbers',
+      'about-intro': 'The idea',
+      architecture: 'Architecture',
+      location: 'Location',
+      infrastructure: 'Infrastructure',
+      'infra-detail': 'Spaces',
+      'invest-formats': 'Investment formats',
+      'invest-manage': 'Management',
+      apartments: 'Apartments',
+      construction: 'Construction',
+      'build-detail': 'Site updates',
+      contacts: 'Contacts',
+    },
   },
 }
 
