@@ -328,7 +328,7 @@
 }
 .rail__btn { width: 3.9rem; height: 3.9rem; }
 .rail__btn.gold-orb svg,
-.rail__btn.gold-orb img {
+.rail__btn.gold-orb :is(img, svg) {
   width: 1.7rem;
   height: 1.7rem;
 }
@@ -667,7 +667,7 @@
 
 @media (min-width: 1101px) {
   .rail__btn.gold-orb { background: #10201780; width: max(46px, 2.4rem); height: max(46px, 2.4rem); }
-  .rail__btn.gold-orb img,
+  .rail__btn.gold-orb :is(img, svg),
   .rail__btn.gold-orb svg {
     width: max(21px, 1.1rem);
     height: max(21px, 1.1rem);
@@ -879,7 +879,7 @@
 }
 #root .gold-orb img { filter: grayscale(1); }
 #root .gold-orb::before { background: var(--control-edge); }
-#root .rail__btn.gold-orb img {
+#root .rail__btn.gold-orb :is(img, svg) {
   width: clamp(26px, 1.5vw, 34px);
   height: clamp(26px, 1.5vw, 34px);
   filter: none;
@@ -967,7 +967,7 @@
     gap: 18px;
   }
   #root .header__menu-social { display: flex; gap: 12px; }
-  #root .header__menu-social-btn img { width: 24px; height: 24px; }
+  #root .header__menu-social-btn :is(img, svg) { width: 24px; height: 24px; }
   #root .header__menu-social-btn span { color: var(--titanium-2); font-size: 11px; }
   #root .header__menu-actions .header__langs {
     display: flex;

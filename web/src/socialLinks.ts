@@ -1,10 +1,10 @@
-import { asset } from './asset'
+import { IconTelegram, IconWhatsapp, IconViber } from './components/Icons'
 import { viberHref, whatsappHref } from './contactLinks'
 
 export function socialLinks(viberLabel: string) {
   return [
-    { href: 'https://t.me/', label: 'Telegram', icon: asset('icons/social-telegram.png?v=1') },
-    { href: whatsappHref, label: 'WhatsApp', icon: asset('icons/social-whatsapp.png?v=1') },
-    { href: viberHref, label: viberLabel, icon: asset('icons/social-phone.png?v=2') },
+    { href: 'https://t.me/', label: 'Telegram', Icon: IconTelegram },
+    { href: whatsappHref, label: 'WhatsApp', Icon: IconWhatsapp },
+    { href: viberHref, label: viberLabel, Icon: IconViber },
   ]
 }

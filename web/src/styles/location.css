@@ -70,7 +70,7 @@
 }
 .location__cities > span { display: flex; gap: 0.42rem; align-items: flex-start; }
 .location__ico { width: 3.375rem; height: 3.375rem; flex: none; }
-.location__ico img {
+.location__ico :is(img, svg) {
   width: 3.375rem;
   height: 3.375rem;
   max-width: 3.375rem;
@@ -185,7 +185,7 @@
     font-size: 0.68rem;
   }
   .location__ico,
-  .location__ico img {
+  .location__ico :is(img, svg) {
     width: 2.55rem;
     height: 2.55rem;
     max-width: 2.55rem;
@@ -364,7 +364,7 @@
     line-height: 1.3;
   }
   .location__ico,
-  .location__ico img {
+  .location__ico :is(img, svg) {
     width: 2.85rem;
     height: 2.85rem;
     max-width: 2.85rem;
@@ -541,7 +541,7 @@
   .stage--location .location__cities { gap: 0.9em; }
   .stage--location .location__cities > span { gap: 0.55em; }
   .stage--location .location__ico,
-  .stage--location .location__ico img {
+  .stage--location .location__ico :is(img, svg) {
     width: 3.35em;
     height: 3.35em;
     max-width: none;

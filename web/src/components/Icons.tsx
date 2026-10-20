@@ -1,189 +1,188 @@
+import { GoldIcon } from './GoldIcon'
+
 export function IconTree() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M16 4 L8 16 H13 L7 24 H25 L19 16 H24 Z" stroke="currentColor" strokeWidth="1.2" />
       <path d="M16 24 V29" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconBuildings() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M6 26 V12 L12 8 V26" stroke="currentColor" strokeWidth="1.2" />
       <path d="M12 26 V6 L26 10 V26" stroke="currentColor" strokeWidth="1.2" />
       <path d="M16 12 H20 M16 16 H20 M16 20 H20" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconUmbrella() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M6 16 C6 10 10 6 16 6 C22 6 26 10 26 16 Z" stroke="currentColor" strokeWidth="1.2" />
       <path d="M16 16 V26" stroke="currentColor" strokeWidth="1.2" />
       <path d="M16 26 C16 28 14 28 13 27" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconShield() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M16 5 L26 9 V16 C26 22 21 26 16 28 C11 26 6 22 6 16 V9 Z" stroke="currentColor" strokeWidth="1.2" />
       <path d="M16 10 L12 18 H20 L16 22" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconApt() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M8 27 V9 H24 V27" stroke="currentColor" strokeWidth="1.2" />
       <path d="M8 9 L16 4 L24 9" stroke="currentColor" strokeWidth="1.2" />
       <path d="M12 13 H14 M18 13 H20 M12 18 H14 M18 18 H20" stroke="currentColor" strokeWidth="1.2" />
       <path d="M14 27 V22 H18 V27" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconSpa() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <circle cx="16" cy="8.5" r="2.6" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M16 11.2 C12 14 10 18 10 22 C10 25 12.5 27 16 27 C19.5 27 22 25 22 22 C22 18 20 14 16 11.2 Z" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M13.5 20 H18.5" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M16 25C8 21 10 11 16 5c6 6 8 16 0 20Z" />
+      <path d="M16 25C8 26 4 20 4 13c5 0 9 3 12 8m0 4c8 1 12-5 12-12-5 0-9 3-12 8M7 28h18" />
+    </GoldIcon>
   )
 }
 
 export function IconPool() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path d="M6 24 C9 22 11 26 14 24 C17 22 19 26 22 24 C25 22 27 26 30 24" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M8 18 C12 12 16 14 20 10 C18 16 22 18 26 16" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-      <circle cx="20.5" cy="8.5" r="1.6" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M10 20V8a3 3 0 0 1 6 0m4 12V8a3 3 0 0 1 6 0M10 12h10M10 17h10" />
+      <path d="M4 22q3-3 6 0t6 0t6 0t6 0M4 27q3-3 6 0t6 0t6 0t6 0" />
+    </GoldIcon>
   )
 }
 
 export function IconCloche() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M7 22 C7 14 11 8 16 8 C21 8 25 14 25 22 Z" stroke="currentColor" strokeWidth="1.2" />
       <path d="M5 22 H27" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
       <path d="M16 8 V5" stroke="currentColor" strokeWidth="1.2" />
       <circle cx="16" cy="4.2" r="1.3" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconDish() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <circle cx="16" cy="16" r="9" stroke="currentColor" strokeWidth="1.2" />
       <circle cx="16" cy="16" r="3" stroke="currentColor" strokeWidth="1.2" />
       <path d="M16 4 V7 M16 25 V28 M4 16 H7 M25 16 H28" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconFire() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M16 5 C18.5 11 12 14 12 20 C12 24 14 27 16 27 C18 27 20 24 20 20 C20 14 13.5 11 16 5 Z" stroke="currentColor" strokeWidth="1.2" />
       <path d="M16 16 C17 18 15 19 15 22 C15 24 16.5 25.5 16 25.5" stroke="currentColor" strokeWidth="1.15" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconStone() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M8 20 L14 10 L24 12 L26 22 L16 26 Z" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconWood() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path d="M16 5 L10 27 H22 Z" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M16 12 C13 14 13 18 16 20 C19 18 19 14 16 12" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="6" y="4" width="20" height="24" rx="2" />
+      <path d="M11 4c-3 7 3 9 0 16-1 3-1 5 0 8M21 4c3 7-3 9 0 16 1 3 1 5 0 8M16 11c-4 4-4 8 0 11 4-3 4-7 0-11Z" />
+    </GoldIcon>
   )
 }
 
 export function IconGlass() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <rect x="7" y="6" width="18" height="20" stroke="currentColor" strokeWidth="1.2" />
       <path d="M16 6 V26 M7 16 H25" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconTerrace() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path d="M6 22 H26 M8 22 V14 H24 V22" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M10 14 L16 8 L22 14" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M4 27h24M5 17h22M6 17v10m5-10v10m5-10v10m5-10v10m5-10v10M5 13l7-8 6 7 4-4 5 5" />
+    </GoldIcon>
   )
 }
 
 export function IconTrain() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <rect x="8" y="6" width="16" height="16" rx="3" stroke="currentColor" strokeWidth="1.2" />
       <path d="M8 14 H24 M12 26 L14 22 M20 22 L22 26" stroke="currentColor" strokeWidth="1.2" />
       <circle cx="12" cy="18" r="1.4" fill="currentColor" />
       <circle cx="20" cy="18" r="1.4" fill="currentColor" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconCar() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M7 18 L10 12 H18 L24 18" stroke="currentColor" strokeWidth="1.2" />
       <path d="M4 18 H28 V22 H4 Z" stroke="currentColor" strokeWidth="1.2" />
       <circle cx="10" cy="22" r="2.1" stroke="currentColor" strokeWidth="1.2" />
       <circle cx="22" cy="22" r="2.1" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconPin() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M16 4 C11 4 8 8 8 12 C8 18 16 28 16 28 C16 28 24 18 24 12 C24 8 21 4 16 4 Z" stroke="currentColor" strokeWidth="1.2" />
       <circle cx="16" cy="12" r="3" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconClock() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <circle cx="16" cy="16" r="10" stroke="currentColor" strokeWidth="1.2" />
       <path d="M16 10 V16 L20 18" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconSmartphone() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <rect x="6" y="2" width="12" height="20" rx="3" stroke="currentColor" strokeWidth="1.4" />
       <path d="M10 5h4M11 19h2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconPhone() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
         d="M7.15 3.6h1.9c.55 0 1.02.4 1.12.94l.38 1.92c.1.46-.08.93-.46 1.2l-1.18.86c.95 2.05 2.62 3.72 4.68 4.68l.86-1.18c.27-.38.74-.56 1.2-.46l1.92.38c.54.1.94.57.94 1.12v1.9c0 .92-.82 1.62-1.73 1.42C9.7 16.55 5.45 12.3 4.73 5.33 4.53 4.42 5.23 3.6 6.15 3.6Z"
         stroke="currentColor"
@@ -191,22 +190,22 @@ export function IconPhone() {
         strokeLinejoin="round"
         strokeLinecap="round"
       />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconMail() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <rect x="5" y="8" width="22" height="16" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
       <path d="M5 10 L16 18 L27 10" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconTelegram() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
         d="M20.85 4.15 3.7 11.05c-.55.22-.52 1.02.04 1.2l4.55 1.48 1.72 5.28c.2.62 1.02.72 1.38.18l2.28-3.42 4.22 3.08c.55.4 1.32.1 1.42-.55L21.7 4.95c.1-.68-.62-1.15-.85-.8Z"
         stroke="currentColor"
@@ -220,13 +219,13 @@ export function IconTelegram() {
         strokeWidth="1.15"
         strokeLinecap="round"
       />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconWhatsapp() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
         d="M12.05 3.55c-4.52 0-8.2 3.55-8.2 7.92 0 1.4.37 2.7 1.02 3.82L3.7 20.3l5.05-1.32c1.08.58 2.32.9 3.3.9 4.52 0 8.2-3.55 8.2-7.92s-3.68-8.41-8.2-8.41Z"
         stroke="currentColor"
@@ -241,25 +240,32 @@ export function IconWhatsapp() {
         strokeLinejoin="round"
         strokeLinecap="round"
       />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconViber() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path
-        d="M10 6 H20 C23 6 26 9 26 13 V20 C26 24 23 26 20 26 H16 L10 29 V26 H10 C7 26 6 23 6 20 V13 C6 9 7 6 10 6 Z"
-        stroke="currentColor"
-        strokeWidth="1.2"
-      />
-    </svg>
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M10 4h12a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6h-6l-6 4v-4a6 6 0 0 1-6-6V10a6 6 0 0 1 6-6Z" />
+      <path d="m10 10 3-1 2 4-2 2c1 2 2 3 4 4l2-2 4 2-1 3c-6 1-13-6-12-12ZM18 9a5 5 0 0 1 5 5m-5-2a2 2 0 0 1 2 2" />
+    </GoldIcon>
+  )
+}
+
+export function IconLeisure() {
+  return (
+    <GoldIcon viewBox="0 0 32 32">
+      <path d="m4 26 8-15 6 10 4-7 6 12H4Zm5-9 3 2 3-2" />
+      <circle cx="23" cy="7" r="3" />
+      <path d="M5 7h6M8 4v6" />
+    </GoldIcon>
   )
 }
 
 export function IconKeys() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path
         d="M8.5 22.5 C8.5 19.5 11 17.5 14.2 17.5 H17.5 C19.2 17.5 20.5 18.8 20.5 20.5 V24.5 H10.2 C9.1 24.5 8.5 23.6 8.5 22.5 Z"
         stroke="currentColor"
@@ -270,94 +276,94 @@ export function IconKeys() {
       <path d="M14.6 17.8 V15.8 H17.4 V17.8" stroke="currentColor" strokeWidth="1.15" />
       <circle cx="22.8" cy="11.2" r="2.6" stroke="currentColor" strokeWidth="1.15" />
       <path d="M24.8 13.2 L28 16.4 M26.2 14.8 L28.2 14.2 M26.2 14.8 L26.8 16.8" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconCalendar() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <rect x="6" y="8" width="18" height="16" rx="1.4" stroke="currentColor" strokeWidth="1.15" />
       <path d="M6 12.5 H24 M11 6.2 V9.2 M19 6.2 V9.2" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
       <path d="M10 16 H14 M10 19.5 H14 M17 16 H20" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
       <path d="M18.2 21.2 L20.4 23.4 L26.2 17.2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconBell() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M10 20.5 C10 14.8 13.2 11.2 16 11.2 C18.8 11.2 22 14.8 22 20.5" stroke="currentColor" strokeWidth="1.15" strokeLinejoin="round" />
       <path d="M8.5 20.5 H23.5" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
       <path d="M11 23 H21" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
       <circle cx="16" cy="8.6" r="1.35" stroke="currentColor" strokeWidth="1.15" />
       <path d="M16 9.9 V11.2" stroke="currentColor" strokeWidth="1.15" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconChart() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M9 7.5 H19 L24 12.5 V24.5 H9 V7.5 Z" stroke="currentColor" strokeWidth="1.15" strokeLinejoin="round" />
       <path d="M19 7.5 V12.5 H24" stroke="currentColor" strokeWidth="1.15" strokeLinejoin="round" />
       <path d="M12 19.5 L15.2 16.2 L17.6 18.2 L21.5 13.5" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M19.2 13.5 H21.5 V15.8" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconHammam() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M8 24 H24 M10 24 V14 C10 10 22 10 22 14 V24" stroke="currentColor" strokeWidth="1.2" />
       <path d="M13 12 C13 8 19 8 19 12" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconJacuzzi() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <circle cx="16" cy="18" r="8" stroke="currentColor" strokeWidth="1.2" />
       <path d="M12 18 C13 16 15 16 16 18 C17 20 19 20 20 18" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconBanya() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <rect x="8" y="14" width="16" height="12" stroke="currentColor" strokeWidth="1.2" />
       <path d="M8 14 L16 7 L24 14" stroke="currentColor" strokeWidth="1.2" />
       <path d="M14 26 V20 H18 V26" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconGym() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <path d="M6 12 V20 M10 10 V22 M22 10 V22 M26 12 V20 M10 16 H22" stroke="currentColor" strokeWidth="1.4" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconChevron({ dir = 'down' }: { dir?: 'down' | 'left' | 'right' }) {
   const rotate = dir === 'left' ? '90' : dir === 'right' ? '-90' : '0'
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ transform: `rotate(${rotate}deg)` }}>
+    <GoldIcon viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ transform: `rotate(${rotate}deg)` }}>
       <path d="M6 9 L12 15 L18 9" stroke="currentColor" strokeWidth="1.4" />
-    </svg>
+    </GoldIcon>
   )
 }
 
 export function IconArrow() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M5 12 H19 M14 7 L19 12 L14 17" stroke="currentColor" strokeWidth="1.3" />
-    </svg>
+    </GoldIcon>
   )
 }
 
@@ -400,10 +406,10 @@ export function IconAmenity({ id }: { id: string }) {
   })()
 
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
       <g stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
         {drawing}
       </g>
-    </svg>
+    </GoldIcon>
   )
 }

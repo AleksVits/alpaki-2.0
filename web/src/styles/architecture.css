@@ -67,7 +67,7 @@
   place-items: center;
   color: var(--gold);
 }
-.materials__icon img {
+.materials__icon :is(img, svg) {
   width: 100%;
   height: 100%;
   max-width: 3.35rem;

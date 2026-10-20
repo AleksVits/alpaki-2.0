@@ -16,6 +16,10 @@
   --muted: var(--beige);
   --titanium-2: #d8d4cb;
   --titanium-dim: rgba(170, 166, 157, 0.38);
+  --icon-gold: #edbd58;
+  --icon-gold-light: #fff0ad;
+  --icon-gold-shade: #bd812b;
+  --icon-gold-gradient: linear-gradient(145deg, var(--icon-gold-light), var(--icon-gold) 36%, var(--icon-gold-light) 48%, var(--icon-gold-shade));
   --card: color-mix(in srgb, var(--pine) 78%, transparent);
   --font-display: 'Montserrat', system-ui, sans-serif;
   --font-brand: 'Montserrat', system-ui, sans-serif;

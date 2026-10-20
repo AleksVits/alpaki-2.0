@@ -1,24 +1,14 @@
+import { createElement } from 'react'
+import { IconTree, IconBuildings, IconPin, IconShield, IconApt, IconSpa, IconPool, IconCloche, IconLeisure } from '../components/Icons'
 import { useNearSection } from '../useNearSection'
-import { asset } from '../asset'
 import { AboutSequence } from '../components/AboutSequence'
 import { UkraineMap } from '../components/Maps'
 import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
 
-const statIcons = [
-  asset('icons/fact-tree.png?v=1'),
-  asset('icons/fact-buildings.png?v=1'),
-  asset('icons/fact-locations.png?v=1'),
-  asset('icons/fact-shield.png?v=1'),
-]
-const featureIcons = [
-  asset('icons/feature-apt.png?v=2'),
-  asset('icons/feature-spa.png?v=3'),
-  asset('icons/feature-pool.png?v=2'),
-  asset('icons/feature-rest.png?v=2'),
-  asset('icons/feature-leisure.png?v=2'),
-]
+const statIcons = [IconTree, IconBuildings, IconPin, IconShield]
+const featureIcons = [IconApt, IconSpa, IconPool, IconCloche, IconLeisure]
 
 export function AboutStats() {
   const { t } = useI18n()
@@ -40,7 +30,7 @@ export function AboutStats() {
               return (
                 <li key={item.value} className={`facts__item${long ? ' facts__item--long' : ''}`}>
                   <span className="facts__icon">
-                    <img src={statIcons[i]} alt="" />
+                    {createElement(statIcons[i])}
                   </span>
                   <span>
                     {long ? <small>{item.value}</small> : <strong>{item.value}</strong>}
@@ -77,7 +67,7 @@ export function AboutIntro() {
             {t.about.features.map((item, i) => (
               <li key={item.id}>
                 <span className="features__icon">
-                  <img src={featureIcons[i]} alt="" />
+                  {createElement(featureIcons[i])}
                 </span>
                 <span>{item.label}</span>
               </li>

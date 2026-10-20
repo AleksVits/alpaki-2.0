@@ -1,4 +1,4 @@
-import { asset } from '../asset'
+import { IconTrain, IconCar, IconPin } from '../components/Icons'
 import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
@@ -20,7 +20,7 @@ export function Location() {
             <div className="location__ways">
               <div className="location__way location__way--train">
                 <span className="location__ico">
-                  <img src={asset('icons/location-train.png?v=4')} alt="" />
+                  <IconTrain />
                 </span>
                 <span>
                   <strong>{t.location.train}</strong>
@@ -30,7 +30,7 @@ export function Location() {
               <span className="location__sep" aria-hidden="true" />
               <div className="location__way location__way--car">
                 <span className="location__ico">
-                  <img src={asset('icons/location-car.png?v=4')} alt="" />
+                  <IconCar />
                 </span>
                 <span>
                   <strong>{t.location.car}</strong>
@@ -43,21 +43,21 @@ export function Location() {
             <div className="location__places">
               <div className="location__cities">
                 <span>
-                  <img className="location__pin" src={asset('icons/location-pin.png?v=1')} alt="" />
+                  <IconPin />
                   <span>
                     <b>{t.location.if}</b>
                     <em>{t.location.ifMeta}</em>
                   </span>
                 </span>
                 <span>
-                  <img className="location__pin" src={asset('icons/location-pin.png?v=1')} alt="" />
+                  <IconPin />
                   <span>
                     <b>{t.location.lviv}</b>
                     <em>{t.location.lvivMeta}</em>
                   </span>
                 </span>
                 <span>
-                  <img className="location__pin" src={asset('icons/location-pin.png?v=1')} alt="" />
+                  <IconPin />
                   <span>
                     <b>{t.location.uzh}</b>
                     <em>{t.location.uzhMeta}</em>

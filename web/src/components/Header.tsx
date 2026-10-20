@@ -276,7 +276,7 @@ export function Header({ hidden, active }: Props) {
                   aria-label={item.label}
                   tabIndex={open ? 0 : -1}
                 >
-                  <img src={item.icon} alt="" />
+                  <item.Icon />
                   <span>{item.label}</span>
                 </a>
               ))}

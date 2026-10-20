@@ -1,17 +1,14 @@
+import { GoldIcon } from '../components/GoldIcon'
+import { IconStone, IconWood, IconGlass, IconTerrace } from '../components/Icons'
 import { useNearSection } from '../useNearSection'
-import { useEffect, useRef, useState } from 'react'
+import { createElement, useEffect, useRef, useState } from 'react'
 import { asset } from '../asset'
 import { Lead, Stage, SectionHeading } from '../components/Ui'
 import { resetShineCard, shineCard } from '../components/uiEffects'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
 
-const materialIcons = [
-  asset('icons/material-stone.png?v=4'),
-  asset('icons/material-wood.png?v=4'),
-  asset('icons/material-glass.png?v=4'),
-  asset('icons/material-terrace.png?v=4'),
-]
+const materialIcons = [IconStone, IconWood, IconGlass, IconTerrace]
 const photos = Array.from({ length: 8 }, (_, i) => asset(`architecture/${String(i).padStart(2, '0')}.webp`))
 
 export function Architecture() {
@@ -98,9 +95,9 @@ export function Architecture() {
             onClick={() => setCopyHidden(false)}
             aria-label={t.ui.close}
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
+            <GoldIcon viewBox="0 0 24 24" aria-hidden="true">
               <path d="m6 6 12 12M18 6 6 18" />
-            </svg>
+            </GoldIcon>
           </button>
         )}
       </div>
@@ -113,7 +110,7 @@ export function Architecture() {
             {t.architecture.materials.map((item, i) => (
               <li key={item.id}>
                 <span className="materials__icon">
-                  <img src={materialIcons[i]} alt="" />
+                  {createElement(materialIcons[i])}
                 </span>
                 <span>{item.label}</span>
               </li>

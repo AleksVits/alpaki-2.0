@@ -1,3 +1,4 @@
+import { GoldIcon } from '../components/GoldIcon'
 import { IconBell, IconCalendar, IconChart, IconKeys } from '../components/Icons'
 import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
@@ -39,11 +40,11 @@ export function InvestFormats({ onInquiry }: InquiryProps) {
                 </span>
                 {item.n === '03' && (
                   <span className="invest-list__sq">
-                    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                    <GoldIcon viewBox="0 0 64 64" fill="none" aria-hidden="true">
                       <rect x="9" y="7" width="39" height="39" rx="1.5" />
                       <path d="M9 51v5m39-5v5M9 54h39M53 7h5m-5 39h5M56 7v39" />
                       <path d="m9 54 3-2m-3 2 3 2m36-2-3-2m3 2-3 2M56 7l-2 3m2-3 2 3m-2 36-2-3m2 3 2-3" />
-                    </svg>
+                    </GoldIcon>
                     <span>{t.invest.minArea}</span>
                   </span>
                 )}

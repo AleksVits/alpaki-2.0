@@ -15,7 +15,7 @@ export function SocialRail({ centered = false }: { centered?: boolean }) {
           rel="noreferrer"
           aria-label={item.label}
         >
-          <img src={item.icon} alt="" />
+          <item.Icon />
         </a>
       ))}
     </aside>

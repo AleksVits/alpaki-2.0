@@ -1,4 +1,4 @@
-/* Shared Titanium finish for every action, independent of section styling. */
+/* Titanium control surfaces with the logo's gold icon finish. */
 :root {
   --control-surface: rgba(67, 64, 58, 0.8);
   --control-hover: rgba(88, 84, 77, 0.9);
@@ -213,4 +213,22 @@
 /* Keep the visible icons compact while making the whole control easy to tap. */
 @media (pointer: coarse) {
   #root .scroll-hint { min-height: 48px; min-width: 48px; }
+}
+
+/* Apply paint to glyphs only; labels and control surfaces retain their tokens. */
+#root svg.gold-icon {
+  color: var(--icon-gold);
+  filter: drop-shadow(0 1px 1px rgba(38, 23, 4, .45));
+}
+#root .gold-icon [stroke="currentColor"] { stroke: var(--icon-paint); }
+#root .gold-icon [fill="currentColor"] { fill: var(--icon-paint); }
+#root .header__burger span { background: var(--icon-gold-gradient); }
+.invest__flow li:not(:last-child)::after { color: var(--icon-gold); }
+
+@media (forced-colors: active) {
+  #root svg.gold-icon { color: CanvasText; filter: none; }
+  #root .gold-icon g,
+  #root .gold-icon [stroke="currentColor"] { stroke: currentColor; }
+  #root .gold-icon [fill="currentColor"] { fill: currentColor; }
+  #root .header__burger span { background: ButtonText; }
 }
