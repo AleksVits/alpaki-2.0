@@ -1,5 +1,5 @@
 import { createElement } from 'react'
-import { IconTree, IconBuildings, IconPin, IconShield, IconApt, IconSpa, IconPool, IconCloche, IconLeisure } from '../components/Icons'
+import { IconTree, IconBuildings, IconPin, IconShield, IconApt, IconSpa, IconPool, IconCloche, IconLeisure } from '../components/RasterIcons'
 import { useNearSection } from '../useNearSection'
 import { AboutSequence } from '../components/AboutSequence'
 import { UkraineMap } from '../components/Maps'

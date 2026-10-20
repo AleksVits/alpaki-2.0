@@ -77,7 +77,7 @@
   max-height: 3.375rem;
   object-fit: contain;
 }
-.location__cities svg,
+.location__cities :is(svg, img.premium-icon),
 .location__pin {
   width: 2rem;
   height: 2rem;
@@ -173,7 +173,7 @@
   .location__cities { flex-wrap: nowrap; justify-content: space-between; gap: 0.55rem 0.85rem; }
   .location__cities b { font-size: 0.72rem; letter-spacing: 0.08em; }
   .location__cities em { font-size: 0.68rem; white-space: nowrap; }
-  .location__cities svg,
+  .location__cities :is(svg, img.premium-icon),
   .location__pin {
     width: 1.55rem;
     height: 1.55rem;
@@ -370,7 +370,7 @@
     max-width: 2.85rem;
     max-height: 2.85rem;
   }
-  .location__cities svg,
+  .location__cities :is(svg, img.premium-icon),
   .location__pin {
     width: 1.85rem;
     height: 1.85rem;
@@ -580,7 +580,7 @@
   .stage--location .location__way--train,
   .stage--location .location__way--car {
     padding-right: 1.2rem;
-    border-right: 1px solid rgba(228, 216, 205, 0.2);
+    border-right: 1px solid rgba(230, 210, 168, 0.2);
   }
   .stage--location .location__way--car { border-right: 0; }
   .stage--location .location__way--car small.pre { max-width: 20ch; }
@@ -589,7 +589,7 @@
     align-items: center;
     min-width: 0;
     padding-left: 1.3rem;
-    border-left: 1px solid rgba(228, 216, 205, 0.2);
+    border-left: 1px solid rgba(230, 210, 168, 0.2);
   }
   .stage--location .location__cities { width: 100%; justify-content: space-between; gap: 1.1rem; }
   .stage--location .location__bar > .btn { align-self: center; white-space: nowrap; }

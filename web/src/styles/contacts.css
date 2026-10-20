@@ -267,7 +267,7 @@
   .stage--contacts .stage__inner {
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: #e4d8cd40 transparent;
+    scrollbar-color: #e6d2a840 transparent;
   }
   .site .contacts { overflow: visible; }
 }
@@ -468,7 +468,7 @@
   top: .75rem;
   bottom: 1rem;
   width: 1px;
-  background: linear-gradient(var(--gold-2), rgba(216, 212, 203, .08));
+  background: linear-gradient(var(--gold-2), rgba(233, 207, 148, .08));
 }
 .stage.stage--contacts .contacts__list .contacts__place--main small {
   max-width: 34rem;
@@ -477,7 +477,7 @@
 }
 .stage.stage--contacts .contacts__list .contacts__place--office {
   padding: .55rem 0 1rem 1.3rem;
-  border-bottom: 1px solid rgba(216, 212, 203, .22);
+  border-bottom: 1px solid rgba(233, 207, 148, .22);
 }
 .stage.stage--contacts .contacts__list .contacts__place--office small { color: var(--beige); }
 .stage.stage--contacts .contacts__list .contacts__channel {
@@ -491,7 +491,7 @@
   height: 1.1rem;
   margin: 0;
   padding: .55rem;
-  border: 1px solid rgba(216, 212, 203, .28);
+  border: 1px solid rgba(233, 207, 148, .28);
   border-radius: 50%;
   background: rgba(8, 26, 18, .24);
 }
@@ -518,14 +518,14 @@
   min-width: 0;
 }
 .stage.stage--contacts .contacts__list .contacts__channel a:is(:hover, :focus-visible) {
-  color: var(--titanium-2);
-  background: rgba(216, 212, 203, .07);
+  color: var(--gold-2);
+  background: rgba(233, 207, 148, .07);
 }
 .stage.stage--contacts .contacts__list .contacts__channel a:is(:hover, :focus-visible) svg {
-  border-color: var(--titanium-2);
+  border-color: var(--gold-2);
 }
 .stage.stage--contacts .contacts__list .contacts__channel a:focus-visible {
-  outline: 2px solid var(--titanium-2);
+  outline: 2px solid var(--gold-2);
   outline-offset: 3px;
 }
 
@@ -561,7 +561,7 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .35); }
 dialog.modal .modal__card { min-width: 0; max-height: 100%; overflow-y: auto; }
 dialog.modal h3 { overflow-wrap: anywhere; }
 dialog.modal .btn { min-height: 48px; }
-dialog.modal .btn:focus-visible { outline: 2px solid var(--titanium-2); outline-offset: 3px; }
+dialog.modal .btn:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 3px; }
 #root .form__check .text-link { min-height: 44px; }
 
 @media (pointer: coarse) {

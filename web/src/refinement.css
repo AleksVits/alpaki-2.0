@@ -230,14 +230,14 @@
 }
 :is(.infra-detail__items button, .plan-card__types button, .apt-floor__list button) {
   background: var(--liquid-glass-highlight), rgba(15, 34, 23, 0.46);
-  border-color: rgba(228, 216, 205, 0.22);
+  border-color: rgba(230, 210, 168, 0.22);
   -webkit-backdrop-filter: blur(8px) saturate(1.2);
   backdrop-filter: blur(8px) saturate(1.2);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.11);
 }
 :is(.manage-steps__icon, .build-line span, .apt-3d__zone) {
   background: var(--liquid-glass-highlight), rgba(12, 30, 20, 0.5);
-  border-color: rgba(228, 216, 205, 0.28);
+  border-color: rgba(230, 210, 168, 0.28);
   -webkit-backdrop-filter: blur(8px) saturate(1.2);
   backdrop-filter: blur(8px) saturate(1.2);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.17), 0 6px 15px rgba(0, 0, 0, 0.12);
@@ -245,7 +245,7 @@
 
 /* Photo cards keep their images crisp; only their edge and footer pick up glass. */
 :is(.infra-card, .apt-type, .apt-house__card, .build-detail__thumbs button) {
-  border: 1px solid rgba(228, 216, 205, 0.25);
+  border: 1px solid rgba(230, 210, 168, 0.25);
   border-radius: clamp(0.45rem, 0.5vw, 0.75rem);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 12px 28px rgba(0, 0, 0, 0.19);
 }
@@ -274,7 +274,7 @@
 }
 .infra-detail__items button {
   background: var(--liquid-glass-highlight), rgba(9, 28, 18, 0.76);
-  border-color: rgba(228, 216, 205, 0.29);
+  border-color: rgba(230, 210, 168, 0.29);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.13);
 }
 
@@ -316,7 +316,7 @@
   gap: clamp(0.75rem, 1.2vw, 1.4rem);
   min-height: clamp(5.5rem, 10.2vh, 7.5rem);
   padding: clamp(0.75rem, 1vw, 1.15rem) clamp(1rem, 1.4vw, 1.65rem);
-  border: 1px solid rgba(228, 216, 205, 0.26);
+  border: 1px solid rgba(230, 210, 168, 0.26);
   border-radius: 0.55rem;
   background: var(--liquid-glass-highlight), rgba(8, 24, 16, 0.68);
   -webkit-backdrop-filter: blur(14px) saturate(1.25);

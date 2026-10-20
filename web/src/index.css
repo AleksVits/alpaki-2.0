@@ -6,16 +6,20 @@
   --cream: #f5f2ed;
   --beige: #e4d8cd;
   --graphite: #1e1e1d;
-  --titanium: #aaa69d;
   --marble: #0a1f14;
-  --silver: #c0c0c0;
   --pine: #203123;
   --bg: var(--marble);
   --bg-2: var(--pine);
   --ink: var(--cream);
   --muted: var(--beige);
-  --titanium-2: #d8d4cb;
-  --titanium-dim: rgba(170, 166, 157, 0.38);
+  /* Gold palette, sampled from the brand mark: base, readable light tone, deep shade. */
+  --gold: #c9a15a;
+  --gold-2: #e9cf94;
+  --gold-3: #f6e6bd;
+  --gold-deep: #9a7230;
+  --gold-dim: rgba(201, 161, 90, 0.38);
+  --gold-metal: linear-gradient(140deg, #f5dfa3 0%, #d6a94f 36%, #f1d388 52%, #c39243 74%, #a87a2e 100%);
+  --on-gold: #2b1d08;
   --icon-gold: #edbd58;
   --icon-gold-light: #fff0ad;
   --icon-gold-shade: #bd812b;
@@ -42,17 +46,14 @@
   --glass-radius-bar: 0.5rem;
   --glass-radius-pill: 0.5rem;
   --glass-radius-chip: 0.5rem;
-  --gold: var(--titanium);
-  --gold-2: var(--titanium-2);
-  --gold-dim: var(--titanium-dim);
-  --line: rgba(228, 216, 205, 0.18);
+  --line: rgba(230, 210, 168, 0.18);
   --liquid-glass-highlight:
     radial-gradient(ellipse 92% 130% at 4% -55%, rgba(255, 255, 255, 0.22), transparent 73%),
     linear-gradient(165deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.025) 29%, transparent 58%),
     radial-gradient(ellipse 78% 85% at 105% 118%, rgba(218, 199, 155, 0.09), transparent 75%);
   --liquid-glass-tint: rgba(9, 28, 18, 0.55);
   --liquid-glass-tint-strong: rgba(8, 24, 16, 0.7);
-  --liquid-glass-edge: rgba(228, 216, 205, 0.31);
+  --liquid-glass-edge: rgba(230, 210, 168, 0.31);
   --liquid-glass-shadow:
     0 12px 30px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.24),
@@ -410,7 +411,7 @@ h3 {
       180% 140% at var(--mx) var(--my),
       rgba(255, 248, 232, 0.28) 0%,
       rgba(255, 248, 232, 0.12) 18%,
-      rgba(170, 166, 157, 0.08) 38%,
+      rgba(201, 161, 90, 0.08) 38%,
       transparent 72%
     );
   mix-blend-mode: soft-light;
@@ -758,7 +759,7 @@ select {
 .stage .btn.btn--solid:hover { background: var(--gold-2); }
 .stage .btn.btn--secondary {
   font-weight: 400;
-  border-color: rgba(228, 216, 205, 0.28);
+  border-color: rgba(230, 210, 168, 0.28);
   background: var(--liquid-glass-highlight), rgba(8, 26, 18, 0.5);
   -webkit-backdrop-filter: blur(11px) saturate(1.28);
   backdrop-filter: blur(11px) saturate(1.28);
@@ -818,7 +819,7 @@ select {
 .stage .btn.btn--ghost:not(.btn--secondary):hover,
 .stage .btn.glass.btn--ghost:hover {
   background: var(--liquid-glass-highlight), rgba(24, 48, 34, 0.66);
-  border-color: rgba(228, 216, 205, 0.46);
+  border-color: rgba(230, 210, 168, 0.46);
   box-shadow: var(--liquid-glass-shadow);
 }
 .stage .btn.btn--solid.glass { -webkit-backdrop-filter: none; backdrop-filter: none; }
@@ -839,7 +840,7 @@ select {
 }
 .stage .btn.btn--secondary:hover,
 .stage .btn.btn--secondary:focus-visible {
-  border-color: rgba(228, 216, 205, 0.52);
+  border-color: rgba(230, 210, 168, 0.52);
   background: var(--liquid-glass-highlight), rgba(18, 42, 29, 0.67);
 }
 .stage .btn.btn--secondary > span { text-decoration: none; }
@@ -847,3 +848,6 @@ select {
 @media (pointer: coarse) {
   .pager__btn { min-width: 48px; min-height: 48px; }
 }
+
+/* Transparent gold miniatures keep intrinsic detail without CSS recoloring. */
+.premium-icon { display: block; object-fit: contain; flex-shrink: 0; }

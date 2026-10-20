@@ -1,5 +1,5 @@
 import { GoldIcon } from '../components/GoldIcon'
-import { IconStone, IconWood, IconGlass, IconTerrace } from '../components/Icons'
+import { IconStone, IconWood, IconGlass, IconTerrace } from '../components/RasterIcons'
 import { useNearSection } from '../useNearSection'
 import { createElement, useEffect, useRef, useState } from 'react'
 import { asset } from '../asset'

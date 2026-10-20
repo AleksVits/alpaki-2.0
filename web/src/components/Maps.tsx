@@ -18,7 +18,7 @@ export function UkraineMap() {
 
   return (
     <div className="ua-map" role="img" aria-label={t.ui.map}>
-      <img className="ua-map__img" src={asset('ukraine-map.png?v=2')} alt="" />
+      <img className="ua-map__img" src={asset('ukraine-map.png?v=3')} alt="" />
       {cities.map((city) => (
         <span
           key={city.id}
@@ -32,7 +32,7 @@ export function UkraineMap() {
       ))}
       <span className="ua-map__kvasy" style={{ left: '12.8%', top: '51.9%' }} tabIndex={0}>
         <span className="ua-map__pin">
-          <img src={asset('logo-mark-header.png')} alt="" />
+          <img src={asset('logo-mark-header.png?v=3')} alt="" />
         </span>
         <span className="ua-map__kvasy-name">{t.about.kvasy}</span>
         <span className="ua-map__kvasy-sub">{t.about.tract}</span>
@@ -68,7 +68,7 @@ export function FloorPlan() {
 export function IsoApartment() {
   return (
     <svg className="iso" viewBox="0 0 640 420" aria-hidden="true">
-      <g fill="none" stroke="#aaa69d" strokeWidth="1.2">
+      <g fill="none" stroke="#c9a15a" strokeWidth="1.2">
         <path d="M80 240 L240 160 L560 200 L400 300 Z" />
         <path d="M240 160 L240 40 L560 80 L560 200" />
         <path d="M80 240 L80 140 L240 40" />

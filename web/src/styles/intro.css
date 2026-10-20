@@ -148,8 +148,8 @@
   font-weight: 600;
   line-height: 1.12;
   letter-spacing: 0.08em;
-  color: var(--titanium-2);
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.62), 0 0 1px rgba(216, 212, 203, 0.8);
+  color: var(--gold-2);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.62), 0 0 1px rgba(233, 207, 148, 0.8);
   white-space: nowrap;
 }
 .stage--intro .intro__tag span { display: inline; }

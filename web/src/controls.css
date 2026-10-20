@@ -1,24 +1,24 @@
-/* Titanium control surfaces with the logo's gold icon finish. */
+/* Gold control surfaces matching the brand mark. */
 :root {
-  --control-surface: rgba(67, 64, 58, 0.8);
-  --control-hover: rgba(88, 84, 77, 0.9);
-  --control-pressed: rgba(49, 46, 41, 0.94);
-  --control-edge: rgba(170, 166, 157, 0.65);
-  --control-highlight: linear-gradient(160deg, #ffffff1f, #ffffff04 55%, #aaa69d10);
+  --control-surface: rgba(22, 36, 26, 0.82);
+  --control-hover: rgba(70, 56, 28, 0.9);
+  --control-pressed: rgba(40, 31, 14, 0.94);
+  --control-edge: rgba(201, 161, 90, 0.65);
+  --control-highlight: linear-gradient(160deg, #ffffff1f, #ffffff04 55%, #c9a15a14);
 }
 #root .btn--solid {
-  color: #292722;
-  border-color: var(--titanium-2);
-  background: var(--control-highlight), var(--titanium);
+  color: var(--on-gold);
+  border-color: var(--gold-2);
+  background: var(--control-highlight), var(--gold-metal);
   text-shadow: none;
 }
 #root .btn--solid:is(:hover, :focus-visible) {
-  color: #292722;
-  background: var(--control-highlight), var(--titanium-2);
+  color: var(--on-gold);
+  background: var(--control-highlight), var(--gold-2);
 }
-#root :is(button, .btn, .gold-orb):active { color: #f3f0e9; background: var(--control-pressed); }
+#root :is(button, .btn, .gold-orb):active { color: #fbf0d6; background: var(--control-pressed); }
 #root button:disabled {
-  color: var(--titanium);
+  color: var(--gold);
   background: var(--control-surface);
   opacity: 0.5;
   cursor: not-allowed;
@@ -26,16 +26,23 @@
 
 /* Photographic cards keep their images; only the frame changes. */
 #root :is(.thumbs__item, .apt-type, .apt-house__card) { background-color: var(--control-surface); }
+/* Selected photo cards keep the picture readable: a warm gold glaze instead of a solid metal fill. */
+#root :is(.thumbs__item, .apt-type, .apt-house__card, .apt-thumbs__item, .build-detail__thumbs button):is(.is-active, [aria-pressed="true"]) {
+  color: var(--gold-3);
+  border-color: var(--gold-2);
+  background: linear-gradient(180deg, rgba(201, 161, 90, 0.26), rgba(154, 114, 48, 0.14)), var(--control-surface);
+  box-shadow: inset 0 1px 0 rgba(246, 230, 189, 0.28), 0 0 0 1px rgba(201, 161, 90, 0.28), 0 12px 28px rgba(0, 0, 0, 0.22);
+}
 
 /* Text actions and image navigation retain their lightweight silhouettes. */
 #root :is(.text-link, .header__lang, .header__burger, .header__menu-close, .thumbs__arrow, .pager__btn, .infra-detail__picker-arrow, .build-line__arrow) {
   background: transparent;
   box-shadow: none;
-  color: var(--titanium-2);
+  color: var(--gold-2);
 }
-#root .header__lang.is-active { color: #f3f0e9; }
+#root .header__lang.is-active { color: #fbf0d6; }
 #root .scroll-hint {
-  color: var(--titanium-2);
+  color: var(--gold-2);
   min-width: 44px;
   min-height: 44px;
   display: grid;
@@ -45,8 +52,8 @@
 /* CTA hierarchy: a light outline leads, an unboxed text action follows. */
 #root .btn.btn--solid,
 #root .btn.glass.btn--solid {
-  color: var(--titanium-2);
-  border: 1px solid var(--titanium-2);
+  color: var(--gold-2);
+  border: 1px solid var(--gold-2);
   background: transparent;
   box-shadow: none;
   -webkit-backdrop-filter: none;
@@ -54,16 +61,16 @@
 }
 #root .btn.btn--solid:is(:hover, :focus-visible),
 #root .btn.glass.btn--solid:is(:hover, :focus-visible) {
-  color: #fffaf1;
-  border-color: #f3f0e9;
-  background: rgba(170, 166, 157, 0.09);
+  color: #fff7e4;
+  border-color: #fbf0d6;
+  background: rgba(201, 161, 90, 0.09);
   box-shadow: none;
 }
-#root .btn.btn--solid:active { background: rgba(170, 166, 157, 0.21); }
+#root .btn.btn--solid:active { background: rgba(201, 161, 90, 0.21); }
 #root .btn.btn--ghost,
 #root .btn.btn--secondary,
 #root .btn.glass.btn--ghost {
-  color: var(--titanium-2);
+  color: var(--gold-2);
   border-color: transparent;
   background: transparent;
   box-shadow: none;
@@ -73,7 +80,7 @@
 #root .btn.btn--ghost:is(:hover, :focus-visible),
 #root .btn.btn--secondary:is(:hover, :focus-visible),
 #root .btn.glass.btn--ghost:is(:hover, :focus-visible) {
-  color: #fffaf1;
+  color: #fff7e4;
   border-color: transparent;
   background: transparent;
   box-shadow: none;
@@ -91,17 +98,17 @@
 /* Photo paging and floating messengers stay legible without opaque circles. */
 #root .infra-detail__photo-nav button,
 #root .infra-detail__photo-nav button:is(:hover, :focus-visible, :active) {
-  color: var(--titanium-2);
+  color: var(--gold-2);
   border: 0;
   background: transparent;
   box-shadow: none;
 }
-#root .infra-detail__photo-nav button:is(:hover, :focus-visible) { color: #fffaf1; }
+#root .infra-detail__photo-nav button:is(:hover, :focus-visible) { color: #fff7e4; }
 
 /* Construction gallery controls let the photograph remain unobstructed. */
 #root .stage--build-detail .build-detail__nav,
 #root .stage--build-detail .build-detail__nav:is(:hover, :focus-visible, :active) {
-  color: var(--titanium-2);
+  color: var(--gold-2);
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -109,16 +116,16 @@
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
-#root .stage--build-detail .build-detail__nav:is(:hover, :focus-visible) { color: #fffaf1; }
+#root .stage--build-detail .build-detail__nav:is(:hover, :focus-visible) { color: #fff7e4; }
 #root .rail__btn.gold-orb,
 #root .rail__btn.gold-orb:is(:hover, :focus-visible, :active) {
-  border-color: rgba(216, 212, 203, .42);
+  border-color: rgba(233, 207, 148, .42);
   background: transparent;
   box-shadow: none;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
-#root .rail__btn.gold-orb:is(:hover, :focus-visible) { border-color: var(--titanium-2); }
+#root .rail__btn.gold-orb:is(:hover, :focus-visible) { border-color: var(--gold-2); }
 #root .header__langs--bar .header__lang,
 #root .header__langs--bar .header__lang:is(:hover, :focus-visible, :active),
 #root .header__langs--bar .header__lang.is-active {
@@ -127,21 +134,21 @@
   box-shadow: none;
 }
 #root .header__phone.gold-orb {
-  color: var(--titanium-2);
-  border-color: rgba(170, 166, 157, 0.48);
+  color: var(--gold-2);
+  border-color: rgba(201, 161, 90, 0.48);
   background: var(--liquid-glass-highlight), rgba(10, 31, 20, 0.82);
   box-shadow: var(--liquid-glass-shadow);
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  :root { --control-surface: #43403a; --control-hover: #58544d; --control-pressed: #312e29; }
+  :root { --control-surface: #16241a; --control-hover: #463818; --control-pressed: #281f0e; }
   #root .btn.btn--solid,
   #root .btn.glass.btn--solid {
     background: transparent;
   }
 }
 
-/* Compact navigation keeps the site's dark-green atmosphere with Titanium accents. */
+/* Compact navigation keeps the site's dark-green atmosphere with gold accents. */
 @media (max-width: 1580px) {
   #root .header__menu-scrim,
   #root .header__menu-scrim:is(:hover, :focus-visible, :active) {
@@ -152,7 +159,7 @@
   #root .header__menu-actions .header__menu-call.glass,
   #root .header__menu-social-btn.gold-orb,
   #root .header__menu-actions .header__lang.is-active {
-    color: var(--titanium-2);
+    color: var(--gold-2);
   }
 }
 
@@ -174,11 +181,11 @@
     width: 100%;
     min-height: 48px;
     box-sizing: border-box;
-    border: 1px solid rgba(216, 212, 203, 0.5);
+    border: 1px solid rgba(233, 207, 148, 0.5);
     border-radius: 8px;
     padding: 12px 16px;
-    background: rgba(216, 212, 203, 0.04);
-    color: var(--titanium-2);
+    background: rgba(233, 207, 148, 0.04);
+    color: var(--gold-2);
     box-shadow: none;
     transform: none;
   }
@@ -194,7 +201,7 @@
     border: 0;
     background: transparent;
     box-shadow: none;
-    color: var(--titanium-2);
+    color: var(--gold-2);
   }
   #root .header__menu-actions .header__lang,
   #root .header__menu-actions .header__lang:is(:hover, :focus-visible, :active) {
@@ -204,10 +211,10 @@
     border-radius: 6px;
     background: transparent;
     box-shadow: none;
-    color: var(--titanium-2);
+    color: var(--gold-2);
     text-decoration: none;
   }
-  #root .header__menu-actions .header__lang.is-active { background: rgba(216, 212, 203, 0.16); }
+  #root .header__menu-actions .header__lang.is-active { background: rgba(233, 207, 148, 0.16); }
 }
 
 /* Keep the visible icons compact while making the whole control easy to tap. */

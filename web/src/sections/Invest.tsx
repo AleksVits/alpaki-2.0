@@ -1,5 +1,5 @@
 import { GoldIcon } from '../components/GoldIcon'
-import { IconBell, IconCalendar, IconChart, IconKeys } from '../components/Icons'
+import { IconBell, IconCalendar, IconChart, IconKeys } from '../components/RasterIcons'
 import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { asset } from '../asset'

@@ -134,7 +134,7 @@
       180% 140% at var(--mx) var(--my),
       rgba(255, 248, 232, 0.28) 0%,
       rgba(255, 248, 232, 0.12) 18%,
-      rgba(170, 166, 157, 0.08) 38%,
+      rgba(201, 161, 90, 0.08) 38%,
       transparent 72%
     );
   mix-blend-mode: soft-light;

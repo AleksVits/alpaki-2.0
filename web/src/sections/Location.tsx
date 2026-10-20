@@ -1,4 +1,4 @@
-import { IconTrain, IconCar, IconPin } from '../components/Icons'
+import { IconTrain, IconCar, IconPin } from '../components/RasterIcons'
 import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
