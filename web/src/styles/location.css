@@ -1,7 +1,7 @@
 /* Location — copy and the bottom transport panel. */
 
 .stage--location .scroll-hint { bottom: 0.45rem; }
-.stage--location { background: url('/location-redrawn.webp') center / cover no-repeat; overflow: hidden; }
+.stage--location { background: url('/location-approved.jpg') center / cover no-repeat; overflow: hidden; }
 .stage--location .stage__shade { background: none; }
 .location__copy {
   max-width: var(--type-copy-max);
