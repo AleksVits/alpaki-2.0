@@ -138,7 +138,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
                   <img src={typeCovers[i].thumb} alt="" loading="lazy" decoding="async" />
                 </span>
                 <span>
-                  {item.n}  {item.title}
+                  {item.title}
                   <small>{item.meta}</small>
                 </span>
               </button>

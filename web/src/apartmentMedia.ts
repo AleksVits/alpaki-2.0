@@ -58,7 +58,7 @@ export const layouts: Layout[][][] = [
 
 /** Card picture for each apartment type on the first screen. */
 export const typeCovers: Media[] = [
-  media('interiors/a-10', 'interior'),
-  media('interiors/a-07', 'interior'),
-  media('interiors/b-14', 'interior'),
+  media('type-icons/studio', '3d'),
+  media('type-icons/one-room', '3d'),
+  media('type-icons/two-room', '3d'),
 ]

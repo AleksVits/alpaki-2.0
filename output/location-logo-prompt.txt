@@ -1,0 +1,1 @@
+Built-in image_gen edit. Replace only the emblem inside the upper-right AL’PAKI map pin with the supplied sculpted gold angular A logo. Preserve the outer pin, labels, route, landscape, framing and colors. References: location-redrawn.webp and user-supplied gold logo.

@@ -110,3 +110,7 @@
 
 #root .messenger-icon { display: block; object-fit: contain; }
 #root :is(.rail__btn, .header__menu-social-btn).gold-orb img.messenger-icon { filter: none; }
+
+/* Conceptual category illustrations remain fully visible, including room divisions. */
+#root .apt-type__ph { height: auto; aspect-ratio: 3 / 2; background: var(--marble); overflow: hidden; }
+#root .apt-type__ph img { width: 100%; height: 100%; object-fit: contain; }

@@ -1,15 +1,13 @@
 import { GoldIcon } from '../components/GoldIcon'
 import { IconChevron } from '../components/Icons'
-import { IconStone, IconWood, IconGlass, IconTerrace } from '../components/RasterIcons'
 import { useNearSection } from '../useNearSection'
-import { createElement, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { asset } from '../asset'
 import { Lead, Stage, SectionHeading } from '../components/Ui'
 import { resetShineCard, shineCard } from '../components/uiEffects'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
 
-const materialIcons = [IconStone, IconWood, IconGlass, IconTerrace]
 const photos = Array.from({ length: 8 }, (_, i) => asset(`architecture/${String(i).padStart(2, '0')}.webp`))
 
 export function Architecture() {
@@ -107,16 +105,6 @@ export function Architecture() {
           <SectionHeading kicker={t.architecture.kicker}>{splitTitle(t.architecture.title)}</SectionHeading>
           <div className="architecture__details">
           <Lead aria-hidden={copyHidden}>{t.architecture.text}</Lead>
-          <ul className="materials" aria-hidden={copyHidden}>
-            {t.architecture.materials.map((item, i) => (
-              <li key={item.id}>
-                <span className="materials__icon">
-                  {createElement(materialIcons[i])}
-                </span>
-                <span>{item.label}</span>
-              </li>
-            ))}
-          </ul>
           <p className="architecture__quote" aria-hidden={copyHidden}>{t.architecture.note}</p>
           </div>
         </div>
