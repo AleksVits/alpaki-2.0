@@ -1,15 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { scrollToStage } from '../scroll'
-import { FloorPlan, IsoApartment } from '../components/Maps'
+import { IsoApartment } from '../components/Maps'
 import { Placeholder } from '../components/Placeholder'
-import { Btn, Lead, Pager, Stage, SectionHeading } from '../components/Ui'
+import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { buildingRenders, layouts, typeCovers, type Media } from '../apartmentMedia'
 import { useI18n } from '../useI18n'
 import type { Inquiry } from '../inquiry'
 
-// Screens follow one path, and the pager walks it in the same order.
-const TYPES = 0
+/*
+ * One path, three steps: type → building → layout.
+ * The step tabs are the only navigation; each step has a single primary action,
+ * and nothing is chosen on the visitor's behalf.
+ */
+const TYPE = 0
 const HOUSE = 1
 const VIEW = 2
 
@@ -34,7 +38,14 @@ function Thumbs({ items, active, onSelect, label }: { items: Media[]; active: nu
 
 export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => void }) {
   const { t } = useI18n()
-  const [page, setPage] = useState(TYPES)
+  const [page, setPage] = useState(TYPE)
+  const [type, setType] = useState<number | null>(null)
+  const [house, setHouse] = useState<number | null>(null)
+  const [render, setRender] = useState(0)
+  const [layoutIndex, setLayoutIndex] = useState(0)
+  const [view, setView] = useState(0)
+
+  // Each step change brings the whole section back into view.
   const previousPage = useRef(page)
   useEffect(() => {
     if (previousPage.current === page) return
@@ -42,37 +53,38 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
     const section = document.getElementById('apartments')
     if (section) scrollToStage(section)
   }, [page])
-  const [type, setTypeState] = useState(0)
-  const [house, setHouseState] = useState(0)
-  const [render, setRender] = useState(0)
-  const [layoutIndex, setLayoutIndex] = useState(0)
-  const [view, setView] = useState(0)
-  const total = 3
 
-  const go = (dir: number) => setPage((v) => Math.max(TYPES, Math.min(VIEW, v + dir)))
-  const setType = (i: number) => {
-    setTypeState(i)
+  const hasLayouts = (h: number, ty: number | null) => ty !== null && layouts[h][ty].length > 0
+  const options = house !== null && type !== null ? layouts[house][type] : []
+  const layout = options[Math.min(layoutIndex, options.length - 1)]
+  const current = layout?.views[Math.min(view, layout.views.length - 1)]
+  const typeTitle = type !== null ? t.apt.types[type].title : ''
+  const building = house !== null ? t.apt.buildings[house] : null
+  const preview = house ?? 0
+  const renders = buildingRenders[preview]
+  const variant = (i: number) => t.apt.variant.replace('{n}', String(i + 1))
+  const canOpen = [true, type !== null, house !== null && hasLayouts(house, type)]
+
+  const chooseType = (i: number) => {
+    setType(i)
     setLayoutIndex(0)
     setView(0)
+    setPage(HOUSE)
   }
-  const setHouse = (i: number) => {
-    setHouseState(i)
+  const chooseHouse = (i: number) => {
+    setHouse(i)
     setRender(0)
     setLayoutIndex(0)
     setView(0)
   }
-  const selectLayout = (i: number) => {
+  const chooseLayout = (i: number) => {
     setLayoutIndex(i)
     setView(0)
   }
 
-  const building = t.apt.buildings[house]
-  const renders = buildingRenders[house]
-  const options = layouts[house][type]
-  const layout = options[Math.min(layoutIndex, options.length - 1)]
-  const current = layout?.views[Math.min(view, layout.views.length - 1)]
-  const layoutName = layout ? t.apt.layout.replace('{n}', String(layout.n)) : ''
-  const backdrop = page === TYPES ? buildingRenders[0][0] : page === HOUSE ? renders[render] : renders[0]
+  const backdrop = page === TYPE ? buildingRenders[0][0] : buildingRenders[preview][0]
+  const summary = [typeTitle, building?.title, page === VIEW && layout ? variant(layoutIndex) : ''].filter(Boolean).join(' · ')
+  const inquiry = (): Inquiry => ({ kind: 'apartment', house: house ?? 0, type: type ?? 0, layout: layout?.n })
 
   return (
     <Stage
@@ -86,15 +98,30 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
       )}
     >
       <nav className="apt-progress" aria-label={t.apt.kicker}>
-        <ol>{t.apt.steps.map((step, i) => <li key={step}><button type="button" aria-current={page === i ? 'step' : undefined} onClick={() => setPage(i)}>{String(i + 1).padStart(2, '0')} · {step}</button></li>)}</ol>
-        <p aria-live="polite">{t.apt.types[type].title} · {building.title}{page === VIEW && layoutName ? ` · ${layoutName}` : ''}</p>
+        <ol>
+          {t.apt.steps.map((step, i) => (
+            <li key={step}>
+              <button
+                type="button"
+                className={i < page ? 'is-done' : ''}
+                aria-current={page === i ? 'step' : undefined}
+                disabled={!canOpen[i]}
+                onClick={() => setPage(i)}
+              >
+                <span className="apt-progress__n">{String(i + 1).padStart(2, '0')}</span> {step}
+              </button>
+            </li>
+          ))}
+        </ol>
+        {summary && <p aria-live="polite">{summary}</p>}
       </nav>
-      {page === TYPES && (
+
+      {page === TYPE && (
         <div className="apt">
           <div className="apt__copy">
             <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.title)}</SectionHeading>
             <Lead>{t.apt.lead}</Lead>
-            <Btn solid onClick={() => setPage(HOUSE)}>{t.apt.cta}</Btn>
+            <p className="apt-hint">{t.apt.typeHint}</p>
           </div>
           <div className="apt-types">
             {t.apt.types.map((item, i) => (
@@ -102,10 +129,8 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
                 key={item.id}
                 type="button"
                 className={`apt-type ${type === i ? 'is-active' : ''}`}
-                onClick={() => {
-                  setType(i)
-                  setPage(HOUSE)
-                }}
+                aria-pressed={type === i}
+                onClick={() => chooseType(i)}
               >
                 <span className="apt-type__ph apt-media">
                   <img src={typeCovers[i].thumb} alt="" loading="lazy" decoding="async" />
@@ -121,120 +146,103 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
       )}
 
       {page === HOUSE && (
-        <div className="apt-house">
-          <div className="apt-house__copy">
+        <div className="apt-pick">
+          <div className="apt-pick__main">
             <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.houseTitle)}</SectionHeading>
-            <Lead>{t.apt.houseLead}</Lead>
-
+            <Lead>{t.apt.houseLead.replace('{type}', typeTitle.toLowerCase())}</Lead>
+            <div className="apt-pick__cards">
+              {t.apt.buildings.map((item, i) => {
+                const ready = hasLayouts(i, type)
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className={`apt-house__card ${house === i ? 'is-active' : ''}${ready ? '' : ' is-soon'}`}
+                    onClick={() => chooseHouse(i)}
+                    aria-pressed={house === i}
+                  >
+                    <span className="apt-house__ph apt-media">
+                      <img src={buildingRenders[i][0].thumb} alt="" loading="lazy" decoding="async" />
+                      {!ready && <span className="apt-badge">{t.apt.soon}</span>}
+                    </span>
+                    <span>{item.n}  {item.title}</span>
+                  </button>
+                )
+              })}
+            </div>
+            <div className="apt-pick__action">
+              {house === null ? (
+                <p className="apt-hint">{t.apt.houseHint}</p>
+              ) : hasLayouts(house, type) ? (
+                <Btn solid onClick={() => setPage(VIEW)}>{t.apt.planCta}</Btn>
+              ) : (
+                <>
+                  <p className="apt-hint">{t.apt.soonNote.replace('{house}', building!.title)}</p>
+                  <Btn solid href="#contacts" onClick={() => onInquiry(inquiry())}>{t.apt.ctaSoon}</Btn>
+                </>
+              )}
+            </div>
           </div>
-          <div className="apt-house__row">
-            {t.apt.buildings.map((item, i) => (
-              <button
-                key={item.id}
-                type="button"
-                className={`apt-house__card ${house === i ? 'is-active' : ''}`}
-                onClick={() => setHouse(i)}
-                aria-pressed={house === i}
-              >
-                <span className="apt-house__ph apt-media">
-                  <img src={buildingRenders[i][0].thumb} alt="" loading="lazy" decoding="async" />
-                </span>
-                <span>
-                  {item.n}  {item.title}
-                </span>
-              </button>
-            ))}
-          </div>
-          {renders.length > 1 && (
-            <div className="apt-house__renders">
-              <p className="apt-house__renders-label">{t.apt.renders} · {building.title}</p>
+          <figure className="apt-pick__preview">
+            <div className="apt-pick__frame">
+              <img key={renders[render].src} src={renders[render].src} alt={`${t.apt.renders} · ${t.apt.buildings[preview].title} · ${render + 1}`} loading="lazy" decoding="async" />
+            </div>
+            <figcaption>
+              <span>{t.apt.renders} · {t.apt.buildings[preview].title}</span>
+              {renders.length > 1 && <span className="apt-pick__count">{String(render + 1).padStart(2, '0')} / {String(renders.length).padStart(2, '0')}</span>}
+            </figcaption>
+            {renders.length > 1 && (
               <Thumbs
                 items={renders}
                 active={render}
                 onSelect={setRender}
-                label={(_, i) => `${t.apt.renders} · ${building.title} · ${i + 1}`}
+                label={(_, i) => `${t.apt.renders} · ${t.apt.buildings[preview].title} · ${i + 1}`}
               />
-            </div>
-          )}
-          <Btn solid onClick={() => setPage(VIEW)}>{t.apt.planCta}</Btn>
-          <aside className="plan-card">
-            <p className="plan-card__kicker">{t.apt.planKicker}</p>
-            <p className="plan-card__area">{t.apt.planArea}</p>
-            {layout ? (
-              <img className="plan-card__plan" src={layout.plan.src} alt={`${t.apt.views.plan} · ${building.title} · ${t.apt.types[type].title} · ${layoutName}`} loading="lazy" decoding="async" />
-            ) : (
-              <FloorPlan />
             )}
-            <div className="plan-card__types">
-              {t.apt.types.map((item, i) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={type === i ? 'is-active' : ''}
-                  onClick={() => setType(i)}
-                >
-                  {item.title}
-                </button>
-              ))}
-            </div>
-            <Btn className="btn--secondary" onClick={() => setPage(VIEW)}>{t.apt.planCta}</Btn>
-          </aside>
+          </figure>
         </div>
       )}
 
-      {page === VIEW && (
+      {page === VIEW && building && (
         <div className={`apt-3d${layout ? ' apt-3d--media' : ''}`}>
           <div className="apt-3d__copy">
-            <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.viewTitle)}</SectionHeading>
+            <SectionHeading kicker={`${t.apt.kicker} · ${building.title}`}>{splitTitle(t.apt.viewTitle)}</SectionHeading>
             <Lead>{t.apt.viewLead}</Lead>
-            <p className="apt-3d__meta">
-              <b>{building.title}</b>
-              <span>{t.apt.planArea}</span>
-              <span>{t.apt.types[type].title}{layout ? ` · ${layoutName}` : ''}</span>
-            </p>
             {options.length > 1 && (
-              <div className="apt-3d__layouts" role="group" aria-label={t.apt.layouts}>
+              <div className="apt-variants" role="group" aria-label={t.apt.layouts}>
                 {options.map((item, i) => (
-                  <button key={item.n} type="button" className={item === layout ? 'is-active' : ''} onClick={() => selectLayout(i)} aria-pressed={item === layout}>
-                    {t.apt.layout.replace('{n}', String(item.n))}
+                  <button key={item.n} type="button" className={item === layout ? 'is-active' : ''} onClick={() => chooseLayout(i)} aria-pressed={item === layout}>
+                    <img src={item.plan.thumb} alt="" loading="lazy" decoding="async" />
+                    <span>{variant(i)}</span>
                   </button>
                 ))}
               </div>
             )}
-            <Btn solid href="#contacts" onClick={() => onInquiry({ kind: 'apartment', house, type, layout: layout?.n })}>{t.apt.ctaPrice}</Btn>
-            <button type="button" className="text-link" onClick={() => setPage(HOUSE)}>
-              {t.apt.back}
-            </button>
+            <div className="apt-3d__cta">
+              <Btn solid href="#contacts" onClick={() => onInquiry(inquiry())}>{t.apt.ctaPrice}</Btn>
+            </div>
           </div>
           {layout && current ? (
             <div className="apt-3d__viewer">
               <div className={`apt-3d__frame apt-3d__frame--${current.kind}`}>
-                <img key={current.src} src={current.src} alt={`${building.title} · ${layoutName} · ${t.apt.views[current.kind]}`} loading="lazy" decoding="async" />
+                <img key={current.src} src={current.src} alt={`${building.title} · ${typeTitle} · ${variant(layoutIndex)} · ${t.apt.views[current.kind]}`} loading="lazy" decoding="async" />
+                <span className="apt-3d__kind">{t.apt.views[current.kind]}</span>
               </div>
               <Thumbs
                 items={layout.views}
                 active={view}
                 onSelect={setView}
-                label={(item, i) => `${layoutName} · ${t.apt.views[item.kind]} · ${i + 1}`}
+                label={(item, i) => `${variant(layoutIndex)} · ${t.apt.views[item.kind]} · ${i + 1}`}
               />
             </div>
           ) : (
             <div className="apt-3d__scene">
               <Placeholder className="apt-3d__ph" />
               <IsoApartment />
-              {t.apt.zones.map((zone) => (
-                <span key={zone.id} className={`apt-3d__zone apt-3d__zone--${zone.id}`}>
-                  {zone.label}
-                </span>
-              ))}
             </div>
           )}
         </div>
       )}
-
-      <div className="apt__pager">
-        <Pager current={page + 1} total={total} bounded onPrev={() => go(-1)} onNext={() => go(1)} />
-      </div>
     </Stage>
   )
 }

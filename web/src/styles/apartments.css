@@ -469,3 +469,151 @@
   .apt-3d__frame img { animation: none; }
   .apt-media img { transition: none; }
 }
+
+/* ——— Apartments flow, 21.10.2026: type → building → layout, one action per step ——— */
+#root .stage--apt .apt-progress button:disabled { opacity: 0.38; cursor: not-allowed; }
+#root .stage--apt .apt-progress button:not(:disabled):not([aria-current]):hover { color: var(--gold-3); }
+#root .stage--apt .apt-progress .apt-progress__n { color: var(--gold-2); font-variant-numeric: tabular-nums; }
+#root .stage--apt .apt-progress button.is-done .apt-progress__n::after { content: ' ✓'; }
+#root .stage--apt .apt-progress p { font-size: 0.8rem; color: var(--gold-2); letter-spacing: 0.04em; }
+
+.apt-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--beige);
+}
+.apt__copy .apt-hint { margin-top: 0.4rem; }
+
+/* Step 2: buildings on the left, a real gallery of the chosen building on the right. */
+.apt-pick {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 3.5vw, 4rem);
+  width: 100%;
+}
+.apt-pick__main { min-width: 0; max-width: 44rem; }
+.apt-pick__main .lead { margin-bottom: 1rem; }
+.apt-pick__cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+}
+.apt-pick__cards .apt-house__card { width: 100%; text-align: left; }
+.apt-pick__cards .apt-house__ph { position: relative; height: clamp(4.6rem, 10vh, 7.5rem); margin-bottom: 0.45rem; }
+.apt-pick__cards .apt-house__card.is-soon .apt-media img { opacity: 0.72; filter: saturate(0.8); }
+.apt-house__card .apt-badge, .apt-badge {
+  position: absolute;
+  left: 0.45rem;
+  top: 0.45rem;
+  padding: 0.22rem 0.5rem;
+  border: 1px solid rgba(233, 207, 148, 0.55);
+  border-radius: 999px;
+  background: rgba(8, 24, 16, 0.78);
+  color: var(--gold-2);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  text-transform: none;
+  white-space: nowrap;
+}
+.apt-pick__action {
+  display: grid;
+  justify-items: start;
+  gap: 0.8rem;
+  min-height: 3rem;
+  margin-top: 1rem;
+}
+.apt-pick__preview { margin: 0; min-width: 0; display: grid; gap: 0.6rem; }
+.apt-pick__frame {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: clamp(0.45rem, 0.5vw, 0.75rem);
+  background: #0a1710;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+}
+.apt-pick__frame img { display: block; width: 100%; height: 100%; object-fit: cover; animation: apt-fade 320ms ease both; }
+.apt-pick__preview figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+}
+.apt-pick__count { color: var(--beige); font-variant-numeric: tabular-nums; }
+
+/* Step 3: options are recognised by their plan, not by an internal type number. */
+.apt-variants { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0 0 1.3rem; }
+#root .apt-variants button {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  width: 6.2rem;
+  padding: 0.5rem 0.4rem 0.45rem;
+  border: 1px solid var(--gold-dim);
+  border-radius: 0.5rem;
+  background: rgba(10, 31, 20, 0.55);
+  color: var(--gold-2);
+  font-size: 0.78rem;
+}
+#root .apt-variants button img { width: 4.6rem; height: 4.6rem; object-fit: contain; }
+#root .apt-variants button.is-active {
+  color: var(--gold-3);
+  border-color: var(--gold-2);
+  background: linear-gradient(180deg, rgba(201, 161, 90, 0.24), rgba(154, 114, 48, 0.12)), rgba(10, 31, 20, 0.6);
+}
+.apt-3d__cta { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+.apt-3d__frame { position: relative; }
+.apt-3d__kind {
+  position: absolute;
+  left: 0.7rem;
+  top: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(8, 24, 16, 0.78);
+  border: 1px solid rgba(233, 207, 148, 0.4);
+  color: var(--gold-2);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 1100px) {
+  .apt-pick { grid-template-columns: 1fr; align-items: start; }
+  .apt-pick__main { max-width: none; }
+}
+@media (max-width: 900px) {
+  .apt-pick, .apt-pick__main { text-align: center; }
+  .apt-pick__action { justify-items: center; }
+  /* The apartment comes first on phones; the price request follows it. */
+  .stage--apt .apt-3d { display: flex; flex-direction: column; gap: var(--mobile-space-block, 1.25rem); }
+  .stage--apt .apt-3d__copy { display: contents; }
+  .stage--apt .apt-3d .section-heading { order: 1; }
+  .stage--apt .apt-3d .lead { order: 2; }
+  .stage--apt .apt-variants { order: 3; justify-content: center; margin: 0; }
+  .stage--apt .apt-3d__viewer,
+  .stage--apt .apt-3d__scene { order: 4; }
+  .stage--apt .apt-3d__cta { order: 5; justify-content: center; }
+}
+@media (max-width: 720px) {
+  .apt-pick__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .apt-pick__cards .apt-house__ph { height: 6.2rem; }
+  .apt-hint { font-size: 14px; }
+  .apt-house__card .apt-badge { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .apt-pick__frame img { animation: none; }
+}
+@media (min-width: 1101px) and (max-height: 820px) {
+  #root .stage--apt .apt-progress { margin-bottom: 0.6rem; padding-bottom: 0.35rem; }
+  .apt-pick__main .lead { margin-bottom: 0.6rem; }
+  .apt-pick__cards .apt-house__ph { height: 4.4rem; }
+  .apt-pick__action { margin-top: 0.7rem; }
+}
+.apt-pick__cards .apt-house__card > span:last-child { white-space: nowrap; letter-spacing: 0.06em; overflow: hidden; text-overflow: ellipsis; }

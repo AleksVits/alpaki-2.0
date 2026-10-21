@@ -24,16 +24,24 @@ const { baseUrl, launch } = require('./browser.cjs');
  await page.waitForFunction(()=>document.querySelector('.site').scrollTop<2);
  await page.evaluate(()=>location.hash='#apartments');
  await page.waitForFunction(()=>Math.abs(document.querySelector('#apartments').getBoundingClientRect().top)<2);
- await page.locator('.apt__copy .btn').click();
- await page.locator('.apt-house > .btn').click();
- assert.equal(await page.locator('.apt-floor').count(),1,'House selection must lead to floors');
- await page.locator('.apt-floor__list button').last().click();
- await page.locator('.apt-floor__copy .btn').click();
- assert.match(await page.locator('.apt-3d__meta').innerText(),/05/);
- // The price request carries the chosen building, floor and type into the form.
- await page.locator('.apt-3d__copy .btn').click();
+ // Apartments: nothing is preselected, later steps stay locked until their choice is made.
+ assert.equal(await page.locator('#apartments .apt-type.is-active').count(),0,'No apartment type may be preselected');
+ assert(await page.locator('#apartments .apt-progress button').nth(1).isDisabled(),'Building step must wait for a type');
+ await page.locator('#apartments .apt-type').first().click();
+ assert.equal(await page.locator('#apartments .apt-pick').count(),1,'Choosing a type must open the buildings');
+ assert(await page.locator('#apartments .apt-progress button').nth(2).isDisabled(),'Layout step must wait for a building');
+ await page.locator('#apartments .apt-house__card').nth(1).click();
+ assert.equal(await page.locator('#apartments .apt-house__card.is-soon').count(),3,'Buildings without layouts must be marked');
+ assert(await page.locator('#apartments .apt-progress button').nth(2).isDisabled(),'A building without layouts must not open the layout step');
+ await page.locator('#apartments .apt-house__card').first().click();
+ await page.locator('#apartments .apt-pick__action .btn').click();
+ assert.equal(await page.locator('#apartments .apt-3d__viewer').count(),1,'Vista must open its layouts');
+ assert.equal(await page.locator('#apartments .apt__pager').count(),0,'Step tabs are the only step navigation');
+ await page.locator('#apartments .apt-variants button').nth(1).click();
+ // The price request carries the chosen building, type and layout into the form.
+ await page.locator('#apartments .apt-3d__cta .btn').click();
  await page.waitForFunction(()=>location.hash==='#contacts');
- assert.match(await page.locator('[name="message"]').inputValue(),/Vista.*05.*студія/);
+ assert.match(await page.locator('[name="message"]').inputValue(),/Vista.*студія.*тип 3/);
  // A message the visitor wrote is never replaced; an emptied field takes the next request.
  await page.locator('[name="message"]').fill('Свій текст');
  await jump('invest-formats');
@@ -45,14 +53,6 @@ const { baseUrl, launch } = require('./browser.cjs');
  await page.locator('.manage__foot .btn').click();
  await page.waitForFunction(()=>location.hash==='#contacts');
  assert.match(await page.locator('[name="message"]').inputValue(),/умови управління/);
- // The pager walks the same path as the buttons: type → building → floor → 3D.
- await jump('apartments');
- const nextApt=()=>page.locator('#apartments .pager__btn').last().evaluate(el=>el.click());
- await nextApt();
- for(const screen of ['.apt-types','.apt-house','.apt-floor','.apt-3d']){
-  assert.equal(await page.locator('#apartments '+screen).count(),1,`Pager must show ${screen}`);
-  await nextApt();
- }
  assert.equal(await page.locator('h1').count(),1,'The page needs exactly one h1');
  await jump('architecture');
  await page.locator('.thumbs__item').first().click();
@@ -77,9 +77,6 @@ const { baseUrl, launch } = require('./browser.cjs');
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('dialog').count(),0);
   assert(await page.locator('.form__check button').evaluate(el=>el===document.activeElement),'Dialog must restore focus');
-  await jump('apartments');
-  const gap=await page.locator('#apartments').evaluate(el=>el.querySelector('.scroll-hint').getBoundingClientRect().top-el.querySelector('.apt__pager').getBoundingClientRect().bottom);
-  assert(gap>=31,`Pager/next arrow gap ${gap} at ${width}`);
  }
  await page.setViewportSize({width:1920,height:1080});
  await jump('infrastructure');
@@ -118,5 +115,5 @@ const { baseUrl, launch } = require('./browser.cjs');
  await animated.close();
  assert.deepEqual(errors,[]);
  await browser.close();
- console.log('PASS: navigation/history, menu focus, apartment flow, gallery, construction, responsive dialog, pager spacing, form draft and request context, language address.');
+ console.log('PASS: navigation/history, menu focus, apartment flow (no preselection, locked steps, soon buildings), gallery, construction, responsive dialog, form draft and request context, language address.');
 })().catch(e=>{console.error(e);process.exit(1)});
