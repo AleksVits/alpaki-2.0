@@ -85,6 +85,8 @@ export function InfraDetail({ groupId }: { groupId: string }) {
   const [itemIndex, setItemIndex] = useState(0)
   const [photoIndex, setPhotoIndex] = useState(0)
   const [hasNextItem, setHasNextItem] = useState(false)
+  // Once the visitor starts flipping photos, the copy steps aside (on phones) so the photo shows.
+  const [browsing, setBrowsing] = useState(false)
   const itemsRef = useRef<HTMLDivElement>(null)
   const item = group.items[itemIndex]
   const photo = item.images[photoIndex] ?? item.images[0]
@@ -92,8 +94,20 @@ export function InfraDetail({ groupId }: { groupId: string }) {
   const showItem = (next: number) => {
     setItemIndex((next + group.items.length) % group.items.length)
     setPhotoIndex(0)
+    setBrowsing(true)
   }
-  const showPhoto = (next: number) => setPhotoIndex((next + item.images.length) % item.images.length)
+  const showPhoto = (next: number) => {
+    setPhotoIndex((next + item.images.length) % item.images.length)
+    setBrowsing(true)
+  }
+
+  useEffect(() => {
+    const section = document.getElementById('infra-detail')
+    if (!section) return
+    const io = new IntersectionObserver(([entry]) => { if (!entry.isIntersecting) setBrowsing(false) }, { root: document.querySelector('.site'), threshold: 0 })
+    io.observe(section)
+    return () => io.disconnect()
+  }, [])
 
   useEffect(() => {
     group.items.forEach((entry) => {
@@ -137,7 +151,7 @@ export function InfraDetail({ groupId }: { groupId: string }) {
   return (
     <Stage
       id="infra-detail"
-      className="stage--infra-detail"
+      className={`stage--infra-detail${browsing ? ' is-browsing' : ''}`}
       next="invest-formats"
       overlay={(
         <div className="infra-detail__media" aria-hidden="true">

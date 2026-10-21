@@ -107,3 +107,6 @@
 @media (prefers-reduced-motion: reduce) {
   .intro__backdrop.is-ready img { animation: none; transform: none; }
 }
+
+#root .messenger-icon { display: block; object-fit: contain; }
+#root :is(.rail__btn, .header__menu-social-btn).gold-orb img.messenger-icon { filter: none; }

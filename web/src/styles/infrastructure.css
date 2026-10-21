@@ -818,3 +818,21 @@
   border-color: var(--gold-2);
   background: rgba(201, 161, 90, 0.08);
 }
+
+/* Phones: while photos are being flipped only the heading stays, the rest of the copy fades away. */
+.stage--infra-detail .infra-detail__copy :is(.kicker, .lead, .ornament) {
+  transition: opacity 0.35s ease, max-height 0.45s ease, margin 0.45s ease;
+}
+@media (max-width: 900px) {
+  .stage--infra-detail .infra-detail__copy :is(.kicker, .lead) { max-height: 12rem; overflow: hidden; }
+  .stage--infra-detail.is-browsing .infra-detail__copy :is(.kicker, .lead, .ornament) {
+    opacity: 0;
+    max-height: 0;
+    margin-block: 0;
+    pointer-events: none;
+  }
+  .stage--infra-detail.is-browsing > .stage__shade { opacity: 0.45; transition: opacity 0.45s ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage--infra-detail .infra-detail__copy :is(.kicker, .lead, .ornament) { transition: none; }
+}

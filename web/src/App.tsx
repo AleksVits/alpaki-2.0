@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useI18n } from './useI18n'
 import { Header } from './components/Header'
 import { SectionDots } from './components/SectionDots'
 import { SocialRail } from './components/SocialRail'
@@ -34,15 +33,6 @@ const sectionMap: Record<string, string> = {
 export default function App() {
   // Starts at the intro so the first render matches the prerendered page; the effects below
   // pick up the address hash and the visible section right after mount.
-  const { t } = useI18n()
-  const [contactsVisible, setContactsVisible] = useState(false)
-  useEffect(() => {
-    const contacts = document.getElementById('contacts')
-    if (!contacts) return
-    const observer = new IntersectionObserver(([entry]) => setContactsVisible(entry.isIntersecting), { root: siteScroller(), rootMargin: '0px 0px 100px 0px' })
-    observer.observe(contacts)
-    return () => observer.disconnect()
-  }, [])
   const [active, setActive] = useState('intro')
   const [pastIntro, setPastIntro] = useState(false)
   const [infraGroup, setInfraGroup] = useState('wellness')
@@ -156,7 +146,6 @@ export default function App() {
       <Header hidden={!showChrome} active={sectionMap[active] ?? 'about'} />
       {showChrome && <SocialRail centered={active === 'contacts'} />}
       {showChrome && <SectionDots ids={Object.keys(sectionMap)} active={active} />}
-      {pastIntro && !contactsVisible && active !== 'apartments' && <a className="mobile-apartment-cta" href="#apartments">{t.about.ctaApt}</a>}
       <div className="site">
         <main>
           <Intro />

@@ -821,3 +821,65 @@
   .manage__foot-note span { font-size: 14px; }
   .stage--invest-manage .manage__foot .btn { grid-column: 1; grid-row: 2; justify-self: stretch; white-space: normal; }
 }
+
+/* Phones: the purchase → management → income path reads as a small three-step timeline. */
+@media (max-width: 720px) {
+  .stage--invest .invest__flow {
+    counter-reset: flow;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 0.4rem;
+    align-items: start;
+    width: 100%;
+    max-width: 26rem;
+    margin-inline: auto;
+    padding: 0;
+    text-align: center;
+  }
+  .stage--invest .invest__flow li {
+    counter-increment: flow;
+    position: relative;
+    display: grid;
+    grid-template-columns: none;
+    justify-items: center;
+    align-content: start;
+    gap: 0.5rem;
+    white-space: normal;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .stage--invest .invest__flow li::before {
+    content: counter(flow, decimal-leading-zero);
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--gold-2);
+    border-radius: 50%;
+    background: rgba(8, 26, 18, 0.9);
+    color: var(--gold-2);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stage--invest .invest__flow li:last-child::before {
+    background: var(--gold-metal);
+    color: var(--on-gold);
+    border-color: var(--gold-3);
+  }
+  /* The connecting line runs from each step's circle to the next one. */
+  .stage--invest .invest__flow li:not(:last-child)::after,
+  #root .invest__flow li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: calc(50% + 1.2rem);
+    width: calc(100% - 2rem);
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-2), rgba(233, 207, 148, 0.35));
+    color: transparent;
+    font-size: 0;
+  }
+}

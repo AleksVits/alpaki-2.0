@@ -567,3 +567,20 @@ dialog.modal .btn:focus-visible { outline: 2px solid var(--gold-2); outline-offs
 @media (pointer: coarse) {
   #root .form__check .text-link { min-height: 48px; }
 }
+
+/* Gold messenger marks in the contact list sit in the same round frame as the line icons. */
+.stage.stage--contacts .contacts__list .contacts__channel img.messenger-icon {
+  box-sizing: content-box;
+  flex: none;
+  width: 1.35rem;
+  height: 1.35rem;
+  object-fit: contain;
+  padding: .45rem;
+  border: 1px solid rgba(233, 207, 148, .28);
+  border-radius: 50%;
+  background: rgba(8, 26, 18, .24);
+}
+.stage.stage--contacts .contacts__list .contacts__channel a:is(:hover, :focus-visible) img.messenger-icon { border-color: var(--gold-2); }
+@media (max-width: 520px) {
+  .stage.stage--contacts .contacts__list .contacts__channel img.messenger-icon { padding: .35rem; }
+}

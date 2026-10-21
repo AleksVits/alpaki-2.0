@@ -858,7 +858,7 @@
 .stage--architecture.is-viewing .thumbs__item { height: calc(var(--thumbs-h) * var(--thumbs-compact)); }
 .stage--architecture.is-viewing .thumbs__item span { opacity: 0; }
 .stage--architecture.is-viewing .thumbs__item.is-active span { opacity: 1; }
-@media (max-width: 1100px) {
+@media (min-width: 901px) and (max-width: 1100px) {
   .stage--architecture.is-viewing .thumbs {
     height: calc(var(--thumbs-h) * var(--thumbs-compact) + 0.85rem);
     min-height: calc(var(--thumbs-h) * var(--thumbs-compact) + 0.85rem);
@@ -877,4 +877,38 @@
     align-self: center;
   }
   .stage--architecture.is-viewing .thumbs { width: min(100%, 50rem); }
+}
+/* Compact strip: thumbnails sit fully inside the glass bar, with arrows and counter centred on the same line. */
+@media (min-width: 901px) {
+  .stage--architecture.is-viewing .thumbs {
+    height: auto;
+    min-height: 0;
+    align-content: center;
+    align-items: center;
+    padding: 0.45rem 0.6rem;
+  }
+  .stage--architecture.is-viewing .thumbs::before { inset: 0; transition: inset 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .stage--architecture .thumbs::before { transition: inset 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .stage--architecture.is-viewing .thumbs__item,
+  .stage--architecture.is-viewing .thumbs__item:hover,
+  .stage--architecture.is-viewing .thumbs__item.is-active,
+  .stage--architecture.is-viewing .thumbs__item.is-active:hover { transform: none; }
+  .stage--architecture.is-viewing :is(.thumbs__arrow, .thumbs .pager) { align-self: center; margin: 0; }
+  .stage--architecture.is-viewing .thumbs__item span { font-size: 0.7rem; left: 0.45rem; bottom: 0.3rem; }
+}
+
+/* Phones and small tablets keep the full-size strip while viewing photos. */
+@media (max-width: 900px) {
+  .stage--architecture.is-viewing .thumbs {
+    grid-template-rows: var(--thumbs-h);
+    height: calc(var(--thumbs-h) + 0.85rem);
+    min-height: calc(var(--thumbs-h) + 0.85rem);
+    max-height: calc(var(--thumbs-h) + 0.85rem);
+    gap: 0.7rem;
+  }
+  .stage--architecture.is-viewing .thumbs__item { height: var(--thumbs-h); }
+  .stage--architecture.is-viewing .thumbs__item span { opacity: 1; }
+}
+@media (max-width: 720px) {
+  .stage--architecture.is-viewing .thumbs { height: auto; min-height: 0; max-height: none; gap: 0.5rem; }
 }
