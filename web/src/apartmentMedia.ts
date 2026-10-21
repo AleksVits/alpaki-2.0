@@ -26,6 +26,9 @@ export const buildingRenders: Media[][] = [
   [1, 2, 3, 4, 5, 6].map((n) => media(`buildings/cascade-0${n}`, 'render')),
 ]
 
+/** Section backgrounds per building: the same renders without the logo watermark. */
+export const buildingBackdrops: string[] = ['vista-01', 'astra-vela-01', 'astra-vela-02', 'cascade-01'].map((name) => asset(`apartments/bg/${name}.webp`))
+
 export type Layout = { n: number; plan: Media; views: Media[] }
 
 const layout = (n: number, interiors: Media[], has3d = true): Layout => {

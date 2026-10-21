@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { scrollToStage } from '../scroll'
 import { IsoApartment } from '../components/Maps'
 import { Placeholder } from '../components/Placeholder'
+import { ExpandIcon, Lightbox } from '../components/Lightbox'
 import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
-import { buildingRenders, layouts, typeCovers, type Media } from '../apartmentMedia'
+import { buildingBackdrops, buildingRenders, layouts, typeCovers, type Media } from '../apartmentMedia'
 import { useI18n } from '../useI18n'
 import type { Inquiry } from '../inquiry'
 
@@ -44,6 +45,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
   const [render, setRender] = useState(0)
   const [layoutIndex, setLayoutIndex] = useState(0)
   const [view, setView] = useState(0)
+  const [fullscreen, setFullscreen] = useState<'renders' | 'views' | null>(null)
 
   // Each step change brings the whole section back into view.
   const previousPage = useRef(page)
@@ -82,7 +84,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
     setView(0)
   }
 
-  const backdrop = page === TYPE ? buildingRenders[0][0] : buildingRenders[preview][0]
+  const backdrop = page === TYPE ? buildingBackdrops[0] : buildingBackdrops[preview]
   const summary = [typeTitle, building?.title, page === VIEW && layout ? variant(layoutIndex) : ''].filter(Boolean).join(' · ')
   const inquiry = (): Inquiry => ({ kind: 'apartment', house: house ?? 0, type: type ?? 0, layout: layout?.n })
 
@@ -93,7 +95,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
       next="construction"
       overlay={(
         <div className={`apt__backdrop apt__backdrop--${page}`} aria-hidden="true">
-          <img key={backdrop.src} src={backdrop.src} alt="" loading="lazy" decoding="async" fetchPriority="low" />
+          <img key={backdrop} src={backdrop} alt="" loading="lazy" decoding="async" fetchPriority="low" />
         </div>
       )}
     >
@@ -184,9 +186,10 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
             </div>
           </div>
           <figure className="apt-pick__preview">
-            <div className="apt-pick__frame">
+            <button type="button" className="apt-pick__frame apt-zoom" onClick={() => setFullscreen('renders')} aria-label={`${t.ui.fullscreen} · ${t.apt.renders} · ${t.apt.buildings[preview].title}`}>
               <img key={renders[render].src} src={renders[render].src} alt={`${t.apt.renders} · ${t.apt.buildings[preview].title} · ${render + 1}`} loading="lazy" decoding="async" />
-            </div>
+              <span className="apt-zoom__badge"><ExpandIcon /></span>
+            </button>
             <figcaption>
               <span>{t.apt.renders} · {t.apt.buildings[preview].title}</span>
               {renders.length > 1 && <span className="apt-pick__count">{String(render + 1).padStart(2, '0')} / {String(renders.length).padStart(2, '0')}</span>}
@@ -224,10 +227,11 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
           </div>
           {layout && current ? (
             <div className="apt-3d__viewer">
-              <div className={`apt-3d__frame apt-3d__frame--${current.kind}`}>
+              <button type="button" className={`apt-3d__frame apt-3d__frame--${current.kind} apt-zoom`} onClick={() => setFullscreen('views')} aria-label={`${t.ui.fullscreen} · ${t.apt.views[current.kind]}`}>
                 <img key={current.src} src={current.src} alt={`${building.title} · ${typeTitle} · ${variant(layoutIndex)} · ${t.apt.views[current.kind]}`} loading="lazy" decoding="async" />
                 <span className="apt-3d__kind">{t.apt.views[current.kind]}</span>
-              </div>
+                <span className="apt-zoom__badge"><ExpandIcon /></span>
+              </button>
               <Thumbs
                 items={layout.views}
                 active={view}
@@ -242,6 +246,22 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
             </div>
           )}
         </div>
+      )}
+      {fullscreen === 'renders' && (
+        <Lightbox
+          items={renders.map((m, i) => ({ src: m.src, alt: `${t.apt.renders} · ${t.apt.buildings[preview].title} · ${i + 1}`, caption: `${t.apt.renders} · ${t.apt.buildings[preview].title}` }))}
+          index={render}
+          onIndex={setRender}
+          onClose={() => setFullscreen(null)}
+        />
+      )}
+      {fullscreen === 'views' && layout && building && (
+        <Lightbox
+          items={layout.views.map((m) => ({ src: m.src, alt: `${building.title} · ${typeTitle} · ${variant(layoutIndex)} · ${t.apt.views[m.kind]}`, caption: `${building.title} · ${variant(layoutIndex)} · ${t.apt.views[m.kind]}` }))}
+          index={Math.min(view, layout.views.length - 1)}
+          onIndex={setView}
+          onClose={() => setFullscreen(null)}
+        />
       )}
     </Stage>
   )

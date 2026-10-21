@@ -530,14 +530,15 @@
 }
 .apt-pick__preview { margin: 0; min-width: 0; display: grid; gap: 0.6rem; }
 .apt-pick__frame {
-  aspect-ratio: 16 / 10;
+  /* Renders are 16:9: the frame matches them so the full width, branding included, stays visible. */
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: clamp(0.45rem, 0.5vw, 0.75rem);
   background: #0a1710;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
 }
-.apt-pick__frame img { display: block; width: 100%; height: 100%; object-fit: cover; animation: apt-fade 320ms ease both; }
+.apt-pick__frame img { display: block; width: 100%; height: 100%; object-fit: contain; animation: apt-fade 320ms ease both; }
 .apt-pick__preview figcaption {
   display: flex;
   justify-content: space-between;
@@ -617,3 +618,124 @@
   .apt-pick__action { margin-top: 0.7rem; }
 }
 .apt-pick__cards .apt-house__card > span:last-child { white-space: nowrap; letter-spacing: 0.06em; overflow: hidden; text-overflow: ellipsis; }
+
+/* Photos open full screen; the frame itself is the button. */
+#root .apt-zoom,
+#root .apt-zoom:is(:hover, :focus-visible, :active) {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  color: inherit;
+  border-color: var(--line);
+  background: #0a1710;
+  text-shadow: none;
+  cursor: zoom-in;
+}
+#root .apt-zoom:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 3px; }
+.apt-zoom__badge {
+  position: absolute;
+  right: 0.7rem;
+  top: 0.7rem;
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid rgba(233, 207, 148, 0.45);
+  border-radius: 50%;
+  background: rgba(8, 24, 16, 0.72);
+  color: var(--gold-2);
+  opacity: 0.85;
+  transition: opacity 200ms ease, background 200ms ease, border-color 200ms ease;
+}
+.apt-zoom:is(:hover, :focus-visible) .apt-zoom__badge { opacity: 1; border-color: var(--gold-2); background: rgba(201, 161, 90, 0.2); }
+.expand-icon { width: 1.05rem; height: 1.05rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Thumbnail strips: a slim gold scrollbar instead of the system one. */
+.apt-thumbs {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 161, 90, 0.7) rgba(233, 207, 148, 0.08);
+  padding-bottom: 0.55rem;
+}
+.apt-thumbs::-webkit-scrollbar { height: 6px; }
+.apt-thumbs::-webkit-scrollbar-track { background: rgba(233, 207, 148, 0.08); border-radius: 999px; }
+.apt-thumbs::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #a87a2e, #d6a94f 50%, #c39243); border-radius: 999px; }
+.apt-thumbs::-webkit-scrollbar-thumb:hover { background: var(--gold-2); }
+.apt-thumbs::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+
+/* Full-screen viewer */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(4, 12, 8, 0.94);
+  color: var(--cream);
+  overflow: hidden;
+}
+.lightbox::backdrop { background: rgba(4, 12, 8, 0.6); }
+.lightbox[open] { display: grid; place-items: center; animation: apt-fade 220ms ease both; }
+.lightbox__figure {
+  display: grid;
+  justify-items: center;
+  gap: 0.8rem;
+  margin: 0;
+  max-width: calc(100vw - 9rem);
+}
+.lightbox__figure img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100dvh - 7rem);
+  object-fit: contain;
+  border-radius: 0.4rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  animation: apt-fade 260ms ease both;
+}
+.lightbox__figure figcaption {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+}
+.lightbox__count { color: var(--beige); font-variant-numeric: tabular-nums; }
+dialog.lightbox .lightbox__nav,
+dialog.lightbox .lightbox__close {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0;
+  border: 1px solid rgba(233, 207, 148, 0.42);
+  border-radius: 50%;
+  background: rgba(10, 31, 20, 0.6);
+  color: var(--gold-2);
+  box-shadow: none;
+}
+dialog.lightbox .lightbox__nav:is(:hover, :focus-visible),
+dialog.lightbox .lightbox__close:is(:hover, :focus-visible) { border-color: var(--gold-2); background: rgba(201, 161, 90, 0.18); }
+dialog.lightbox .lightbox__nav:active,
+dialog.lightbox .lightbox__close:active { background: rgba(201, 161, 90, 0.28); }
+dialog.lightbox .lightbox__nav--prev { left: 1.5rem; top: 50%; translate: 0 -50%; }
+dialog.lightbox .lightbox__nav--next { right: 1.5rem; top: 50%; translate: 0 -50%; }
+dialog.lightbox .lightbox__close { right: 1.5rem; top: 1.5rem; }
+.lightbox__nav svg { width: 1.4rem; height: 1.4rem; }
+.lightbox__close svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+@media (max-width: 720px) {
+  .lightbox__figure { max-width: 100vw; }
+  .lightbox__figure img { max-height: calc(100dvh - 9rem); border-radius: 0; }
+  dialog.lightbox .lightbox__nav--prev { left: 0.6rem; top: auto; bottom: 1.2rem; translate: none; }
+  dialog.lightbox .lightbox__nav--next { right: 0.6rem; top: auto; bottom: 1.2rem; translate: none; }
+  dialog.lightbox .lightbox__close { right: 0.8rem; top: 0.8rem; }
+  .lightbox__figure figcaption { padding-inline: 4rem; text-align: center; flex-wrap: wrap; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox[open], .lightbox__figure img { animation: none; }
+}

@@ -193,6 +193,8 @@ const ua = {
         text: 'Власник отримуватиме дохід відповідно до умов програми.',
       },
     ],
+    termsKicker: 'Умови програми',
+    termsNote: 'Деталі управління та умови договору надішлемо вам особисто.',
     ctaTerms: 'Дізнатися умови управління',
   },
   apt: {
@@ -336,6 +338,7 @@ const ua = {
     nextSection: 'Наступний розділ',
     map: 'Карта України',
     photo: 'Фото',
+    fullscreen: 'На весь екран',
     sectionsNav: 'Розділи сторінки',
     sections: {
       intro: 'Головна',
@@ -545,6 +548,8 @@ const en: typeof ua = {
         text: 'The owner receives income according to the programme terms.',
       },
     ],
+    termsKicker: 'Programme terms',
+    termsNote: 'We will send you the management details and contract terms personally.',
     ctaTerms: 'Learn the management terms',
   },
   apt: {
@@ -687,6 +692,7 @@ const en: typeof ua = {
     nextSection: 'Next section',
     map: 'Map of Ukraine',
     photo: 'Photo',
+    fullscreen: 'Full screen',
     sectionsNav: 'Page sections',
     sections: {
       intro: 'Home',

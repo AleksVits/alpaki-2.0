@@ -101,6 +101,10 @@ export function InvestManage({ onInquiry }: InquiryProps) {
             })}
           </ol>
           <div className="manage__foot">
+            <p className="manage__foot-note">
+              <b>{t.invest.termsKicker}</b>
+              <span>{t.invest.termsNote}</span>
+            </p>
             <Btn href="#contacts" solid arrow onClick={() => onInquiry({ kind: 'management' })}>{t.invest.ctaTerms}</Btn>
           </div>
         </div>

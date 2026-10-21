@@ -779,3 +779,45 @@
   .stage--invest-manage .manage__foot { margin-inline: 1rem; padding-block: 1rem; }
   .stage--invest-manage .manage__foot .btn { width: 100%; padding-inline: 0.75rem; }
 }
+
+/* The terms action closes the four steps as their conclusion: a short note on the left, the action on the right. */
+.stage--invest-manage .manage__foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+  padding-inline: clamp(0.25rem, 1vw, 1rem);
+}
+.manage__foot-note {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  text-align: left;
+}
+.manage__foot-note b {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+}
+.manage__foot-note b::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--gold-2);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  box-shadow: 0 0 10px rgba(214, 169, 79, 0.5);
+}
+.manage__foot-note span { font-size: 0.92rem; line-height: 1.5; color: var(--cream); opacity: 0.88; }
+.stage--invest-manage .manage__foot .manage__foot-note { grid-column: 1; grid-row: 1; }
+.stage--invest-manage .manage__foot .btn { grid-column: 2; grid-row: 1; justify-self: end; white-space: nowrap; }
+@media (max-width: 720px) {
+  .stage--invest-manage .manage__foot { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .manage__foot-note { text-align: center; justify-items: center; }
+  .manage__foot-note span { font-size: 14px; }
+  .stage--invest-manage .manage__foot .btn { grid-column: 1; grid-row: 2; justify-self: stretch; white-space: normal; }
+}
