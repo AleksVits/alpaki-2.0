@@ -84,23 +84,25 @@ export function InvestManage({ onInquiry }: InquiryProps) {
           <SectionHeading kicker={t.invest.kicker}>{splitTitle(t.invest.manageTitle)}</SectionHeading>
           <Lead>{t.invest.manageLead}</Lead>
         </div>
-        <ol className="manage-steps">
-          {t.invest.steps.map((step, i) => {
-            const Icon = manageIcons[i]
-            return (
-              <li key={step.n}>
-                <span className="manage-steps__icon">
-                  <Icon />
-                </span>
-                <span className="manage-steps__n">{step.n}</span>
-                <strong>{step.title}</strong>
-                <small>{step.text}</small>
-              </li>
-            )
-          })}
-        </ol>
-        <div className="manage__foot">
-          <Btn href="#contacts" solid arrow onClick={() => onInquiry({ kind: 'management' })}>{t.invest.ctaTerms}</Btn>
+        <div className="manage__panel">
+          <ol className="manage-steps">
+            {t.invest.steps.map((step, i) => {
+              const Icon = manageIcons[i]
+              return (
+                <li key={step.n}>
+                  <span className="manage-steps__icon">
+                    <Icon />
+                  </span>
+                  <span className="manage-steps__n">{step.n}</span>
+                  <strong>{step.title}</strong>
+                  <small>{step.text}</small>
+                </li>
+              )
+            })}
+          </ol>
+          <div className="manage__foot">
+            <Btn href="#contacts" solid arrow onClick={() => onInquiry({ kind: 'management' })}>{t.invest.ctaTerms}</Btn>
+          </div>
         </div>
       </div>
     </Stage>

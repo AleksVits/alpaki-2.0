@@ -1,5 +1,5 @@
 import { createElement } from 'react'
-import { IconTree, IconBuildings, IconPin, IconShield, IconApt, IconSpa, IconPool, IconCloche, IconLeisure } from '../components/RasterIcons'
+import { IconTree, IconBuildings, IconPin, IconNatureReserve, IconApt, IconSpa, IconPool, IconCloche, IconLeisure } from '../components/RasterIcons'
 import { useNearSection } from '../useNearSection'
 import { AboutSequence } from '../components/AboutSequence'
 import { UkraineMap } from '../components/Maps'
@@ -7,7 +7,7 @@ import { Btn, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
 
-const statIcons = [IconTree, IconBuildings, IconPin, IconShield]
+const statIcons = [IconTree, IconBuildings, IconPin, IconNatureReserve]
 const featureIcons = [IconApt, IconSpa, IconPool, IconCloche, IconLeisure]
 
 export function AboutStats() {
@@ -61,9 +61,8 @@ export function AboutIntro() {
     <Stage id="about-intro" className="stage--about-intro" next="about-stats" overlay={near ? <AboutSequence /> : null}>
       <div className="about-intro">
         <div className="about-intro__copy">
-          <SectionHeading kicker={t.about.ideaKicker}>{splitTitle(t.about.title)}</SectionHeading>
-          <Lead>{t.about.lead}</Lead>
-          <p className="about-intro__location">{t.intro.location}</p>
+          <SectionHeading kicker={t.intro.location}>{splitTitle(t.about.title)}</SectionHeading>
+          <Lead>{t.about.overview}</Lead>
           <ul className="features">
             {t.about.features.map((item, i) => (
               <li key={item.id}>
@@ -74,7 +73,6 @@ export function AboutIntro() {
               </li>
             ))}
           </ul>
-          <p className="about-intro__quote">{t.about.owner}</p>
           <div className="btn-row">
             <Btn href="#apartments" solid arrow>
               {t.about.ctaApt}

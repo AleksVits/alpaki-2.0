@@ -18,6 +18,17 @@
 .stage--architecture .thumbs__item:hover, .stage--architecture .thumbs__item.is-active:hover { transform: translateY(-.15rem); }
 .stage--architecture .thumbs__item:hover img { transform: none; }
 .site { scroll-snap-type: none; }
+/* A steady dark surface behind navigation, fading gently into the photograph. */
+#root .header {
+  background: linear-gradient(180deg,
+    rgba(10, 31, 20, .96) 0,
+    rgba(10, 31, 20, .9) 3.5rem,
+    rgba(10, 31, 20, .66) 5.5rem,
+    rgba(10, 31, 20, .22) 8rem,
+    transparent 11rem);
+}
+#root .header__link { color: var(--cream); text-shadow: 0 1px 5px rgba(0, 0, 0, .35); }
+#root .header__link:is(.is-active, :hover, :focus-visible) { color: var(--gold-2); }
 .stage--intro .intro,
 .stage--intro.is-ready .intro,
 .stage--intro > .scroll-hint,
@@ -27,18 +38,36 @@
 @keyframes intro-calm { from { transform: scale(1.06); } to { transform: scale(1); } }
 .stage--intro .intro { margin-top: 0; gap: 1rem; padding: 1.5rem 0; }
 .stage--intro .intro__tag { color: var(--cream); white-space: normal; text-wrap: balance; }
-.about-intro__location { margin: 1rem 0 0; color: var(--gold-2); font-size: .85rem; line-height: 1.6; letter-spacing: .04em; text-wrap: balance; }
+.stage--about-intro .about-intro__copy { max-width: 40rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1.65rem; }
+.stage--about-intro .section-heading { margin: 0; gap: .9rem; text-align: left; justify-items: start; }
+.stage--about-intro .section-heading .kicker { margin: 0; color: var(--gold-2); font-size: .72rem; letter-spacing: .12em; line-height: 1.6; }
+.stage--about-intro .section-heading .title { margin: 0; font-weight: 400; line-height: 1.18; letter-spacing: -.02em; }
+.stage--about-intro .section-heading .ornament { display: none; }
+.stage--about-intro .about-intro__copy > .lead { margin: 0; max-width: 34rem; color: var(--beige); font-size: 1rem; line-height: 1.75; white-space: normal; text-align: left; text-wrap: pretty; }
+.stage--about-intro .about-intro__copy .features { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); width: 100%; max-width: 34rem; gap: 1rem; margin: .25rem 0; padding: 1.4rem 0; border-block: 1px solid var(--line); }
+.stage--about-intro .about-intro__copy .features li { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; grid-column: auto; width: auto; min-width: 0; flex: none; gap: .5rem; margin: 0; padding: 0; border: 0; color: var(--beige); font-size: .72rem; text-align: center; }
+.stage--about-intro .features li::before, .stage--about-intro .features li::after { display: none; }
+.stage--about-intro .about-intro__copy .features__icon { flex: none; width: 2.5rem; height: 2.5rem; }
+.stage--about-intro .about-intro__copy .features__icon :is(img, svg) { width: 100%; height: 100%; max-width: none; max-height: none; }
+.stage--about-intro .about-intro__copy .btn-row { margin: 0; gap: 1rem 1.5rem; align-items: center; }
+@media (max-width: 720px) {
+  .stage--about-intro .about-intro__copy { gap: 1.5rem; width: 100%; }
+  .stage--about-intro .about-intro__copy .features { gap: .5rem; padding-block: 1rem; }
+  .stage--about-intro .about-intro__copy .features li { font-size: .65rem; overflow-wrap: anywhere; }
+  .stage--about-intro .about-intro__copy .features__icon { width: 2.15rem; height: 2.15rem; }
+  .stage--about-intro .about-intro__copy .btn-row { align-items: flex-start; }
+}
 .stage--intro .logo__mark { max-height: min(28svh, 13rem); width: auto; object-fit: contain; }
 .intro__backdrop::after { background: radial-gradient(ellipse at center, rgba(10,31,20,.65), rgba(10,31,20,.12)); }
 .stage--intro { height: auto; max-height: none; min-height: 100svh; }
-.stage--intro .stage__inner { display: flex; justify-content: center; min-height: 100svh; padding-block: 3rem 5rem; }
+.stage--intro .stage__inner { display: flex; justify-content: flex-start; min-height: 100svh; padding-block: clamp(3rem, 13svh, 9rem) 5rem; }
 .header__phone, .header__phone::after, .header__phone svg,
 .header__nav-marker, .burger-menu svg { animation: none !important; }
-.apt-progress { position: sticky; top: calc(var(--header) + .5rem); z-index: 6; width: 100%; margin: 0 0 1.5rem; padding: .6rem 1rem; border-radius: .5rem; background: var(--pine); color: var(--cream); }
+.apt-progress { position: static; align-self: flex-start; width: fit-content; max-width: 100%; margin: 0 0 1.5rem; padding: 0 0 .65rem; border-bottom: 1px solid color-mix(in srgb, var(--gold) 28%, transparent); background: transparent; color: var(--cream); }
 .apt-progress ol { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; padding: 0; margin: 0; list-style: none; }
-#root .apt-progress button { background: transparent; border: 0; border-bottom: 1px solid transparent; box-shadow: none; color: var(--cream); font: inherit; min-height: 44px; cursor: pointer; }
+#root .apt-progress button { background: transparent; border: 0; border-bottom: 1px solid transparent; padding: .35rem .15rem; box-shadow: none; color: var(--cream); font: inherit; font-size: .85rem; min-height: 44px; cursor: pointer; }
 #root .apt-progress button[aria-current] { color: var(--gold-2); border-color: var(--gold); }
-.apt-progress p { margin: .5rem 0 0; font-size: .85rem; color: var(--gold-2); }
+.apt-progress p { margin: .4rem 0 0; font-size: .75rem; color: var(--beige); }
 .stage--apt .stage__inner { display: flex; flex-direction: column; justify-content: center; align-items: stretch; }
 .pager__btn:disabled { opacity: .3; cursor: default; pointer-events: none; }
 .architecture__caption { position: absolute; left: 50%; bottom: 10rem; transform: translateX(-50%); z-index: 5; margin: 0; padding: .6rem 1rem; max-width: 90%; background: var(--pine); color: var(--cream); text-align: center; border-radius: .5rem; font-size: .85rem; }
@@ -46,6 +75,27 @@
 .thumbs__arrow svg { width: 1.25rem; height: 1.25rem; }
 :is(.thumbs__item, .apt-thumbs__item, .build-detail__thumbs button)[aria-pressed="true"] { outline: 1px solid var(--gold-2); outline-offset: 2px; }
 .mobile-apartment-cta { display: none; }
+/* Messenger buttons share the call button's dark-green surface. */
+#root .rail__btn.gold-orb,
+#root .header__menu-social-btn.gold-orb {
+  color: var(--gold-2);
+  background: var(--marble);
+  border: 1px solid color-mix(in srgb, var(--gold) 65%, transparent);
+  box-shadow: inset 0 1px 0 rgba(233,207,148,.08);
+}
+#root :is(.rail__btn, .header__menu-social-btn).gold-orb::before,
+#root :is(.rail__btn, .header__menu-social-btn).gold-orb::after { display: none; }
+#root :is(.rail__btn, .header__menu-social-btn).gold-orb:is(:hover, :focus-visible) {
+  background: var(--pine);
+  color: var(--gold-3);
+  border-color: var(--gold-2);
+}
+#root :is(.rail__btn, .header__menu-social-btn).gold-orb:active { background: var(--marble); }
+#root .rail__btn.gold-orb .messenger-icon { width: clamp(24px, 1.45rem, 34px); height: clamp(24px, 1.45rem, 34px); }
+#root .header__menu-social-btn.gold-orb .messenger-icon { width: 24px; height: 24px; }
+@media (forced-colors: active) {
+  #root :is(.rail__btn, .header__menu-social-btn).gold-orb { background: Canvas; color: LinkText; border-color: LinkText; }
+}
 @media (max-width: 900px) {
   .mobile-apartment-cta { display: block; position: fixed; z-index: 35; bottom: calc(.75rem + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); max-width: calc(100% - 2rem); padding: .8rem 1.2rem; min-height: 48px; border-radius: .5rem; background: var(--pine); border: 1px solid var(--gold); color: var(--gold-2); text-decoration: none; text-align: center; box-shadow: 0 4px 20px #0a1f1466; }
   html.is-nav-lock .mobile-apartment-cta { display: none; }

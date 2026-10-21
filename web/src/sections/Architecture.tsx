@@ -121,7 +121,6 @@ export function Architecture() {
           </div>
         </div>
       </div>
-      <p className="architecture__caption" aria-live="polite">{t.architecture.captions[index]}</p>
       <div className="thumbs glass glass--bar">
         <button
           type="button"

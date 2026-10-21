@@ -203,55 +203,7 @@ export function IconMail() {
   )
 }
 
-export function IconTelegram() {
-  return (
-    <GoldIcon viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M20.85 4.15 3.7 11.05c-.55.22-.52 1.02.04 1.2l4.55 1.48 1.72 5.28c.2.62 1.02.72 1.38.18l2.28-3.42 4.22 3.08c.55.4 1.32.1 1.42-.55L21.7 4.95c.1-.68-.62-1.15-.85-.8Z"
-        stroke="currentColor"
-        strokeWidth="1.15"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      />
-      <path
-        d="M9.55 13.55 19.7 5.7"
-        stroke="currentColor"
-        strokeWidth="1.15"
-        strokeLinecap="round"
-      />
-    </GoldIcon>
-  )
-}
-
-export function IconWhatsapp() {
-  return (
-    <GoldIcon viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M12.05 3.55c-4.52 0-8.2 3.55-8.2 7.92 0 1.4.37 2.7 1.02 3.82L3.7 20.3l5.05-1.32c1.08.58 2.32.9 3.3.9 4.52 0 8.2-3.55 8.2-7.92s-3.68-8.41-8.2-8.41Z"
-        stroke="currentColor"
-        strokeWidth="1.15"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      />
-      <path
-        d="M9.55 8.55c.12 1.85 1.55 3.55 3.32 4.28.28.12.55 0 .68-.22l.42-.72c.12-.22.4-.32.62-.25l1.2.32c.28.08.45.35.4.63-.22 1.35-1.55 2.22-2.95 1.78-2.28-.72-4.12-2.55-4.85-4.85-.42-1.4.48-2.72 1.82-2.95.28-.05.55.12.63.4l.32 1.2c.08.22-.02.5-.25.62l-.72.42c-.22.12-.35.4-.22.66Z"
-        stroke="currentColor"
-        strokeWidth="1.05"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      />
-    </GoldIcon>
-  )
-}
-
-export function IconViber() {
-  return (
-    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path d="M10 4h12a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6h-6l-6 4v-4a6 6 0 0 1-6-6V10a6 6 0 0 1 6-6Z" />
-      <path d="m10 10 3-1 2 4-2 2c1 2 2 3 4 4l2-2 4 2-1 3c-6 1-13-6-12-12ZM18 9a5 5 0 0 1 5 5m-5-2a2 2 0 0 1 2 2" />
-    </GoldIcon>
-  )
-}
+export { IconTelegram, IconWhatsapp, IconViber } from './MessengerIcons'
 
 export function IconLeisure() {
   return (

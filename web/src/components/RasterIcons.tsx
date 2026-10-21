@@ -9,6 +9,7 @@ export function IconTree() { return <RasterIcon name="tree" /> }
 export function IconBuildings() { return <RasterIcon name="buildings" /> }
 export function IconPin() { return <RasterIcon name="pin" /> }
 export function IconShield() { return <RasterIcon name="shield" /> }
+export function IconNatureReserve() { return <RasterIcon name="nature-reserve" /> }
 export function IconApt() { return <RasterIcon name="apartment" /> }
 export function IconSpa() { return <RasterIcon name="spa" /> }
 export function IconPool() { return <RasterIcon name="pool" /> }

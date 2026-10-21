@@ -378,7 +378,7 @@
 }
 .stage--invest-manage .manage {
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto auto;
+  grid-template-rows: minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(0.75rem, 1.4vh, 1.4rem);
   width: 100%;
@@ -416,7 +416,7 @@
   padding: 0.2rem clamp(0.45rem, 0.75vw, 0.85rem) clamp(0.75rem, 1.2vh, 1rem);
   border: 0;
 }
-.stage--invest-manage .manage-steps::before {
+.stage--invest-manage .manage__panel::before {
   content: '';
   position: absolute;
   z-index: -1;
@@ -457,23 +457,6 @@
   backdrop-filter: none;
   box-shadow: none;
 }
-.stage--invest-manage .manage-steps__icon::before,
-.stage--invest-manage .manage-steps__icon::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 0.58rem;
-  height: 0.58rem;
-  transform: translateY(-50%);
-  background:
-    linear-gradient(var(--gold-2), var(--gold-2)) center / 100% 1px no-repeat,
-    linear-gradient(var(--gold-2), var(--gold-2)) center / 1px 100% no-repeat;
-  box-shadow: 0 0 7px rgba(218, 185, 122, 0.72);
-  opacity: 0.92;
-  pointer-events: none;
-}
-.stage--invest-manage .manage-steps__icon::before { left: -0.08rem; }
-.stage--invest-manage .manage-steps__icon::after { right: -0.08rem; }
 .stage--invest-manage .manage-steps__icon :is(svg, img) {
   width: clamp(2.2rem, 2.55vw, 2.95rem);
   height: clamp(2.2rem, 2.55vw, 2.95rem);
@@ -524,31 +507,12 @@
   .stage--invest-manage .manage {
     position: relative;
     display: grid;
-    grid-template-rows: minmax(min-content, 1fr) auto auto;
+    grid-template-rows: minmax(min-content, 1fr) auto;
     height: auto;
     row-gap: clamp(1.25rem, 2.5vh, 2rem);
   }
   .stage--invest-manage .manage__copy { position: relative; align-self: center; transform: none; }
   .stage--invest-manage .manage-steps { position: relative; }
-  .stage--invest-manage .manage-steps::after {
-    content: '';
-    position: absolute;
-    top: calc(clamp(3.5rem, 4vw, 4.7rem) / 2);
-    left: 10%;
-    right: 10%;
-    z-index: 0;
-    height: 1px;
-    pointer-events: none;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(218, 185, 122, 0.28) 6%,
-      rgba(218, 185, 122, 0.62) 18%,
-      rgba(218, 185, 122, 0.62) 82%,
-      rgba(218, 185, 122, 0.28) 94%,
-      transparent 100%
-    );
-  }
   .stage--invest-manage .manage__foot { position: relative; }
 }
 
@@ -560,7 +524,6 @@
   .stage--invest-manage .manage__copy .lead { font-size: 0.84rem; line-height: 1.45; }
   .stage--invest-manage .manage-steps { padding-bottom: 0.45rem; }
   .stage--invest-manage .manage-steps__icon { width: 3.3rem; height: 3.3rem; }
-  .stage--invest-manage .manage-steps::after { top: 1.65rem; }
   .stage--invest-manage .manage-steps li + li::before { top: 3.15rem; }
   .stage--invest-manage .manage-steps small { font-size: 0.7rem; line-height: 1.35; }
 }
@@ -600,14 +563,9 @@
     gap: 1.75rem 0;
     padding: 0.2rem 0.45rem 1rem;
   }
-  .stage--invest-manage .manage-steps::before { top: 1.8rem; }
-  .stage--invest-manage .manage-steps::after { display: none; }
+  .stage--invest-manage .manage__panel::before { top: 1.8rem; }
   .stage--invest-manage .manage-steps li { padding-inline: 0.8rem; }
   .stage--invest-manage .manage-steps li + li::before { display: none; }
-  .stage--invest-manage .manage-steps__icon::before,
-  .stage--invest-manage .manage-steps__icon::after {
-    display: none;
-  }
   .stage--invest-manage .manage-steps li:nth-child(even)::before {
     content: '';
     display: block;
@@ -636,7 +594,7 @@
 @media (max-width: 520px) {
   .manage__backdrop img { object-position: 59% center; }
   .stage--invest-manage .manage-steps { grid-template-columns: 1fr; gap: 0; padding: 0.5rem 0.7rem; }
-  .stage--invest-manage .manage-steps::before { inset: 0; }
+  .stage--invest-manage .manage__panel::before { inset: 0; }
   .stage--invest-manage .manage-steps li {
     display: grid;
     grid-template-columns: 3.15rem minmax(0, 1fr);
@@ -655,10 +613,6 @@
     height: 3rem;
     margin: 0;
   }
-  .stage--invest-manage .manage-steps__icon::before,
-  .stage--invest-manage .manage-steps__icon::after {
-    display: none;
-  }
   .stage--invest-manage .manage-steps__n,
   .stage--invest-manage .manage-steps strong,
   .stage--invest-manage .manage-steps small {
@@ -675,7 +629,7 @@
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .stage--invest-manage .manage-steps::before {
+  .stage--invest-manage .manage__panel::before {
     background: var(--liquid-glass-highlight), rgba(8, 24, 16, 0.9);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -808,4 +762,20 @@
 @media (max-width: 900px) {
   .stage--invest .invest-list__item { width: 100%; }
   .stage--invest .invest__flow { padding: 0; }
+}
+
+/* Integrated management action, inside the shared glass panel. */
+.stage--invest-manage .manage__panel { position: relative; isolation: isolate; min-width: 0; }
+.stage--invest-manage .manage__foot {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  margin: 0 clamp(1rem, 2vw, 2rem);
+  padding: clamp(0.9rem, 1.6vh, 1.35rem) 0;
+  border-top: 1px solid rgba(201, 161, 90, 0.24);
+}
+.stage--invest-manage .manage__foot .btn { width: auto; max-width: 100%; min-height: 2.9rem; }
+@media (max-width: 520px) {
+  .stage--invest-manage .manage__foot { margin-inline: 1rem; padding-block: 1rem; }
+  .stage--invest-manage .manage__foot .btn { width: 100%; padding-inline: 0.75rem; }
 }

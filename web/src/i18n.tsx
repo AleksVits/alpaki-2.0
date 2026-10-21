@@ -53,6 +53,7 @@ const ua = {
     owner:
       'Власник зможе користуватися апартаментами сам\u00A0або\nпередати їх\u00A0в\u00A0управління для отримання\u00A0доходу.',
     ctaApt: 'Обрати апартаменти',
+    overview: 'AL’PAKI LEGEND — майбутній курортний комплекс у Карпатах. Власні апартаменти для відпочинку протягом року — з можливістю передати їх в управління для отримання доходу.',
     ctaInvest: 'Дізнатися про інвестиції',
     features: [
       { id: 'apt', label: 'Апартаменти' },
@@ -398,6 +399,7 @@ const en: typeof ua = {
     owner:
       'Owners may use the apartment themselves\nor place it under management to\u00A0receive income.',
     ctaApt: 'Choose an apartment',
+    overview: 'AL’PAKI LEGEND is a forthcoming resort in the Carpathians. Your own apartment for year-round escapes, with the option of professional rental management to generate income.',
     ctaInvest: 'Learn about investing',
     features: [
       { id: 'apt', label: 'Apartments' },
