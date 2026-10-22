@@ -1,0 +1,6 @@
+{
+  "tool": "Built-in image_gen",
+  "prompt": "Edit this exact Carpathian valley landscape into a quiet mobile website background. Preserve the mountain ridges, pine forests, village, valley geography and realistic illustrated photographic style. Remove ALL glowing golden route lines from the station to the hilltop, all location pins, station icon, ALPAKI logo and all text labels; seamlessly restore natural landscape beneath them. Replace the intense bright sun, sunburst rays, glowing clouds and bright golden reflections with soft subdued overcast late-afternoon light, muted warm horizon and cool deep forest greens. No bright spotlights or luminous paths anywhere. Keep enough gentle midtone detail to recognize the landscape under white website copy; no crushed black. Compose portrait 2:3 for mobile, extending the same landscape naturally vertically, with mountain skyline near upper quarter and forest valley throughout the center and bottom. No text, no symbols, no map markings, no frames.",
+  "source": "C:\\Users\\Aleks\\.codex\\generated_images\\01a162ee-d8c3-77a2-8920-09b5e9f68a0b\\exec-6ef15901-2da9-490f-8dad-bfd3dfd4739c.png",
+  "output": "web/public/location-mobile.webp"
+}

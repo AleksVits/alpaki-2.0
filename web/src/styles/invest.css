@@ -316,9 +316,7 @@
 
 @media (max-width: 900px) {
   .invest__backdrop img { object-position: 68% center; filter: saturate(0.8) brightness(0.76); }
-  .site .stage.stage--invest .stage__inner {
-    padding-bottom: calc(3.2rem + env(safe-area-inset-bottom, 0px));
-  }
+  .site .stage.stage--invest .stage__inner { padding-bottom: 0; }
   .stage--invest .invest {
     display: flex;
     flex-direction: column;
@@ -530,9 +528,7 @@
 
 @media (max-width: 900px) {
   .manage__backdrop img { object-position: 64% center; filter: saturate(0.78) brightness(0.7); }
-  .site .stage.stage--invest-manage .stage__inner {
-    padding-bottom: calc(3.4rem + env(safe-area-inset-bottom, 0px));
-  }
+  .site .stage.stage--invest-manage .stage__inner { padding-bottom: 0; }
   .stage--invest-manage .manage {
     display: flex;
     flex-direction: column;

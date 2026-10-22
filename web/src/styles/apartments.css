@@ -18,12 +18,13 @@
   display: grid;
 }
 .apt {
-  grid-template-columns: 0.9fr 1.1fr;
-  align-items: end;
-  gap: 2rem;
-  padding-bottom: 4.8rem;
+  flex: none;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-bottom: 0;
 }
-.apt__copy { align-self: center; padding-bottom: 2rem; }
+.apt__copy { align-self: center; padding-bottom: 0; }
 .apt-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
 .apt-type { text-align: left; color: var(--ink); border: 1px solid transparent; }
 .apt-type.is-active { border-color: var(--gold); }
@@ -155,11 +156,18 @@
     grid-template-columns: 1fr;
   }
   .plan-card { position: relative; width: 100%; }
-  .apt { padding-bottom: 1.4rem; }
+  .apt { padding-bottom: 0; }
   .apt-3d__scene,
   .apt-floor__ph {
     min-height: 280px;
   }
+}
+
+/* Tall tablet screens keep the introduction and choices in one reading column. */
+@media (min-width: 901px) and (max-width: 1400px) and (min-height: 821px) {
+  .apt { grid-template-columns: 1fr; gap: 1.5rem; }
+  .apt__copy { max-width: 36rem; }
+  .apt-types { width: 100%; max-width: 48rem; }
 }
 
 @media (max-width: 900px) {

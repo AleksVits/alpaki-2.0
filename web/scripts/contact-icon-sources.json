@@ -1,0 +1,25 @@
+{
+  "tool": "Built-in image_gen",
+  "icons": {
+    "telegram": {
+      "source": "C:\\Users\\Aleks\\.codex\\generated_images\\01a162ee-d8c3-77a2-8920-09b5e9f68a0b\\exec-88f3eb68-20c2-47f1-8220-e87d596e4d01.png",
+      "prompt": "Create one premium website UI icon: Telegram paper airplane logo, clean recognizable folded paper-plane silhouette. Warm satin champagne gold metal (#c9a15a midtone, #e9cf94 highlights, #9a7230 edges), softly bevelled three-dimensional solid form, restrained polished edge, broad clean surfaces, no glitter, no jewels. Front view, centered square composition, icon occupies 80% of canvas with ample transparent margins, consistent optical weight, clean recognizable at 24px. Soft upper-left lighting. Genuine transparent background, no floor, no cast shadow, no badge, no external circle around the symbol, no text. Single icon only."
+    },
+    "whatsapp": {
+      "source": "C:\\Users\\Aleks\\.codex\\generated_images\\01a162ee-d8c3-77a2-8920-09b5e9f68a0b\\exec-c10c32cc-d5d3-4d3d-bb01-e6af5a2ba5b2.png",
+      "prompt": "Create one premium website UI icon: WhatsApp logo: rounded speech bubble outline with a short lower-left tail and diagonal telephone handset inside. Warm satin champagne gold metal (#c9a15a midtone, #e9cf94 highlights, #9a7230 edges), softly bevelled three-dimensional solid form, restrained polished edge, broad clean surfaces, no glitter, no jewels. Front view, centered square composition, icon occupies 80% of canvas with ample transparent margins, consistent optical weight, clean recognizable at 24px. Soft upper-left lighting. Genuine transparent background, no floor, no cast shadow, no badge, no external circle around the symbol, no text. Single icon only."
+    },
+    "viber": {
+      "source": "C:\\Users\\Aleks\\.codex\\generated_images\\01a162ee-d8c3-77a2-8920-09b5e9f68a0b\\exec-6718d751-92c1-46b5-b568-5f297b569829.png",
+      "prompt": "Create one premium website UI icon: Viber logo: rounded square speech bubble outline with lower-left tail, diagonal telephone handset and two curved call signal lines inside. Warm satin champagne gold metal (#c9a15a midtone, #e9cf94 highlights, #9a7230 edges), softly bevelled three-dimensional solid form, restrained polished edge, broad clean surfaces, no glitter, no jewels. Front view, centered square composition, icon occupies 80% of canvas with ample transparent margins, consistent optical weight, clean recognizable at 24px. Soft upper-left lighting. Genuine transparent background, no floor, no cast shadow, no badge, no external circle around the symbol, no text. Single icon only."
+    },
+    "email": {
+      "source": "C:\\Users\\Aleks\\.codex\\generated_images\\01a162ee-d8c3-77a2-8920-09b5e9f68a0b\\exec-d2b4ecd1-b397-46d6-a272-134412fa4d4d.png",
+      "prompt": "Create one premium website UI icon: email icon: sealed envelope with a clear V-shaped folded flap. Warm satin champagne gold metal (#c9a15a midtone, #e9cf94 highlights, #9a7230 edges), softly bevelled three-dimensional solid form, restrained polished edge, broad clean surfaces, no glitter, no jewels. Front view, centered square composition, icon occupies 80% of canvas with ample transparent margins, consistent optical weight, clean recognizable at 24px. Soft upper-left lighting. Genuine transparent background, no floor, no cast shadow, no badge, no external circle around the symbol, no text. Single icon only."
+    },
+    "phone": {
+      "source": "C:\\Users\\Aleks\\.codex\\generated_images\\01a162ee-d8c3-77a2-8920-09b5e9f68a0b\\exec-c4368981-53e0-4ecf-8356-e9c0127dfbd5.png",
+      "prompt": "Create one premium website UI icon: telephone icon: a single classic curved diagonal telephone receiver handset. Warm satin champagne gold metal (#c9a15a midtone, #e9cf94 highlights, #9a7230 edges), softly bevelled three-dimensional solid form, restrained polished edge, broad clean surfaces, no glitter, no jewels. Front view, centered square composition, icon occupies 80% of canvas with ample transparent margins, consistent optical weight, clean recognizable at 24px. Soft upper-left lighting. Genuine transparent background, no floor, no cast shadow, no badge, no external circle around the symbol, no text. Single icon only."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "tool": "Built-in image_gen",
+  "prompt": "Redraw the provided apartment dollhouse illustration for a premium Carpathian real-estate website. Preserve exactly its room count, wall layout, furniture functions and camera angle so the apartment category is immediately recognizable. Refine into a crisp architectural miniature with ivory walls, pale natural oak floor, cream textiles, subdued forest-green upholstery, tasteful satin champagne GOLD accents on the top edges of walls, door frames, furniture legs, light fixtures and taps (#c9a15a, #e9cf94). Gold is clearly visible but not a solid gold apartment. Clean legible shapes at small card size. Remove the entire exterior green background and ground plane: genuinely transparent alpha outside the apartment footprint, no rectangular backing, no floor outside the apartment, no external cast shadow. Keep opaque floors inside rooms. Center the complete model with generous transparent margins on all sides, landscape 3:2 composition, no cropping. No text, no labels, no measurements, no added rooms.",
+  "icons": {
+    "studio": "C:\\Users\\Aleks\\.codex\\generated_images\\01a162ee-d8c3-77a2-8920-09b5e9f68a0b\\exec-385a6366-154b-4637-8513-f08ca1ee7031.png",
+    "one-room": "C:\\Users\\Aleks\\.codex\\generated_images\\01a162ee-d8c3-77a2-8920-09b5e9f68a0b\\exec-61f2d607-a945-4df0-b18d-2af5e3ec093d.png",
+    "two-room": "C:\\Users\\Aleks\\.codex\\generated_images\\01a162ee-d8c3-77a2-8920-09b5e9f68a0b\\exec-904cf99c-241d-4bde-8c9d-13e0255aeadd.png"
+  }
+}

@@ -180,30 +180,7 @@ export function IconSmartphone() {
   )
 }
 
-export function IconPhone() {
-  return (
-    <GoldIcon viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M7.15 3.6h1.9c.55 0 1.02.4 1.12.94l.38 1.92c.1.46-.08.93-.46 1.2l-1.18.86c.95 2.05 2.62 3.72 4.68 4.68l.86-1.18c.27-.38.74-.56 1.2-.46l1.92.38c.54.1.94.57.94 1.12v1.9c0 .92-.82 1.62-1.73 1.42C9.7 16.55 5.45 12.3 4.73 5.33 4.53 4.42 5.23 3.6 6.15 3.6Z"
-        stroke="currentColor"
-        strokeWidth="1.15"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      />
-    </GoldIcon>
-  )
-}
-
-export function IconMail() {
-  return (
-    <GoldIcon viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <rect x="5" y="8" width="22" height="16" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M5 10 L16 18 L27 10" stroke="currentColor" strokeWidth="1.2" />
-    </GoldIcon>
-  )
-}
-
-export { IconTelegram, IconWhatsapp, IconViber } from './MessengerIcons'
+export { IconTelegram, IconWhatsapp, IconViber, IconMail, IconPhone } from './MessengerIcons'
 
 export function IconLeisure() {
   return (

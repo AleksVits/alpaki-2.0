@@ -445,6 +445,9 @@
 .stage--build-detail .build-detail__nav.is-left { left: 0.75rem; }
 .stage--build-detail .build-detail__nav.is-right { right: 0.75rem; }
 .stage--build-detail .build-detail__empty {
+  position: relative;
+  z-index: 1;
+  background: rgba(10, 31, 20, .35);
   display: grid;
   place-items: center;
   width: 100%;
@@ -455,6 +458,10 @@
   text-align: center;
   font-size: clamp(0.9rem, 1vw, 1.2rem);
 }
+.build-detail__empty-card { max-width: 30rem; padding: 1.25rem; background: rgba(10, 31, 20, .9); border: 1px solid var(--gold-dim); border-radius: .4rem; }
+.build-detail__empty-card strong { color: var(--gold-2); }
+.build-detail__empty-card p { margin: .75rem 0; line-height: 1.5; }
+.build-detail__empty-card small { display: block; font-size: .75rem; line-height: 1.5; }
 .stage--build-detail .build-detail__gallery-foot {
   display: grid;
   grid-template-columns: minmax(9rem, 0.42fr) minmax(0, 1fr);
@@ -509,9 +516,7 @@
 @media (max-width: 900px) {
   .build__backdrop img { object-position: 70% center; filter: saturate(0.78) brightness(0.7); }
   .site .stage.stage--build .stage__inner,
-  .site .stage.stage--build-detail .stage__inner {
-    padding-bottom: calc(3.2rem + env(safe-area-inset-bottom, 0px));
-  }
+  .site .stage.stage--build-detail .stage__inner { padding-bottom: 0; }
   .stage--build .build,
   .stage--build-detail .build-detail {
     width: min(100%, 44rem);
@@ -681,3 +686,12 @@
   border-color: var(--gold-2);
 }
 #root .stage--build .build-line li.is-active button span { background: rgba(201, 161, 90, 0.1); }
+
+/* Availability is independent from the currently selected month. */
+#root .stage--build-detail .months button.has-photos {
+  background: rgba(201, 161, 90, .22);
+  border-color: var(--gold-2);
+  color: var(--gold-3);
+}
+#root .stage--build-detail .months button.is-active { outline: 1px solid var(--gold-2); outline-offset: 3px; }
+.months__dot { display: inline-block; width: .35rem; height: .35rem; margin-left: .45rem; vertical-align: middle; border-radius: 50%; background: var(--gold-2); }

@@ -11,13 +11,15 @@ const vistaJulyPhotos = [
   'construction/vista-july-03.jpg',
 ]
 
+const photosByHouseMonth: Record<string, string[]> = { '0:6': vistaJulyPhotos }
+
 export function Construction() {
   const { t } = useI18n()
   const [house, setHouse] = useState(0)
   const [month, setMonth] = useState(6)
   const [photo, setPhoto] = useState(0)
   const houses = t.build.houses
-  const gallery = house === 0 && month === 6 ? vistaJulyPhotos : []
+  const gallery = photosByHouseMonth[`${house}:${month}`] ?? []
 
   const selectHouse = (index: number) => {
     setHouse(index)
@@ -99,8 +101,9 @@ export function Construction() {
             <ul className="months">
               {t.build.months.map((name, i) => (
                 <li key={name}>
-                  <button type="button" className={month === i ? 'is-active' : ''} onClick={() => selectMonth(i)} aria-pressed={month === i}>
+                  <button type="button" className={[month === i ? 'is-active' : '', photosByHouseMonth[`${house}:${i}`]?.length ? 'has-photos' : ''].filter(Boolean).join(' ')} title={photosByHouseMonth[`${house}:${i}`]?.length ? t.build.hasPhotos : t.build.emptyTitle} onClick={() => selectMonth(i)} aria-pressed={month === i}>
                     {name}
+                    {photosByHouseMonth[`${house}:${i}`]?.length ? <span className="months__dot" aria-label={t.build.hasPhotos} /> : null}
                   </button>
                 </li>
               ))}
@@ -121,7 +124,16 @@ export function Construction() {
                   </button>
                 </>
               ) : (
-                <p className="build-detail__empty">{t.build.noUpdates}</p>
+                <>
+                  <img className="is-active" src={asset('construction-overview.jpg')} alt="" loading="lazy" decoding="async" />
+                  <div className="build-detail__empty" role="status">
+                    <div className="build-detail__empty-card">
+                      <strong>{t.build.emptyTitle}</strong>
+                      <p>{t.build.noUpdates}</p>
+                      <small>{t.build.previewNote}</small>
+                    </div>
+                  </div>
+                </>
               )}
             </div>
             {gallery.length > 0 && (

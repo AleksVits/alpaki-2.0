@@ -268,6 +268,9 @@ const ua = {
     detailLead:
       'Стежте за етапами реалізації будинку та переглядайте актуальні матеріали проєкту.',
     photos: 'Ілюстрації будівництва · візуалізація',
+    hasPhotos: 'Є фото',
+    emptyTitle: 'Контенту поки немає',
+    previewNote: 'Ілюстрація проєкту · не фотозвіт за вибраний місяць',
     noUpdates: 'Для вибраного будинку й місяця матеріали ще не додано.',
     months: [
       'Січень',
@@ -622,6 +625,9 @@ const en: typeof ua = {
     status: 'Design',
     detailLead: 'Follow the building stages and review the latest project materials.',
     photos: 'Construction illustrations · visualization',
+    hasPhotos: 'Photos available',
+    emptyTitle: 'No content yet',
+    previewNote: 'Project illustration · not a report for the selected month',
     noUpdates: 'Materials for this building and month have not been added yet.',
     months: [
       'January',

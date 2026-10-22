@@ -99,7 +99,6 @@
 @media (max-width: 900px) {
   .mobile-apartment-cta { display: block; position: fixed; z-index: 35; bottom: calc(.75rem + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); max-width: calc(100% - 2rem); padding: .8rem 1.2rem; min-height: 48px; border-radius: .5rem; background: var(--pine); border: 1px solid var(--gold); color: var(--gold-2); text-decoration: none; text-align: center; box-shadow: 0 4px 20px #0a1f1466; }
   html.is-nav-lock .mobile-apartment-cta { display: none; }
-  .site .stage:not(.stage--intro) .stage__inner { padding-bottom: 7rem; }
   .apt-progress ol { gap: .35rem .75rem; }
   #root .apt-progress button { min-height: 48px; font-size: .8rem; }
   .architecture__caption { position: relative; inset: auto; transform: none; align-self: center; margin: 1rem auto; }
@@ -108,9 +107,12 @@
   .intro__backdrop.is-ready img { animation: none; transform: none; }
 }
 
-#root .messenger-icon { display: block; object-fit: contain; }
+#root .messenger-icon { display: block; width: 1.5rem; height: 1.5rem; flex: none; object-fit: contain; }
+#root .header__phone .messenger-icon { width: 1.5rem; height: 1.5rem; filter: none; }
 #root :is(.rail__btn, .header__menu-social-btn).gold-orb img.messenger-icon { filter: none; }
 
 /* Conceptual category illustrations remain fully visible, including room divisions. */
-#root .apt-type__ph { height: auto; aspect-ratio: 3 / 2; background: var(--marble); overflow: hidden; }
+#root .apt-type,
+#root .apt-type:is(.is-active, [aria-pressed="true"], :hover, :focus-visible) { background: transparent; }
+#root .apt-type__ph { height: auto; aspect-ratio: 3 / 2; background: transparent; border: 0; overflow: hidden; }
 #root .apt-type__ph img { width: 100%; height: 100%; object-fit: contain; }
