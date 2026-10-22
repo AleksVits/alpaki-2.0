@@ -1,7 +1,7 @@
 /* Location — copy and the bottom transport panel. */
 
 .stage--location .scroll-hint { bottom: 0.45rem; }
-.stage--location { background: url('/location-approved.jpg') center / cover no-repeat; overflow: hidden; }
+.stage--location { background: url('/location-approved.jpg') right center / cover no-repeat; overflow: hidden; }
 .stage--location .stage__shade { background: none; }
 .location__copy {
   max-width: var(--type-copy-max);
@@ -232,6 +232,7 @@
 @media (max-width: 900px) {
   .stage--location {
     background-image: url('/location-mobile.webp');
+    background-position: center;
   }
   .stage--location .stage__shade {
     background: linear-gradient(180deg, rgba(10, 31, 20, .3), rgba(10, 31, 20, .45) 45%, rgba(10, 31, 20, .2));
