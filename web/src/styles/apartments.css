@@ -763,3 +763,10 @@ dialog.lightbox .lightbox__close { right: 1.5rem; top: 1.5rem; }
   .apt-step,
   .apt-motion--backward .apt-step { animation: none; }
 }
+
+@media (max-width: 600px) {
+  .apt-types { grid-template-columns: 1fr; }
+  .apt-types .apt-type { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: center; gap: .75rem; width: 100%; text-align: left; }
+  .apt-types .apt-type__ph { margin-bottom: 0; }
+  .apt-types .apt-type > span:last-child { min-width: 0; letter-spacing: .04em; }
+}

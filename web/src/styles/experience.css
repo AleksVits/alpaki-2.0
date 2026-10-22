@@ -114,8 +114,9 @@
 #root :is(.rail__btn, .header__menu-social-btn).gold-orb img.messenger-icon { filter: none; }
 
 /* Conceptual category illustrations remain fully visible, including room divisions. */
-#root .apt-type,
-#root .apt-type:is(.is-active, [aria-pressed="true"], :hover, :focus-visible) { background: transparent; }
+#root .apt-type { background: rgba(10, 31, 20, .48); }
+#root .apt-type:is(:hover, :focus-visible) { background: rgba(10, 31, 20, .62); }
+#root .apt-type:is(.is-active, [aria-pressed="true"]) { background: rgba(10, 31, 20, .88); }
 #root .apt-type__ph { height: auto; aspect-ratio: 3 / 2; background: transparent; border: 0; overflow: hidden; }
 #root .apt-type__ph img { width: 100%; height: 100%; object-fit: contain; }
 
