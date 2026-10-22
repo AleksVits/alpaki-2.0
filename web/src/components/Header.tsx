@@ -164,7 +164,7 @@ export function Header({ hidden, active }: Props) {
 
   const langs = (place: 'bar' | 'menu') => (
     <div
-      className={`header__langs glass glass--pill header__langs--${place}`}
+      className={`header__langs glass glass--pill header__langs--bar${place === 'menu' ? ' header__langs--menu' : ''}`}
       data-active-lang={lang}
       role="group"
       aria-label={t.ui.language}

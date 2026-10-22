@@ -40,6 +40,12 @@ function Thumbs({ items, active, onSelect, label }: { items: Media[]; active: nu
 export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => void }) {
   const { t } = useI18n()
   const [page, setPage] = useState(TYPE)
+  const [direction, setDirection] = useState('forward')
+  const goToPage = (next: number) => {
+    if (next === page) return
+    setDirection(next > page ? 'forward' : 'backward')
+    setPage(next)
+  }
   const [type, setType] = useState<number | null>(null)
   const [house, setHouse] = useState<number | null>(null)
   const [render, setRender] = useState(0)
@@ -71,7 +77,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
     setType(i)
     setLayoutIndex(0)
     setView(0)
-    setPage(HOUSE)
+    goToPage(HOUSE)
   }
   const chooseHouse = (i: number) => {
     setHouse(i)
@@ -91,7 +97,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
   return (
     <Stage
       id="apartments"
-      className={`stage--apt stage--apt-${page}`}
+      className={`stage--apt stage--apt-${page} apt-motion--${direction}`}
       next="construction"
       overlay={(
         <div className={`apt__backdrop apt__backdrop--${page}`} aria-hidden="true">
@@ -108,7 +114,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
                 className={i < page ? 'is-done' : ''}
                 aria-current={page === i ? 'step' : undefined}
                 disabled={!canOpen[i]}
-                onClick={() => setPage(i)}
+                onClick={() => goToPage(i)}
               >
                 <span className="apt-progress__n">{String(i + 1).padStart(2, '0')}</span> {step}
               </button>
@@ -119,7 +125,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
       </nav>
 
       {page === TYPE && (
-        <div className="apt">
+        <div className="apt apt-step">
           <div className="apt__copy">
             <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.title)}</SectionHeading>
             <Lead>{t.apt.lead}</Lead>
@@ -148,7 +154,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
       )}
 
       {page === HOUSE && (
-        <div className="apt-pick">
+        <div className="apt-pick apt-step">
           <div className="apt-pick__main">
             <SectionHeading kicker={t.apt.kicker}>{splitTitle(t.apt.houseTitle)}</SectionHeading>
             <Lead>{t.apt.houseLead.replace('{type}', typeTitle.toLowerCase())}</Lead>
@@ -176,7 +182,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
               {house === null ? (
                 <p className="apt-hint">{t.apt.houseHint}</p>
               ) : hasLayouts(house, type) ? (
-                <Btn solid onClick={() => setPage(VIEW)}>{t.apt.planCta}</Btn>
+                <Btn solid onClick={() => goToPage(VIEW)}>{t.apt.planCta}</Btn>
               ) : (
                 <>
                   <p className="apt-hint">{t.apt.soonNote.replace('{house}', building!.title)}</p>
@@ -207,7 +213,7 @@ export function Apartments({ onInquiry }: { onInquiry: (inquiry: Inquiry) => voi
       )}
 
       {page === VIEW && building && (
-        <div className={`apt-3d${layout ? ' apt-3d--media' : ''}`}>
+        <div className={`apt-3d apt-step${layout ? ' apt-3d--media' : ''}`}>
           <div className="apt-3d__copy">
             <SectionHeading kicker={`${t.apt.kicker} · ${building.title}`}>{splitTitle(t.apt.viewTitle)}</SectionHeading>
             <Lead>{t.apt.viewLead}</Lead>
