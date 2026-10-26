@@ -6,7 +6,8 @@ export type Lang = 'ua' | 'en'
 
 /** A paragraph, or a short list set in one line (the values of the Creators). */
 export type LegendBlock = string | string[]
-export type LegendChapter = { n: string; title: string; blocks: LegendBlock[] }
+/** `quote`: index of the block set as a large pull quote. `scene`: the chapter sits on a photograph. */
+export type LegendChapter = { n: string; title: string; blocks: LegendBlock[]; quote?: number; scene?: boolean }
 
 const ua = {
   meta: {
@@ -215,9 +216,9 @@ const ua = {
     lead: 'Від панорамних студій до просторових апартаментів — оберіть формат, що відповідає вашому ритму.',
     cta: 'Оберіть простір',
     types: [
-      { id: 'studio', n: '01', title: 'Студія', meta: 'від  …  до  …  м²' },
-      { id: 'one', n: '02', title: 'Однокімнатна', meta: 'від  …  до  …  м²' },
-      { id: 'two', n: '03', title: 'Двокімнатна', meta: 'від  …  до  …  м²' },
+      { id: 'studio', n: '01', title: 'Студія', meta: 'від 46,59 до 66,51 м²' },
+      { id: 'one', n: '02', title: 'Однокімнатна', meta: '69,32 м²' },
+      { id: 'two', n: '03', title: 'Двокімнатна', meta: '88,15 м²' },
     ],
     houseTitle: 'Оберіть\nбудинок',
     houseLead: 'Оберіть будинок — покажемо, які планування типу «{type}» у ньому доступні.',
@@ -376,6 +377,8 @@ const ua = {
       {
         n: 'IV',
         title: 'Відродження',
+        quote: 3,
+        scene: true,
         blocks: [
           'Минали століття. Змінювалися покоління, держави та люди. Та є місця, які неможливо стерти з пам’яті часу.',
           'Легенда про АЛЬПАКІ жила не в книгах і не в переказах. Вона жила в самій землі, у горах, у річках, у лісах та зоряному небі, яке колись освітлювало шлях ТВОРЦЯМ.',
@@ -387,6 +390,7 @@ const ua = {
       {
         n: 'V',
         title: 'Спадщина',
+        quote: 0,
         blocks: [
           'Справжня спадщина — це не те, що ми отримуємо. Це те, що ми залишаємо після себе.',
           'AL’PAKI LEGEND — це продовження легенди ТВОРЦІВ. Місце, де люди знову створюють цінності. Місце, де народжуються нові ідеї, міцні родини, нові традиції та історії, які житимуть поколіннями.',
@@ -401,6 +405,8 @@ const ua = {
     invest: 'Інвестиції',
     home: 'На головну',
     chaptersLabel: 'Розділи легенди',
+    chapter: 'Розділ',
+    mapLabel: 'Карта легенди: п’ять розділів',
     footer: 'Карпати · урочище Тростянець',
   },
   ui: {
@@ -646,9 +652,9 @@ const en: typeof ua = {
     lead: 'From panoramic studios to spacious apartments — choose the format that matches your rhythm.',
     cta: 'Choose a space',
     types: [
-      { id: 'studio', n: '01', title: 'Studio', meta: 'from  …  to  …  m²' },
-      { id: 'one', n: '02', title: '1 bedroom', meta: 'from  …  to  …  m²' },
-      { id: 'two', n: '03', title: '2 bedrooms', meta: 'from  …  to  …  m²' },
+      { id: 'studio', n: '01', title: 'Studio', meta: 'from 46.59 to 66.51 m²' },
+      { id: 'one', n: '02', title: '1 bedroom', meta: '69.32 m²' },
+      { id: 'two', n: '03', title: '2 bedrooms', meta: '88.15 m²' },
     ],
     houseTitle: 'Choose\na building',
     houseLead: 'Choose a building — we will show which “{type}” layouts it offers.',
@@ -806,6 +812,8 @@ const en: typeof ua = {
       {
         n: 'IV',
         title: 'Revival',
+        quote: 3,
+        scene: true,
         blocks: [
           'Centuries passed. Generations, nations and people changed. Yet there are places that time cannot erase from memory.',
           'The legend of ALPAKI lived on not in books or retellings. It lived in the land itself — in the mountains, the rivers, the forests and the starry sky that once lit the way for the CREATORS.',
@@ -817,6 +825,7 @@ const en: typeof ua = {
       {
         n: 'V',
         title: 'Legacy',
+        quote: 0,
         blocks: [
           'True legacy is not what we receive. It is what we leave behind.',
           'AL’PAKI LEGEND continues the legend of the CREATORS. A place where people create value again. A place where new ideas, strong families, new traditions and stories that will live for generations are born.',
@@ -831,6 +840,8 @@ const en: typeof ua = {
     invest: 'Investments',
     home: 'Back to home',
     chaptersLabel: 'Chapters of the legend',
+    chapter: 'Chapter',
+    mapLabel: 'Map of the legend: five chapters',
     footer: 'Carpathians · Trostyanets tract',
   },
   ui: {
