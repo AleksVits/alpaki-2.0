@@ -1097,3 +1097,13 @@
   .section-dots__dot::before { background: CanvasText; }
   .section-dots__dot.is-active::before { background: Highlight; }
 }
+
+/* Side messengers, slightly larger (26.10.2026). Extra `.rail` keeps these above later layers. */
+@media (min-width: 1101px) {
+  #root .rail .rail__btn.gold-orb { width: max(54px, 2.8rem); height: max(54px, 2.8rem); }
+  #root .rail .rail__btn.gold-orb :is(img, svg),
+  #root .rail .rail__btn.gold-orb .messenger-icon {
+    width: clamp(28px, 1.7rem, 40px);
+    height: clamp(28px, 1.7rem, 40px);
+  }
+}

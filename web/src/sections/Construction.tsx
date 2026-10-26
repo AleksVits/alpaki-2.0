@@ -5,13 +5,9 @@ import { splitTitle } from '../components/titleText'
 import { asset } from '../asset'
 import { useI18n } from '../useI18n'
 
-const vistaJulyPhotos = [
-  'construction/vista-july-01.jpg',
-  'construction/vista-july-02.jpg',
-  'construction/vista-july-03.jpg',
-]
-
-const photosByHouseMonth: Record<string, string[]> = { '0:6': vistaJulyPhotos }
+// Construction materials by `house:month`. Empty for now: every month shows the placeholder until
+// real site photos arrive. Former July visuals for Vista stay in public/construction/.
+const photosByHouseMonth: Record<string, string[]> = {}
 
 export function Construction() {
   const { t } = useI18n()

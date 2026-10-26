@@ -55,7 +55,7 @@ export function Infrastructure({
                 >
                   <img
                     className="infra-card__image"
-                    src={asset(group.items[0].images[0])}
+                    src={asset(`infrastructure/categories/${group.id}.webp`)}
                     alt=""
                     loading="eager"
                     decoding="async"

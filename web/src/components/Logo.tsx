@@ -4,6 +4,8 @@ import { asset } from '../asset'
 const logoFrames = Array.from({ length: 10 }, (_, index) => asset(`logo-animation/${index + 1}.webp?v=4`))
 
 type Props = {
+  href?: string
+  label?: string
   compact?: boolean
   animatedMark?: boolean
   className?: string
@@ -36,9 +38,9 @@ function AnimatedLogoMark() {
   )
 }
 
-export function Logo({ compact = false, animatedMark = false, className = '', style }: Props) {
+export function Logo({ href = '#intro', label = 'AL’PAKI LEGEND', compact = false, animatedMark = false, className = '', style }: Props) {
   return (
-    <a href="#intro" className={`logo ${compact ? 'logo--compact' : ''} ${className}`} style={style} aria-label="AL'PAKI LEGEND">
+    <a href={href} className={`logo ${compact ? 'logo--compact' : ''} ${className}`} style={style} aria-label={label}>
       {animatedMark ? <AnimatedLogoMark /> : <img className="logo__mark" src={asset('logo-mark-header.webp?v=4')} alt="" />}
       <span className="logo__text">
         <span className="logo__name">

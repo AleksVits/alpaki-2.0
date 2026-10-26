@@ -20,3 +20,8 @@ export function inquiryMessage(inquiry: Inquiry | null, t: Translations) {
 export function inquirySubject(inquiry: Inquiry | null, t: Translations) {
   return inquiry ? t.inquiry.subject[inquiry.kind] : ''
 }
+
+/** Submit button label: names what the visitor asked for, or a general request. */
+export function inquirySubmit(inquiry: Inquiry | null, t: Translations) {
+  return inquiry ? t.inquiry.submit[inquiry.kind] : t.contacts.submit
+}

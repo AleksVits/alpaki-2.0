@@ -10,11 +10,17 @@ const dist = resolve(root, 'dist')
 const { render } = await import(pathToFileURL(resolve(root, 'node_modules/.prerender/entry-server.js')).href)
 
 const marker = '<div id="root"></div>'
-for (const [lang, page] of [['ua', 'index.html'], ['en', 'en/index.html']]) {
+const pages = [
+  ['ua', 'home', 'index.html'],
+  ['en', 'home', 'en/index.html'],
+  ['ua', 'legend', 'legend/index.html'],
+  ['en', 'legend', 'en/legend/index.html'],
+]
+for (const [lang, name, page] of pages) {
   const file = resolve(dist, page)
   const html = readFileSync(file, 'utf8')
   if (!html.includes(marker)) throw new Error(`${page}: expected an empty ${marker}`)
-  const markup = render(lang)
+  const markup = render(lang, name)
   writeFileSync(file, html.replace(marker, () => `<div id="root">${markup}</div>`))
   console.log(`prerendered ${page} (${lang}): ${(markup.length / 1024).toFixed(1)} kB of markup`)
 }

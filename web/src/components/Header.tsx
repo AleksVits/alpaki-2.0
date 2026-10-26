@@ -6,10 +6,13 @@ import { phoneHref } from '../contactLinks'
 import { resetShineCard, shineCard } from './uiEffects'
 import { useI18n } from '../useI18n'
 import type { Lang } from '../i18n'
+import { pagePath, type Page } from '../route'
 
 type Props = {
   hidden?: boolean
   active: string
+  /** On the legend page the section links lead back to the home page. */
+  page?: Page
 }
 
 const items = [
@@ -31,8 +34,12 @@ function unlockNavScroll() {
   document.documentElement.classList.remove(NAV_LOCK)
 }
 
-export function Header({ hidden, active }: Props) {
+export function Header({ hidden, active, page = 'home' }: Props) {
   const { t, lang, setLang } = useI18n()
+  const home = pagePath(lang, 'home')
+  const links = page === 'legend'
+    ? [{ id: 'home', href: home } as const, ...items.map((item) => ({ ...item, href: `${home}${item.href}` }))]
+    : items
   const [open, setOpen] = useState(false)
   const [exited, setExited] = useState(true)
   const burgerRef = useRef<HTMLButtonElement>(null)
@@ -184,10 +191,10 @@ export function Header({ hidden, active }: Props) {
   )
 
   return (
-    <header className={`header${hidden && !open ? ' header--hidden' : ''}${open ? ' header--menu' : ''}`}>
-      <Logo compact />
+    <header className={`header${page === 'legend' ? ' header--legend' : ''}${hidden && !open ? ' header--hidden' : ''}${open ? ' header--menu' : ''}`}>
+      <Logo compact href={page === 'legend' ? '#top' : pagePath(lang, 'legend')} label={t.ui.legendLink} />
       <nav ref={navRef} className="header__nav glass glass--pill" aria-label={t.ui.mainNav}>
-        {items.map((item) => (
+        {links.map((item) => (
           <a
             key={item.id}
             href={item.href}
@@ -239,7 +246,7 @@ export function Header({ hidden, active }: Props) {
           }}
         />
         <nav className="header__menu-panel" aria-label={t.ui.mobileNav}>
-          {items.map((item) => (
+          {links.map((item) => (
             <a
               key={item.id}
               href={item.href}

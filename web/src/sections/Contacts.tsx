@@ -13,7 +13,7 @@ import { emailHref, phoneHref, viberHref, whatsappHref } from '../contactLinks'
 import { Btn, Kicker, Lead, Stage, SectionHeading } from '../components/Ui'
 import { splitTitle } from '../components/titleText'
 import { useI18n } from '../useI18n'
-import { inquiryMessage, inquirySubject, type Inquiry } from '../inquiry'
+import { inquiryMessage, inquirySubject, inquirySubmit, type Inquiry } from '../inquiry'
 
 export function Contacts({ inquiry }: { inquiry: Inquiry | null }) {
   const { t } = useI18n()
@@ -143,7 +143,7 @@ export function Contacts({ inquiry }: { inquiry: Inquiry | null }) {
             </span>
           </label>
           <Btn type="submit" solid arrow={false}>
-            {t.contacts.submit}
+            {inquirySubmit(inquiry, t)}
           </Btn>
         </form>
       </div>

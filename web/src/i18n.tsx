@@ -1,7 +1,12 @@
 import { I18nContext } from './useI18n'
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { pageFromPath, pagePath } from './route'
 
 export type Lang = 'ua' | 'en'
+
+/** A paragraph, or a short list set in one line (the values of the Creators). */
+export type LegendBlock = string | string[]
+export type LegendChapter = { n: string; title: string; blocks: LegendBlock[] }
 
 const ua = {
   meta: {
@@ -10,6 +15,7 @@ const ua = {
       'AL’PAKI LEGEND — власний простір у Карпатах. Апартаменти, відпочинок та інвестиції в урочищі Тростянець, Кваси.',
   },
   nav: {
+    home: 'Головна',
     about: 'Про комплекс',
     infra: 'Інфраструктура',
     invest: 'Інвестиції',
@@ -32,6 +38,12 @@ const ua = {
       offer: 'Інвестиційна пропозиція',
       consultation: 'Консультація щодо інвестування',
       management: 'Умови управління',
+    },
+    submit: {
+      apartment: 'Запитати вартість',
+      offer: 'Отримати інвестпропозицію',
+      consultation: 'Записатися на консультацію',
+      management: 'Дізнатися умови управління',
     },
   },
   about: {
@@ -311,7 +323,7 @@ const ua = {
     phoneField: 'Телефон *',
     message: 'Повідомлення',
     privacy: 'Погоджуюсь з політикою конфіденційності',
-    submit: 'Підготувати лист',
+    submit: 'Надіслати заявку',
     success: 'Завершіть надсилання у поштовій програмі. Якщо вона не відкрилася, напишіть на info@alpaki.ua. Дані форми залишаються тут.',
     privacyTitle: 'Політика конфіденційності',
     privacyText:
@@ -326,6 +338,71 @@ const ua = {
     dnipro: 'Дніпро',
     odesa: 'Одеса',
   },
+  legend: {
+    meta: {
+      title: 'Легенда AL’PAKI LEGEND — про Творців і Спадкоємців',
+      description:
+        'Легенда про землі АЛЬПАКІ, ТВОРЦІВ і СПАДКОЄМЦІВ — історія, з якої почався карпатський комплекс AL’PAKI LEGEND.',
+    },
+    kicker: 'Легенда',
+    title: 'AL’PAKI LEGEND',
+    lead: 'Це цінність, яку ми отримали у спадок від давніх пращурів, які й народили легенду про «СПАДКОЄМЦІВ».',
+    chapters: [
+      {
+        n: 'I',
+        title: 'Творці',
+        blocks: [
+          'Далеко в минулому, в землях і місцевості, які наші пращури називали АЛЬПАКІ, жили особливі люди — їх називали ТВОРЦЯМИ. За довгий час вони навчилися створювати те, що робило життя людей ціннішим за все:',
+          ['здорову їжу', 'медицину', 'знання', 'винаходи', 'домівки'],
+          'та багато іншого, що ТВОРЦЯМ допомагала створювати сама природа, яка оточувала чарівні землі АЛЬПАКІ, і зорі, які світили вночі та надихали тих дивних людей творити.',
+        ],
+      },
+      {
+        n: 'II',
+        title: 'Виклик',
+        blocks: [
+          'Та настали складні часи для ТВОРЦІВ — вони опинилися перед викликом життя. До них прийшов ворог, який хотів знищити їх та відібрати все, що вони створили. Почалася боротьба за майбутнє, за збереження самого цінного, що в них було, — за життя.',
+          'Та довелося покинути свої землі, щоб зберегти нащадків: тих, хто в майбутньому відшукає та відродить втрачені землі, які колись називали АЛЬПАКІ.',
+        ],
+      },
+      {
+        n: 'III',
+        title: 'Зоряний шлях',
+        blocks: [
+          'Ця легенда жила тисячоліттями, поки не знайшла притулок на небі під зорями, які завжди прокладали шлях і служили путівником майбутнім СПАДКОЄМЦЯМ.',
+          'Зорі прокладали шлях і світили туди, де СПАДКОЄМЦІ завжди відчували поклик ТВОРЦІВ — знову відродити місце особливих людей, повернути землі, які раніше називали АЛЬПАКІ.',
+        ],
+      },
+      {
+        n: 'IV',
+        title: 'Відродження',
+        blocks: [
+          'Минали століття. Змінювалися покоління, держави та люди. Та є місця, які неможливо стерти з пам’яті часу.',
+          'Легенда про АЛЬПАКІ жила не в книгах і не в переказах. Вона жила в самій землі, у горах, у річках, у лісах та зоряному небі, яке колись освітлювало шлях ТВОРЦЯМ.',
+          'І одного дня СПАДКОЄМЦІ повернулися. Не тому, що шукали загублені землі. А тому, що відчули їхній поклик.',
+          'Вони не прийшли завойовувати. Вони прийшли продовжити.',
+          'Так почалося нове життя АЛЬПАКІ. Не як спогад про минуле. А як місце, де знову народжуються великі історії.',
+        ],
+      },
+      {
+        n: 'V',
+        title: 'Спадщина',
+        blocks: [
+          'Справжня спадщина — це не те, що ми отримуємо. Це те, що ми залишаємо після себе.',
+          'AL’PAKI LEGEND — це продовження легенди ТВОРЦІВ. Місце, де люди знову створюють цінності. Місце, де народжуються нові ідеї, міцні родини, нові традиції та історії, які житимуть поколіннями.',
+          'Кожен, хто приходить сюди, стає частиною легенди. Кожен, хто будує, інвестує, відпочиває чи створює майбутнє разом із AL’PAKI LEGEND, стає СПАДКОЄМЦЕМ.',
+          'Бо легенди не закінчуються. Вони живуть доти, доки знаходяться люди, які готові їх продовжувати.',
+        ],
+      },
+    ] as LegendChapter[],
+    finaleKicker: 'AL’PAKI LEGEND',
+    finaleTitle: 'Місце, де народжуються нові Спадкоємці',
+    apartments: 'Апартаменти',
+    invest: 'Інвестиції',
+    home: 'На головну',
+    chaptersLabel: 'Розділи легенди',
+    footer: 'Карпати · урочище Тростянець',
+  },
   ui: {
     next: 'Далі',
     prev: 'Назад',
@@ -333,6 +410,7 @@ const ua = {
     phone: 'Зателефонувати',
     placeholder: 'Зображення',
     menu: 'Меню',
+    legendLink: 'AL’PAKI LEGEND — легенда',
     closeMenu: 'Закрити меню',
     mainNav: 'Основна навігація',
     mobileNav: 'Мобільна навігація',
@@ -368,6 +446,7 @@ const en: typeof ua = {
       'AL’PAKI LEGEND — a private space in the Carpathians. Apartments, leisure and investment in the Trostyanets tract, Kvasy.',
   },
   nav: {
+    home: 'Home',
     about: 'About',
     infra: 'Infrastructure',
     invest: 'Investments',
@@ -390,6 +469,12 @@ const en: typeof ua = {
       offer: 'Investment offer',
       consultation: 'Investment consultation',
       management: 'Management terms',
+    },
+    submit: {
+      apartment: 'Ask for the price',
+      offer: 'Get the investment offer',
+      consultation: 'Book a consultation',
+      management: 'Get management terms',
     },
   },
   about: {
@@ -668,7 +753,7 @@ const en: typeof ua = {
     phoneField: 'Phone *',
     message: 'Message',
     privacy: 'I agree to the privacy policy',
-    submit: 'Prepare email',
+    submit: 'Send request',
     success: 'Complete sending in your email app. If it did not open, email info@alpaki.ua. Your form entries remain here.',
     privacyTitle: 'Privacy policy',
     privacyText:
@@ -683,6 +768,71 @@ const en: typeof ua = {
     dnipro: 'Dnipro',
     odesa: 'Odesa',
   },
+  legend: {
+    meta: {
+      title: 'The AL’PAKI LEGEND story — of Creators and Heirs',
+      description:
+        'The legend of the ALPAKI lands, the CREATORS and the HEIRS — the story behind the AL’PAKI LEGEND resort in the Carpathians.',
+    },
+    kicker: 'The legend',
+    title: 'AL’PAKI LEGEND',
+    lead: 'It is a treasure we inherited from our distant ancestors — the very ones who gave birth to the legend of the “HEIRS”.',
+    chapters: [
+      {
+        n: 'I',
+        title: 'The Creators',
+        blocks: [
+          'Long ago, in the lands our ancestors called ALPAKI, there lived remarkable people known as the CREATORS. Over a long time they learned to create what made people’s lives more precious than anything:',
+          ['healthy food', 'medicine', 'knowledge', 'inventions', 'homes'],
+          'and much more besides. The CREATORS were helped by nature itself, which surrounded the enchanted lands of ALPAKI, and by the stars that shone at night and inspired those wondrous people to create.',
+        ],
+      },
+      {
+        n: 'II',
+        title: 'The Challenge',
+        blocks: [
+          'But hard times came for the CREATORS — they faced the challenge of their lives. An enemy came, wanting to destroy them and take everything they had created. A struggle began for the future, for keeping the most precious thing they had — life itself.',
+          'They had to leave their lands to save their descendants: those who would one day find and revive the lost lands once called ALPAKI.',
+        ],
+      },
+      {
+        n: 'III',
+        title: 'The Starlit Path',
+        blocks: [
+          'The legend lived on for millennia, until it found shelter in the sky, beneath the stars that always lit the way and guided the future HEIRS.',
+          'The stars lit the path and shone towards the place where the HEIRS always felt the call of the CREATORS — to revive the home of those remarkable people and return the lands once called ALPAKI.',
+        ],
+      },
+      {
+        n: 'IV',
+        title: 'Revival',
+        blocks: [
+          'Centuries passed. Generations, nations and people changed. Yet there are places that time cannot erase from memory.',
+          'The legend of ALPAKI lived on not in books or retellings. It lived in the land itself — in the mountains, the rivers, the forests and the starry sky that once lit the way for the CREATORS.',
+          'And one day the HEIRS returned. Not because they were searching for lost lands, but because they felt their call.',
+          'They did not come to conquer. They came to continue.',
+          'So began a new life for ALPAKI. Not as a memory of the past, but as a place where great stories are born again.',
+        ],
+      },
+      {
+        n: 'V',
+        title: 'Legacy',
+        blocks: [
+          'True legacy is not what we receive. It is what we leave behind.',
+          'AL’PAKI LEGEND continues the legend of the CREATORS. A place where people create value again. A place where new ideas, strong families, new traditions and stories that will live for generations are born.',
+          'Everyone who comes here becomes part of the legend. Everyone who builds, invests, rests or creates the future together with AL’PAKI LEGEND becomes an HEIR.',
+          'Because legends never end. They live for as long as there are people ready to carry them on.',
+        ],
+      },
+    ] as LegendChapter[],
+    finaleKicker: 'AL’PAKI LEGEND',
+    finaleTitle: 'A place where new Heirs are born',
+    apartments: 'Apartments',
+    invest: 'Investments',
+    home: 'Back to home',
+    chaptersLabel: 'Chapters of the legend',
+    footer: 'Carpathians · Trostyanets tract',
+  },
   ui: {
     next: 'Next',
     prev: 'Back',
@@ -690,6 +840,7 @@ const en: typeof ua = {
     phone: 'Call',
     placeholder: 'Image',
     menu: 'Menu',
+    legendLink: 'AL’PAKI LEGEND — the legend',
     closeMenu: 'Close menu',
     mainNav: 'Main navigation',
     mobileNav: 'Mobile navigation',
@@ -730,9 +881,6 @@ function langFromPath(): Lang {
   return /^en(\/|$)/.test(window.location.pathname.slice(base.length)) ? 'en' : 'ua'
 }
 
-function langPath(lang: Lang) {
-  return lang === 'en' ? `${base}en/` : base
-}
 
 // The address alone decides the language, so the first render always matches the
 // prerendered page. A saved choice of English is restored by the small script in
@@ -749,8 +897,9 @@ export function I18nProvider({ children, initialLang }: { children: ReactNode; i
   }, [])
   const value = useMemo(() => ({ lang, setLang, t: dictionaries[lang] }), [lang, setLang])
   useEffect(() => {
-    const { meta } = dictionaries[lang]
-    const path = langPath(lang)
+    const page = pageFromPath(window.location.pathname)
+    const { meta } = page === 'legend' ? dictionaries[lang].legend : dictionaries[lang]
+    const path = pagePath(lang, page)
     document.documentElement.lang = lang === 'en' ? 'en' : 'uk'
     document.title = meta.title
     document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description)

@@ -17,14 +17,17 @@ import './styles/contacts.css'
 import './refinement.css'
 import './controls.css'
 import './styles/experience.css'
+import './styles/legend.css'
 import App from './App.tsx'
 import { I18nProvider } from './i18n.tsx'
+import { LegendPage } from './pages/Legend.tsx'
+import { pageFromPath } from './route'
 
 const container = document.getElementById('root')!
 const app = (
   <StrictMode>
     <I18nProvider>
-      <App />
+      {pageFromPath(window.location.pathname) === 'legend' ? <LegendPage /> : <App />}
     </I18nProvider>
   </StrictMode>
 )

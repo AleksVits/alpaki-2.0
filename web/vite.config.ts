@@ -19,19 +19,23 @@ function siteMeta(): Plugin {
       handler: (html) => html.replaceAll('__SITE_URL__', siteUrl),
     },
     generateBundle() {
-      const pages = [siteUrl, `${siteUrl}en/`]
-      const alternates = [
-        `<xhtml:link rel="alternate" hreflang="uk" href="${siteUrl}" />`,
-        `<xhtml:link rel="alternate" hreflang="en" href="${siteUrl}en/" />`,
-        `<xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}" />`,
-      ].join('\n    ')
+      // Each page exists in Ukrainian (site root) and English (`en/`).
+      const pages = ['', 'legend/']
+      const urlset = pages.flatMap((page) => {
+        const alternates = [
+          `<xhtml:link rel="alternate" hreflang="uk" href="${siteUrl}${page}" />`,
+          `<xhtml:link rel="alternate" hreflang="en" href="${siteUrl}en/${page}" />`,
+          `<xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${page}" />`,
+        ].join('\n    ')
+        return [`${siteUrl}${page}`, `${siteUrl}en/${page}`].map((loc) => `  <url>\n    <loc>${loc}</loc>\n    ${alternates}\n  </url>`)
+      })
       this.emitFile({
         type: 'asset',
         fileName: 'sitemap.xml',
         source: [
           '<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
-          ...pages.map((loc) => `  <url>\n    <loc>${loc}</loc>\n    ${alternates}\n  </url>`),
+          ...urlset,
           '</urlset>',
           '',
         ].join('\n'),
@@ -59,10 +63,12 @@ export default defineConfig(({ command, isPreview, isSsrBuild }) => ({
         outDir: 'dist',
         emptyOutDir: true,
         rolldownOptions: {
-          // Українська версія — у корені, англійська — за адресою /en/.
+          // Українська версія — у корені, англійська — за адресою /en/; легенда — /legend/ і /en/legend/.
           input: {
             main: resolve(root, 'index.html'),
             en: resolve(root, 'en/index.html'),
+            legend: resolve(root, 'legend/index.html'),
+            enLegend: resolve(root, 'en/legend/index.html'),
           },
         },
       },
