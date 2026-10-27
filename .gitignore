@@ -4,3 +4,6 @@ dist
 _pdf_pages
 web/node_modules
 web/dist
+output/imagegen/separated-elements/wolf.png
+output/imagegen/separated-elements/tracks.png
+output/imagegen/separated-elements/text.png

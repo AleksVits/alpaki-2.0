@@ -62,14 +62,9 @@ function Block({ block, index, quote }: { block: LegendBlock; index: number; quo
   const style = { '--i': index } as CSSProperties
   if (Array.isArray(block)) {
     return (
-      <ol className="lg-values lg-reveal" style={style}>
-        {block.map((value, i) => (
-          <li key={value}>
-            <span>{String(i + 1).padStart(2, '0')}</span>
-            {value}
-          </li>
-        ))}
-      </ol>
+      <ul className="lg-values lg-reveal" style={style}>
+        {block.map((value) => <li key={value}>{value}</li>)}
+      </ul>
     )
   }
   if (quote) {
